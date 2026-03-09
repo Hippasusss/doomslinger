@@ -1,6 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class HumanSpawner : Node2D
 {
@@ -10,7 +9,7 @@ public partial class HumanSpawner : Node2D
 
 	private const int numHumans = 4;
 	private const int humanSpacing = 50;
-	private List<Node2D> humans = new List<Node2D>();
+	private readonly List<Node2D> humans = [];
 
 	public override void _Ready()
 	{

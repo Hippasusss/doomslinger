@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cg0jst0bit7ga"]
+
+[ext_resource type="Texture2D" uid="uid://dtus3i1b1x2wu" path="res://sprite/face/Face1.png" id="1_1cp6o"]
+[ext_resource type="Texture2D" uid="uid://dhunl8eychu31" path="res://sprite/phone.png" id="2_or0av"]
+[ext_resource type="Script" uid="uid://c2thfxtdiblda" path="res://script/Feed.cs" id="3_cjs1v"]
+[ext_resource type="PackedScene" uid="uid://d6devkjuk4rq" path="res://scenes/prefab/feedblock.tscn" id="4_sogvw"]
+
+[node name="Node2D" type="Node2D" unique_id=2048066982]
+
+[node name="Face" type="Sprite2D" parent="." unique_id=590860739]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_1cp6o")
+
+[node name="Phone" type="Sprite2D" parent="Face" unique_id=1063720879]
+position = Vector2(-18.5, 13.499999)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_or0av")
+
+[node name="Feed" type="Sprite2D" parent="Face/Phone" unique_id=1870672503]
+position = Vector2(46.249992, -33.75)
+scale = Vector2(2.4999998, 2.4999998)
+script = ExtResource("3_cjs1v")
+feedBlockSN = ExtResource("4_sogvw")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c4b1crddu6d8o"]
+
+[ext_resource type="Script" uid="uid://vqum7ak6ukpm" path="res://script/HumanSpawner.cs" id="1_rvslj"]
+[ext_resource type="PackedScene" uid="uid://cg0jst0bit7ga" path="res://scenes/prefab/human.tscn" id="2_0bbpv"]
+[ext_resource type="Texture2D" uid="uid://dtus3i1b1x2wu" path="res://sprite/face/Face1.png" id="3_rarhs"]
+[ext_resource type="Texture2D" uid="uid://bl2gi8d40800" path="res://sprite/face/Face2.png" id="4_vcsgt"]
+[ext_resource type="Texture2D" uid="uid://b5nw22ypx3ep0" path="res://sprite/face/Face3.png" id="5_vcsgt"]
+
+[node name="Node2D" type="Node2D" unique_id=656142500]
+
+[node name="Humans" type="Node2D" parent="." unique_id=1781715270]
+
+[node name="Spawner" type="Node2D" parent="Humans" unique_id=247484237 node_paths=PackedStringArray("initPosition")]
+texture_filter = 1
+script = ExtResource("1_rvslj")
+human = ExtResource("2_0bbpv")
+initPosition = NodePath("Positioner")
+faces = Array[Texture2D]([ExtResource("3_rarhs"), ExtResource("4_vcsgt"), ExtResource("5_vcsgt")])
+
+[node name="Positioner" type="Node2D" parent="Humans/Spawner" unique_id=1753962803]
+position = Vector2(0, 1080)

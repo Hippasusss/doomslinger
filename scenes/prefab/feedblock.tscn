@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d6devkjuk4rq"]
+
+[ext_resource type="Texture2D" uid="uid://djkugk50v5t6b" path="res://sprite/feedblock.png" id="1_obplb"]
+
+[node name="Feedblock" type="Sprite2D" unique_id=1268537260]
+texture_filter = 1
+texture = ExtResource("1_obplb")

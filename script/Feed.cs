@@ -13,13 +13,12 @@ using System.Collections.Generic;
 public partial class Feed : Sprite2D
 {
 	private const int numBlocks = 12;
-	private const int scrollSpeed = 10;
 	private const int blockSpacing = 52;
 
 	[Export]
 	private PackedScene feedBlockSN;
 
-	private List<Node2D> feedBlocks = new List<Node2D>();
+	private readonly List<Node2D> feedBlocks = [];
 
 	public override void _Ready()
 	{

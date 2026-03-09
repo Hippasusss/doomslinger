@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dtus3i1b1x2wu" path="res://sprite/face/Face1.png" id="3_rarhs"]
 [ext_resource type="Texture2D" uid="uid://bl2gi8d40800" path="res://sprite/face/Face2.png" id="4_vcsgt"]
 [ext_resource type="Texture2D" uid="uid://b5nw22ypx3ep0" path="res://sprite/face/Face3.png" id="5_vcsgt"]
+[ext_resource type="Texture2D" uid="uid://cbxinf5qn0c3d" path="res://sprite/face/Face4.png" id="6_c01mt"]
 
 [node name="Node2D" type="Node2D" unique_id=656142500]
 
@@ -15,7 +16,7 @@ texture_filter = 1
 script = ExtResource("1_rvslj")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-faces = Array[Texture2D]([ExtResource("3_rarhs"), ExtResource("4_vcsgt"), ExtResource("5_vcsgt")])
+faces = Array[Texture2D]([ExtResource("3_rarhs"), ExtResource("4_vcsgt"), ExtResource("5_vcsgt"), ExtResource("6_c01mt")])
 
 [node name="Positioner" type="Node2D" parent="Humans/Spawner" unique_id=1753962803]
-position = Vector2(0, 1080)
+position = Vector2(-3, 318)

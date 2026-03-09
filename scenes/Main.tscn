@@ -6,17 +6,30 @@
 [ext_resource type="Texture2D" uid="uid://bl2gi8d40800" path="res://sprite/face/Face2.png" id="4_vcsgt"]
 [ext_resource type="Texture2D" uid="uid://b5nw22ypx3ep0" path="res://sprite/face/Face3.png" id="5_vcsgt"]
 [ext_resource type="Texture2D" uid="uid://cbxinf5qn0c3d" path="res://sprite/face/Face4.png" id="6_c01mt"]
+[ext_resource type="Texture2D" uid="uid://b4kxuiyqqj3ov" path="res://sprite/backgroundWork.png" id="7_q8u5g"]
+[ext_resource type="Texture2D" uid="uid://cjl8rpfdpyh30" path="res://sprite/printer.png" id="8_lhr70"]
+[ext_resource type="Script" uid="uid://cucin4p58a1tl" path="res://script/Printer.cs" id="9_wp0k4"]
 
-[node name="Node2D" type="Node2D" unique_id=656142500]
+[node name="Node2D" type="Sprite2D" unique_id=514441053]
 
-[node name="Humans" type="Node2D" parent="." unique_id=1781715270]
+[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270]
 
-[node name="Spawner" type="Node2D" parent="Humans" unique_id=247484237 node_paths=PackedStringArray("initPosition")]
+[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("initPosition")]
 texture_filter = 1
 script = ExtResource("1_rvslj")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
 faces = Array[Texture2D]([ExtResource("3_rarhs"), ExtResource("4_vcsgt"), ExtResource("5_vcsgt"), ExtResource("6_c01mt")])
 
-[node name="Positioner" type="Node2D" parent="Humans/Spawner" unique_id=1753962803]
+[node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
 position = Vector2(-3, 318)
+
+[node name="WorkArea" type="Sprite2D" parent="." unique_id=1690977494]
+position = Vector2(536, 181.00002)
+scale = Vector2(4.2000003, 7.2400002)
+texture = ExtResource("7_q8u5g")
+
+[node name="Printer" type="Sprite2D" parent="." unique_id=414308455]
+position = Vector2(495, 33)
+texture = ExtResource("8_lhr70")
+script = ExtResource("9_wp0k4")

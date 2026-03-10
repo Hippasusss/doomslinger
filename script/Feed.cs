@@ -70,18 +70,9 @@ public partial class Feed : Sprite2D
 	{
 
 		block.Position = new Vector2(block.Position.X, (feedBlocks.Count - 2) * -blockSpacing);
-		ApplyRandomColor(block);
+        block.Modulate = new Color(GD.Randf(), GD.Randf(), GD.Randf(), 1.0f);
 	}
 
-	private static void ApplyRandomColor(Node2D block)
-	{
-
-		float r = (float)GD.RandRange(0.0, 1.0);
-		float g = (float)GD.RandRange(0.0, 1.0);
-		float b = (float)GD.RandRange(0.0, 1.0);
-
-		block.Modulate = new Color(r, g, b, 1.0f);
-	}
 
 
 }

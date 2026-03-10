@@ -30,6 +30,7 @@ scale = Vector2(4.2000003, 7.2400002)
 texture = ExtResource("7_q8u5g")
 
 [node name="Printer" type="Sprite2D" parent="." unique_id=414308455]
+visible = false
 position = Vector2(495, 33)
 texture = ExtResource("8_lhr70")
 script = ExtResource("9_wp0k4")

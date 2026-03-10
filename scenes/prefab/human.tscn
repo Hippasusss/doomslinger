@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dtus3i1b1x2wu" path="res://sprite/face/Face1.png" id="1_1cp6o"]
 [ext_resource type="Script" uid="uid://bs00qfw1smg33" path="res://script/Human.cs" id="1_sogvw"]
+[ext_resource type="Shader" uid="uid://3tehyuga8vfy" path="res://script/shader/human.gdshader" id="2_2xgf6"]
 [ext_resource type="Texture2D" uid="uid://dhunl8eychu31" path="res://sprite/phone.png" id="2_or0av"]
 [ext_resource type="Script" uid="uid://c2thfxtdiblda" path="res://script/Feed.cs" id="3_cjs1v"]
 [ext_resource type="PackedScene" uid="uid://d6devkjuk4rq" path="res://scenes/prefab/feedblock.tscn" id="4_sogvw"]
@@ -10,11 +11,15 @@
 [ext_resource type="Script" uid="uid://bw00aalnwo6e4" path="res://script/PhoneLight.cs" id="7_2baw4"]
 [ext_resource type="Texture2D" uid="uid://fc8aohf18hpl" path="res://sprite/FadeBlackout.png" id="7_jaatf"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2b3g0"]
+shader = ExtResource("2_2xgf6")
+
 [node name="Node2D" type="Node2D" unique_id=2048066982]
 script = ExtResource("1_sogvw")
 
 [node name="Face" type="Sprite2D" parent="." unique_id=590860739]
 texture_filter = 1
+material = SubResource("ShaderMaterial_2b3g0")
 texture = ExtResource("1_1cp6o")
 
 [node name="Phone" type="Sprite2D" parent="Face" unique_id=1063720879]

@@ -9,8 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://b4kxuiyqqj3ov" path="res://sprite/backgroundWork.png" id="7_q8u5g"]
 [ext_resource type="Texture2D" uid="uid://cjl8rpfdpyh30" path="res://sprite/printer.png" id="8_lhr70"]
 [ext_resource type="Script" uid="uid://cucin4p58a1tl" path="res://script/Printer.cs" id="9_wp0k4"]
+[ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
 
-[node name="Node2D" type="Sprite2D" unique_id=514441053]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp0k4"]
+shader = ExtResource("10_lhr70")
+shader_parameter/dither_size = 1.0
+shader_parameter/color_levels = 39.0
+shader_parameter/dither_strength = 0.254000012065
+shader_parameter/gradient_threshold = 0.0530000025175
+
+[node name="World" type="CanvasLayer" unique_id=1668985472]
+layer = 0
 
 [node name="HumanArea" type="Node2D" parent="." unique_id=1781715270]
 
@@ -34,3 +43,12 @@ visible = false
 position = Vector2(495, 33)
 texture = ExtResource("8_lhr70")
 script = ExtResource("9_wp0k4")
+
+[node name="ScreenShader" type="ColorRect" parent="." unique_id=1731287264]
+visible = false
+material = SubResource("ShaderMaterial_wp0k4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

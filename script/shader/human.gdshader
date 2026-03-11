@@ -11,5 +11,5 @@ void light() {
 	// ATENUATION: The light's falloff and shadow masking.
 	// COLOR: The sprite's texture color (from the fragment shader).
 	
-	LIGHT = LIGHT_COLOR * LIGHT_ENERGY * ATENUATION * COLOR;
+	LIGHT = (LIGHT_COLOR) * LIGHT_ENERGY * COLOR;
 }

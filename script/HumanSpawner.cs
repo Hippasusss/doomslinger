@@ -9,7 +9,7 @@ public partial class HumanSpawner : Node2D
 
 	private const int numHumans = 4;
 	private const int humanSpacing = 50;
-	private readonly List<Node2D> humans = [];
+	private readonly List<Human> humans = [];
 
 	public override void _Ready()
 	{
@@ -25,7 +25,7 @@ public partial class HumanSpawner : Node2D
 
 	private void SpawnNewHuman()
 	{
-		Node2D newHuman = human.Instantiate<Node2D>();
+		Human newHuman = human.Instantiate<Human>();
 		AddChild(newHuman);
 		humans.Add(newHuman);
 		newHuman.Position = new Vector2(initPosition.Position.X + (humans.Count * humanSpacing), initPosition.Position.Y );

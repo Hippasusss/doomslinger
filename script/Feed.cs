@@ -16,6 +16,7 @@ public partial class Feed : Sprite2D
 	private const int blockSpacing = 52;
 
 	[Export] private PackedScene feedBlockSN;
+    [Export] private ColorPalette feedBlockPalette;
 	[Export] private Light2D screenLight;
 
 	private readonly List<Feedblock> feedBlocks = [];
@@ -79,7 +80,7 @@ public partial class Feed : Sprite2D
 	{
 
 		block.Position = new Vector2(block.Position.X, (feedBlocks.Count - 2) * -blockSpacing);
-        block.SetColour(GD.Randf(), GD.Randf(), GD.Randf(), 1.0f);
+        block.SetColour(feedBlockPalette.Colors.GetRandom());
 	}
 
 

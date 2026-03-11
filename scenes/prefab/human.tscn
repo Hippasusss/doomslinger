@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://d6devkjuk4rq" path="res://scenes/prefab/feedblock.tscn" id="4_sogvw"]
 [ext_resource type="Texture2D" uid="uid://bxqqpigg6caff" path="res://sprite/light.png" id="6_evmiy"]
 [ext_resource type="Texture2D" uid="uid://ewkri5wypydi" path="res://sprite/Fade.png" id="6_po0uj"]
+[ext_resource type="ColorPalette" uid="uid://dlpevtnylwyr8" path="res://resources/feedPalette.tres" id="7_2b3g0"]
 [ext_resource type="Script" uid="uid://bw00aalnwo6e4" path="res://script/PhoneLight.cs" id="7_2baw4"]
 [ext_resource type="Texture2D" uid="uid://fc8aohf18hpl" path="res://sprite/FadeBlackout.png" id="7_jaatf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2b3g0"]
 shader = ExtResource("2_2xgf6")
 
-[node name="Node2D" type="Node2D" unique_id=2048066982]
+[node name="Human" type="Node2D" unique_id=2048066982]
 script = ExtResource("1_sogvw")
 
 [node name="Face" type="Sprite2D" parent="." unique_id=590860739]
@@ -34,6 +35,7 @@ z_index = -2
 scale = Vector2(0.99999994, 0.99999994)
 script = ExtResource("3_cjs1v")
 feedBlockSN = ExtResource("4_sogvw")
+feedBlockPalette = ExtResource("7_2b3g0")
 screenLight = NodePath("../ScreenLight")
 
 [node name="FeedBlocker" type="Node2D" parent="Face" unique_id=1959528111]
@@ -53,13 +55,14 @@ texture = ExtResource("7_jaatf")
 
 [node name="ScreenLight" type="PointLight2D" parent="Face" unique_id=372120746]
 z_index = 1
+texture_filter = 1
+texture_repeat = 2
 position = Vector2(0, -0.9999974)
 scale = Vector2(1, 1.1600001)
 color = Color(0.6379994, 0.38298547, 0.3758784, 1)
-energy = 3.54
+energy = 2.0
 blend_mode = 2
 texture = ExtResource("6_evmiy")
 script = ExtResource("7_2baw4")
-BaseEnergy = 2.0
-FlickerRange = 2.0
+FlickerRange = 0.4
 FlickerSpeed = 10.04

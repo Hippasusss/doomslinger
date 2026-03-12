@@ -7,8 +7,8 @@ public partial class HumanSpawner : Node2D
 	[Export] private Node2D initPosition;
 	[Export] private Texture2D[] faces;
 
-	private const int numHumans = 4;
-	private const int humanSpacing = 50;
+	private const int numHumans = 6;
+	private const int humanSpacing = 40;
 	private readonly List<Human> humans = [];
 
 	public override void _Ready()
@@ -19,10 +19,6 @@ public partial class HumanSpawner : Node2D
 		}
 	}
 
-	public override void _Process(double delta)
-	{
-	}
-
 	private void SpawnNewHuman()
 	{
 		Human newHuman = human.Instantiate<Human>();
@@ -31,8 +27,5 @@ public partial class HumanSpawner : Node2D
 		newHuman.Position = new Vector2(initPosition.Position.X + (humans.Count * humanSpacing), initPosition.Position.Y );
 		var newHumanFace = newHuman.GetNode<Sprite2D>("Face");
 		newHumanFace.Texture = faces.GetRandom();
-
-		//TODO: random colours
-
 	}
 }

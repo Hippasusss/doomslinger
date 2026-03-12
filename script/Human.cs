@@ -13,7 +13,6 @@ public partial class Human : Node2D
 	private string name = "Danny";
 	private HumanStats stats;
 
-
 	private void ReadFeedBlock(Feedblock block)
 	{
 		stats += block.stats;

@@ -6,8 +6,7 @@ public partial class HumanSpawner : Node2D
 	[Export] private PackedScene human;
 	[Export] private Node2D initPosition;
 	[Export] private Texture2D[] faces;
-
-	private const int numHumans = 6;
+	[Export] private int numHumans = 1;
 	private const int humanSpacing = 40;
 	private readonly List<Human> humans = [];
 

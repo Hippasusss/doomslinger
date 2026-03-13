@@ -10,22 +10,29 @@ using Godot;
 
 public partial class Human : Node2D
 {
+	[Export]private Feed feed;
 	private string name = "Danny";
 	private HumanStats stats;
+
+	public override void _Ready()
+	{
+		feed.feedCallback += ReadFeedBlock;
+	}
 
 	private void ReadFeedBlock(Feedblock block)
 	{
 		stats += block.stats;
+		GD.Print(stats.mood);
 	}
 }
 
-public readonly struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hunger = 0, int fatigue = 0)
+public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hunger = 0, int fatigue = 0)
 {
-	private readonly int mood = mood;
-	private readonly int attention = attention;
-	private readonly int rage = rage;
-	private readonly int hunger = hunger;
-	private readonly int fatigue = fatigue;
+	public int mood = mood;
+	public int attention = attention;
+	public int rage = rage;
+	public int hunger = hunger;
+	public int fatigue = fatigue;
 
 	public static HumanStats operator +(HumanStats a, HumanStats b)
 	{
@@ -36,5 +43,14 @@ public readonly struct HumanStats(int mood = 5, int attention = 10, int rage = 0
 			a.hunger + b.hunger,
 			a.fatigue + b.fatigue
 		);
+	}
+
+	public void RandomizeStats()
+	{
+		mood = GD.RandRange(0,10);
+		attention = GD.RandRange(0,10);
+		rage = GD.RandRange(0,10);
+		hunger = GD.RandRange(0,10);
+		fatigue = GD.RandRange(0,10);
 	}
 }

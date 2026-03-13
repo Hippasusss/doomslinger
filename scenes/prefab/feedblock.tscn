@@ -4,27 +4,12 @@
 [ext_resource type="Shader" uid="uid://sl6bshe3rf3y" path="res://script/shader/feedblock.gdshader" id="1_shader"]
 [ext_resource type="Script" uid="uid://v0ypjitj2tuc" path="res://script/Feedblock.cs" id="2_iiqf2"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_16441"]
-noise_type = 0
-seed = 102
-frequency = 0.0362
-fractal_octaves = 1
-fractal_lacunarity = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_30cq2"]
-noise = SubResource("FastNoiseLite_16441")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_feedblock"]
 shader = ExtResource("1_shader")
 shader_parameter/alpha_override = 1.0
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_30cq2")
-shader_parameter/zoom = 10.0
-shader_parameter/noise_strength = 0.0800000038
-shader_parameter/flash_speed = 6.2970002991075
-shader_parameter/wander_speed = 0.110000005225
 
 [node name="Feedblock" type="Sprite2D" unique_id=1268537260]
-light_mask = 2
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
 texture_filter = 1
 material = SubResource("ShaderMaterial_feedblock")
 texture = ExtResource("1_obplb")

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bwy4a2qw7481w" path="res://sprite/deskBacground.png" id="7_lhr70"]
 [ext_resource type="Texture2D" uid="uid://cjl8rpfdpyh30" path="res://sprite/printer.png" id="8_lhr70"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="8_wp0k4"]
-[ext_resource type="Texture2D" uid="uid://bxons8jn3w4tp" path="res://sprite/eye.png" id="9_bjd11"]
+[ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_bjd11"]
 [ext_resource type="Script" uid="uid://cucin4p58a1tl" path="res://script/Printer.cs" id="9_wp0k4"]
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
 
@@ -30,6 +30,7 @@ script = ExtResource("1_rvslj")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
 faces = Array[Texture2D]([ExtResource("3_rarhs"), ExtResource("4_vcsgt"), ExtResource("5_vcsgt"), ExtResource("6_c01mt")])
+numHumans = 3
 
 [node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
 position = Vector2(-3, 318)
@@ -77,9 +78,16 @@ bbcode_enabled = true
 scroll_active = false
 text_direction = 1
 
-[node name="Eye" type="Sprite2D" parent="WorkArea" unique_id=1314043165]
+[node name="Eye" parent="WorkArea" unique_id=1271531143 instance=ExtResource("9_bjd11")]
 position = Vector2(-47, -64)
-texture = ExtResource("9_bjd11")
+
+[node name="HeartMonitor" type="Node2D" parent="WorkArea" unique_id=1487332596]
+
+[node name="Line2D" type="Line2D" parent="WorkArea/HeartMonitor" unique_id=440793788]
+position = Vector2(-90, 0)
+points = PackedVector2Array(1, 0, 185, -1)
+width = 1.0
+default_color = Color(0.4, 0.48235294, 0.5254902, 1)
 
 [node name="Printer" type="Sprite2D" parent="." unique_id=414308455]
 visible = false

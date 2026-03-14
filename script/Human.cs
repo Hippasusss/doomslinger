@@ -10,7 +10,8 @@ using Godot;
 
 public partial class Human : Node2D
 {
-	[Export]private Feed feed;
+	[Export] private Feed feed;
+	[Export] private Light2D light;
 	private string name = "Danny";
 	private HumanStats stats;
 
@@ -23,6 +24,11 @@ public partial class Human : Node2D
 	{
 		stats += block.stats;
 		GD.Print(stats.mood);
+	}
+
+	private void ToggleLight(bool on)
+	{
+		light.Enabled = on;
 	}
 }
 

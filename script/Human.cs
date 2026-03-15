@@ -41,7 +41,7 @@ public partial class Human : Node2D
 		display.DisplayNewHuman(this);
 	}
 
-	public void onClick(Node viewport, InputEvent clickEvent, long shape_idx)
+	public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)
 	{
 		if (clickEvent is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
 		{

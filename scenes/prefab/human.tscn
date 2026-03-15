@@ -75,4 +75,4 @@ FlickerSpeed = 10.04
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1364458529]
 shape = ExtResource("12_vj28b")
 
-[connection signal="input_event" from="." to="." method="onClick"]
+[connection signal="input_event" from="." to="." method="OnClick"]

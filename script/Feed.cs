@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 public partial class Feed : Node2D 
 {
-	public Action<Feedblock> feedCallback;
+	public Action<Feedblock> newMainFeedBlockCallBack;
 
 	private const int numBlocks = 12;
 	private const int blockSpacing = 52;
@@ -79,7 +79,7 @@ public partial class Feed : Node2D
 				}
 				if(CheckBlockDelta(block, 0))
 				{
-					feedCallback?.Invoke(block);
+					newMainFeedBlockCallBack?.Invoke(block);
 				}
 			}
 		}));

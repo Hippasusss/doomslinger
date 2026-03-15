@@ -17,7 +17,7 @@ public partial class Human : Node2D
 
 	public override void _Ready()
 	{
-		feed.feedCallback += ReadFeedBlock;
+		feed.newMainFeedBlockCallBack += ReadFeedBlock;
 	}
 
 	private void ReadFeedBlock(Feedblock block)

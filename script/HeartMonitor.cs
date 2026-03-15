@@ -48,7 +48,6 @@ public partial class HeartMonitor : Node2D
 
 	private void AddBeep()
 	{
-		GD.Print("yes");
 		beepTween = GetTree().CreateTween();
 		beepTween.TweenProperty(this, "targetValue", -amplitude, beepLength/2)
 				.SetTrans(Tween.TransitionType.Quart)

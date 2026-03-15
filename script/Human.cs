@@ -7,13 +7,19 @@
 
 
 using Godot;
+using System;
+using System.Collections.Generic;
 
 public partial class Human : Node2D
 {
+	public HumanDataDisplay display;
+	[Export] private Sprite2D face;
 	[Export] private Feed feed;
 	[Export] private Light2D light;
-	private string name = "Danny";
-	private HumanStats stats;
+	public HumanStats stats;
+	public HumanPersonalData data;
+
+	public Sprite2D Face { get => face; set => face = value; }
 
 	public override void _Ready()
 	{
@@ -23,12 +29,11 @@ public partial class Human : Node2D
 	private void ReadFeedBlock(Feedblock block)
 	{
 		stats += block.stats;
-		GD.Print(stats.mood);
 	}
 
-	private void ToggleLight(bool on)
+	public void SetLightOnOff(bool onOff)
 	{
-		light.Enabled = on;
+		light.Enabled = onOff;
 	}
 
 	public void Select()
@@ -46,6 +51,40 @@ public partial class Human : Node2D
 			}
 		}
 	}
+
+
+}
+
+public struct HumanPersonalData
+{
+	public string name;
+	public DateOnly DOB;
+	public int height;
+	public string gender;
+	public string nationality;
+	public int UID;
+	private readonly static List<int> UIDs = [];
+
+	public HumanPersonalData(string name,
+									DateOnly DOB,
+									int height,
+									string gender,
+									string nationality)
+	{
+		this.name = name;
+		this.DOB = DOB;
+		this.height = height;
+		this.gender = gender;
+		this.nationality = nationality;
+		do
+		{
+			UID = GD.RandRange(0,99999);
+		}
+		while(UIDs.Contains(UID));
+		UIDs.Add(UID);
+	}
+
+
 }
 
 public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hunger = 0, int fatigue = 0)
@@ -69,10 +108,12 @@ public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hun
 
 	public void RandomizeStats()
 	{
-		mood = GD.RandRange(0,10);
-		attention = GD.RandRange(0,10);
-		rage = GD.RandRange(0,10);
-		hunger = GD.RandRange(0,10);
-		fatigue = GD.RandRange(0,10);
+		const int rangeLow = -5;
+		const int rangeHigh = 10;
+		mood = GD.RandRange(rangeLow, rangeHigh);
+		attention = GD.RandRange(rangeLow, rangeHigh);
+		rage = GD.RandRange(rangeLow, rangeHigh);
+		hunger = GD.RandRange(rangeLow, rangeHigh);
+		fatigue = GD.RandRange(rangeLow, rangeHigh);
 	}
 }

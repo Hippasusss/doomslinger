@@ -30,6 +30,22 @@ public partial class Human : Node2D
 	{
 		light.Enabled = on;
 	}
+
+	public void Select()
+	{
+		display.DisplayNewHuman(this);
+	}
+
+	public void onClick(Node viewport, InputEvent clickEvent, long shape_idx)
+	{
+		if (clickEvent is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
+		{
+			if (mouseEvent.ButtonIndex == MouseButton.Left)
+			{
+				Select();
+			}
+		}
+	}
 }
 
 public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hunger = 0, int fatigue = 0)

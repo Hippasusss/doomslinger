@@ -8,17 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://d6devkjuk4rq" path="res://scenes/prefab/feedblock.tscn" id="4_sogvw"]
 [ext_resource type="Texture2D" uid="uid://bxqqpigg6caff" path="res://sprite/light.png" id="6_evmiy"]
 [ext_resource type="Texture2D" uid="uid://ewkri5wypydi" path="res://sprite/Fade.png" id="6_po0uj"]
-[ext_resource type="ColorPalette" uid="uid://dlpevtnylwyr8" path="res://resources/feedPalette.tres" id="7_2b3g0"]
+[ext_resource type="ColorPalette" uid="uid://dlpevtnylwyr8" path="res://resources/ColorPalettes/feedPalette.tres" id="7_2b3g0"]
 [ext_resource type="Script" uid="uid://bw00aalnwo6e4" path="res://script/PhoneLight.cs" id="7_2baw4"]
 [ext_resource type="Texture2D" uid="uid://fc8aohf18hpl" path="res://sprite/FadeBlackout.png" id="7_jaatf"]
-[ext_resource type="Shape2D" uid="uid://cnkej4hl217uv" path="res://resources/new_rectangle_shape_2d.tres" id="12_vj28b"]
+[ext_resource type="Shape2D" uid="uid://cnkej4hl217uv" path="res://resources/clickableAreaFace.tres" id="12_vj28b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2b3g0"]
 shader = ExtResource("2_2xgf6")
 
-[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("feed")]
+[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light")]
 script = ExtResource("1_sogvw")
+face = NodePath("Face")
 feed = NodePath("Face/Feed")
+light = NodePath("Face/ScreenLight")
 
 [node name="Face" type="Sprite2D" parent="." unique_id=590860739]
 light_mask = 2
@@ -72,3 +74,5 @@ FlickerSpeed = 10.04
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1364458529]
 shape = ExtResource("12_vj28b")
+
+[connection signal="input_event" from="." to="." method="onClick"]

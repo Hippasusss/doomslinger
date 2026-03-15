@@ -6,12 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://bl2gi8d40800" path="res://sprite/face/Face2.png" id="4_vcsgt"]
 [ext_resource type="Texture2D" uid="uid://b5nw22ypx3ep0" path="res://sprite/face/Face3.png" id="5_vcsgt"]
 [ext_resource type="Texture2D" uid="uid://cbxinf5qn0c3d" path="res://sprite/face/Face4.png" id="6_c01mt"]
-[ext_resource type="Texture2D" uid="uid://bwy4a2qw7481w" path="res://sprite/deskBacground.png" id="7_lhr70"]
+[ext_resource type="Texture2D" uid="uid://dme683wdl5jx" path="res://sprite/workArea.png" id="7_mwfav"]
+[ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
 [ext_resource type="Texture2D" uid="uid://cjl8rpfdpyh30" path="res://sprite/printer.png" id="8_lhr70"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="8_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_bjd11"]
+[ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="9_ft6cd"]
+[ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="9_mwfav"]
 [ext_resource type="Script" uid="uid://cucin4p58a1tl" path="res://script/Printer.cs" id="9_wp0k4"]
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
+[ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitor.cs" id="10_qmy6f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3p2gp"]
+shader = ExtResource("9_mwfav")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wp0k4"]
 shader = ExtResource("10_lhr70")
@@ -24,9 +31,10 @@ layer = 0
 
 [node name="HumanArea" type="Node2D" parent="." unique_id=1781715270]
 
-[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("initPosition")]
+[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("data", "initPosition")]
 texture_filter = 1
 script = ExtResource("1_rvslj")
+data = NodePath("../../WorkArea")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
 faces = Array[Texture2D]([ExtResource("3_rarhs"), ExtResource("4_vcsgt"), ExtResource("5_vcsgt"), ExtResource("6_c01mt")])
@@ -35,39 +43,91 @@ numHumans = 3
 [node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
 position = Vector2(-3, 318)
 
-[node name="WorkArea" type="Sprite2D" parent="." unique_id=1690977494]
+[node name="WorkArea" type="Sprite2D" parent="." unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitor")]
 texture_filter = 1
 position = Vector2(534, 180)
-texture = ExtResource("7_lhr70")
+texture = ExtResource("7_mwfav")
+script = ExtResource("8_cvmbd")
+idDisplay = NodePath("IDSection")
+heartMonitor = NodePath("HeartMonitor")
 
-[node name="Control" type="Control" parent="WorkArea" unique_id=624350743]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IDSection" type="Node2D" parent="WorkArea" unique_id=1903382953 node_paths=PackedStringArray("text", "face")]
+script = ExtResource("9_ft6cd")
+text = NodePath("IDText")
+face = NodePath("Headshot")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="WorkArea/Control" unique_id=806655714]
+[node name="IDText" type="RichTextLabel" parent="WorkArea/IDSection" unique_id=806655714]
 texture_filter = 1
 texture_repeat = 1
-layout_mode = 0
-offset_left = -91.0
-offset_top = -171.0
-offset_right = 94.0
-offset_bottom = -103.0
+offset_left = -83.0
+offset_top = -161.0
+offset_right = 43.0
+offset_bottom = -106.0
 theme_override_colors/default_color = Color(0.4, 0.48235294, 0.5254902, 1)
 theme_override_fonts/normal_font = ExtResource("8_wp0k4")
-theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "Name: 
-DOB
-Nationality:"
+text = "Name: John Smith	
+DOB: 23/04/1994
+Nationality: Scottish
+Height:
+UID: "
 scroll_active = false
 text_direction = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="WorkArea/Control" unique_id=1572138369]
+[node name="ColorRect" type="ColorRect" parent="WorkArea/IDSection" unique_id=1804732182]
+offset_left = 44.0
+offset_top = -165.0
+offset_right = 93.0
+offset_bottom = -105.0
+color = Color(0.4, 0.48235294, 0.5254902, 0.44705883)
+
+[node name="Headshot" type="Sprite2D" parent="WorkArea/IDSection" unique_id=1005073743]
+material = SubResource("ShaderMaterial_3p2gp")
+position = Vector2(69, -136)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_rarhs")
+
+[node name="HeartMonitor" type="Node2D" parent="WorkArea" unique_id=1487332596 node_paths=PackedStringArray("line", "BPMText")]
+script = ExtResource("10_qmy6f")
+line = NodePath("Line2D")
+BPMText = NodePath("BPM Readout/Value")
+
+[node name="Line2D" type="Line2D" parent="WorkArea/HeartMonitor" unique_id=440793788]
+position = Vector2(-94, -11)
+scale = Vector2(1.0215054, 1)
+points = PackedVector2Array(1, 0, 160.5474, 0)
+width = 1.0
+default_color = Color(0.4, 0.48235294, 0.5254902, 1)
+
+[node name="BPM Readout" type="Node2D" parent="WorkArea/HeartMonitor" unique_id=174210184]
+position = Vector2(84, -14)
+
+[node name="Label" type="RichTextLabel" parent="WorkArea/HeartMonitor/BPM Readout" unique_id=154003182]
+offset_left = -11.0
+offset_top = -8.0
+offset_right = 12.0
+text = "BPM
+"
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="WorkArea/HeartMonitor/BPM Readout" unique_id=213886279]
+offset_left = -12.0
+offset_top = -1.0
+offset_right = 12.0
+offset_bottom = 18.0
+theme_override_font_sizes/normal_font_size = 12
+text = "150
+"
+scroll_active = false
+
+[node name="EyeSection" type="Node2D" parent="WorkArea" unique_id=244526087]
+
+[node name="Eye" parent="WorkArea/EyeSection" unique_id=1271531143 instance=ExtResource("9_bjd11")]
+position = Vector2(-47, -64)
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="WorkArea/EyeSection" unique_id=1572138369]
 texture_filter = 1
 texture_repeat = 1
-layout_mode = 0
 offset_left = 7.0
 offset_top = -91.0
 offset_right = 95.0
@@ -77,17 +137,6 @@ theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
 scroll_active = false
 text_direction = 1
-
-[node name="Eye" parent="WorkArea" unique_id=1271531143 instance=ExtResource("9_bjd11")]
-position = Vector2(-47, -64)
-
-[node name="HeartMonitor" type="Node2D" parent="WorkArea" unique_id=1487332596]
-
-[node name="Line2D" type="Line2D" parent="WorkArea/HeartMonitor" unique_id=440793788]
-position = Vector2(-90, 0)
-points = PackedVector2Array(1, 0, 185, -1)
-width = 1.0
-default_color = Color(0.4, 0.48235294, 0.5254902, 1)
 
 [node name="Printer" type="Sprite2D" parent="." unique_id=414308455]
 visible = false

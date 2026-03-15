@@ -34,7 +34,7 @@ public partial class HumanSpawner : Node2D
 
 	private static string GetRandomName()
 	{
-		string[] names = { "John", "Jane", "Alice", "Bob", "Charlie", "Diana", "Edward", "Fiona", "George", "Hannah", "Ian", "Julia", "Kevin", "Laura", "Mike", "Nora", "Oscar", "Paula", "Quinn", "Ryan", "Sarah", "Tom", "Ursula", "Victor", "Wendy", "Xander", "Yara", "Zack" };
+		string[] names = [ "John", "Jane", "Alice", "Bob", "Charlie", "Diana", "Edward", "Fiona", "George", "Hannah", "Ian", "Julia", "Kevin", "Laura", "Mike", "Nora", "Oscar", "Paula", "Quinn", "Ryan", "Sarah", "Tom", "Ursula", "Victor", "Wendy", "Xander", "Yara", "Zack" ];
 		return names.GetRandom();
 	}
 
@@ -45,13 +45,13 @@ public partial class HumanSpawner : Node2D
 
 	private static string GetRandomGender()
 	{
-		string[] genders = { "M", "F", "NB" };
+		string[] genders = [ "M", "F", "NB" ];
 		return genders.GetRandom();
 	}
 
 	private static string GetRandomNationality()
 	{
-		string[] nationalities = { "Scottish", "English", "Welsh", "Irish", "French", "German", "Spanish", "Italian", "American", "Canadian", "Australian", "Japanese", "Chinese", "Indian", "Brazilian", "Mexican", "Russian", "Danish", "Swedish", "Norwegian" };
+		string[] nationalities = [ "Scottish", "English", "Welsh", "Irish", "French", "German", "Spanish", "Italian", "American", "Canadian", "Australian", "Japanese", "Chinese", "Indian", "Brazilian", "Mexican", "Russian", "Danish", "Swedish", "Norwegian" ];
 		return nationalities.GetRandom();
 	}
 

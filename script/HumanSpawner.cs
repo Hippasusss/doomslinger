@@ -28,7 +28,7 @@ public partial class HumanSpawner : Node2D
 		humans.Add(newHuman);
 		newHuman.Position = new Vector2(initPosition.Position.X + (humans.Count * humanSpacing), initPosition.Position.Y );
 		newHuman.Face.Texture = faces.GetRandom();
-		newHuman.data = new HumanPersonalData(GetRandomName(),GetRandomDate(), GetRandomHeight(), GetRandomGender(), GetRandomNationality());
+		newHuman.data = new HumanPersonalData(GetRandomName(),GetRandomDate(), GetRandomHeight(), GetRandomGender(), GetRandomNationality(), GetRandomEyeColour());
 		newHuman.display = data;
 	}
 
@@ -76,6 +76,12 @@ public partial class HumanSpawner : Node2D
 		// 5. Add that offset back to the start date
 		return start.AddDays(randomOffset);
 	}
+
+    private static HumanPersonalData.EyeColour GetRandomEyeColour()
+    {
+        return (HumanPersonalData.EyeColour)GD.RandRange(0,2);
+    }
+
 
 
 }

@@ -57,25 +57,35 @@ public partial class Human : Node2D
 
 public struct HumanPersonalData
 {
+    public enum EyeColour
+    {
+        blue,
+        brown,
+        green
+    };
+
 	public string name;
 	public DateOnly DOB;
 	public int height;
 	public string gender;
 	public string nationality;
 	public int UID;
+    public EyeColour eyeColour;
 	private readonly static List<int> UIDs = [];
 
 	public HumanPersonalData(string name,
 									DateOnly DOB,
 									int height,
 									string gender,
-									string nationality)
+									string nationality,
+                                    EyeColour eyeColour)
 	{
 		this.name = name;
 		this.DOB = DOB;
 		this.height = height;
 		this.gender = gender;
 		this.nationality = nationality;
+        this.eyeColour = eyeColour;
 		do
 		{
 			UID = GD.RandRange(0,99999);

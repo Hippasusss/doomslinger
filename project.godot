@@ -28,6 +28,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="doomslinger"
 
+[gui]
+
+theme/custom="uid://dqooghemw7a8d"
+
 [input]
 
 Test={

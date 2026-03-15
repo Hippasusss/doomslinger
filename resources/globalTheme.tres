@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://dqooghemw7a8d"]
+
+[ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="1_8ki28"]
+
+[resource]
+default_font = ExtResource("1_8ki28")
+default_font_size = 6
+RichTextLabel/colors/default_color = Color(0.4, 0.48235294, 0.5254902, 1)

@@ -9,7 +9,7 @@
 using Godot;
 using System;
 
-public partial class IDDisplay : Node2D
+public partial class IDDisplay : Control
 {
     [Export] private RichTextLabel text;
     [Export] private Sprite2D face;
@@ -17,12 +17,12 @@ public partial class IDDisplay : Node2D
     {
         string displayText = $"""
             [table=2]
-            [cell][b]NAME:[/b][/cell] [cell expand=true][right]{human.data.name}[/right][/cell]
-            [cell][b]DOB:[/b][/cell]  [cell expand=true][right]{human.data.DOB}[/right][/cell]
-            [cell][b]HT:[/b][/cell]   [cell expand=true][right]{human.data.height}[/right][/cell]
-            [cell][b]GEN:[/b][/cell]  [cell expand=true][right]{human.data.gender}[/right][/cell]
-            [cell][b]UID:[/b][/cell]  [cell expand=true][right]{human.data.UID}[/right][/cell]
-            [cell][b]NAT:[/b][/cell]  [cell expand=true][right]{human.data.nationality}[/right][/cell]
+            [cell][b]NAME:[/b][/cell] [cell expand=true][right]{human.Data.name}[/right][/cell]
+            [cell][b]DOB:[/b][/cell]  [cell expand=true][right]{human.Data.DOB}[/right][/cell]
+            [cell][b]HT:[/b][/cell]   [cell expand=true][right]{human.Data.height}[/right][/cell]
+            [cell][b]GEN:[/b][/cell]  [cell expand=true][right]{human.Data.gender}[/right][/cell]
+            [cell][b]UID:[/b][/cell]  [cell expand=true][right]{human.Data.UID}[/right][/cell]
+            [cell][b]NAT:[/b][/cell]  [cell expand=true][right]{human.Data.nationality}[/right][/cell]
             [/table]
             """;
 
@@ -30,5 +30,4 @@ public partial class IDDisplay : Node2D
 
         face.Texture = human.Face.Texture;
     }
-
 }

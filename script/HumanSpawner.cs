@@ -1,35 +1,41 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class HumanSpawner : Node2D
 {
 
-    [Export] private HumanDataDisplay data;
+    [Export] private HumanDataDisplay displayData;
+    [Export] private CameraController camera;
     [Export] private PackedScene human;
     [Export] private Node2D initPosition;
-    [Export] private Texture2D[] faces;
     [Export] private int numHumans = 1;
-    private const int humanSpacing = 40;
+    [Export] private FaceGenerator faceGenerator;
+    private const int humanSpacing = 50;
     private readonly List<Human> humans = [];
 
-    public override void _Ready()
+    public override async void _Ready()
     {
         for(int i = 0; i < numHumans; i++)
         {
-            SpawnNewHuman();
+            await SpawnNewHuman();
         }
     }
 
-    private void SpawnNewHuman()
+    private async Task SpawnNewHuman()
     {
         Human newHuman = human.Instantiate<Human>();
         AddChild(newHuman);
         humans.Add(newHuman);
         newHuman.Position = new Vector2(initPosition.Position.X + (humans.Count * humanSpacing), initPosition.Position.Y );
-        newHuman.Face.Texture = faces.GetRandom();
-        newHuman.data = new HumanPersonalData(GetRandomName(),GetRandomDate(), GetRandomHeight(), GetRandomGender(), GetRandomNationality(), GetRandomEyeColour());
-        newHuman.display = data;
+        newHuman.Data = new HumanPersonalData(GetRandomName(),GetRandomDate(), GetRandomHeight(), GetRandomGender(), GetRandomNationality(), GetRandomEyeColour());
+        
+        // need to wait for it to draw the aggregate sprite
+        newHuman.Face.Texture = await faceGenerator.GenerateAsync();
+        
+        newHuman.HumanSelected += camera.MovePositionToNode;
+        newHuman.HumanSelected += displayData.DisplayNewHuman;
     }
 
     private static string GetRandomName()
@@ -81,7 +87,4 @@ public partial class HumanSpawner : Node2D
     {
         return (HumanPersonalData.EyeColour)GD.RandRange(0,2);
     }
-
-
-
 }

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Utils;
 
-public partial class HeartMonitor : Node2D
+public partial class HeartMonitor : Control
 {
     [Export] private Line2D line;
     [Export] private RichTextLabel BPMText;

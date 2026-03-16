@@ -1,21 +1,59 @@
 [gd_scene format=3 uid="uid://c4b1crddu6d8o"]
 
+[ext_resource type="Script" uid="uid://d2iofbakvf44f" path="res://script/CameraController.cs" id="1_mwfav"]
 [ext_resource type="Script" uid="uid://vqum7ak6ukpm" path="res://script/HumanSpawner.cs" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://cg0jst0bit7ga" path="res://scenes/prefab/human.tscn" id="2_0bbpv"]
-[ext_resource type="Texture2D" uid="uid://dtus3i1b1x2wu" path="res://sprite/face/Face1.png" id="3_rarhs"]
-[ext_resource type="Texture2D" uid="uid://bl2gi8d40800" path="res://sprite/face/Face2.png" id="4_vcsgt"]
-[ext_resource type="Texture2D" uid="uid://b5nw22ypx3ep0" path="res://sprite/face/Face3.png" id="5_vcsgt"]
-[ext_resource type="Texture2D" uid="uid://cbxinf5qn0c3d" path="res://sprite/face/Face4.png" id="6_c01mt"]
+[ext_resource type="PackedScene" uid="uid://dfv4wku4lcbuj" path="res://scenes/FaceGenerator.tscn" id="3_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dme683wdl5jx" path="res://sprite/workArea.png" id="7_mwfav"]
+[ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
-[ext_resource type="Texture2D" uid="uid://cjl8rpfdpyh30" path="res://sprite/printer.png" id="8_lhr70"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="8_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_bjd11"]
 [ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="9_ft6cd"]
 [ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="9_mwfav"]
-[ext_resource type="Script" uid="uid://cucin4p58a1tl" path="res://script/Printer.cs" id="9_wp0k4"]
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
+[ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="10_mwfav"]
 [ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitor.cs" id="10_qmy6f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmy6f"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.5694427, 0.43328017, 0.45042324, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwfav"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.40669784, 0.27632633, 0.12828207, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cvmbd"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.6864975, 0.6704099, 0.72135246, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ft6cd"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.6864975, 0.6704099, 0.72135246, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bb450"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.40669784, 0.27632633, 0.12828207, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nfivy"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.40669784, 0.27632633, 0.12828207, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1nqs0"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.40669784, 0.27632633, 0.12828207, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1iba3"]
+shader = ExtResource("8_1iba3")
+shader_parameter/target_color = Color(0.99999994, 0.04050345, 0.022352884, 1)
+shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3p2gp"]
 shader = ExtResource("9_mwfav")
@@ -26,24 +64,64 @@ shader_parameter/dither_size = 1.0
 shader_parameter/color_levels = 39.0
 shader_parameter/dither_strength = 0.254000012065
 
-[node name="World" type="CanvasLayer" unique_id=1668985472]
-layer = 0
+[node name="World" type="Node2D" unique_id=889943719]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1338437481]
+anchor_mode = 0
+script = ExtResource("1_mwfav")
 
 [node name="HumanArea" type="Node2D" parent="." unique_id=1781715270]
 
-[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("data", "initPosition")]
+[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("displayData", "camera", "initPosition", "faceGenerator")]
 texture_filter = 1
 script = ExtResource("1_rvslj")
-data = NodePath("../../WorkArea")
+displayData = NodePath("../../CanvasLayer/WorkArea")
+camera = NodePath("../../Camera2D")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-faces = Array[Texture2D]([ExtResource("3_rarhs"), ExtResource("4_vcsgt"), ExtResource("5_vcsgt"), ExtResource("6_c01mt")])
-numHumans = 3
+numHumans = 5
+faceGenerator = NodePath("FaceGenerator")
 
 [node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
-position = Vector2(-3, 318)
+position = Vector2(23, 327)
 
-[node name="WorkArea" type="Sprite2D" parent="." unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitor")]
+[node name="FaceGenerator" parent="HumanArea/Spawner" unique_id=828249479 instance=ExtResource("3_bjd11")]
+
+[node name="Body" parent="HumanArea/Spawner/FaceGenerator" index="0" unique_id=1721584226]
+material = SubResource("ShaderMaterial_qmy6f")
+frame = 2
+
+[node name="Face" parent="HumanArea/Spawner/FaceGenerator" index="1" unique_id=707476335]
+material = SubResource("ShaderMaterial_mwfav")
+
+[node name="Hair" parent="HumanArea/Spawner/FaceGenerator" index="2" unique_id=1498276484]
+material = SubResource("ShaderMaterial_cvmbd")
+
+[node name="Beard" parent="HumanArea/Spawner/FaceGenerator" index="3" unique_id=1321028753]
+visible = true
+material = SubResource("ShaderMaterial_ft6cd")
+frame = 19
+
+[node name="Eyes" parent="HumanArea/Spawner/FaceGenerator" index="4" unique_id=1924924684]
+material = SubResource("ShaderMaterial_bb450")
+frame = 22
+
+[node name="Nose" parent="HumanArea/Spawner/FaceGenerator" index="5" unique_id=95740465]
+material = SubResource("ShaderMaterial_nfivy")
+frame = 26
+
+[node name="Mouth" parent="HumanArea/Spawner/FaceGenerator" index="6" unique_id=310951105]
+material = SubResource("ShaderMaterial_1nqs0")
+frame = 30
+
+[node name="Glasses" parent="HumanArea/Spawner/FaceGenerator" index="7" unique_id=2013651169]
+material = SubResource("ShaderMaterial_1iba3")
+frame = 38
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=277055262]
+
+[node name="WorkArea" type="Sprite2D" parent="CanvasLayer" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitor")]
+z_index = 5
 texture_filter = 1
 position = Vector2(534, 180)
 texture = ExtResource("7_mwfav")
@@ -51,114 +129,120 @@ script = ExtResource("8_cvmbd")
 idDisplay = NodePath("IDSection")
 heartMonitor = NodePath("HeartMonitor")
 
-[node name="IDSection" type="Node2D" parent="WorkArea" unique_id=1903382953 node_paths=PackedStringArray("text", "face")]
+[node name="IDSection" type="Control" parent="CanvasLayer/WorkArea" unique_id=147275066 node_paths=PackedStringArray("text", "face")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -95.0
+offset_top = -172.0
+offset_right = 99.0
+offset_bottom = -101.0
 script = ExtResource("9_ft6cd")
 text = NodePath("IDText")
-face = NodePath("Headshot")
+face = NodePath("ColorRect/Headshot")
 
-[node name="IDText" type="RichTextLabel" parent="WorkArea/IDSection" unique_id=806655714]
+[node name="IDText" type="RichTextLabel" parent="CanvasLayer/WorkArea/IDSection" unique_id=806655714]
 texture_filter = 1
 texture_repeat = 1
 layout_direction = 2
-offset_left = -83.0
-offset_top = -169.0
-offset_right = 43.0
-offset_bottom = -102.0
+layout_mode = 0
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 137.0
+offset_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.4, 0.48235294, 0.5254902, 1)
-theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 0.60784316)
-theme_override_colors/table_border = Color(0.4, 0.48235294, 0.5254902, 1)
-theme_override_constants/table_h_separation = 6
+theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 0.5137255)
+theme_override_constants/table_h_separation = 12
 theme_override_constants/table_v_separation = 0
 theme_override_fonts/normal_font = ExtResource("8_wp0k4")
 theme_override_font_sizes/normal_font_size = 6
 bbcode_enabled = true
-text = "[fill][table=2]
-    [cell][b]NAME:[/b][/cell] [cell ]Danny Herbert[/cell]
-    [cell][b]DOB:[/b][/cell]  [cell][09/03/1994[/cell]
-    [cell][b]HT:[/b][/cell]   [cell]187[/cell]
+text = "[table=2]
+    [cell][b]NAME:[/b][/cell] [cell expand=true]Danny Herbert[/cell]
+    [cell][b]DOB:[/b][/cell]  [cell]09/03/1994[/cell]
+    [cell][b]HT:[/b][/cell]   [cell]187cm[/cell]
     [cell][b]GEN:[/b][/cell]  [cell]M[/cell]
     [cell][b]UID:[/b][/cell]  [cell]7387387[/cell]
     [cell][b]NAT:[/b][/cell]  [cell]scottish[/cell]
-[/table][/fill]"
-scroll_active = false
+[/table]"
 autowrap_mode = 0
 autowrap_trim_flags = 0
-horizontal_alignment = 3
+horizontal_alignment = 1
 vertical_alignment = 1
 text_direction = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="WorkArea/IDSection" unique_id=1804732182]
-offset_left = 44.0
-offset_top = -165.0
-offset_right = 93.0
-offset_bottom = -105.0
-color = Color(0.4, 0.48235294, 0.5254902, 0.44705883)
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/WorkArea/IDSection" unique_id=1804732182]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 7.0
+offset_right = 188.0
+offset_bottom = 67.0
+color = Color(0.4, 0.48235294, 0.5254902, 0.25882354)
 
-[node name="Headshot" type="Sprite2D" parent="WorkArea/IDSection" unique_id=1005073743]
+[node name="Headshot" type="Sprite2D" parent="CanvasLayer/WorkArea/IDSection/ColorRect" unique_id=1005073743]
 material = SubResource("ShaderMaterial_3p2gp")
-position = Vector2(69, -136)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("3_rarhs")
+position = Vector2(25, 30)
+scale = Vector2(0.8, 0.74999994)
+texture = ExtResource("10_mwfav")
 
-[node name="HeartMonitor" type="Node2D" parent="WorkArea" unique_id=1487332596 node_paths=PackedStringArray("line", "BPMText")]
+[node name="HeartMonitor" type="Control" parent="CanvasLayer/WorkArea" unique_id=1577979279 node_paths=PackedStringArray("line", "BPMText")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -95.0
+offset_top = -27.0
+offset_right = 98.0
+offset_bottom = 6.0
 script = ExtResource("10_qmy6f")
 line = NodePath("Line2D")
 BPMText = NodePath("BPM Readout/Value")
 
-[node name="Line2D" type="Line2D" parent="WorkArea/HeartMonitor" unique_id=440793788]
-position = Vector2(-94, -11)
+[node name="Line2D" type="Line2D" parent="CanvasLayer/WorkArea/HeartMonitor" unique_id=440793788]
+position = Vector2(1, 16)
 scale = Vector2(1.0215054, 1)
 points = PackedVector2Array(1, 0, 160.5474, 0)
 width = 1.0
 default_color = Color(0.4, 0.48235294, 0.5254902, 1)
 
-[node name="BPM Readout" type="Node2D" parent="WorkArea/HeartMonitor" unique_id=174210184]
-position = Vector2(84, -14)
+[node name="BPM Readout" type="Control" parent="CanvasLayer/WorkArea/HeartMonitor" unique_id=1734247390]
+clip_children = 1
+anchors_preset = 0
+offset_left = 167.0
+offset_top = 1.0
+offset_right = 192.0
+offset_bottom = 32.0
 
-[node name="Label" type="RichTextLabel" parent="WorkArea/HeartMonitor/BPM Readout" unique_id=154003182]
-offset_left = -11.0
-offset_top = -8.0
-offset_right = 12.0
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/WorkArea/HeartMonitor/BPM Readout" unique_id=154003182]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 25.0
+offset_bottom = 13.0
 text = "BPM
 "
 scroll_active = false
 
-[node name="Value" type="RichTextLabel" parent="WorkArea/HeartMonitor/BPM Readout" unique_id=213886279]
-offset_left = -12.0
-offset_top = -1.0
-offset_right = 12.0
-offset_bottom = 18.0
+[node name="Value" type="RichTextLabel" parent="CanvasLayer/WorkArea/HeartMonitor/BPM Readout" unique_id=213886279]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 12.0
+offset_right = 25.0
+offset_bottom = 31.0
 theme_override_font_sizes/normal_font_size = 12
 text = "150
 "
 scroll_active = false
 
-[node name="EyeSection" type="Node2D" parent="WorkArea" unique_id=244526087]
+[node name="EyeSection" type="Control" parent="CanvasLayer/WorkArea" unique_id=1267227362]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -95.0
+offset_top = -93.0
+offset_right = 1.0
+offset_bottom = -34.0
 
-[node name="Eye" parent="WorkArea/EyeSection" unique_id=1271531143 instance=ExtResource("9_bjd11")]
-position = Vector2(-47, -64)
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="WorkArea/EyeSection" unique_id=1572138369]
-texture_filter = 1
-texture_repeat = 1
-offset_left = 7.0
-offset_top = -91.0
-offset_right = 95.0
-offset_bottom = -37.0
-theme_override_fonts/normal_font = ExtResource("8_wp0k4")
-theme_override_font_sizes/normal_font_size = 10
-bbcode_enabled = true
-scroll_active = false
-text_direction = 1
-
-[node name="Printer" type="Sprite2D" parent="." unique_id=414308455]
-visible = false
-position = Vector2(495, 33)
-texture = ExtResource("8_lhr70")
-script = ExtResource("9_wp0k4")
+[node name="Eye" parent="CanvasLayer/WorkArea/EyeSection" unique_id=1271531143 instance=ExtResource("9_bjd11")]
+position = Vector2(48, 29)
 
 [node name="ScreenShader" type="ColorRect" parent="." unique_id=1731287264]
 visible = false
@@ -170,3 +254,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.30588236, 0.30588236, 0.30588236, 1)
+
+[editable path="HumanArea/Spawner/FaceGenerator"]

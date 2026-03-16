@@ -12,23 +12,38 @@ using System.Collections.Generic;
 
 public partial class Human : Node2D
 {
-    public HumanDataDisplay display;
+    [Signal] public delegate void HumanSelectedEventHandler(Human selected);
+
     [Export] private Sprite2D face;
     [Export] private Feed feed;
     [Export] private Light2D light;
-    public HumanStats stats;
-    public HumanPersonalData data;
+    [Export] private AnimationPlayer animation;
+    private HumanDataDisplay display;
+    private HumanStats stats;
+    private HumanPersonalData data;
+
+    private bool selected = false;
 
     public Sprite2D Face { get => face; set => face = value; }
+    public HumanStats Stats { get => stats; set => stats = value; }
+    public HumanPersonalData Data { get => data; set => data = value; }
+
 
     public override void _Ready()
     {
         feed.newMainFeedBlockCallBack += ReadFeedBlock;
+        HumanSelected += selected => {
+            if (data.UID != selected.data.UID) 
+            {
+                DeSelect();
+            }
+            GD.Print(data.UID);
+        };
     }
 
     private void ReadFeedBlock(Feedblock block)
     {
-        stats += block.stats;
+        Stats += block.stats;
     }
 
     public void SetLightOnOff(bool onOff)
@@ -38,7 +53,20 @@ public partial class Human : Node2D
 
     public void Select()
     {
-        display.DisplayNewHuman(this);
+        if(!selected)
+        {
+            EmitSignal(SignalName.HumanSelected, this);
+            selected = true;
+        }
+    }
+
+    public void DeSelect()
+    {
+        if(selected)
+        {
+            selected = false;
+            animation.PlayBackwards("hover");
+        }
     }
 
     public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)
@@ -52,6 +80,21 @@ public partial class Human : Node2D
         }
     }
 
+    public void OnMouseEnter()
+    {
+        if(!selected)
+        {
+            animation.Play("hover");
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        if(!selected)
+        {
+            animation.PlayBackwards("hover");
+        }
+    }
 
 }
 

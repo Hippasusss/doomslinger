@@ -44,7 +44,7 @@ public partial class HumanDataDisplay : Sprite2D
     {
         if(currentHuman != null)
         {
-            heartMonitor.SetBPM(currentHuman.stats.rage);
+            heartMonitor.SetBPM(currentHuman.Stats.rage);
         }
     }
 

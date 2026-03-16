@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://cg0jst0bit7ga"]
 
-[ext_resource type="Texture2D" uid="uid://dtus3i1b1x2wu" path="res://sprite/face/Face1.png" id="1_1cp6o"]
 [ext_resource type="Script" uid="uid://bs00qfw1smg33" path="res://script/Human.cs" id="1_sogvw"]
 [ext_resource type="Shader" uid="uid://3tehyuga8vfy" path="res://script/shader/human.gdshader" id="2_2xgf6"]
 [ext_resource type="Texture2D" uid="uid://dhunl8eychu31" path="res://sprite/phone.png" id="2_or0av"]
 [ext_resource type="Script" uid="uid://c2thfxtdiblda" path="res://script/Feed.cs" id="3_cjs1v"]
+[ext_resource type="Script" uid="uid://uwod6owwab6d" path="res://script/Outline.cs" id="4_2pby3"]
 [ext_resource type="PackedScene" uid="uid://d6devkjuk4rq" path="res://scenes/prefab/feedblock.tscn" id="4_sogvw"]
+[ext_resource type="Script" uid="uid://cqoi3wgiqjy76" path="res://script/HoverComponent.cs" id="5_b524o"]
 [ext_resource type="Texture2D" uid="uid://bxqqpigg6caff" path="res://sprite/light.png" id="6_evmiy"]
 [ext_resource type="Texture2D" uid="uid://ewkri5wypydi" path="res://sprite/Fade.png" id="6_po0uj"]
 [ext_resource type="ColorPalette" uid="uid://dlpevtnylwyr8" path="res://resources/ColorPalettes/feedPalette.tres" id="7_2b3g0"]
@@ -16,55 +17,90 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2b3g0"]
 shader = ExtResource("2_2xgf6")
 
-[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light")]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b524o"]
+load_path = "res://.godot/imported/FacePlaceHolder.png-ecc258afcbd13701e5134df53f0d5e31.ctex"
+
+[sub_resource type="Animation" id="Animation_b524o"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2pby3"]
+resource_name = "hover"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2.4622886, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2.4622886, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jfd8"]
+_data = {
+&"RESET": SubResource("Animation_b524o"),
+&"hover": SubResource("Animation_2pby3")
+}
+
+[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation")]
 script = ExtResource("1_sogvw")
 face = NodePath("Face")
 feed = NodePath("Face/Feed")
-light = NodePath("Face/ScreenLight")
+light = NodePath("Face/Phone/ScreenLight")
+animation = NodePath("AnimationPlayer")
 
 [node name="Face" type="Sprite2D" parent="." unique_id=590860739]
 light_mask = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_2b3g0")
-texture = ExtResource("1_1cp6o")
+texture = SubResource("CompressedTexture2D_b524o")
 
 [node name="Phone" type="Sprite2D" parent="Face" unique_id=1063720879]
-modulate = Color(0.12955844, 0.12955847, 0.12955844, 1)
+modulate = Color(0.27752772, 0.27752772, 0.27752772, 1)
 z_index = 2
-position = Vector2(0, 18)
+position = Vector2(0.99999994, 15)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_or0av")
+script = ExtResource("5_b524o")
+Radius = 1.0
+Speed = 1.0
 
-[node name="Feed" type="Node2D" parent="Face" unique_id=1373662661 node_paths=PackedStringArray("screenLight")]
-z_index = -2
-scale = Vector2(0.99999994, 0.99999994)
-script = ExtResource("3_cjs1v")
-feedBlockSN = ExtResource("4_sogvw")
-feedBlockPalette = ExtResource("7_2b3g0")
-screenLight = NodePath("../ScreenLight")
-
-[node name="FeedBlocker" type="Node2D" parent="Face" unique_id=1959528111]
-z_index = -1
-position = Vector2(-1.1920929e-07, 1.1920929e-07)
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="Fade" type="Sprite2D" parent="Face/FeedBlocker" unique_id=605822224]
-position = Vector2(0, 12)
-texture = ExtResource("6_po0uj")
-
-[node name="FadeBlackout" type="Sprite2D" parent="Face/FeedBlocker" unique_id=1333015491]
-position = Vector2(1.1920929e-07, 68)
-texture = ExtResource("7_jaatf")
-
-[node name="ScreenLight" type="PointLight2D" parent="Face" unique_id=372120746]
+[node name="ScreenLight" type="PointLight2D" parent="Face/Phone" unique_id=372120746]
 light_mask = 2
 z_index = 1
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(0, -0.9999974)
-scale = Vector2(1, 1.1600001)
+position = Vector2(0, -47.49999)
+scale = Vector2(2.4999998, 2.8999999)
 color = Color(0.6379994, 0.38298547, 0.3758784, 1)
-energy = 2.39
+energy = 1.9
 blend_mode = 2
 range_item_cull_mask = 2
 texture = ExtResource("6_evmiy")
@@ -72,7 +108,49 @@ script = ExtResource("7_2baw4")
 FlickerRange = 0.4
 FlickerSpeed = 10.04
 
+[node name="Feed" type="Node2D" parent="Face" unique_id=1373662661 node_paths=PackedStringArray("screenLight")]
+z_index = -2
+scale = Vector2(0.99999994, 0.99999994)
+script = ExtResource("3_cjs1v")
+feedBlockSN = ExtResource("4_sogvw")
+feedBlockPalette = ExtResource("7_2b3g0")
+screenLight = NodePath("../Phone/ScreenLight")
+
+[node name="FeedBlocker" type="Node2D" parent="Face" unique_id=1959528111]
+z_index = -1
+position = Vector2(-1.1920929e-07, 1.1920929e-07)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Fade" type="Sprite2D" parent="Face/FeedBlocker" unique_id=605822224]
+position = Vector2(1, 0)
+texture = ExtResource("6_po0uj")
+
+[node name="FadeBlackout" type="Sprite2D" parent="Face/FeedBlocker" unique_id=1333015491]
+position = Vector2(1.1920929e-07, 68)
+texture = ExtResource("7_jaatf")
+
+[node name="LockedIn" type="RichTextLabel" parent="Face" unique_id=271891833]
+visible = false
+offset_left = -20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 39.0
+theme_override_font_sizes/normal_font_size = 4
+text = "locked in"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highlight" type="Sprite2D" parent="Face" unique_id=1595873674]
+script = ExtResource("4_2pby3")
+IsHighlighted = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1364458529]
 shape = ExtResource("12_vj28b")
+debug_color = Color(0, 0.6, 0.69803923, 0.3137255)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=112613896]
+libraries/ = SubResource("AnimationLibrary_5jfd8")
 
 [connection signal="input_event" from="." to="." method="OnClick"]
+[connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExit"]

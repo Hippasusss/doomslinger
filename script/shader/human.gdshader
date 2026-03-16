@@ -9,5 +9,4 @@ void fragment() {
 
 void light() {
 	LIGHT = base_color * LIGHT_COLOR * LIGHT_ENERGY;
-    LIGHT.a = base_color.a;
 }

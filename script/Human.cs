@@ -22,6 +22,7 @@ public partial class Human : Node2D
     private HumanStats stats;
     private HumanPersonalData data;
 
+    private static List<Human> allHumans = [];
     private bool selected = false;
 
     public Sprite2D Face { get => face; set => face = value; }
@@ -32,12 +33,13 @@ public partial class Human : Node2D
     public override void _Ready()
     {
         feed.newMainFeedBlockCallBack += ReadFeedBlock;
+        allHumans.Add(this);
         HumanSelected += selected => {
-            if (data.UID != selected.data.UID) 
+            foreach(Human human in allHumans)
             {
-                DeSelect();
-            }
-            GD.Print(data.UID);
+                if(human == this) continue;
+                human.DeSelect();
+            };
         };
     }
 

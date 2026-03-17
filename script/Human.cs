@@ -119,11 +119,11 @@ public struct HumanPersonalData
     private readonly static List<int> UIDs = [];
 
     public HumanPersonalData(string name,
-                                    DateOnly DOB,
-                                    int height,
-                                    string gender,
-                                    string nationality,
-                                    EyeColour eyeColour)
+            DateOnly DOB,
+            int height,
+            string gender,
+            string nationality,
+            EyeColour eyeColour)
     {
         this.name = name;
         this.DOB = DOB;
@@ -153,12 +153,12 @@ public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hun
     public static HumanStats operator +(HumanStats a, HumanStats b)
     {
         return new HumanStats(
-            a.mood + b.mood,
-            a.attention + b.attention,
-            a.rage + b.rage,
-            a.hunger + b.hunger,
-            a.fatigue + b.fatigue
-        );
+                a.mood + b.mood,
+                a.attention + b.attention,
+                a.rage + b.rage,
+                a.hunger + b.hunger,
+                a.fatigue + b.fatigue
+                );
     }
 
     public void RandomizeStats()

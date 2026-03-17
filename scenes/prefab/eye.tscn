@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d0c5unv81cesg"]
 
+[ext_resource type="Shader" uid="uid://u0x7q3rujx85" path="res://script/shader/CRT.gdshader" id="1_6je8u"]
 [ext_resource type="Script" uid="uid://cpgryj2v0cghk" path="res://script/Eye.cs" id="1_7mg6a"]
 [ext_resource type="Texture2D" uid="uid://df18o2j6ric03" path="res://sprite/eye/eyeiris.png" id="2_7mg6a"]
 [ext_resource type="Texture2D" uid="uid://7uibvpiyd8mr" path="res://sprite/eye/eyecolour.png" id="3_k7uwh"]
@@ -8,14 +9,19 @@
 [ext_resource type="Texture2D" uid="uid://gun8qgvj5hs8" path="res://sprite/eye/eyelid.png" id="6_7mg6a"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="6_k7uwh"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ngl1"]
+shader = ExtResource("1_6je8u")
+shader_parameter/pixel_size = 1.1330000063175
+shader_parameter/vhs_intensity = 1.1910000565725
+shader_parameter/noise_intensity = 0.17200000817
+shader_parameter/opacity = 0.5110000242725
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k7uwh"]
 shader = ExtResource("6_k7uwh")
-shader_parameter/target_color = Color(0.48843604, 0.71312124, 0.96860284, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6je8u"]
 shader = ExtResource("6_k7uwh")
-shader_parameter/target_color = Color(0.5697037, 0.5440629, 0.3589677, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="Animation" id="Animation_k7uwh"]
@@ -55,9 +61,10 @@ _data = {
 &"RESET": SubResource("Animation_6je8u")
 }
 
-[node name="Eye" type="Sprite2D" unique_id=1877282262 node_paths=PackedStringArray("_eyeball", "_iris", "_eyelid", "_color", "_animation")]
+[node name="Eye" type="Sprite2D" unique_id=1407928438 node_paths=PackedStringArray("_eyeball", "_iris", "_eyelid", "_color", "_animation")]
 clip_children = 1
 texture_filter = 1
+material = SubResource("ShaderMaterial_2ngl1")
 texture = ExtResource("5_2ngl1")
 script = ExtResource("1_7mg6a")
 _eyeball = NodePath("Eyeball")

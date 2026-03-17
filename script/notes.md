@@ -1,7 +1,8 @@
 
 # Mechanic Ideas
 
-if user eye is certain way (undilated?) send push notification to pull them back in
+    - if user eye is certain way (undilated?) send push notification to pull them back in
+    - Ability to warn users via email about their issues. lowers the ceiling for getting fired. 
 
 ## Data Link Ideas
 
@@ -35,8 +36,12 @@ if user eye is certain way (undilated?) send push notification to pull them back
         - How does the user respond
         - Correct response leads to Game Over? Fired for calling police?
         - Good response from scary vids
+        - Big Tek covers it up
 
     - Big Tek Share holder meeting
+
+    - Heart arythmia leading to death. Big Tek denies knowledge. Removes info from employee hand book.
+
 
 # TODO
 
@@ -61,6 +66,10 @@ if user eye is certain way (undilated?) send push notification to pull them back
     - [] Hook up feed to affect data correctly
     - [] Perspiration?
     - [] Sleep Score?
+    - [] Photo feed?
+    - [] Voice recording?
+    - [] IOT devices Scan
+    - [] Location Scan
     - [] Warnings. (flight risk, High Emotion, Locked in etc. user has to work out why)
 
 ## Input

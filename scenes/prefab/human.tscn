@@ -12,13 +12,15 @@
 [ext_resource type="ColorPalette" uid="uid://dlpevtnylwyr8" path="res://resources/ColorPalettes/feedPalette.tres" id="7_2b3g0"]
 [ext_resource type="Script" uid="uid://bw00aalnwo6e4" path="res://script/PhoneLight.cs" id="7_2baw4"]
 [ext_resource type="Texture2D" uid="uid://fc8aohf18hpl" path="res://sprite/FadeBlackout.png" id="7_jaatf"]
-[ext_resource type="Shape2D" uid="uid://cnkej4hl217uv" path="res://resources/clickableAreaFace.tres" id="12_vj28b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2b3g0"]
 shader = ExtResource("2_2xgf6")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b524o"]
 load_path = "res://.godot/imported/FacePlaceHolder.png-ecc258afcbd13701e5134df53f0d5e31.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj28b"]
+size = Vector2(27, 85)
 
 [sub_resource type="Animation" id="Animation_b524o"]
 length = 0.2
@@ -145,7 +147,8 @@ script = ExtResource("4_2pby3")
 IsHighlighted = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1364458529]
-shape = ExtResource("12_vj28b")
+position = Vector2(0.5, 17.5)
+shape = SubResource("RectangleShape2D_vj28b")
 debug_color = Color(0, 0.6, 0.69803923, 0.3137255)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=112613896]

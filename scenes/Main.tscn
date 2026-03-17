@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d2iofbakvf44f" path="res://script/CameraController.cs" id="1_mwfav"]
 [ext_resource type="Script" uid="uid://vqum7ak6ukpm" path="res://script/HumanSpawner.cs" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://cg0jst0bit7ga" path="res://scenes/prefab/human.tscn" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://bcaiiynn7r52i" path="res://scenes/BGGenerator.tscn" id="3_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://dfv4wku4lcbuj" path="res://scenes/FaceGenerator.tscn" id="3_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dme683wdl5jx" path="res://sprite/workArea.png" id="7_mwfav"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
@@ -18,6 +19,7 @@
 [ext_resource type="Script" uid="uid://dees5mj3p1sw" path="res://script/FileCabinet.cs" id="16_cvmbd"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
+[ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
 shader = ExtResource("10_lhr70")
@@ -27,42 +29,34 @@ shader_parameter/dither_strength = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mwfav"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.4846006, 0.60844153, 0.8211958, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvmbd"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.8359969, 0.6970713, 0.71518946, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ft6cd"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.26094162, 0.12859502, 0.0695997, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bb450"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.26094162, 0.12859502, 0.0695997, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nfivy"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.8359969, 0.6970713, 0.71518946, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1nqs0"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.8359969, 0.6970713, 0.71518946, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1iba3"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.8359969, 0.6970713, 0.71518946, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yxlcp"]
 shader = ExtResource("8_1iba3")
-shader_parameter/target_color = Color(0.99999994, 0.04050345, 0.022352884, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3p2gp"]
@@ -71,6 +65,7 @@ shader = ExtResource("9_mwfav")
 [sub_resource type="Animation" id="Animation_bb450"]
 resource_name = "Close"
 length = 0.7933
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -78,15 +73,16 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.43333334, 0.52002305, 0.5921375, 0.66176516, 0.73333335),
+"times": PackedFloat32Array(0, 0.43333334, 0.52002305, 0.6, 0.66176516, 0.73333335),
 "transitions": PackedFloat32Array(0.90125024, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(150, 150), Vector2(-142, 150), Vector2(-135.145, 150), Vector2(-141.51, 150), Vector2(-138.305, 150), Vector2(-142.035, 150)]
+"update": 2,
+"values": [Vector2(150, 200), Vector2(-142, 200), Vector2(-135.145, 200), Vector2(-141.51, 200), Vector2(-138.305, 200), Vector2(-142.035, 200)]
 }
 
 [sub_resource type="Animation" id="Animation_nfivy"]
 resource_name = "Open"
 length = 0.765
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -96,8 +92,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 0.584548, 0.65666234, 0.7312635),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-142, 150), Vector2(150, 150), Vector2(143.47, 150), Vector2(151.01, 150), Vector2(150, 150)]
+"update": 2,
+"values": [Vector2(-142, 200), Vector2(150, 200), Vector2(143.47, 200), Vector2(151.01, 200), Vector2(150, 200)]
 }
 
 [sub_resource type="Animation" id="Animation_1nqs0"]
@@ -112,7 +108,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-142, 150)]
+"values": [Vector2(-142, 200)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1iba3"]
@@ -138,6 +134,9 @@ material = SubResource("ShaderMaterial_ebg2g")
 anchor_mode = 0
 script = ExtResource("1_mwfav")
 
+[node name="BGGenerator" parent="." unique_id=917973400 instance=ExtResource("3_1nqs0")]
+position = Vector2(27.999998, 73)
+
 [node name="HumanArea" type="Node2D" parent="." unique_id=1781715270]
 
 [node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("displayData", "camera", "initPosition", "faceGenerator")]
@@ -157,7 +156,6 @@ position = Vector2(23, 327)
 
 [node name="Body" parent="HumanArea/Spawner/FaceGenerator" index="0" unique_id=1721584226]
 material = SubResource("ShaderMaterial_mwfav")
-frame = 4
 
 [node name="Face" parent="HumanArea/Spawner/FaceGenerator" index="1" unique_id=707476335]
 material = SubResource("ShaderMaterial_cvmbd")
@@ -183,11 +181,10 @@ frame = 32
 
 [node name="Glasses" parent="HumanArea/Spawner/FaceGenerator" index="7" unique_id=2013651169]
 material = SubResource("ShaderMaterial_yxlcp")
-frame = 35
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=277055262]
 
-[node name="WorkArea" type="Sprite2D" parent="CanvasLayer" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitor")]
+[node name="WorkArea" type="Sprite2D" parent="CanvasLayer" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitor", "eye")]
 z_index = 5
 texture_filter = 1
 position = Vector2(534, 180)
@@ -195,6 +192,7 @@ texture = ExtResource("7_mwfav")
 script = ExtResource("8_cvmbd")
 idDisplay = NodePath("IDSection")
 heartMonitor = NodePath("HeartMonitor")
+eye = NodePath("EyeSection/Eye")
 
 [node name="IDSection" type="Control" parent="CanvasLayer/WorkArea" unique_id=147275066 node_paths=PackedStringArray("text", "face")]
 layout_mode = 3
@@ -309,7 +307,7 @@ offset_right = 1.0
 offset_bottom = -34.0
 
 [node name="Eye" parent="CanvasLayer/WorkArea/EyeSection" unique_id=1271531143 instance=ExtResource("9_bjd11")]
-position = Vector2(48, 29)
+position = Vector2(48, 29.5)
 
 [node name="RiskSection" type="Control" parent="CanvasLayer/WorkArea" unique_id=232227697]
 layout_mode = 3
@@ -333,27 +331,34 @@ Warning! "
 
 [node name="FileCabinet" type="Sprite2D" parent="CanvasLayer" unique_id=604660609]
 texture_filter = 1
-position = Vector2(-142, 150)
+position = Vector2(-142, 200)
 texture = ExtResource("15_3p2gp")
 script = ExtResource("16_cvmbd")
 
-[node name="Node2D" type="Node2D" parent="CanvasLayer/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("animation")]
+[node name="Revealer" type="Node2D" parent="CanvasLayer/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("animation")]
 script = ExtResource("17_ft6cd")
 animation = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/FileCabinet" unique_id=1863839554]
 libraries/ = SubResource("AnimationLibrary_1iba3")
 
-[node name="Area2D" type="Area2D" parent="CanvasLayer/FileCabinet" unique_id=61395713]
+[node name="OpenCloseArea" type="Area2D" parent="CanvasLayer/FileCabinet" unique_id=61395713]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FileCabinet/Area2D" unique_id=1705947655]
+[node name="Shape" type="CollisionShape2D" parent="CanvasLayer/FileCabinet/OpenCloseArea" unique_id=1705947655]
 position = Vector2(147, 1)
 shape = SubResource("RectangleShape2D_bb450")
+
+[node name="AdBlock" type="Sprite2D" parent="CanvasLayer/FileCabinet" unique_id=1789840487]
+position = Vector2(28.66, 0)
+texture = ExtResource("18_nfivy")
+
+[node name="AdBlock2" type="Sprite2D" parent="CanvasLayer/FileCabinet" unique_id=796027783]
+position = Vector2(12.999996, 7.3313713e-06)
+texture = ExtResource("18_nfivy")
 
 [node name="ActionBar" type="Sprite2D" parent="CanvasLayer" unique_id=1056628882]
 
 [node name="ScreenShader" type="ColorRect" parent="." unique_id=1731287264]
-visible = false
 z_index = 10
 material = SubResource("ShaderMaterial_wp0k4")
 anchors_preset = 15
@@ -369,6 +374,6 @@ volume_db = -9.055
 autoplay = true
 parameters/looping = true
 
-[connection signal="input_event" from="CanvasLayer/FileCabinet/Area2D" to="CanvasLayer/FileCabinet/Node2D" method="OnClick"]
+[connection signal="input_event" from="CanvasLayer/FileCabinet/OpenCloseArea" to="CanvasLayer/FileCabinet/Revealer" method="OnClick"]
 
 [editable path="HumanArea/Spawner/FaceGenerator"]

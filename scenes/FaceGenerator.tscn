@@ -7,45 +7,46 @@
 [ext_resource type="ColorPalette" uid="uid://ddwom2lugfl2w" path="res://resources/ColorPalettes/Face/hairPalette.tres" id="3_lcp7c"]
 [ext_resource type="ColorPalette" uid="uid://d32pqxf3o0s7l" path="res://resources/ColorPalettes/Face/clothesPalette.tres" id="4_42ka2"]
 [ext_resource type="ColorPalette" uid="uid://d2qudujurrrpi" path="res://resources/ColorPalettes/Face/trimPalette.tres" id="5_v7f6h"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynm86"]
-shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.5694427, 0.43328017, 0.45042324, 1)
-shader_parameter/intensity = 1.0
+[ext_resource type="ColorPalette" uid="uid://bhctqgl4tv3wp" path="res://resources/ColorPalettes/Face/eyePalette.tres" id="6_lcp7c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lcp7c"]
 shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.6193581, 0.4548319, 0.23208034, 1)
+shader_parameter/target_color = Color(0.7251204, 0.42821425, 0.44373795, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_42ka2"]
 shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.2659632, 0.27110505, 0.2754878, 1)
+shader_parameter/target_color = Color(0.98424155, 0.60619, 0.58017683, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v7f6h"]
 shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.2659632, 0.27110505, 0.2754878, 1)
+shader_parameter/target_color = Color(0.15487596, 0.154876, 0.15487596, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvgue"]
 shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.6193581, 0.4548319, 0.23208034, 1)
+shader_parameter/target_color = Color(0.15487596, 0.154876, 0.15487596, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mxibj"]
 shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.6193581, 0.4548319, 0.23208034, 1)
+shader_parameter/target_color = Color(0.98424155, 0.60619, 0.58017683, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jgd1y"]
 shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.6193581, 0.4548319, 0.23208034, 1)
+shader_parameter/target_color = Color(0.98424155, 0.60619, 0.58017683, 1)
 shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bgtxb"]
 shader = ExtResource("2_opue8")
-shader_parameter/target_color = Color(0.2319457, 0.61767775, 0.9999917, 1)
+shader_parameter/target_color = Color(0.98424155, 0.60619, 0.58017683, 1)
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ic6vy"]
+shader = ExtResource("2_opue8")
+shader_parameter/target_color = Color(0.047557652, 0.047557652, 0.04755763, 1)
 shader_parameter/intensity = 1.0
 
 [node name="Node2D" type="SubViewport" unique_id=736996481]
@@ -59,19 +60,20 @@ facePalette = ExtResource("2_ynm86")
 hairPalette = ExtResource("3_lcp7c")
 clotPalette = ExtResource("4_42ka2")
 trimPalette = ExtResource("5_v7f6h")
+eyesPalette = ExtResource("6_lcp7c")
 
 [node name="Body" type="Sprite2D" parent="." unique_id=1721584226]
 texture_filter = 1
-material = SubResource("ShaderMaterial_ynm86")
+material = SubResource("ShaderMaterial_lcp7c")
 texture = ExtResource("2_wlud4")
 centered = false
 hframes = 5
 vframes = 8
-frame = 3
+frame = 4
 
 [node name="Face" type="Sprite2D" parent="." unique_id=707476335]
 texture_filter = 1
-material = SubResource("ShaderMaterial_lcp7c")
+material = SubResource("ShaderMaterial_42ka2")
 texture = ExtResource("2_wlud4")
 centered = false
 hframes = 5
@@ -80,56 +82,56 @@ frame = 7
 
 [node name="Hair" type="Sprite2D" parent="." unique_id=1498276484]
 texture_filter = 1
-material = SubResource("ShaderMaterial_42ka2")
-texture = ExtResource("2_wlud4")
-centered = false
-hframes = 5
-vframes = 8
-frame = 11
-
-[node name="Beard" type="Sprite2D" parent="." unique_id=1321028753]
-visible = false
-texture_filter = 1
 material = SubResource("ShaderMaterial_v7f6h")
 texture = ExtResource("2_wlud4")
 centered = false
 hframes = 5
 vframes = 8
-frame = 18
+frame = 10
 
-[node name="Eyes" type="Sprite2D" parent="." unique_id=1924924684]
+[node name="Beard" type="Sprite2D" parent="." unique_id=1321028753]
+visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_cvgue")
 texture = ExtResource("2_wlud4")
 centered = false
 hframes = 5
 vframes = 8
-frame = 21
+frame = 19
 
-[node name="Nose" type="Sprite2D" parent="." unique_id=95740465]
+[node name="Eyes" type="Sprite2D" parent="." unique_id=1924924684]
 texture_filter = 1
 material = SubResource("ShaderMaterial_mxibj")
 texture = ExtResource("2_wlud4")
 centered = false
 hframes = 5
 vframes = 8
-frame = 29
+frame = 23
 
-[node name="Mouth" type="Sprite2D" parent="." unique_id=310951105]
+[node name="Nose" type="Sprite2D" parent="." unique_id=95740465]
 texture_filter = 1
 material = SubResource("ShaderMaterial_jgd1y")
 texture = ExtResource("2_wlud4")
 centered = false
 hframes = 5
 vframes = 8
-frame = 31
+frame = 27
 
-[node name="Glasses" type="Sprite2D" parent="." unique_id=2013651169]
-visible = false
+[node name="Mouth" type="Sprite2D" parent="." unique_id=310951105]
 texture_filter = 1
 material = SubResource("ShaderMaterial_bgtxb")
 texture = ExtResource("2_wlud4")
 centered = false
 hframes = 5
 vframes = 8
-frame = 36
+frame = 34
+
+[node name="Glasses" type="Sprite2D" parent="." unique_id=2013651169]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_ic6vy")
+texture = ExtResource("2_wlud4")
+centered = false
+hframes = 5
+vframes = 8
+frame = 35

@@ -18,9 +18,9 @@ public partial class Human : Node2D
     [Export] private Feed feed;
     [Export] private Light2D light;
     [Export] private AnimationPlayer animation;
-    private HumanDataDisplay display;
     private HumanStats stats;
     private HumanPersonalData data;
+    private Color[] colors;
 
     private static List<Human> allHumans = [];
     private bool selected = false;
@@ -28,7 +28,7 @@ public partial class Human : Node2D
     public Sprite2D Face { get => face; set => face = value; }
     public HumanStats Stats { get => stats; set => stats = value; }
     public HumanPersonalData Data { get => data; set => data = value; }
-
+    public Color[] Colors { get => colors; set => colors = value; }
 
     public override void _Ready()
     {

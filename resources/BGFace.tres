@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://r2t0vci8oeq"]
+
+[ext_resource type="Shader" uid="uid://27cbutex20j4" path="res://script/shader/BGFace.gdshader" id="1_iq08q"]
+
+[resource]
+shader = ExtResource("1_iq08q")

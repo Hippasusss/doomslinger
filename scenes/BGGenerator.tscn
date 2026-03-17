@@ -1,0 +1,2086 @@
+[gd_scene format=3 uid="uid://bcaiiynn7r52i"]
+
+[ext_resource type="Script" uid="uid://bau7ygkcb0doj" path="res://script/BgGenerator.cs" id="1_2p075"]
+[ext_resource type="Texture2D" uid="uid://bvl6fbvu6n0qp" path="res://sprite/BGFaces.png" id="1_8uo7v"]
+[ext_resource type="Shader" uid="uid://27cbutex20j4" path="res://script/shader/BGFace.gdshader" id="2_bcaft"]
+[ext_resource type="Material" uid="uid://r2t0vci8oeq" path="res://resources/BGFace.tres" id="2_ow28r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbtbj"]
+shader = ExtResource("2_bcaft")
+
+[node name="Node2D" type="Node2D" unique_id=917973400]
+z_index = -10
+scale = Vector2(0.58, 0.58)
+script = ExtResource("1_2p075")
+BaseParallaxAmount = 0.2
+VerticalParallaxFactor = 0.01
+
+[node name="Node2D5" type="Node2D" parent="." unique_id=964679608]
+modulate = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
+material = ExtResource("2_ow28r")
+position = Vector2(-144.82759, 127.58622)
+scale = Vector2(0.55, 0.55)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D5" unique_id=581090405]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(92.99999, 292.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D5" unique_id=666708202]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(145.99998, 287.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D5" unique_id=614793806]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(193.99998, 286.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D5" unique_id=690399855]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(244.99998, 288.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D5" type="Sprite2D" parent="Node2D5" unique_id=921397754]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(291.76468, 294.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="Node2D5" unique_id=845626089]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(344.76468, 289.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="Node2D5" unique_id=879002152]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(392.76468, 288.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D8" type="Sprite2D" parent="Node2D5" unique_id=1499525824]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(443.76468, 290.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D9" type="Sprite2D" parent="Node2D5" unique_id=385219658]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(484.4117, 291.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D10" type="Sprite2D" parent="Node2D5" unique_id=2066156369]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(537.41174, 286.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D11" type="Sprite2D" parent="Node2D5" unique_id=1053169534]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(585.4117, 285.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D12" type="Sprite2D" parent="Node2D5" unique_id=1809377199]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(636.4117, 287.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D13" type="Sprite2D" parent="Node2D5" unique_id=335772653]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(668.23517, 300.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D14" type="Sprite2D" parent="Node2D5" unique_id=1286779604]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(721.23517, 295.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D15" type="Sprite2D" parent="Node2D5" unique_id=1283378412]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(769.23517, 294.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D16" type="Sprite2D" parent="Node2D5" unique_id=1516421344]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(820.2351, 296.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D17" type="Sprite2D" parent="Node2D5" unique_id=2001851548]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(807.42944, 293.59003)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D18" type="Sprite2D" parent="Node2D5" unique_id=468535578]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(860.42944, 288.59003)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D19" type="Sprite2D" parent="Node2D5" unique_id=1447875497]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(908.42944, 287.59003)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D20" type="Sprite2D" parent="Node2D5" unique_id=1998090389]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(959.42944, 289.59003)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D21" type="Sprite2D" parent="Node2D5" unique_id=806004440]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1006.1941, 295.09)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D22" type="Sprite2D" parent="Node2D5" unique_id=1885269117]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1059.1941, 290.09)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D23" type="Sprite2D" parent="Node2D5" unique_id=1142433707]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1107.1941, 289.09)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D24" type="Sprite2D" parent="Node2D5" unique_id=1801067630]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1158.1941, 291.09)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D25" type="Sprite2D" parent="Node2D5" unique_id=996235924]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1198.8412, 292.14886)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D26" type="Sprite2D" parent="Node2D5" unique_id=702646558]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1251.8412, 287.14886)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D27" type="Sprite2D" parent="Node2D5" unique_id=2075744924]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1299.8411, 286.14886)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D28" type="Sprite2D" parent="Node2D5" unique_id=710634243]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1350.8411, 288.14886)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D29" type="Sprite2D" parent="Node2D5" unique_id=2059569268]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1382.6646, 300.97238)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D30" type="Sprite2D" parent="Node2D5" unique_id=543498422]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1435.6646, 295.97238)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D31" type="Sprite2D" parent="Node2D5" unique_id=1015345795]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1483.6646, 294.97238)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D32" type="Sprite2D" parent="Node2D5" unique_id=1034718725]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1534.6646, 296.97238)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Node2D4" type="Node2D" parent="." unique_id=988010087]
+modulate = Color(0.008202021, 0.008202026, 0.00820202, 1)
+material = ExtResource("2_ow28r")
+position = Vector2(-101.72412, 98.27586)
+scale = Vector2(0.69, 0.69)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D4" unique_id=11713357]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(92.99999, 292.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D4" unique_id=448911806]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(145.99998, 287.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D4" unique_id=2035816329]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(193.99998, 286.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D4" unique_id=638693051]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(244.99998, 288.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D5" type="Sprite2D" parent="Node2D4" unique_id=471429773]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(291.76468, 294.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="Node2D4" unique_id=29854740]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(344.76468, 289.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="Node2D4" unique_id=537892399]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(392.76468, 288.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D8" type="Sprite2D" parent="Node2D4" unique_id=327126939]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(443.76468, 290.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D9" type="Sprite2D" parent="Node2D4" unique_id=92759534]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(484.4117, 291.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D10" type="Sprite2D" parent="Node2D4" unique_id=1439587989]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(537.41174, 286.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D11" type="Sprite2D" parent="Node2D4" unique_id=1149620017]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(585.4117, 285.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D12" type="Sprite2D" parent="Node2D4" unique_id=1992704883]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(636.4117, 287.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D13" type="Sprite2D" parent="Node2D4" unique_id=1636689061]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(668.23517, 300.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D14" type="Sprite2D" parent="Node2D4" unique_id=2090088722]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(721.23517, 295.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D15" type="Sprite2D" parent="Node2D4" unique_id=839226]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(769.23517, 294.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D16" type="Sprite2D" parent="Node2D4" unique_id=110328628]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(820.2351, 296.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D17" type="Sprite2D" parent="Node2D4" unique_id=1019742137]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-617.1765, 288.31995)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D33" type="Sprite2D" parent="Node2D4" unique_id=1782191447]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(852.62036, 300.81372)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D34" type="Sprite2D" parent="Node2D4" unique_id=430636391]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(905.62036, 295.81372)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D35" type="Sprite2D" parent="Node2D4" unique_id=2101056300]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(953.62036, 294.81372)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D36" type="Sprite2D" parent="Node2D4" unique_id=1977145297]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1004.62036, 296.81372)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D37" type="Sprite2D" parent="Node2D4" unique_id=90482371]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1051.385, 302.3137)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D38" type="Sprite2D" parent="Node2D4" unique_id=1211615817]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1104.385, 297.3137)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D39" type="Sprite2D" parent="Node2D4" unique_id=629474121]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1152.385, 296.3137)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D40" type="Sprite2D" parent="Node2D4" unique_id=201429993]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1203.385, 298.3137)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D41" type="Sprite2D" parent="Node2D4" unique_id=1717297397]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1244.0321, 299.37256)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D42" type="Sprite2D" parent="Node2D4" unique_id=1992038747]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1297.0321, 294.37256)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D43" type="Sprite2D" parent="Node2D4" unique_id=670148224]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1345.032, 293.37256)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D44" type="Sprite2D" parent="Node2D4" unique_id=614894061]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1396.032, 295.37256)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D45" type="Sprite2D" parent="Node2D4" unique_id=272014254]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1427.8555, 308.19608)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D46" type="Sprite2D" parent="Node2D4" unique_id=161977655]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1480.8555, 303.19608)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D47" type="Sprite2D" parent="Node2D4" unique_id=2055275450]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1528.8555, 302.19608)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D48" type="Sprite2D" parent="Node2D4" unique_id=875344613]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1579.8555, 304.19608)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D49" type="Sprite2D" parent="Node2D4" unique_id=2054914344]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(142.44385, 296.1337)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D18" type="Sprite2D" parent="Node2D4" unique_id=1283160379]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-564.1765, 283.31995)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D19" type="Sprite2D" parent="Node2D4" unique_id=1040425644]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-516.1765, 282.31995)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D20" type="Sprite2D" parent="Node2D4" unique_id=2060296311]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-465.1765, 284.31995)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D21" type="Sprite2D" parent="Node2D4" unique_id=1458113511]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-418.41183, 289.81992)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D22" type="Sprite2D" parent="Node2D4" unique_id=958868312]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-365.41183, 284.81992)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D23" type="Sprite2D" parent="Node2D4" unique_id=1833194982]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-317.41183, 283.81992)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D24" type="Sprite2D" parent="Node2D4" unique_id=763637876]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-266.41183, 285.81992)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D25" type="Sprite2D" parent="Node2D4" unique_id=1566488964]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-225.7648, 286.87878)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D26" type="Sprite2D" parent="Node2D4" unique_id=1966401302]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-172.76477, 281.87878)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D27" type="Sprite2D" parent="Node2D4" unique_id=195694677]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-124.76483, 280.87878)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D28" type="Sprite2D" parent="Node2D4" unique_id=708797765]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-73.76483, 282.87878)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D29" type="Sprite2D" parent="Node2D4" unique_id=160977433]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-41.941345, 295.7023)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D30" type="Sprite2D" parent="Node2D4" unique_id=1453479025]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(11.058655, 290.7023)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D31" type="Sprite2D" parent="Node2D4" unique_id=158145906]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(59.058655, 289.7023)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D32" type="Sprite2D" parent="Node2D4" unique_id=1911449131]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(110.05859, 291.7023)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Node2D3" type="Node2D" parent="." unique_id=366748882]
+modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
+material = ExtResource("2_ow28r")
+position = Vector2(-112.068954, 99.99999)
+scale = Vector2(0.75, 0.75)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D3" unique_id=275344170]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(92.99999, 292.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D3" unique_id=95624982]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(145.99998, 287.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D3" unique_id=962487855]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(193.99998, 286.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D3" unique_id=1276592336]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(244.99998, 288.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D5" type="Sprite2D" parent="Node2D3" unique_id=384495292]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(291.76468, 294.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="Node2D3" unique_id=92744931]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(344.76468, 289.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="Node2D3" unique_id=135631047]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(392.76468, 288.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D8" type="Sprite2D" parent="Node2D3" unique_id=249329296]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(443.76468, 290.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D9" type="Sprite2D" parent="Node2D3" unique_id=1344651244]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(484.4117, 291.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D10" type="Sprite2D" parent="Node2D3" unique_id=1035169243]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(537.41174, 286.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D11" type="Sprite2D" parent="Node2D3" unique_id=1208573876]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(585.4117, 285.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D12" type="Sprite2D" parent="Node2D3" unique_id=1506942163]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(636.4117, 287.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D13" type="Sprite2D" parent="Node2D3" unique_id=1039848534]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(668.23517, 300.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D14" type="Sprite2D" parent="Node2D3" unique_id=357281974]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(721.23517, 295.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D15" type="Sprite2D" parent="Node2D3" unique_id=1803412782]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(769.23517, 294.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D16" type="Sprite2D" parent="Node2D3" unique_id=1576078583]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(820.2351, 296.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D33" type="Sprite2D" parent="Node2D3" unique_id=546749869]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(871.3794, 298.81473)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D34" type="Sprite2D" parent="Node2D3" unique_id=53554291]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(924.3794, 293.81473)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D35" type="Sprite2D" parent="Node2D3" unique_id=659423751]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(972.3794, 292.81473)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D36" type="Sprite2D" parent="Node2D3" unique_id=1884935841]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1023.3794, 294.81473)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D37" type="Sprite2D" parent="Node2D3" unique_id=554234313]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1070.144, 300.3147)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D38" type="Sprite2D" parent="Node2D3" unique_id=54208706]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1123.144, 295.3147)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D39" type="Sprite2D" parent="Node2D3" unique_id=460985672]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1171.144, 294.3147)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D40" type="Sprite2D" parent="Node2D3" unique_id=997114856]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1222.144, 296.3147)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D41" type="Sprite2D" parent="Node2D3" unique_id=1189627287]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1262.7911, 297.37357)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D42" type="Sprite2D" parent="Node2D3" unique_id=1956373352]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1315.7911, 292.37357)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D43" type="Sprite2D" parent="Node2D3" unique_id=1012383008]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1363.791, 291.37357)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D44" type="Sprite2D" parent="Node2D3" unique_id=1312855895]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1414.791, 293.37357)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D45" type="Sprite2D" parent="Node2D3" unique_id=772131937]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1446.6145, 306.19708)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D46" type="Sprite2D" parent="Node2D3" unique_id=1120678106]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1499.6145, 301.19708)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D47" type="Sprite2D" parent="Node2D3" unique_id=1604900420]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1547.6145, 300.19708)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D48" type="Sprite2D" parent="Node2D3" unique_id=961854421]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(1598.6145, 302.19708)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D17" type="Sprite2D" parent="Node2D3" unique_id=1166473479]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-673.44836, 289.61932)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D18" type="Sprite2D" parent="Node2D3" unique_id=961419673]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-620.44836, 284.61932)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D19" type="Sprite2D" parent="Node2D3" unique_id=2043010566]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-572.44836, 283.61932)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D20" type="Sprite2D" parent="Node2D3" unique_id=114147120]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-521.44836, 285.61932)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D21" type="Sprite2D" parent="Node2D3" unique_id=1617737111]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-474.6837, 291.1193)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D22" type="Sprite2D" parent="Node2D3" unique_id=398292009]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-421.6837, 286.1193)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D23" type="Sprite2D" parent="Node2D3" unique_id=275625078]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-373.6837, 285.1193)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D24" type="Sprite2D" parent="Node2D3" unique_id=1156374307]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-322.6837, 287.1193)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D25" type="Sprite2D" parent="Node2D3" unique_id=2144480572]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-282.03665, 288.17816)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D26" type="Sprite2D" parent="Node2D3" unique_id=1881031420]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-229.03662, 283.17816)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D27" type="Sprite2D" parent="Node2D3" unique_id=1929873605]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-181.03668, 282.17816)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D28" type="Sprite2D" parent="Node2D3" unique_id=1868740821]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-130.03668, 284.17816)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D29" type="Sprite2D" parent="Node2D3" unique_id=69288657]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-98.213196, 297.00168)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D30" type="Sprite2D" parent="Node2D3" unique_id=1509995942]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(-45.213196, 292.00168)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D31" type="Sprite2D" parent="Node2D3" unique_id=1341979724]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(2.7868042, 291.00168)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D32" type="Sprite2D" parent="Node2D3" unique_id=1772018628]
+texture_filter = 1
+material = SubResource("ShaderMaterial_dbtbj")
+use_parent_material = true
+position = Vector2(53.786743, 293.00168)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Node2D2" type="Node2D" parent="." unique_id=1235530084]
+modulate = Color(0.021434635, 0.021434637, 0.021434627, 1)
+position = Vector2(-136.20691, 74.137924)
+scale = Vector2(0.89, 0.89)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D2" unique_id=1748313373]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(92.99999, 292.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D2" unique_id=650568836]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(145.99998, 287.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D2" unique_id=260341852]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(193.99998, 286.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D2" unique_id=1573810549]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(244.99998, 288.99997)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D5" type="Sprite2D" parent="Node2D2" unique_id=1276145689]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(291.76468, 294.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="Node2D2" unique_id=898526210]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(344.76468, 289.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="Node2D2" unique_id=280267967]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(392.76468, 288.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D8" type="Sprite2D" parent="Node2D2" unique_id=1919570816]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(443.76468, 290.49994)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D9" type="Sprite2D" parent="Node2D2" unique_id=375002082]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(484.4117, 291.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D10" type="Sprite2D" parent="Node2D2" unique_id=1366750581]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(537.41174, 286.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D11" type="Sprite2D" parent="Node2D2" unique_id=1156183258]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(585.4117, 285.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D12" type="Sprite2D" parent="Node2D2" unique_id=2144364568]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(636.4117, 287.5588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D13" type="Sprite2D" parent="Node2D2" unique_id=344180353]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(668.23517, 300.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D14" type="Sprite2D" parent="Node2D2" unique_id=1761623342]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(721.23517, 295.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D15" type="Sprite2D" parent="Node2D2" unique_id=1548629557]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(769.23517, 294.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D16" type="Sprite2D" parent="Node2D2" unique_id=1473426228]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(820.2351, 296.38232)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D17" type="Sprite2D" parent="Node2D2" unique_id=1705378863]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-680.9647, 288.09537)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D18" type="Sprite2D" parent="Node2D2" unique_id=1332008535]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-627.9647, 283.09537)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D19" type="Sprite2D" parent="Node2D2" unique_id=101225684]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-579.9647, 282.09537)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D33" type="Sprite2D" parent="Node2D2" unique_id=1169826056]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(869.8307, 301.24496)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D34" type="Sprite2D" parent="Node2D2" unique_id=189093420]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(922.8307, 296.24496)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D35" type="Sprite2D" parent="Node2D2" unique_id=1690221325]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(970.8307, 295.24496)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D36" type="Sprite2D" parent="Node2D2" unique_id=1383367521]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1021.8307, 297.24496)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D37" type="Sprite2D" parent="Node2D2" unique_id=776947932]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1068.5953, 302.74493)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D38" type="Sprite2D" parent="Node2D2" unique_id=1910263105]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1121.5953, 297.74493)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D39" type="Sprite2D" parent="Node2D2" unique_id=1000692245]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1169.5953, 296.74493)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D40" type="Sprite2D" parent="Node2D2" unique_id=2094056572]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1220.5953, 298.74493)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D41" type="Sprite2D" parent="Node2D2" unique_id=131033655]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1261.2424, 299.8038)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D42" type="Sprite2D" parent="Node2D2" unique_id=1849035360]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1314.2424, 294.8038)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D43" type="Sprite2D" parent="Node2D2" unique_id=1597162909]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1362.2424, 293.8038)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D44" type="Sprite2D" parent="Node2D2" unique_id=649984120]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1413.2424, 295.8038)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D45" type="Sprite2D" parent="Node2D2" unique_id=181654497]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1445.0659, 308.62732)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D46" type="Sprite2D" parent="Node2D2" unique_id=1763623508]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1498.0659, 303.62732)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D47" type="Sprite2D" parent="Node2D2" unique_id=586817860]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1546.0659, 302.62732)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D48" type="Sprite2D" parent="Node2D2" unique_id=1540654937]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(1597.0658, 304.62732)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D49" type="Sprite2D" parent="Node2D2" unique_id=540030235]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(95.86597, 296.34036)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D50" type="Sprite2D" parent="Node2D2" unique_id=1278963155]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(148.86597, 291.34036)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D51" type="Sprite2D" parent="Node2D2" unique_id=764174885]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(196.86597, 290.34036)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D20" type="Sprite2D" parent="Node2D2" unique_id=1278287452]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-528.9647, 284.09537)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D21" type="Sprite2D" parent="Node2D2" unique_id=1910081230]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-482.20004, 289.59534)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D22" type="Sprite2D" parent="Node2D2" unique_id=920043887]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-429.20004, 284.59534)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D23" type="Sprite2D" parent="Node2D2" unique_id=1580032680]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-381.20004, 283.59534)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D24" type="Sprite2D" parent="Node2D2" unique_id=2000476989]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-330.20004, 285.59534)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D25" type="Sprite2D" parent="Node2D2" unique_id=1603028801]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-289.553, 286.6542)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D26" type="Sprite2D" parent="Node2D2" unique_id=972195242]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-236.55298, 281.6542)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D27" type="Sprite2D" parent="Node2D2" unique_id=2097779715]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-188.55304, 280.6542)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D28" type="Sprite2D" parent="Node2D2" unique_id=1702659024]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-137.55304, 282.6542)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D29" type="Sprite2D" parent="Node2D2" unique_id=579092544]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-105.72955, 295.47772)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D30" type="Sprite2D" parent="Node2D2" unique_id=1532991856]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-52.729553, 290.47772)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D31" type="Sprite2D" parent="Node2D2" unique_id=1430108844]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(-4.729553, 289.47772)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D32" type="Sprite2D" parent="Node2D2" unique_id=1744894022]
+texture_filter = 1
+material = ExtResource("2_ow28r")
+position = Vector2(46.270386, 291.47772)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Node2D" type="Node2D" parent="." unique_id=750030953]
+modulate = Color(0.025363795, 0.025363805, 0.02536378, 1)
+material = ExtResource("2_ow28r")
+position = Vector2(-222.4138, 74.13793)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=1582895791]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(88.62069, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=1551118046]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(147.2414, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D" unique_id=1866692852]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(205.86209, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D" unique_id=1916628750]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(247.41377, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D5" type="Sprite2D" parent="Node2D" unique_id=1283525619]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(294.17847, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="Node2D" unique_id=1966969922]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(347.17847, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="Node2D" unique_id=2131653427]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(395.17847, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D8" type="Sprite2D" parent="Node2D" unique_id=234416524]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(446.17847, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D9" type="Sprite2D" parent="Node2D" unique_id=268472474]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(486.8255, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D10" type="Sprite2D" parent="Node2D" unique_id=523100009]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(539.8255, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D11" type="Sprite2D" parent="Node2D" unique_id=1116492299]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(587.82544, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D12" type="Sprite2D" parent="Node2D" unique_id=1175095992]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(638.82544, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D13" type="Sprite2D" parent="Node2D" unique_id=252088720]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(670.6489, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D14" type="Sprite2D" parent="Node2D" unique_id=997107212]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(723.6489, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D15" type="Sprite2D" parent="Node2D" unique_id=1750915424]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(771.6489, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D16" type="Sprite2D" parent="Node2D" unique_id=1456992501]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(822.64886, 281.60345)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D17" type="Sprite2D" parent="Node2D" unique_id=915195431]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-699.31036, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D18" type="Sprite2D" parent="Node2D" unique_id=722858271]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-640.68964, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D19" type="Sprite2D" parent="Node2D" unique_id=419341723]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-582.069, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D20" type="Sprite2D" parent="Node2D" unique_id=1180330582]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-540.5173, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D21" type="Sprite2D" parent="Node2D" unique_id=850827332]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-493.75256, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D22" type="Sprite2D" parent="Node2D" unique_id=751290260]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-440.75256, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D23" type="Sprite2D" parent="Node2D" unique_id=2045747137]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-392.75256, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D24" type="Sprite2D" parent="Node2D" unique_id=1823931242]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-341.75256, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D25" type="Sprite2D" parent="Node2D" unique_id=330973304]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-301.10553, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D26" type="Sprite2D" parent="Node2D" unique_id=67461719]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-248.10553, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D27" type="Sprite2D" parent="Node2D" unique_id=1846736268]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-200.10559, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D28" type="Sprite2D" parent="Node2D" unique_id=1290616787]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-149.10559, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D29" type="Sprite2D" parent="Node2D" unique_id=1621673040]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-117.282104, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D30" type="Sprite2D" parent="Node2D" unique_id=401130553]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-64.282104, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D31" type="Sprite2D" parent="Node2D" unique_id=498391506]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-16.282104, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D32" type="Sprite2D" parent="Node2D" unique_id=1410093639]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(34.717834, 279.8793)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D33" type="Sprite2D" parent="Node2D" unique_id=2041588766]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(867.9311, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D34" type="Sprite2D" parent="Node2D" unique_id=262064526]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(926.5518, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D35" type="Sprite2D" parent="Node2D" unique_id=644160427]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(985.1725, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D36" type="Sprite2D" parent="Node2D" unique_id=1999717382]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1026.7242, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D37" type="Sprite2D" parent="Node2D" unique_id=70962502]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1073.4889, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D38" type="Sprite2D" parent="Node2D" unique_id=377003226]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1126.4889, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D39" type="Sprite2D" parent="Node2D" unique_id=475157518]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1174.4889, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D40" type="Sprite2D" parent="Node2D" unique_id=579984539]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1225.4889, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D41" type="Sprite2D" parent="Node2D" unique_id=462112194]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1266.1359, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D42" type="Sprite2D" parent="Node2D" unique_id=1159919288]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1319.1359, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D43" type="Sprite2D" parent="Node2D" unique_id=1815740429]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1367.1359, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D44" type="Sprite2D" parent="Node2D" unique_id=838236892]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1418.1359, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D45" type="Sprite2D" parent="Node2D" unique_id=95257160]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1449.9594, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+
+[node name="Sprite2D46" type="Sprite2D" parent="Node2D" unique_id=2032271409]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1502.9594, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D47" type="Sprite2D" parent="Node2D" unique_id=201971132]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1550.9594, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D48" type="Sprite2D" parent="Node2D" unique_id=28386139]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1601.9594, 286.77588)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("1_8uo7v")
+hframes = 4
+frame = 3

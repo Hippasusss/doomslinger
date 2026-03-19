@@ -29,7 +29,7 @@ public partial class HumanSpawner : Node2D
         AddChild(newHuman);
         humans.Add(newHuman);
         newHuman.Position = new Vector2(initPosition.Position.X + (humans.Count * humanSpacing), initPosition.Position.Y );
-        newHuman.Data = new HumanPersonalData(GetRandomName(),GetRandomDate(), GetRandomHeight(), GetRandomGender(), GetRandomNationality(), GetRandomEyeColour());
+        newHuman.Data = new HumanPersonalData(GetRandomName(),GetRandomDate(), GetRandomHeight(), GetRandomGender(), GetRandomNationality() );
 
         // need to wait for it to draw the aggregate sprite
         var retVal = await faceGenerator.GenerateAsync();
@@ -37,6 +37,7 @@ public partial class HumanSpawner : Node2D
         newHuman.Colors = retVal.Item2;
         newHuman.HumanSelected += camera.MovePositionToNode;
         newHuman.HumanSelected += displayData.DisplayNewHuman;
+        newHuman.Phone.Modulate = newHuman.Colors[5];
     }
 
     private static string GetRandomName()
@@ -76,10 +77,5 @@ public partial class HumanSpawner : Node2D
         int randomOffset = random.Next(0, range + 1);
 
         return start.AddDays(randomOffset);
-    }
-
-    private static HumanPersonalData.EyeColour GetRandomEyeColour()
-    {
-        return (HumanPersonalData.EyeColour)GD.RandRange(0,2);
     }
 }

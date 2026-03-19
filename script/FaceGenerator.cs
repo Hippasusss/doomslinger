@@ -14,6 +14,7 @@ public partial class FaceGenerator : SubViewport
     [Export] public ColorPalette clotPalette;
     [Export] public ColorPalette trimPalette;
     [Export] public ColorPalette eyesPalette;
+    [Export] public ColorPalette phonePalette;
     [Export] public Texture2D maleSpriteSheet;
     [Export] public Texture2D femaleSpriteSheet;
 
@@ -32,6 +33,7 @@ public partial class FaceGenerator : SubViewport
         Color clotColor = clotPalette.Colors.GetRandom();
         Color trimColor = trimPalette.Colors.GetRandom();
         Color eyeColor  = eyesPalette.Colors.GetRandom();
+        Color phoneColor = phonePalette.Colors.GetRandom();
 
         for (int i = 0; i < children.Count; i++)
         {
@@ -89,7 +91,7 @@ public partial class FaceGenerator : SubViewport
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
         Image image = GetTexture().GetImage();
-        Color[] colors = [faceColor, hairColor, clotColor, trimColor, eyeColor];
+        Color[] colors = [faceColor, hairColor, clotColor, trimColor, eyeColor, phoneColor];
         return (ImageTexture.CreateFromImage(image), colors);
     }
 }

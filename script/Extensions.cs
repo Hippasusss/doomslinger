@@ -18,6 +18,6 @@ public static class EnumerableExtensions
         if (source == null) return default;
         var list = source.ToList();
         if (list.Count == 0) return default;
-        return list[(int)GD.RandRange(0, list.Count - 1)];
+        return list[GD.RandRange(0, list.Count - 1)];
     }
 }

@@ -9,6 +9,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Utils;
 
 public partial class Human : Node2D
 {
@@ -18,9 +19,11 @@ public partial class Human : Node2D
     [Export] private Feed feed;
     [Export] private Light2D light;
     [Export] private AnimationPlayer animation;
+    [Export] private Sprite2D phone;
     private HumanStats stats;
     private HumanPersonalData data;
     private Color[] colors;
+    private bool isOnline = true;
 
     private static List<Human> allHumans = [];
     private bool selected = false;
@@ -29,10 +32,14 @@ public partial class Human : Node2D
     public HumanStats Stats { get => stats; set => stats = value; }
     public HumanPersonalData Data { get => data; set => data = value; }
     public Color[] Colors { get => colors; set => colors = value; }
+    public Sprite2D Phone { get => phone; set => phone = value; }
+    public Feed Feed { get => feed; set => feed = value; }
+    public bool IsOnline { get => isOnline;}
+
 
     public override void _Ready()
     {
-        feed.newMainFeedBlockCallBack += ReadFeedBlock;
+        Feed.newMainFeedBlockCallBack += ReadFeedBlock;
         allHumans.Add(this);
         HumanSelected += selected => {
             foreach(Human human in allHumans)
@@ -43,20 +50,33 @@ public partial class Human : Node2D
         };
     }
 
+    private DeltaTimer tempTimerOnOffTest = new(5,10);
+    public override void _Process(double delta)
+    {
+        if(tempTimerOnOffTest.Delta(delta))
+        {
+            SetUserOnline(!isOnline);
+        }
+
+    }
+
+    public void SetUserOnline(bool onOff)
+    {
+        isOnline = onOff;
+        feed.ToggleOnOff(onOff);
+        light.Enabled = onOff;
+    }
+
     private void ReadFeedBlock(Feedblock block)
     {
         Stats += block.stats;
-    }
-
-    public void SetLightOnOff(bool onOff)
-    {
-        light.Enabled = onOff;
     }
 
     public void Select()
     {
         if(!selected)
         {
+            animation.Play("hover");
             EmitSignal(SignalName.HumanSelected, this);
             selected = true;
         }
@@ -86,7 +106,7 @@ public partial class Human : Node2D
     {
         if(!selected)
         {
-            animation.Play("hover");
+            // animation.Play("hover");
         }
     }
 
@@ -94,7 +114,7 @@ public partial class Human : Node2D
     {
         if(!selected)
         {
-            animation.PlayBackwards("hover");
+            // animation.PlayBackwards("hover");
         }
     }
 
@@ -115,22 +135,19 @@ public struct HumanPersonalData
     public string gender;
     public string nationality;
     public int UID;
-    public EyeColour eyeColour;
     private readonly static List<int> UIDs = [];
 
     public HumanPersonalData(string name,
             DateOnly DOB,
             int height,
             string gender,
-            string nationality,
-            EyeColour eyeColour)
+            string nationality)
     {
         this.name = name;
         this.DOB = DOB;
         this.height = height;
         this.gender = gender;
         this.nationality = nationality;
-        this.eyeColour = eyeColour;
         do
         {
             UID = GD.RandRange(0,99999);
@@ -149,6 +166,7 @@ public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hun
     public int rage = rage;
     public int hunger = hunger;
     public int fatigue = fatigue;
+    public int longTermFatigue = fatigue;
 
     public static HumanStats operator +(HumanStats a, HumanStats b)
     {
@@ -171,4 +189,15 @@ public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hun
         hunger = GD.RandRange(rangeLow, rangeHigh);
         fatigue = GD.RandRange(rangeLow, rangeHigh);
     }
+
+    public string GetStatsString()
+    {
+        const int spacing = -3;
+        return $"{attention, spacing} {fatigue, spacing} {hunger, spacing} {mood, spacing} {rage, spacing}";
+    }
+
+
+
+
+
 }

@@ -15,11 +15,17 @@ using Utils;
 public partial class HumanDataDisplay : Sprite2D
 {
     [Export] private IDDisplay idDisplay;
-    [Export] private HeartMonitor heartMonitor;
-    [Export] private Eye eye;
+    [Export] private HeartMonitorDisplay heartMonitorDisplay;
+    [Export] private EyeDisplay eyeDisplay;
+    [Export] private FeedDataDisplay feedDataDisplay;
+    private IDisplay[] displays;
     private Human currentHuman;
-    private DeltaTimer updateTimer = new (0.2);
 
+    public override void _Ready()
+    {
+        displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay];
+    }
+    private readonly DeltaTimer updateTimer = new (0.2);
     public override void _Process(double delta)
     {
         if(updateTimer.Delta(delta))
@@ -31,28 +37,33 @@ public partial class HumanDataDisplay : Sprite2D
     public void DisplayNewHuman(Human newHuman)
     {
         currentHuman = newHuman;
-        idDisplay.UpdateID(newHuman);
-        UpdateCurrentHumanData();
-        heartMonitor.Wipe();
-        eye.SetEyelidColor(newHuman.Colors[0]);
-        eye.SetEyeColor(newHuman.Colors[4]);
-        eye.MoveEyeball(4);
-        eye.ScaleIris((float)GD.RandRange(0.5, 1.5), 0);
-    }
-
-    public void ClearDisplay()
-    {
-
+        if(newHuman.IsOnline)
+        {
+            UpdateCurrentHumanData();
+            eyeDisplay.MoveEyeball(4);
+            eyeDisplay.ScaleIris((float)GD.RandRange(0.5, 1.5), 0);
+        }
     }
 
     private void UpdateCurrentHumanData()
     {
-        if(currentHuman != null)
+        if(currentHuman == null) return;
+        if(currentHuman.IsOnline)
         {
-            heartMonitor.SetBPM(currentHuman.Stats.rage);
+            foreach(IDisplay display in displays)
+            {
+                if(display.Enabled != currentHuman.IsOnline) display.ToggleOnOff(currentHuman.IsOnline);
+                display.UpdateDisplay(currentHuman);
+            }
+        }
+        else
+        {
+            foreach(IDisplay display in displays)
+            {
+                if(display.Enabled != currentHuman.IsOnline) display.ToggleOnOff(currentHuman.IsOnline);
+            }
         }
     }
-
 
 
 }

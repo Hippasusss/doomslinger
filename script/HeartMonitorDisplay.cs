@@ -2,10 +2,13 @@ using Godot;
 using System;
 using Utils;
 
-public partial class HeartMonitor : Control
+public partial class HeartMonitorDisplay : Control, IDisplay
 {
     [Export] private Line2D line;
     [Export] private RichTextLabel BPMText;
+
+    public bool Enabled {get; set;} = true;
+
     private const int numPoints = 300;
     private float targetValue = 0;
     private float amplitude = 15f;
@@ -16,6 +19,7 @@ public partial class HeartMonitor : Control
 
     public override void _Ready()
     {
+        Enabled = true;
         SetBPM(40);
         Vector2 startPoint = line.Points[0];
         Vector2 endPoint = line.Points[1];
@@ -32,6 +36,7 @@ public partial class HeartMonitor : Control
     public override void _Process(double delta)
     {
 
+        if(!Enabled) return;
         if(updateTimer.Delta(delta))
         {
             line.SetPointPosition(numPoints - 1, new(line.GetPointPosition(numPoints-1).X, targetValue));  
@@ -60,7 +65,7 @@ public partial class HeartMonitor : Control
                 .SetEase(Tween.EaseType.OutIn);
     }
 
-    public void SetBPM(int newBPM)
+    private void SetBPM(int newBPM)
     {
         if (newBPM < 5) return;
         beepTimer.SetResetTime(60f/newBPM);
@@ -76,4 +81,19 @@ public partial class HeartMonitor : Control
             line.SetPointPosition(i, new(line.GetPointPosition(i).X, 0));
         }
     }
+
+    public void ToggleOnOff(bool onOff)
+    {
+        if(!onOff)
+        {
+            Wipe();
+        }
+        Enabled = onOff;
+    }
+
+    public void UpdateDisplay(Human human)
+    {
+        SetBPM(human.Stats.rage);
+    }
+
 }

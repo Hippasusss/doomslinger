@@ -3,24 +3,19 @@ using System;
 
 public partial class SectionRevealer : Node2D
 {
-    [Export] public AnimationPlayer animation;
+    [Export] public RigidBody2D rigidBody2D;
     private bool open = false;
+    private const int force = 20000;
 
     public override void _Ready()
     {
     }
 
-    public void Open()
+    public void Toggle()
     {
-        animation.Play("Open");
-        open = true;
-    }
-
-    public void Close()
-    {
-
-        animation.Play("Close");
-        open = false;
+        int sign = open ? -1 : 1;
+        rigidBody2D.ApplyCentralImpulse(new(force * sign,0));
+        open = !open;
     }
 
     public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)
@@ -29,8 +24,7 @@ public partial class SectionRevealer : Node2D
         {
             if (mouseEvent.ButtonIndex == MouseButton.Left)
             {
-                if(open) Close();
-                else Open();
+                Toggle();
             }
         }
     }

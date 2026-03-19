@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="8_wp0k4"]
+[ext_resource type="Texture2D" uid="uid://bkn0gbxuvg7jh" path="res://sprite/controls.png" id="8_xa025"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_bjd11"]
 [ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="9_ft6cd"]
 [ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="9_mwfav"]
@@ -115,7 +116,7 @@ numHumans = 5
 faceGenerator = NodePath("FaceGenerator")
 
 [node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
-position = Vector2(5, 318)
+position = Vector2(2, 286)
 
 [node name="FaceGenerator" parent="HumanArea/Spawner" unique_id=828249479 instance=ExtResource("3_bjd11")]
 
@@ -418,7 +419,12 @@ linear_damp = 45.08
 position = Vector2(132.755, -39)
 shape = SubResource("RectangleShape2D_1iba3")
 
-[node name="ActionBar" type="Sprite2D" parent="UI" unique_id=1056628882]
+[node name="ActionBar" type="Node2D" parent="UI" unique_id=1924222355]
+
+[node name="Controls" type="Sprite2D" parent="UI/ActionBar" unique_id=1091065098]
+texture_filter = 1
+position = Vector2(199, 345)
+texture = ExtResource("8_xa025")
 
 [node name="ScreenShader" type="ColorRect" parent="UI" unique_id=1731287264]
 visible = false

@@ -14,12 +14,16 @@
 [ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="9_mwfav"]
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
 [ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="10_mwfav"]
-[ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitor.cs" id="10_qmy6f"]
+[ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="10_qmy6f"]
+[ext_resource type="Texture2D" uid="uid://qnnk5d38udbv" path="res://sprite/face/Faceback.png" id="12_1iba3"]
+[ext_resource type="Shader" uid="uid://db0ftlnwdwsou" path="res://script/shader/dither.gdshader" id="12_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
-[ext_resource type="Script" uid="uid://dees5mj3p1sw" path="res://script/FileCabinet.cs" id="16_cvmbd"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
+[ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="18_ebg2g"]
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
+[ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
+[ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
 shader = ExtResource("10_lhr70")
@@ -59,73 +63,34 @@ shader_parameter/intensity = 1.0
 shader = ExtResource("8_1iba3")
 shader_parameter/intensity = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3p2gp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ofn6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xa025"]
+shader = ExtResource("12_yxlcp")
+shader_parameter/dither_size = 1.0
+shader_parameter/color_levels = 8.0
+shader_parameter/dither_strength = 0.1
+shader_parameter/use_edge_mask = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36rkl"]
 shader = ExtResource("9_mwfav")
-
-[sub_resource type="Animation" id="Animation_bb450"]
-resource_name = "Close"
-length = 0.7933
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.43333334, 0.52002305, 0.6, 0.66176516, 0.73333335),
-"transitions": PackedFloat32Array(0.90125024, 1, 1, 1, 1, 1),
-"update": 2,
-"values": [Vector2(150, 200), Vector2(-142, 200), Vector2(-135.145, 200), Vector2(-141.51, 200), Vector2(-138.305, 200), Vector2(-142.035, 200)]
-}
-
-[sub_resource type="Animation" id="Animation_nfivy"]
-resource_name = "Open"
-length = 0.765
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.584548, 0.65666234, 0.7312635),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 2,
-"values": [Vector2(-142, 200), Vector2(150, 200), Vector2(143.47, 200), Vector2(151.01, 200), Vector2(150, 200)]
-}
-
-[sub_resource type="Animation" id="Animation_1nqs0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-142, 200)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iba3"]
-_data = {
-&"Close": SubResource("Animation_bb450"),
-&"Open": SubResource("Animation_nfivy"),
-&"RESET": SubResource("Animation_1nqs0")
-}
+shader_parameter/divider = 3.0
+shader_parameter/boost = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb450"]
 size = Vector2(10, 46)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxlcp"]
+size = Vector2(11.93, 40.755)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1iba3"]
+size = Vector2(11, 19)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wp0k4"]
 shader = ExtResource("10_lhr70")
 shader_parameter/dither_size = 1.0
-shader_parameter/color_levels = 39.0
-shader_parameter/dither_strength = 0.254000012065
+shader_parameter/color_levels = 148.0
+shader_parameter/dither_strength = 1.0
 
 [node name="World" type="Node2D" unique_id=889943719]
 
@@ -142,7 +107,7 @@ position = Vector2(27.999998, 73)
 [node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("displayData", "camera", "initPosition", "faceGenerator")]
 texture_filter = 1
 script = ExtResource("1_rvslj")
-displayData = NodePath("../../CanvasLayer/WorkArea")
+displayData = NodePath("../../UI/WorkArea")
 camera = NodePath("../../Camera2D")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
@@ -150,7 +115,7 @@ numHumans = 5
 faceGenerator = NodePath("FaceGenerator")
 
 [node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
-position = Vector2(23, 327)
+position = Vector2(5, 318)
 
 [node name="FaceGenerator" parent="HumanArea/Spawner" unique_id=828249479 instance=ExtResource("3_bjd11")]
 
@@ -173,7 +138,6 @@ material = SubResource("ShaderMaterial_nfivy")
 
 [node name="Nose" parent="HumanArea/Spawner/FaceGenerator" index="5" unique_id=95740465]
 material = SubResource("ShaderMaterial_1nqs0")
-frame = 26
 
 [node name="Mouth" parent="HumanArea/Spawner/FaceGenerator" index="6" unique_id=310951105]
 material = SubResource("ShaderMaterial_1iba3")
@@ -182,19 +146,20 @@ frame = 32
 [node name="Glasses" parent="HumanArea/Spawner/FaceGenerator" index="7" unique_id=2013651169]
 material = SubResource("ShaderMaterial_yxlcp")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=277055262]
+[node name="UI" type="CanvasLayer" parent="." unique_id=277055262]
 
-[node name="WorkArea" type="Sprite2D" parent="CanvasLayer" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitor", "eye")]
+[node name="WorkArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
 z_index = 5
 texture_filter = 1
 position = Vector2(534, 180)
 texture = ExtResource("7_mwfav")
 script = ExtResource("8_cvmbd")
 idDisplay = NodePath("IDSection")
-heartMonitor = NodePath("HeartMonitor")
-eye = NodePath("EyeSection/Eye")
+heartMonitorDisplay = NodePath("HeartMonitor")
+eyeDisplay = NodePath("EyeSection/Eye")
+feedDataDisplay = NodePath("FeedDataSection")
 
-[node name="IDSection" type="Control" parent="CanvasLayer/WorkArea" unique_id=147275066 node_paths=PackedStringArray("text", "face")]
+[node name="IDSection" type="Control" parent="UI/WorkArea" unique_id=147275066 node_paths=PackedStringArray("text", "face")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0
@@ -203,17 +168,17 @@ offset_right = 99.0
 offset_bottom = -101.0
 script = ExtResource("9_ft6cd")
 text = NodePath("IDText")
-face = NodePath("ColorRect/Headshot")
+face = NodePath("ColorRect/Dither/Headshot")
 
-[node name="IDText" type="RichTextLabel" parent="CanvasLayer/WorkArea/IDSection" unique_id=806655714]
+[node name="IDText" type="RichTextLabel" parent="UI/WorkArea/IDSection" unique_id=806655714]
 texture_filter = 1
 texture_repeat = 1
 layout_direction = 2
 layout_mode = 0
-offset_left = 11.0
-offset_top = 4.0
-offset_right = 137.0
-offset_bottom = 70.0
+offset_left = 16.0
+offset_top = 9.0
+offset_right = 109.0
+offset_bottom = 59.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.4, 0.48235294, 0.5254902, 1)
@@ -233,11 +198,12 @@ text = "[table=2]
 [/table]"
 autowrap_mode = 0
 autowrap_trim_flags = 0
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 text_direction = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/WorkArea/IDSection" unique_id=1804732182]
+[node name="ColorRect" type="ColorRect" parent="UI/WorkArea/IDSection" unique_id=1804732182]
+material = SubResource("ShaderMaterial_2ofn6")
 layout_mode = 0
 offset_left = 139.0
 offset_top = 7.0
@@ -245,13 +211,19 @@ offset_right = 188.0
 offset_bottom = 67.0
 color = Color(0.4, 0.48235294, 0.5254902, 0.25882354)
 
-[node name="Headshot" type="Sprite2D" parent="CanvasLayer/WorkArea/IDSection/ColorRect" unique_id=1005073743]
-material = SubResource("ShaderMaterial_3p2gp")
+[node name="Dither" type="Sprite2D" parent="UI/WorkArea/IDSection/ColorRect" unique_id=672352738]
+clip_children = 1
+material = SubResource("ShaderMaterial_xa025")
 position = Vector2(25, 30)
+texture = ExtResource("12_1iba3")
+
+[node name="Headshot" type="Sprite2D" parent="UI/WorkArea/IDSection/ColorRect/Dither" unique_id=1005073743]
+material = SubResource("ShaderMaterial_36rkl")
+position = Vector2(0, 2.000002)
 scale = Vector2(0.8, 0.74999994)
 texture = ExtResource("10_mwfav")
 
-[node name="HeartMonitor" type="Control" parent="CanvasLayer/WorkArea" unique_id=1577979279 node_paths=PackedStringArray("line", "BPMText")]
+[node name="HeartMonitor" type="Control" parent="UI/WorkArea" unique_id=1577979279 node_paths=PackedStringArray("line", "BPMText")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0
@@ -262,14 +234,14 @@ script = ExtResource("10_qmy6f")
 line = NodePath("Line2D")
 BPMText = NodePath("BPM Readout/Value")
 
-[node name="Line2D" type="Line2D" parent="CanvasLayer/WorkArea/HeartMonitor" unique_id=440793788]
+[node name="Line2D" type="Line2D" parent="UI/WorkArea/HeartMonitor" unique_id=440793788]
 position = Vector2(1, 16)
 scale = Vector2(1.0215054, 1)
 points = PackedVector2Array(1, 0, 160.5474, 0)
 width = 1.0
 default_color = Color(0.4, 0.48235294, 0.5254902, 1)
 
-[node name="BPM Readout" type="Control" parent="CanvasLayer/WorkArea/HeartMonitor" unique_id=1734247390]
+[node name="BPM Readout" type="Control" parent="UI/WorkArea/HeartMonitor" unique_id=1734247390]
 clip_children = 1
 anchors_preset = 0
 offset_left = 167.0
@@ -277,7 +249,7 @@ offset_top = 1.0
 offset_right = 192.0
 offset_bottom = 32.0
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/WorkArea/HeartMonitor/BPM Readout" unique_id=154003182]
+[node name="Label" type="RichTextLabel" parent="UI/WorkArea/HeartMonitor/BPM Readout" unique_id=154003182]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 5.0
@@ -287,7 +259,7 @@ text = "BPM
 "
 scroll_active = false
 
-[node name="Value" type="RichTextLabel" parent="CanvasLayer/WorkArea/HeartMonitor/BPM Readout" unique_id=213886279]
+[node name="Value" type="RichTextLabel" parent="UI/WorkArea/HeartMonitor/BPM Readout" unique_id=213886279]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 12.0
@@ -298,7 +270,7 @@ text = "150
 "
 scroll_active = false
 
-[node name="EyeSection" type="Control" parent="CanvasLayer/WorkArea" unique_id=1267227362]
+[node name="EyeSection" type="Control" parent="UI/WorkArea" unique_id=1267227362]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0
@@ -306,10 +278,11 @@ offset_top = -93.0
 offset_right = 1.0
 offset_bottom = -34.0
 
-[node name="Eye" parent="CanvasLayer/WorkArea/EyeSection" unique_id=1271531143 instance=ExtResource("9_bjd11")]
-position = Vector2(48, 29.5)
+[node name="Eye" parent="UI/WorkArea/EyeSection" unique_id=517888025 instance=ExtResource("9_bjd11")]
+material = null
+position = Vector2(48.045, 29.425)
 
-[node name="RiskSection" type="Control" parent="CanvasLayer/WorkArea" unique_id=232227697]
+[node name="RiskSection" type="Control" parent="UI/WorkArea" unique_id=232227697]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 6.0
@@ -317,7 +290,37 @@ offset_top = -94.0
 offset_right = 99.0
 offset_bottom = -33.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/WorkArea/RiskSection" unique_id=346930113]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/WorkArea/RiskSection" unique_id=346930113]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = -5.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 5
+text = " Exit risk: Intense Emotion
+ "
+scroll_active = false
+
+[node name="WarningSymbold" type="Sprite2D" parent="UI/WorkArea/RiskSection" unique_id=356295528]
+position = Vector2(6, 10)
+texture = ExtResource("18_ebg2g")
+
+[node name="FeedDataSection" type="Control" parent="UI/WorkArea" unique_id=596890635 node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -94.0
+offset_top = 15.0
+offset_right = -32.0
+offset_bottom = 108.0
+script = ExtResource("19_2ofn6")
+label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/WorkArea/FeedDataSection" unique_id=149028222]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -325,40 +328,100 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 5
-text = "warning! Exit risk
-warning! Intense Emotion
-Warning! "
+bbcode_enabled = true
+text = "
 
-[node name="FileCabinet" type="Sprite2D" parent="CanvasLayer" unique_id=604660609]
-texture_filter = 1
-position = Vector2(-142, 200)
-texture = ExtResource("15_3p2gp")
-script = ExtResource("16_cvmbd")
+"
+scroll_active = false
+horizontal_alignment = 1
 
-[node name="Revealer" type="Node2D" parent="CanvasLayer/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("animation")]
+[node name="Node2D" type="Node2D" parent="UI" unique_id=951621444]
+position = Vector2(-142.16, 170.12)
+
+[node name="FileCabinet" type="RigidBody2D" parent="UI/Node2D" unique_id=770060897]
+mass = 20.972
+gravity_scale = 0.0
+inertia = 18.87
+lock_rotation = true
+freeze_mode = 1
+continuous_cd = 2
+linear_damp = 0.36
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Node2D/FileCabinet" unique_id=749621471]
+position = Vector2(-42, 16)
+polygon = PackedVector2Array(79, -37, -108, -37, -128.955, -46, -129.955, -59, -110.955, -60, -111, -45, 81, -45, 184, -45, 184.045, -62, 203.045, -61, 196.045, 15, -123.955, 14, -128.955, -46, -108, -37, -108, 6, 79, 6)
+
+[node name="Revealer" type="Node2D" parent="UI/Node2D/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
 script = ExtResource("17_ft6cd")
-animation = NodePath("../AnimationPlayer")
+rigidBody2D = NodePath("..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/FileCabinet" unique_id=1863839554]
-libraries/ = SubResource("AnimationLibrary_1iba3")
+[node name="OpenCloseArea" type="Area2D" parent="UI/Node2D/FileCabinet" unique_id=61395713]
 
-[node name="OpenCloseArea" type="Area2D" parent="CanvasLayer/FileCabinet" unique_id=61395713]
-
-[node name="Shape" type="CollisionShape2D" parent="CanvasLayer/FileCabinet/OpenCloseArea" unique_id=1705947655]
+[node name="Shape" type="CollisionShape2D" parent="UI/Node2D/FileCabinet/OpenCloseArea" unique_id=1705947655]
 position = Vector2(147, 1)
 shape = SubResource("RectangleShape2D_bb450")
 
-[node name="AdBlock" type="Sprite2D" parent="CanvasLayer/FileCabinet" unique_id=1789840487]
-position = Vector2(28.66, 0)
+[node name="FileCabinet" type="Sprite2D" parent="UI/Node2D/FileCabinet" unique_id=604660609]
+texture_filter = 1
+texture = ExtResource("15_3p2gp")
+
+[node name="ScreenCenterPos" type="Node2D" parent="UI/Node2D/FileCabinet/FileCabinet" unique_id=2082215201]
+position = Vector2(83, 0)
+
+[node name="Adblock" type="RigidBody2D" parent="UI/Node2D" unique_id=984209564]
+texture_filter = 1
+mass = 0.492
+physics_material_override = ExtResource("20_yxlcp")
+gravity_scale = 0.0
+inertia = 1.13
+lock_rotation = true
+continuous_cd = 2
+linear_damp = 4.329
+
+[node name="AdBlock" type="Sprite2D" parent="UI/Node2D/Adblock" unique_id=1789840487]
+texture_filter = 1
 texture = ExtResource("18_nfivy")
 
-[node name="AdBlock2" type="Sprite2D" parent="CanvasLayer/FileCabinet" unique_id=796027783]
-position = Vector2(12.999996, 7.3313713e-06)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Node2D/Adblock" unique_id=1690506586]
+position = Vector2(-0.16000366, 0)
+shape = SubResource("RectangleShape2D_yxlcp")
+
+[node name="Adblock2" type="RigidBody2D" parent="UI/Node2D" unique_id=1320607208]
+texture_filter = 1
+position = Vector2(-14.815, 0)
+mass = 0.386
+physics_material_override = ExtResource("20_yxlcp")
+gravity_scale = 0.0
+inertia = 1.08
+lock_rotation = true
+continuous_cd = 2
+linear_damp = 1.804
+
+[node name="AdBlock" type="Sprite2D" parent="UI/Node2D/Adblock2" unique_id=1244489767]
+texture_filter = 1
 texture = ExtResource("18_nfivy")
 
-[node name="ActionBar" type="Sprite2D" parent="CanvasLayer" unique_id=1056628882]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Node2D/Adblock2" unique_id=1318608411]
+position = Vector2(-0.16000366, 0)
+shape = SubResource("RectangleShape2D_yxlcp")
 
-[node name="ScreenShader" type="ColorRect" parent="." unique_id=1731287264]
+[node name="Stopper" type="RigidBody2D" parent="UI/Node2D" unique_id=1992939175]
+position = Vector2(3.79, 0)
+mass = 1000.0
+inertia = 1000.0
+lock_rotation = true
+freeze = true
+continuous_cd = 2
+linear_damp = 45.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Node2D/Stopper" unique_id=121083324]
+position = Vector2(132.755, -39)
+shape = SubResource("RectangleShape2D_1iba3")
+
+[node name="ActionBar" type="Sprite2D" parent="UI" unique_id=1056628882]
+
+[node name="ScreenShader" type="ColorRect" parent="UI" unique_id=1731287264]
+visible = false
 z_index = 10
 material = SubResource("ShaderMaterial_wp0k4")
 anchors_preset = 15
@@ -374,6 +437,6 @@ volume_db = -9.055
 autoplay = true
 parameters/looping = true
 
-[connection signal="input_event" from="CanvasLayer/FileCabinet/OpenCloseArea" to="CanvasLayer/FileCabinet/Revealer" method="OnClick"]
+[connection signal="input_event" from="UI/Node2D/FileCabinet/OpenCloseArea" to="UI/Node2D/FileCabinet/Revealer" method="OnClick"]
 
 [editable path="HumanArea/Spawner/FaceGenerator"]

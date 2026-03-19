@@ -1,16 +1,33 @@
 [gd_scene format=3 uid="uid://d6devkjuk4rq"]
 
+[ext_resource type="Shader" uid="uid://u0x7q3rujx85" path="res://script/shader/CRT.gdshader" id="1_16441"]
 [ext_resource type="Texture2D" uid="uid://djkugk50v5t6b" path="res://sprite/feedblock.png" id="1_obplb"]
-[ext_resource type="Shader" uid="uid://sl6bshe3rf3y" path="res://script/shader/feedblock.gdshader" id="1_shader"]
 [ext_resource type="Script" uid="uid://v0ypjitj2tuc" path="res://script/Feedblock.cs" id="2_iiqf2"]
+[ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="4_30cq2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4vda"]
+shader = ExtResource("1_16441")
+shader_parameter/pixel_size = 1.33200001577
+shader_parameter/vhs_intensity = 0.3330000158175
+shader_parameter/noise_intensity = 0.0
+shader_parameter/opacity = 1.0
+shader_parameter/scan_size = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_feedblock"]
-shader = ExtResource("1_shader")
-shader_parameter/alpha_override = 1.0
+shader = ExtResource("4_30cq2")
+shader_parameter/intensity = 1.0
 
-[node name="Feedblock" type="Sprite2D" unique_id=1268537260]
+[node name="Feedblock" type="Sprite2D" unique_id=1268537260 node_paths=PackedStringArray("colourSprite")]
 modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+clip_children = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_k4vda")
+texture = ExtResource("1_obplb")
+script = ExtResource("2_iiqf2")
+colourSprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1735178243]
+modulate = Color(0.9539923, 0.15758067, 0.50245893, 1)
 texture_filter = 1
 material = SubResource("ShaderMaterial_feedblock")
 texture = ExtResource("1_obplb")
-script = ExtResource("2_iiqf2")

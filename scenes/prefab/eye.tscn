@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d0c5unv81cesg"]
 
 [ext_resource type="Shader" uid="uid://u0x7q3rujx85" path="res://script/shader/CRT.gdshader" id="1_6je8u"]
-[ext_resource type="Script" uid="uid://cpgryj2v0cghk" path="res://script/Eye.cs" id="1_7mg6a"]
+[ext_resource type="Script" uid="uid://cpgryj2v0cghk" path="res://script/EyeDisplay.cs" id="1_7mg6a"]
 [ext_resource type="Texture2D" uid="uid://df18o2j6ric03" path="res://sprite/eye/eyeiris.png" id="2_7mg6a"]
 [ext_resource type="Texture2D" uid="uid://7uibvpiyd8mr" path="res://sprite/eye/eyecolour.png" id="3_k7uwh"]
 [ext_resource type="Texture2D" uid="uid://brxyq81a6ow04" path="res://sprite/eye/eyeredline.png" id="4_6je8u"]
@@ -12,9 +12,20 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ngl1"]
 shader = ExtResource("1_6je8u")
 shader_parameter/pixel_size = 1.1330000063175
-shader_parameter/vhs_intensity = 1.1910000565725
+shader_parameter/vhs_intensity = 0.3050000144875
 shader_parameter/noise_intensity = 0.17200000817
-shader_parameter/opacity = 0.5110000242725
+shader_parameter/opacity = 0.3410000161975
+shader_parameter/scan_size = 0.002000000095
+shader_parameter/greyscale = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jnpku"]
+shader = ExtResource("1_6je8u")
+shader_parameter/pixel_size = 1.7330000348175
+shader_parameter/vhs_intensity = 0.5430000257925
+shader_parameter/noise_intensity = 0.102000004845
+shader_parameter/opacity = 0.5
+shader_parameter/scan_size = 0.002000000095
+shader_parameter/greyscale = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k7uwh"]
 shader = ExtResource("6_k7uwh")
@@ -61,38 +72,52 @@ _data = {
 &"RESET": SubResource("Animation_6je8u")
 }
 
-[node name="Eye" type="Sprite2D" unique_id=1407928438 node_paths=PackedStringArray("_eyeball", "_iris", "_eyelid", "_color", "_animation")]
-clip_children = 1
+[node name="Eye" type="Node2D" unique_id=517888025 node_paths=PackedStringArray("_eyeBall", "_clipCRT", "_iris", "_eyelid", "_eyeColor", "_eyeTrackingText", "_animation")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_2ngl1")
-texture = ExtResource("5_2ngl1")
 script = ExtResource("1_7mg6a")
-_eyeball = NodePath("Eyeball")
-_iris = NodePath("Eyeball/iris")
-_eyelid = NodePath("eyelid")
-_color = NodePath("Eyeball/colour")
-_animation = NodePath("eyelid/AnimationPlayer")
+_eyeBall = NodePath("ClipCRT/Eyeball")
+_clipCRT = NodePath("ClipCRT")
+_iris = NodePath("ClipCRT/Eyeball/iris")
+_eyelid = NodePath("ClipCRT/eyelid")
+_eyeColor = NodePath("ClipCRT/Eyeball/colour")
+_eyeTrackingText = NodePath("RichTextLabel")
+_animation = NodePath("ClipCRT/eyelid/AnimationPlayer")
 
-[node name="Eyeball" type="Node2D" parent="." unique_id=1656491265]
-
-[node name="white" type="Sprite2D" parent="Eyeball" unique_id=1110568816]
+[node name="ClipCRT" type="Sprite2D" parent="." unique_id=1915084286]
+clip_children = 1
+material = SubResource("ShaderMaterial_jnpku")
 texture = ExtResource("5_2ngl1")
 
-[node name="red" type="Sprite2D" parent="Eyeball" unique_id=1234116340]
+[node name="Eyeball" type="Node2D" parent="ClipCRT" unique_id=1656491265]
+
+[node name="white" type="Sprite2D" parent="ClipCRT/Eyeball" unique_id=1110568816]
+texture = ExtResource("5_2ngl1")
+
+[node name="red" type="Sprite2D" parent="ClipCRT/Eyeball" unique_id=1234116340]
 texture = ExtResource("4_6je8u")
 
-[node name="colour" type="Sprite2D" parent="Eyeball" unique_id=1363281362]
+[node name="colour" type="Sprite2D" parent="ClipCRT/Eyeball" unique_id=1363281362]
 material = SubResource("ShaderMaterial_k7uwh")
 texture = ExtResource("3_k7uwh")
 
-[node name="iris" type="Sprite2D" parent="Eyeball" unique_id=1796287037]
+[node name="iris" type="Sprite2D" parent="ClipCRT/Eyeball" unique_id=1796287037]
 use_parent_material = true
 texture = ExtResource("2_7mg6a")
 
-[node name="eyelid" type="Sprite2D" parent="." unique_id=1841445181]
+[node name="eyelid" type="Sprite2D" parent="ClipCRT" unique_id=1841445181]
 material = SubResource("ShaderMaterial_6je8u")
 texture = ExtResource("6_7mg6a")
 hframes = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="eyelid" unique_id=192745474]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ClipCRT/eyelid" unique_id=192745474]
 libraries/ = SubResource("AnimationLibrary_2ngl1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=2021291920]
+offset_left = -47.0
+offset_top = -28.0
+offset_right = -2.0
+offset_bottom = -18.0
+theme_override_font_sizes/normal_font_size = 3
+bbcode_enabled = true
+text = "eye tracking: [color=green]enabled[/color]"

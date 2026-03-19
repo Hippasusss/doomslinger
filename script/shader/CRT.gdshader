@@ -6,6 +6,8 @@ uniform float pixel_size : hint_range(1.0, 10.0) = 3.0;
 uniform float vhs_intensity : hint_range(0.0, 10.0) = 3.0;
 uniform float noise_intensity : hint_range(0.0, 1.0) = 0.15;
 uniform float opacity : hint_range(0.0, 1.0) = 0.5; 
+uniform float scan_size: hint_range(0.0, 1.0) = 0.02; 
+uniform bool greyscale = false;
 
 // Quick & dirty random function
 float random(vec2 uv) {
@@ -16,6 +18,12 @@ void fragment() {
     // Keep a clean copy of the screen
     vec4 original_color = texture(SCREEN_TEXTURE, SCREEN_UV);
     
+    if(greyscale)
+    {
+        float grey = dot(original_color.rgb, vec3(1, 1, 1));
+        grey = grey/3.0+ 0.2;
+        original_color.rgb = vec3(grey);
+    }
     // Convert to float to avoid the ivec2/float math crash in Godot 4
     vec2 screen_res = vec2(textureSize(SCREEN_TEXTURE, 0));
     
@@ -28,7 +36,7 @@ void fragment() {
     
     // Tape tracking line - scrolls down the screen
     float tracking_pos = fract(TIME * 0.2); 
-    float tracking_line = step(0.995, 1.0 - abs(grid_uv.y - tracking_pos));
+    float tracking_line = step(1.0 - scan_size, 1.0 - abs(grid_uv.y - tracking_pos));
     float tracking_glitch = tracking_line * (random(vec2(TIME)) - 0.5) * 0.05;
     
     // Apply all UV offsets at once

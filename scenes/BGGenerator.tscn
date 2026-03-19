@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bau7ygkcb0doj" path="res://script/BgGenerator.cs" id="1_2p075"]
 [ext_resource type="Texture2D" uid="uid://bvl6fbvu6n0qp" path="res://sprite/BGFaces.png" id="1_8uo7v"]
 [ext_resource type="Shader" uid="uid://27cbutex20j4" path="res://script/shader/BGFace.gdshader" id="2_bcaft"]
-[ext_resource type="Material" uid="uid://r2t0vci8oeq" path="res://resources/BGFace.tres" id="2_ow28r"]
+[ext_resource type="Material" uid="uid://r2t0vci8oeq" path="res://resources/materials/BGFace.tres" id="2_ow28r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dbtbj"]
 shader = ExtResource("2_bcaft")

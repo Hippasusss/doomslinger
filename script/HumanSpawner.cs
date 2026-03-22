@@ -32,9 +32,9 @@ public partial class HumanSpawner : Node2D
         newHuman.Data = new HumanPersonalData(GetRandomName(),GetRandomDate(), GetRandomHeight(), GetRandomGender(), GetRandomNationality() );
 
         // need to wait for it to draw the aggregate sprite
-        var retVal = await faceGenerator.GenerateAsync();
-        newHuman.Face.Texture = retVal.Item1;
-        newHuman.Colors = retVal.Item2;
+        var (texture, colours) = await faceGenerator.GenerateAsync();
+        newHuman.Face.Texture = texture;
+        newHuman.Colors = colours;
         newHuman.HumanSelected += camera.MovePositionToNode;
         newHuman.HumanSelected += displayData.DisplayNewHuman;
         newHuman.Phone.Modulate = newHuman.Colors[5];

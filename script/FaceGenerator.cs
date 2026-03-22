@@ -24,7 +24,7 @@ public partial class FaceGenerator : SubViewport
         RenderTargetUpdateMode = UpdateMode.Always;
     }
 
-    public async Task<(ImageTexture, Color[])> GenerateAsync()
+    public async Task<(ImageTexture texture, Color[] colours)> GenerateAsync()
     {
         var children = GetChildren().OfType<Sprite2D>().ToList();
 

@@ -57,13 +57,11 @@ public partial class FaceGenerator : SubViewport
             {
                 part.Visible = GD.Randf() < HairChance;
                 part.Modulate = hairColor;
-                part.Visible = GD.Randf() < HairChance;
             }
             else if (name.Contains("beard"))
             {
                 part.Visible = GD.Randf() < BeardChance;
                 part.Modulate = hairColor;
-                part.Visible = GD.Randf() < BeardChance;
             }
             else if (name.Contains("face"))
             {

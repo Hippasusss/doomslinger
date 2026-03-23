@@ -10,9 +10,11 @@ public partial class HeartMonitorDisplay : Control, IDisplay
     public bool Enabled {get; set;} = true;
 
     private const int numPoints = 300;
+    private const float beepLength = 0.1f;
+    private const float amplitude = 15f;
+    private readonly (int min, int max) BPMRange = (35, 199);
+
     private float targetValue = 0;
-    private float amplitude = 15f;
-    private float beepLength = 0.1f;
     private readonly DeltaTimer updateTimer = new(0.01);
     private readonly DeltaTimer beepTimer = new(2);
     private Tween beepTween;
@@ -72,6 +74,25 @@ public partial class HeartMonitorDisplay : Control, IDisplay
         BPMText.Text = newBPM.ToString();
     }
 
+    private int CalculateBPM(Human human)
+    {
+        int BPMdiff = BPMRange.max- BPMRange.min;
+
+        float rage = human.Stats.rage;
+        float fear = human.Stats.fear;
+        float fatigue = human.Stats.fatigue;
+
+        int rageBPM = (int)((BPMdiff / 10f * rage) * (fatigue / 10f * 0.5f) + BPMRange.min);
+        int fearBPM = (int)((BPMdiff / 10f * fear) * (fatigue / 10f * 0.5f) + BPMRange.min);
+
+        int BPM = Mathf.Max(rageBPM, fearBPM);
+
+        BPM = Mathf.Clamp(rageBPM, BPMRange.min, BPMRange.max);
+
+        return BPM;
+
+    }
+
     public void Wipe()
     {
         beepTween?.Kill();
@@ -93,7 +114,7 @@ public partial class HeartMonitorDisplay : Control, IDisplay
 
     public void UpdateDisplay(Human human)
     {
-        SetBPM(human.Stats.rage);
+        SetBPM(CalculateBPM(human));
     }
 
 }

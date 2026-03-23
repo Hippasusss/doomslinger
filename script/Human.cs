@@ -50,15 +50,15 @@ public partial class Human : Node2D
         };
     }
 
-    private DeltaTimer tempTimerOnOffTest = new(5,10);
-    public override void _Process(double delta)
-    {
-        if(tempTimerOnOffTest.Delta(delta))
-        {
-            SetUserOnline(!isOnline);
-        }
-
-    }
+    // private DeltaTimer tempTimerOnOffTest = new(20,30);
+    // public override void _Process(double delta)
+    // {
+    //     if(tempTimerOnOffTest.Delta(delta))
+    //     {
+    //         SetUserOnline(!isOnline);
+    //     }
+    //
+    // }
 
     public void SetUserOnline(bool onOff)
     {
@@ -71,6 +71,7 @@ public partial class Human : Node2D
     {
         Stats += block.stats;
     }
+
 
     public void Select()
     {
@@ -122,13 +123,6 @@ public partial class Human : Node2D
 
 public struct HumanPersonalData
 {
-    public enum EyeColour
-    {
-        blue,
-        brown,
-        green
-    };
-
     public string name;
     public DateOnly DOB;
     public int height;
@@ -159,42 +153,48 @@ public struct HumanPersonalData
 
 }
 
-public struct HumanStats(int mood = 5, int attention = 10, int rage = 0, int hunger = 0, int fatigue = 0)
+public struct HumanStats(float mood = 5, float engagement = 10, float rage = 0, float hunger = 0, float fatigue = 0, float fear = 0)
 {
-    public int mood = mood;
-    public int attention = attention;
-    public int rage = rage;
-    public int hunger = hunger;
-    public int fatigue = fatigue;
-    public int longTermFatigue = fatigue;
+    public float mood = mood;
+    public float rage = rage;
+    public float fear = fear;
+    public float hunger = hunger;
+    public float fatigue = fatigue;
 
-    public static HumanStats operator +(HumanStats a, HumanStats b)
+    public float engagement = engagement;
+    public float longTermFatigue = fatigue;
+    public float addiction = engagement;
+    public float mentalStability = 10;
+
+    public static HumanStats operator + (HumanStats a, HumanStats b)
     {
+        const int min = 0;
+        const int max = 10;
         return new HumanStats(
-                a.mood + b.mood,
-                a.attention + b.attention,
-                a.rage + b.rage,
-                a.hunger + b.hunger,
-                a.fatigue + b.fatigue
+                Mathf.Clamp(a.mood + b.mood, min, max),
+                Mathf.Clamp(a.rage + b.rage, min, max),
+                Mathf.Clamp(a.fear + b.fear, min, max),
+                Mathf.Clamp(a.hunger + b.hunger, min, max),
+                Mathf.Clamp(a.fatigue + b.fatigue, min, max)
                 );
     }
 
-    public void RandomizeStats()
+    public void RandomizeStats(int rangeLow = - 2, int rangeHigh = 2)
     {
-        const int rangeLow = -5;
-        const int rangeHigh = 10;
         mood = GD.RandRange(rangeLow, rangeHigh);
-        attention = GD.RandRange(rangeLow, rangeHigh);
         rage = GD.RandRange(rangeLow, rangeHigh);
+        fear = GD.RandRange(rangeLow, rangeHigh);
         hunger = GD.RandRange(rangeLow, rangeHigh);
         fatigue = GD.RandRange(rangeLow, rangeHigh);
     }
 
-    public string GetStatsString()
+
+    private void CalculateLongTemStat(ref float longtermStat, float shortTermStat)
     {
-        const int spacing = -3;
-        return $"{attention, spacing} {fatigue, spacing} {hunger, spacing} {mood, spacing} {rage, spacing}";
+        const float rate = 10;
+        longtermStat = (shortTermStat - longtermStat) / rate;
     }
+
 
 
 

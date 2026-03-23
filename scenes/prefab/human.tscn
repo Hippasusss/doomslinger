@@ -1,19 +1,24 @@
 [gd_scene format=3 uid="uid://cg0jst0bit7ga"]
 
+[ext_resource type="Shader" uid="uid://b8m575ypqkyo7" path="res://script/shader/cvback.gdshader" id="1_2pby3"]
 [ext_resource type="Script" uid="uid://bs00qfw1smg33" path="res://script/Human.cs" id="1_sogvw"]
 [ext_resource type="Shader" uid="uid://3tehyuga8vfy" path="res://script/shader/human.gdshader" id="2_2xgf6"]
+[ext_resource type="Texture2D" uid="uid://qy4r3p3lpp4r" path="res://sprite/FeedMachine.png" id="2_5jfd8"]
 [ext_resource type="Texture2D" uid="uid://dhunl8eychu31" path="res://sprite/phone.png" id="2_or0av"]
 [ext_resource type="Script" uid="uid://c2thfxtdiblda" path="res://script/Feed.cs" id="3_cjs1v"]
 [ext_resource type="Script" uid="uid://uwod6owwab6d" path="res://script/Outline.cs" id="4_2pby3"]
-[ext_resource type="PackedScene" uid="uid://d6devkjuk4rq" path="res://scenes/prefab/feedblock.tscn" id="4_sogvw"]
+[ext_resource type="PackedScene" uid="uid://df41cddfa6uwb" path="res://scenes/prefab/feedblock2.tscn" id="4_b524o"]
 [ext_resource type="Script" uid="uid://cqoi3wgiqjy76" path="res://script/HoverComponent.cs" id="5_b524o"]
 [ext_resource type="Texture2D" uid="uid://bxqqpigg6caff" path="res://sprite/light.png" id="6_evmiy"]
-[ext_resource type="Texture2D" uid="uid://ewkri5wypydi" path="res://sprite/Fade.png" id="6_po0uj"]
 [ext_resource type="ColorPalette" uid="uid://dlpevtnylwyr8" path="res://resources/ColorPalettes/feedPalette.tres" id="7_2b3g0"]
 [ext_resource type="Script" uid="uid://bw00aalnwo6e4" path="res://script/PhoneLight.cs" id="7_2baw4"]
-[ext_resource type="Texture2D" uid="uid://fc8aohf18hpl" path="res://sprite/FadeBlackout.png" id="7_jaatf"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="9_b524o"]
 [ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="14_2pby3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jfd8"]
+shader = ExtResource("1_2pby3")
+shader_parameter/fade_start = 0.70000003325
+shader_parameter/fade_end = 0.850000040375
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2b3g0"]
 shader = ExtResource("2_2xgf6")
@@ -85,26 +90,23 @@ light = NodePath("Phone/ScreenLight")
 animation = NodePath("AnimationPlayer")
 phone = NodePath("Phone")
 
-[node name="Feed" type="Node2D" parent="." unique_id=1373662661 node_paths=PackedStringArray("screenLight")]
+[node name="FeedMachine" type="Sprite2D" parent="." unique_id=1629747291]
+texture_filter = 1
+position = Vector2(0, -295)
+texture = ExtResource("2_5jfd8")
+offset = Vector2(0.22699404, 14.779182)
+
+[node name="Feed" type="CanvasGroup" parent="." unique_id=2075176353 node_paths=PackedStringArray("screenLight", "generator", "face")]
+process_mode = 3
 z_index = -2
+material = SubResource("ShaderMaterial_5jfd8")
 scale = Vector2(0.99999994, 0.99999994)
 script = ExtResource("3_cjs1v")
-feedBlockSN = ExtResource("4_sogvw")
+feedBlockSN = ExtResource("4_b524o")
 feedBlockPalette = ExtResource("7_2b3g0")
 screenLight = NodePath("../Phone/ScreenLight")
-
-[node name="FeedBlocker" type="Node2D" parent="." unique_id=1959528111]
-z_index = -1
-position = Vector2(-1.1575804e-07, 1.245705e-07)
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="Fade" type="Sprite2D" parent="FeedBlocker" unique_id=605822224]
-position = Vector2(1, 0)
-texture = ExtResource("6_po0uj")
-
-[node name="FadeBlackout" type="Sprite2D" parent="FeedBlocker" unique_id=1333015491]
-position = Vector2(0, 65.01)
-texture = ExtResource("7_jaatf")
+generator = NodePath("../FeedMachine")
+face = NodePath("../Face")
 
 [node name="Face" type="Sprite2D" parent="." unique_id=590860739]
 light_mask = 2
@@ -145,7 +147,7 @@ light_mask = 2
 z_index = 1
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(0, -47.49999)
+position = Vector2(0, -42.042)
 scale = Vector2(2.4999998, 2.8999999)
 color = Color(0.6379994, 0.38298547, 0.3758784, 1)
 energy = 1.89

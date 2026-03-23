@@ -13,21 +13,40 @@ using System.Text;
 using System.Collections.Generic;
 using Utils;
 
-public partial class Feed : Node2D 
+public partial class Feed : CanvasGroup 
 {
-    public Action<Feedblock> newMainFeedBlockCallBack;
-    public List<Feedblock> FeedBlocks => feedBlocks;
-
-    private const int numBlocks = 12;
-    private const int blockSpacing = 52;
     [Export] private PackedScene feedBlockSN;
     [Export] private ColorPalette feedBlockPalette;
     [Export] private Light2D screenLight;
+    [Export] private Sprite2D generator;
+    [Export] private Sprite2D face;
+
+    public Action<Feedblock> newMainFeedBlockCallBack;
+    public List<Feedblock> FeedBlocks => feedBlocks;
+
+    private const int numBlocks = 9;
+    private const int blockSpacing = 52;
+    private const float fadeDistance= 0.1f;
+    private const float fadeOffset = 0.05f;
     private readonly List<Feedblock> feedBlocks = [];
     private bool enabled = true;
 
-    public override void _Ready()
+    public override async void _Ready()
     {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        Vector2 globalPos = GlobalPosition;
+        Vector2 screenSize = GetViewportRect().Size;
+
+        generator.Position = new(Position.X, -globalPos.Y);
+
+        if(Material is ShaderMaterial mat)
+        {
+            float screenUV = Mathf.Clamp(globalPos.Y / screenSize.Y, 0, 1);
+            mat.SetShaderParameter("fade_start", screenUV - fadeDistance + fadeOffset);
+            mat.SetShaderParameter("fade_end", screenUV + fadeOffset);
+        }
+
+
         for(int i = 0; i < numBlocks; i++)
         {
             Feedblock newfeedblock = feedBlockSN.Instantiate<Feedblock>();
@@ -41,7 +60,7 @@ public partial class Feed : Node2D
         }
     }
 
-    private readonly DeltaTimer swipeTimer = new(1, 4);
+    private readonly DeltaTimer swipeTimer = new(3, 14);
     public override void _Process(double delta) 
     {
         if(swipeTimer.Delta(delta) && enabled)
@@ -87,25 +106,6 @@ public partial class Feed : Node2D
         }));
     }
 
-    public string GetBlockData()
-    {
-        if (FeedBlocks.Count == 0) return string.Empty;
-
-        StringBuilder text = new();
-        int count = FeedBlocks.Count;
-
-        for (int i = 0; i < count; i++)
-        {
-            int currentIndex = (feedBlocks.IndexOf(GetBlockBeingRead()) - i + count) % count;
-
-            Feedblock block = FeedBlocks[currentIndex];
-
-            text.AppendLine(block.stats.GetStatsString());
-        }
-
-        return text.ToString();
-    }
-
     public void ToggleOnOff(bool onOff)
     {
         enabled = onOff;
@@ -128,13 +128,7 @@ public partial class Feed : Node2D
         }
     }
 
-    private static bool CheckBlockDelta(Feedblock block, int delta)
-    {
-        if (Mathf.Abs(block.Position.Y + (blockSpacing * -delta)) < 1.0f) return true;
-        return false;
-    }
-
-    private Feedblock GetBlockBeingRead()
+    public Feedblock GetBlockBeingRead()
     {
         foreach(Feedblock block in feedBlocks)
         {
@@ -145,6 +139,13 @@ public partial class Feed : Node2D
         }
         return null;
     }
+
+    private static bool CheckBlockDelta(Feedblock block, int delta)
+    {
+        if (Mathf.Abs(block.Position.Y + (blockSpacing * -delta)) < 1.0f) return true;
+        return false;
+    }
+
 
     private void ResetBlock(Feedblock block)
     {

@@ -112,11 +112,11 @@ displayData = NodePath("../../UI/WorkArea")
 camera = NodePath("../../Camera2D")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-numHumans = 5
+numHumans = 3
 faceGenerator = NodePath("FaceGenerator")
 
 [node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
-position = Vector2(2, 286)
+position = Vector2(0, 320)
 
 [node name="FaceGenerator" parent="HumanArea/Spawner" unique_id=828249479 instance=ExtResource("3_bjd11")]
 
@@ -420,6 +420,7 @@ position = Vector2(132.755, -39)
 shape = SubResource("RectangleShape2D_1iba3")
 
 [node name="ActionBar" type="Node2D" parent="UI" unique_id=1924222355]
+visible = false
 
 [node name="Controls" type="Sprite2D" parent="UI/ActionBar" unique_id=1091065098]
 texture_filter = 1

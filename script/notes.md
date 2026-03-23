@@ -4,6 +4,7 @@
     - if user eye is certain way (undilated?) send push notification to pull them back in
     - Ability to warn users via email about their issues. lowers the ceiling for getting fired. 
     - Warning when user might leave. Computer risk detection is not always right. Can be upgraded.
+    - Upgradable advert injector
 
 ## Data Link Ideas
 

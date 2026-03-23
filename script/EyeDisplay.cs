@@ -14,19 +14,20 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     public bool Enabled {get; set;} = true;
 
-    private float eyeballMoveRange = 8;
+    private const float eyeballMoveRange = 8;
+    private readonly (float min, float max) irisSizeRange;
 
     private readonly DeltaTimer eyeMoveTimer = new(0.5, 3);
     private readonly DeltaTimer blinkTimer = new(0.2, 3);
 
-    private (float,float) CRTReset;
+    private (float vhsAmount,float noiseAmount) CRTReset;
 
     public override void _Ready()
     {
         if (_clipCRT.Material is ShaderMaterial sm)
         {
-            CRTReset.Item1 = (float)sm.GetShaderParameter("vhs_intensity");
-            CRTReset.Item2 = (float)sm.GetShaderParameter("noise_intensity");
+            CRTReset.vhsAmount = (float)sm.GetShaderParameter("vhs_intensity");
+            CRTReset.noiseAmount = (float)sm.GetShaderParameter("noise_intensity");
         }
     }
 
@@ -78,7 +79,7 @@ public partial class EyeDisplay : Node2D, IDisplay
         {
             MoveEyeball(4);
             ScaleIris((float)GD.RandRange(0.5, 1.5), 0);
-            SetCRTAmount(CRTReset.Item1, CRTReset.Item2, false);
+            SetCRTAmount(CRTReset.vhsAmount, CRTReset.noiseAmount, false);
         }
         else
         {
@@ -92,6 +93,14 @@ public partial class EyeDisplay : Node2D, IDisplay
     {
         _eyelid.Modulate = human.Colors[0];
         _eyeColor.Modulate = human.Colors[4];
+    }
+
+    private void CalculateEye(Human human)
+    {
+        float eyeMovementRate = 0;
+        float eyeMovementRange = 0;
+        float blinkRate = 0;
+        float irisSize = 0;
     }
 
     private void SetCRTAmount(float vhs, float noise, bool grey)

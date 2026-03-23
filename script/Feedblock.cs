@@ -11,7 +11,7 @@
 
 using Godot;
 
-public partial class Feedblock : Sprite2D
+public partial class Feedblock : Node2D 
 {
     public HumanStats stats;
     [Export] private Sprite2D colourSprite;

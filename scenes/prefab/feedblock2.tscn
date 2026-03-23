@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://df41cddfa6uwb"]
+
+[ext_resource type="Texture2D" uid="uid://djkugk50v5t6b" path="res://sprite/feedblock.png" id="2_2bmi6"]
+[ext_resource type="Script" uid="uid://v0ypjitj2tuc" path="res://script/Feedblock.cs" id="3_73s5c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30cq2"]
+
+[node name="Feedblock" type="Node2D" unique_id=526387067 node_paths=PackedStringArray("colourSprite")]
+light_mask = 4
+texture_filter = 1
+script = ExtResource("3_73s5c")
+colourSprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1735178243]
+modulate = Color(0.31884912, 0.8256452, 0.79148096, 1)
+texture_filter = 1
+material = SubResource("ShaderMaterial_30cq2")
+texture = ExtResource("2_2bmi6")

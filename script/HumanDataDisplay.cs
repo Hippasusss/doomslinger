@@ -48,20 +48,10 @@ public partial class HumanDataDisplay : Sprite2D
     private void UpdateCurrentHumanData()
     {
         if(currentHuman == null) return;
-        if(currentHuman.IsOnline)
+        foreach(IDisplay display in displays)
         {
-            foreach(IDisplay display in displays)
-            {
-                if(display.Enabled != currentHuman.IsOnline) display.ToggleOnOff(currentHuman.IsOnline);
-                display.UpdateDisplay(currentHuman);
-            }
-        }
-        else
-        {
-            foreach(IDisplay display in displays)
-            {
-                if(display.Enabled != currentHuman.IsOnline) display.ToggleOnOff(currentHuman.IsOnline);
-            }
+            if(display.Enabled != currentHuman.IsOnline) display.ToggleOnOff(currentHuman.IsOnline);
+            if(currentHuman.IsOnline) display.UpdateDisplay(currentHuman);
         }
     }
 

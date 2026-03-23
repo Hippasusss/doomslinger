@@ -9,7 +9,6 @@
 
 using Godot;
 using System;
-using System.Text;
 using System.Collections.Generic;
 using Utils;
 
@@ -86,8 +85,6 @@ public partial class Feed : CanvasGroup
                     .SetTrans(Tween.TransitionType.Quart)
                     .SetEase(Tween.EaseType.Out);
             }
-
-
         }
 
         tween.Chain().TweenCallback(Callable.From(() =>

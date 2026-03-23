@@ -101,6 +101,9 @@ public partial class EyeDisplay : Node2D, IDisplay
         float eyeMovementRange = 0;
         float blinkRate = 0;
         float irisSize = 0;
+
+        float irisDiffRange = irisSizeRange.max - irisSizeRange.min;
+        irisSize = (1 - human.Stats.engagement/10) ; 
     }
 
     private void SetCRTAmount(float vhs, float noise, bool grey)

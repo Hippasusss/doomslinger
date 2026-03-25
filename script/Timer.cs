@@ -51,6 +51,11 @@ namespace Utils
             }
         }
 
+        public void ForceFinish()
+        {
+            _currentTime = 0;
+        }
+
         private double GetNextRandomTime()
         {
             if (Math.Abs(_minTime - _maxTime) < 0.0001) return _minTime;

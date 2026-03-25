@@ -14,16 +14,27 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     public bool Enabled {get; set;} = true;
 
-    private const float eyeballMoveRange = 8;
-    private readonly (float min, float max) irisSizeRange;
+    private readonly (float min, float max) eyeballMoveRange = (0, 18);
+    private readonly (float min, float max) moveRateRange = (0.05f, 8);
+    private readonly (float min, float max) irisSizeRange = (0.4f, 2);
+    private readonly (float min, float max) blinkRateRange = (0.1f, 10);
 
     private readonly DeltaTimer eyeMoveTimer = new(0.5, 3);
     private readonly DeltaTimer blinkTimer = new(0.2, 3);
 
     private (float vhsAmount,float noiseAmount) CRTReset;
 
+    private Human currentHuman = null;
+    private float irisSize = 1;
+    private float blinkRate = 1;
+    private float moveRate = 1;
+    private Vector2 eyeballMovePosition = new(1,1);
+
+
     public override void _Ready()
     {
+        eyeMoveTimer.ForceFinish();
+        blinkTimer.ForceFinish();
         if (_clipCRT.Material is ShaderMaterial sm)
         {
             CRTReset.vhsAmount = (float)sm.GetShaderParameter("vhs_intensity");
@@ -36,22 +47,21 @@ public partial class EyeDisplay : Node2D, IDisplay
         if(!Enabled) return;
         if (eyeMoveTimer.Delta(delta))
         {
-            MoveEyeball(eyeballMoveRange);
-
-            float randomScale = (float)GD.RandRange(0.5, 1.5);
-            ScaleIris(randomScale, 0.5f);
+            MoveEyeball(eyeballMovePosition);
+            ScaleIris(irisSize, 0.5f);
+            eyeMoveTimer.SetResetRange(moveRateRange.min, moveRate);
         }
 
         if (blinkTimer.Delta(delta))
         {
             _animation.Play("Blink");
+            blinkTimer.SetResetRange(blinkRateRange.min, blinkRate);
         }
     }
 
-    public void MoveEyeball(float range)
+    public void MoveEyeball(Vector2 position)
     {
-        Vector2 randomPos = new((float)GD.RandRange(-range, range), (float)GD.RandRange(-range, range));
-        _eyeBall.Position = randomPos;
+        _eyeBall.Position = position;
     }
 
     private Tween irisTween;
@@ -77,7 +87,7 @@ public partial class EyeDisplay : Node2D, IDisplay
     {
         if(onOff)
         {
-            MoveEyeball(4);
+            MoveEyeball(new(4,4));
             ScaleIris((float)GD.RandRange(0.5, 1.5), 0);
             SetCRTAmount(CRTReset.vhsAmount, CRTReset.noiseAmount, false);
         }
@@ -91,19 +101,37 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     public void UpdateDisplay(Human human)
     {
-        _eyelid.Modulate = human.Colors[0];
-        _eyeColor.Modulate = human.Colors[4];
+        if(currentHuman != human)
+        {
+            CalculateEye(human);
+            MoveEyeball(eyeballMovePosition);
+            ScaleIris(irisSize, 0);
+            _eyelid.Modulate = human.Colors[0];
+            _eyeColor.Modulate = human.Colors[4];
+            currentHuman = human;
+        }
+        CalculateEye(human);
     }
 
     private void CalculateEye(Human human)
     {
-        float eyeMovementRate = 0;
-        float eyeMovementRange = 0;
-        float blinkRate = 0;
-        float irisSize = 0;
+        float engagementNorm = HumanStats.GetNormalized(human.Stats.engagement);
 
-        float irisDiffRange = irisSizeRange.max - irisSizeRange.min;
-        irisSize = (1 - human.Stats.engagement/10) ; 
+        irisSize = Mathf.Lerp(irisSizeRange.min, irisSizeRange.max, 1 - engagementNorm); 
+        blinkRate = Mathf.Lerp(blinkRateRange.min, blinkRateRange.max, engagementNorm);
+        moveRate = Mathf.Lerp(moveRateRange.min, moveRateRange.max, 1 - engagementNorm);
+
+        const float minMove = 1f;
+        float currentRadius = eyeballMoveRange.max * (1.0f - engagementNorm) + minMove;
+
+        float yOffset = eyeballMoveRange.max/2 * engagementNorm;
+
+        float angle = GD.Randf() * Mathf.Tau;
+        float distance = Mathf.Sqrt(GD.Randf()) * currentRadius;
+
+        Vector2 randomPoint = Vector2.FromAngle(angle) * distance;
+        eyeballMovePosition = new Vector2(0, yOffset) + randomPoint;
+
     }
 
     private void SetCRTAmount(float vhs, float noise, bool grey)

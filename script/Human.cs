@@ -20,8 +20,8 @@ public partial class Human : Node2D
     [Export] private Light2D light;
     [Export] private AnimationPlayer animation;
     [Export] private Sprite2D phone;
-    private HumanStats stats;
-    private HumanPersonalData data;
+    private HumanStats stats = new();
+    private HumanPersonalData data = new();
     private Color[] colors;
     private bool isOnline = true;
 
@@ -39,6 +39,7 @@ public partial class Human : Node2D
 
     public override void _Ready()
     {
+        stats = new(5);
         Feed.newMainFeedBlockCallBack += ReadFeedBlock;
         allHumans.Add(this);
         HumanSelected += selected => {
@@ -49,16 +50,6 @@ public partial class Human : Node2D
             };
         };
     }
-
-    // private DeltaTimer tempTimerOnOffTest = new(20,30);
-    // public override void _Process(double delta)
-    // {
-    //     if(tempTimerOnOffTest.Delta(delta))
-    //     {
-    //         SetUserOnline(!isOnline);
-    //     }
-    //
-    // }
 
     public void SetUserOnline(bool onOff)
     {
@@ -149,22 +140,34 @@ public struct HumanPersonalData
         while(UIDs.Contains(UID));
         UIDs.Add(UID);
     }
-
-
 }
 
-public struct HumanStats(float mood = 5, float engagement = 10, float rage = 0, float hunger = 0, float fatigue = 0, float fear = 0)
+public struct HumanStats
 {
-    public float mood = mood;
-    public float rage = rage;
-    public float fear = fear;
-    public float hunger = hunger;
-    public float fatigue = fatigue;
+    public float mood = 5;
+    public float rage;
+    public float fear;
+    public float hunger;
+    public float fatigue;
 
-    public float engagement = engagement;
-    public float longTermFatigue = fatigue;
-    public float addiction = engagement;
-    public float mentalStability = 10;
+    public float engagement = 10;
+    public float longTermFatigue;
+    public float addiction = 10;
+    public float mentalStability;
+
+    public HumanStats(float mood = 5, float rage = 0, float hunger = 0, float fatigue = 0, float fear = 0)
+    {
+        this.mood = mood;
+        this.rage = rage;
+        this.fear = fear;
+        this.hunger = hunger;
+        this.fatigue = fatigue;
+
+        engagement = 10;
+        longTermFatigue = fatigue;
+        addiction = 10;
+        mentalStability = 10;
+    }
 
     public static HumanStats operator + (HumanStats a, HumanStats b)
     {
@@ -173,9 +176,9 @@ public struct HumanStats(float mood = 5, float engagement = 10, float rage = 0, 
         return new HumanStats(
                 Mathf.Clamp(a.mood + b.mood, min, max),
                 Mathf.Clamp(a.rage + b.rage, min, max),
-                Mathf.Clamp(a.fear + b.fear, min, max),
                 Mathf.Clamp(a.hunger + b.hunger, min, max),
-                Mathf.Clamp(a.fatigue + b.fatigue, min, max)
+                Mathf.Clamp(a.fatigue + b.fatigue, min, max),
+                Mathf.Clamp(a.fear + b.fear, min, max)
                 );
     }
 
@@ -193,6 +196,12 @@ public struct HumanStats(float mood = 5, float engagement = 10, float rage = 0, 
     {
         const float rate = 10;
         longtermStat = (shortTermStat - longtermStat) / rate;
+    }
+
+
+    public static float GetNormalized(float stat)
+    {
+        return stat / 10f;
     }
 
 

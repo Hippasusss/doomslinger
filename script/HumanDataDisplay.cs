@@ -40,8 +40,6 @@ public partial class HumanDataDisplay : Sprite2D
         if(newHuman.IsOnline)
         {
             UpdateCurrentHumanData();
-            eyeDisplay.MoveEyeball(4);
-            eyeDisplay.ScaleIris((float)GD.RandRange(0.5, 1.5), 0);
         }
     }
 

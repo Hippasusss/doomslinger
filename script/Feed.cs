@@ -25,8 +25,6 @@ public partial class Feed : CanvasGroup
 
     private const int numBlocks = 9;
     private const int blockSpacing = 52;
-    private const float fadeDistance= 0.1f;
-    private const float fadeOffset = 0.05f;
     private readonly List<Feedblock> feedBlocks = [];
     private bool enabled = true;
 
@@ -40,11 +38,12 @@ public partial class Feed : CanvasGroup
 
         if(Material is ShaderMaterial mat)
         {
+            const float fadeDistance= 0.1f;
+            const float fadeOffset = 0.05f;
             float screenUV = Mathf.Clamp(globalPos.Y / screenSize.Y, 0, 1);
             mat.SetShaderParameter("fade_start", screenUV - fadeDistance + fadeOffset);
             mat.SetShaderParameter("fade_end", screenUV + fadeOffset);
         }
-
 
         for(int i = 0; i < numBlocks; i++)
         {

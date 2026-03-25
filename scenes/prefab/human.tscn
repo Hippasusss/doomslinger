@@ -82,13 +82,14 @@ _data = {
 &"hover": SubResource("Animation_2pby3")
 }
 
-[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone")]
+[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol")]
 script = ExtResource("1_sogvw")
 face = NodePath("Face")
 feed = NodePath("Feed")
 light = NodePath("Phone/ScreenLight")
 animation = NodePath("AnimationPlayer")
 phone = NodePath("Phone")
+warnignSymbol = NodePath("WarningSymbold")
 
 [node name="FeedMachine" type="Sprite2D" parent="." unique_id=1629747291]
 texture_filter = 1
@@ -100,7 +101,7 @@ offset = Vector2(0.22699404, 14.779182)
 process_mode = 3
 z_index = -2
 material = SubResource("ShaderMaterial_5jfd8")
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(1.165, 1.165)
 script = ExtResource("3_cjs1v")
 feedBlockSN = ExtResource("4_b524o")
 feedBlockPalette = ExtResource("7_2b3g0")

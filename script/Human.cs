@@ -20,6 +20,7 @@ public partial class Human : Node2D
     [Export] private Light2D light;
     [Export] private AnimationPlayer animation;
     [Export] private Sprite2D phone;
+    [Export] private Sprite2D warnignSymbol;
     private HumanStats stats = new();
     private HumanPersonalData data = new();
     private Color[] colors;
@@ -49,6 +50,10 @@ public partial class Human : Node2D
                 human.DeSelect();
             };
         };
+    }
+
+    public override void _Process(double delta)
+    {
     }
 
     public void SetUserOnline(bool onOff)
@@ -94,20 +99,17 @@ public partial class Human : Node2D
         }
     }
 
+    private void ToggleWarning(bool onOff)
+    {
+        warnignSymbol.Visible = onOff;
+    }
+
     public void OnMouseEnter()
     {
-        if(!selected)
-        {
-            // animation.Play("hover");
-        }
     }
 
     public void OnMouseExit()
     {
-        if(!selected)
-        {
-            // animation.PlayBackwards("hover");
-        }
     }
 
 }

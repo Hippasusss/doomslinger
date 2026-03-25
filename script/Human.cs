@@ -150,7 +150,7 @@ public struct HumanStats
     public float hunger;
     public float fatigue;
 
-    public float engagement = 10;
+    public float engagement = 5;
     public float longTermFatigue;
     public float addiction = 10;
     public float mentalStability;
@@ -163,7 +163,7 @@ public struct HumanStats
         this.hunger = hunger;
         this.fatigue = fatigue;
 
-        engagement = 10;
+        engagement = 5;
         longTermFatigue = fatigue;
         addiction = 10;
         mentalStability = 10;
@@ -171,8 +171,8 @@ public struct HumanStats
 
     public static HumanStats operator + (HumanStats a, HumanStats b)
     {
-        const int min = 0;
-        const int max = 10;
+        const float min = 0;
+        const float max = 10;
         return new HumanStats(
                 Mathf.Clamp(a.mood + b.mood, min, max),
                 Mathf.Clamp(a.rage + b.rage, min, max),

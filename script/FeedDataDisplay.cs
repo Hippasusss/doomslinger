@@ -30,7 +30,7 @@ public partial class FeedDataDisplay : Control, IDisplay
     public static string GetStatsString(HumanStats humanStats)
     {
         const int spacing = -2;
-        return $"{FormatStat(humanStats.fear), spacing} {FormatStat(humanStats.rage), spacing} {FormatStat(humanStats.mood), spacing} {FormatStat(humanStats.hunger), spacing} {FormatStat(humanStats.fatigue), spacing}";
+        return $"{FormatStat(humanStats.fear.Value), spacing} {FormatStat(humanStats.rage.Value), spacing} {FormatStat(humanStats.mood.Value), spacing} {FormatStat(humanStats.hunger.Value), spacing} {FormatStat(humanStats.fatigue.Value), spacing}";
     }
 
     private static string FormatStat(float value) 
@@ -52,7 +52,8 @@ public partial class FeedDataDisplay : Control, IDisplay
             color = "";
             arrow = '~';
         }
-        return $"[color={color}]{Math.Abs(value)}{arrow}[/color]";
+        const string formatting = "F0";
+        return $"[color={color}]{Math.Abs(value).ToString(formatting)}{arrow}[/color]";
     }
 
     public static string GetBlockData(Feed feed)
@@ -69,7 +70,7 @@ public partial class FeedDataDisplay : Control, IDisplay
 
             Feedblock block = feedBlocks[currentIndex];
 
-            text.AppendLine(GetStatsString(block.stats));
+            text.AppendLine($"| {GetStatsString(block.stats)} |");
         }
 
         return text.ToString();

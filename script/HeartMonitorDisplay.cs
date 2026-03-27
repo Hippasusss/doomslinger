@@ -78,16 +78,15 @@ public partial class HeartMonitorDisplay : Control, IDisplay
     {
         int BPMdiff = BPMRange.max- BPMRange.min;
 
-        float rage = human.Stats.rage;
-        float fear = human.Stats.fear;
-        float fatigue = human.Stats.fatigue;
+        float rage = human.Stats.rage.GetNormalised();
+        float fear = human.Stats.fear.GetNormalised();
+        float fatigue = human.Stats.fatigue.GetNormalised();
 
-        int rageBPM = (int)((BPMdiff / 10f * rage) * (fatigue / 10f * 0.5f) + BPMRange.min);
-        int fearBPM = (int)((BPMdiff / 10f * fear) * (fatigue / 10f * 0.5f) + BPMRange.min);
+        int rageBPM = (int)(BPMdiff * rage * (1 - fatigue * 0.5f) + BPMRange.min);
+        int fearBPM = (int)(BPMdiff * fear * (1 - fatigue * 0.5f) + BPMRange.min);
 
         int BPM = Mathf.Max(rageBPM, fearBPM);
-
-        BPM = Mathf.Clamp(rageBPM, BPMRange.min, BPMRange.max);
+        BPM = Mathf.Clamp(BPM, BPMRange.min, BPMRange.max);
 
         return BPM;
 

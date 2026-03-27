@@ -17,7 +17,7 @@ public partial class EyeDisplay : Node2D, IDisplay
     private readonly (float min, float max) eyeballMoveRange = (0, 18);
     private readonly (float min, float max) moveRateRange = (0.05f, 8);
     private readonly (float min, float max) irisSizeRange = (0.4f, 2);
-    private readonly (float min, float max) blinkRateRange = (0.1f, 10);
+    private readonly (float min, float max) blinkRateRange = (0.2f, 10);
 
     private readonly DeltaTimer eyeMoveTimer = new(0.5, 3);
     private readonly DeltaTimer blinkTimer = new(0.2, 3);
@@ -55,7 +55,7 @@ public partial class EyeDisplay : Node2D, IDisplay
         if (blinkTimer.Delta(delta))
         {
             _animation.Play("Blink");
-            blinkTimer.SetResetRange(blinkRateRange.min, blinkRate);
+            blinkTimer.SetResetRange(blinkRateRange.min, blinkRate + 0.5);
         }
     }
 
@@ -115,7 +115,7 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     private void CalculateEye(Human human)
     {
-        float engagementNorm = HumanStats.GetNormalized(human.Stats.engagement);
+        float engagementNorm = human.Stats.engagement.GetNormalised();
 
         irisSize = Mathf.Lerp(irisSizeRange.min, irisSizeRange.max, 1 - engagementNorm); 
         blinkRate = Mathf.Lerp(blinkRateRange.min, blinkRateRange.max, engagementNorm);

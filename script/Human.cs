@@ -52,8 +52,33 @@ public partial class Human : Node2D
         };
     }
 
+    DeltaTimer warningTimerCheck = new(0.2);
+    DeltaTimer exitTimer =  new(10);
     public override void _Process(double delta)
     {
+        if(warningTimerCheck.Delta(delta))
+        {
+            if(stats.AreAnyOver(0.79f))
+            {
+                ToggleWarning(true);
+            }
+            else
+            {
+                ToggleWarning(false);
+            }
+            if(stats.AreAnyOver(0.99f))
+            {
+                SetUserOnline(false);
+            }
+        }
+        if(!isOnline)
+        {
+            if(exitTimer.Delta(delta))
+            {
+                SetUserOnline(true);
+            }
+            stats.CoolDown(delta);
+        }
     }
 
     public void SetUserOnline(bool onOff)
@@ -144,71 +169,171 @@ public struct HumanPersonalData
     }
 }
 
-public struct HumanStats
-{
-    public float mood = 5;
-    public float rage;
-    public float fear;
-    public float hunger;
-    public float fatigue;
 
-    public float engagement = 5;
-    public float longTermFatigue;
-    public float addiction = 10;
-    public float mentalStability;
+public class Stat
+{
+    private readonly string name;
+    private float value;
+    private float targetValue;
+    private float coolValue;
+
+    private float rate;
+    private (float min, float max) range;
+
+    public float Value 
+    { 
+        get {return this.value;} 
+        set 
+        {
+            targetValue = value;
+            if(rate == 0)
+            {
+                this.value = value;
+            }
+        } 
+    }
+    public string Name => name;
+
+
+    public Stat(string name, float value = 0, float rate = 0, (float min, float max) range = default)
+    {
+        this.name = name;
+        this.value = value;
+        this.rate = rate;
+        this.targetValue = value;
+        this.coolValue = 0;
+        this.range = range == (0,0) ? (0, 10) : range;
+    }
+
+    public static Stat operator + (Stat a, float b)
+    {
+        a.Value = Mathf.Clamp(a.value + b, a.range.min, a.range.max);
+        return a;
+    }
+
+    public static Stat operator + (Stat a, Stat b)
+    {
+        return a + b.value;
+    }
+
+
+    public static implicit operator float(Stat b)
+    {
+        return b.Value;
+    }
+
+    public void Randomize(float min = 0, float max = 0)
+    {
+        if (min == 0 && max == 0)
+        {
+            Value = (float)GD.RandRange(range.min, range.max);
+        }
+        else
+        {
+            range.min = min;
+            range.max = max;
+            Value = (float)GD.RandRange(min,max);
+        }
+    }
+
+    public float GetNormalised()
+    {
+        
+        return range.max == 0 ?  0 : value/range.max;
+    }
+
+    public bool IsOver(float percent)
+    {
+        if(GetNormalised() > percent) return true;
+        else return false;
+    }
+
+    public void Update(float delta)
+    {
+        float t = 1.0f - Mathf.Exp(-rate * delta);
+        value = Mathf.Lerp(value, targetValue, t);
+    }
+     
+    public void CoolDown(double delta)
+    {
+        value = Mathf.Lerp(value, coolValue, (float)delta);
+        GD.Print(name);
+        GD.Print(value);
+        GD.Print(coolValue);
+    }
+}
+
+public class HumanStats
+{
+    public Stat mood;
+    public Stat rage;
+    public Stat fear;
+    public Stat hunger;
+    public Stat fatigue;
+
+    public Stat engagement;
+    public Stat longTermFatigue;
+    public Stat addiction;
+    public Stat mentalStability;
+
+    public readonly List<Stat> mainStats = [];
+    public readonly List<Stat> deepStats = [];
+    public readonly List<Stat> allStats = [];
 
     public HumanStats(float mood = 5, float rage = 0, float hunger = 0, float fatigue = 0, float fear = 0)
     {
-        this.mood = mood;
-        this.rage = rage;
-        this.fear = fear;
-        this.hunger = hunger;
-        this.fatigue = fatigue;
 
-        engagement = 5;
-        longTermFatigue = fatigue;
-        addiction = 10;
-        mentalStability = 10;
+
+        this.mood = new("mood", mood);
+        this.rage = new("rage", rage);
+        this.fear = new("fear", fear);
+        this.hunger = new("hunger", hunger);
+        this.fatigue = new("fatigue", fatigue);
+
+        engagement = new("engagement", 5);
+        longTermFatigue = new("fatigue", fatigue);
+        addiction = new("addiction", 10);
+        mentalStability = new("mental stability", 10);
+        allStats.AddRange([this.mood, this.rage, this.fear, this.hunger, this.fatigue, engagement, longTermFatigue, addiction, mentalStability]);
+        mainStats.AddRange([this.mood, this.rage, this.fear, this.hunger, this.fatigue]);
+        deepStats.AddRange([engagement, longTermFatigue, addiction, mentalStability]);
     }
 
     public static HumanStats operator + (HumanStats a, HumanStats b)
     {
-        const float min = 0;
-        const float max = 10;
-        return new HumanStats(
-                Mathf.Clamp(a.mood + b.mood, min, max),
-                Mathf.Clamp(a.rage + b.rage, min, max),
-                Mathf.Clamp(a.hunger + b.hunger, min, max),
-                Mathf.Clamp(a.fatigue + b.fatigue, min, max),
-                Mathf.Clamp(a.fear + b.fear, min, max)
-                );
+        HumanStats newStats = a;
+        newStats.rage += b.rage;
+        newStats.mood += b.mood;
+        newStats.fear += b.fear;
+        newStats.hunger += b.hunger;
+        newStats.fatigue += b.fatigue;
+        newStats.engagement.Value = Mathf.Max(newStats.rage, newStats.fear) * newStats.fatigue.GetNormalised();
+        return newStats;
     }
 
-    public void RandomizeStats(int rangeLow = - 2, int rangeHigh = 2)
+    public void RandomizeStats(float rangeLow = - 2, float rangeHigh = 2)
     {
-        mood = GD.RandRange(rangeLow, rangeHigh);
-        rage = GD.RandRange(rangeLow, rangeHigh);
-        fear = GD.RandRange(rangeLow, rangeHigh);
-        hunger = GD.RandRange(rangeLow, rangeHigh);
-        fatigue = GD.RandRange(rangeLow, rangeHigh);
+        mood.Randomize(rangeLow, rangeHigh);
+        rage.Randomize(rangeLow, rangeHigh);
+        fear.Randomize(rangeLow, rangeHigh);
+        hunger.Randomize(rangeLow, rangeHigh);
+        fatigue.Randomize(rangeLow, rangeHigh);
     }
 
-
-    private void CalculateLongTemStat(ref float longtermStat, float shortTermStat)
+    public bool AreAnyOver(float percent)
     {
-        const float rate = 10;
-        longtermStat = (shortTermStat - longtermStat) / rate;
+        foreach(Stat s in mainStats)
+        {
+            if(s.IsOver(percent)) return true;
+        }
+        return false;
     }
 
-
-    public static float GetNormalized(float stat)
+    public void CoolDown(double delta)
     {
-        return stat / 10f;
+        foreach(Stat s in mainStats)
+        {
+            s.CoolDown(delta);
+        }
     }
-
-
-
-
-
-
 }

@@ -168,6 +168,7 @@ debug_color = Color(0, 0.6, 0.69803923, 0.3137255)
 libraries/ = SubResource("AnimationLibrary_5jfd8")
 
 [node name="WarningSymbold" type="Sprite2D" parent="." unique_id=1496949490]
+visible = false
 texture_filter = 1
 position = Vector2(-13.1, 32)
 texture = ExtResource("14_2pby3")

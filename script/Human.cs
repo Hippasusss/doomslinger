@@ -39,7 +39,7 @@ public partial class Human : Node2D
 
     public override void _Ready()
     {
-        stats = new(rate: 0.1f);
+        stats = new(rate: 0.7f);
         Feed.newMainFeedBlockCallBack += ReadFeedBlock;
         allHumans.Add(this);
         HumanSelected += selected => {

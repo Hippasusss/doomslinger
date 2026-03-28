@@ -18,7 +18,6 @@ public partial class Feed : CanvasGroup
     [Export] private ColorPalette feedBlockPalette;
     [Export] private Light2D screenLight;
     [Export] private Sprite2D generator;
-    [Export] private Sprite2D face;
 
     public Action<Feedblock> newMainFeedBlockCallBack;
     public List<Feedblock> FeedBlocks => feedBlocks;
@@ -27,6 +26,8 @@ public partial class Feed : CanvasGroup
     private const int blockSpacing = 52;
     private readonly List<Feedblock> feedBlocks = [];
     private bool enabled = true;
+
+    private readonly DeltaTimer swipeTimer = new(3, 14);
 
     public override async void _Ready()
     {
@@ -58,7 +59,6 @@ public partial class Feed : CanvasGroup
         }
     }
 
-    private readonly DeltaTimer swipeTimer = new(3, 14);
     public override void _Process(double delta) 
     {
         if(swipeTimer.Delta(delta) && enabled)
@@ -147,6 +147,6 @@ public partial class Feed : CanvasGroup
     {
         block.Position = new Vector2(block.Position.X, (FeedBlocks.Count - 2) * -blockSpacing);
         block.SetColour(feedBlockPalette.Colors.GetRandom());
-        block.stats.RandomizeStats();
+        block.stats.RandomizeStats(-2, 2);
     }
 }

@@ -53,5 +53,10 @@ public partial class HumanDataDisplay : Sprite2D
         }
     }
 
+    private void ClearDisplay()
+    {
+        currentHuman = null;
+    }
+
 
 }

@@ -9,6 +9,8 @@ public partial class EyeDisplay : Node2D, IDisplay
     [Export] private Sprite2D _iris;
     [Export] private Sprite2D _eyelid;
     [Export] private Sprite2D _eyeColor;
+    [Export] private Sprite2D _eyeBag;
+    [Export] private Sprite2D _eyeRed;
     [Export] private RichTextLabel _eyeTrackingText;
     [Export] private AnimationPlayer _animation;
 
@@ -28,6 +30,8 @@ public partial class EyeDisplay : Node2D, IDisplay
     private float irisSize = 1;
     private float blinkRate = 1;
     private float moveRate = 1;
+    private float redEyeAmount = 1;
+    private float eyebagAmount = 1;
     private Vector2 eyeballMovePosition = new(1,1);
 
 
@@ -49,6 +53,8 @@ public partial class EyeDisplay : Node2D, IDisplay
         {
             MoveEyeball(eyeballMovePosition);
             ScaleIris(irisSize, 0.5f);
+            ChangeEyeBag(eyebagAmount);
+            ChangeRedeye(redEyeAmount);
             eyeMoveTimer.SetResetRange(moveRateRange.min, moveRate);
         }
 
@@ -82,6 +88,16 @@ public partial class EyeDisplay : Node2D, IDisplay
         }
     }
 
+    public void ChangeRedeye(float value)
+    {
+        _eyeRed.SetFrameFromPercent(value);
+    }
+
+    public void ChangeEyeBag(float value)
+    {
+        _eyeBag.SetFrameFromPercent(value);
+    }
+
 
     public void ToggleOnOff(bool onOff)
     {
@@ -106,6 +122,8 @@ public partial class EyeDisplay : Node2D, IDisplay
             CalculateEye(human);
             MoveEyeball(eyeballMovePosition);
             ScaleIris(irisSize, 0);
+            ChangeEyeBag(eyebagAmount);
+            ChangeRedeye(redEyeAmount);
             _eyelid.Modulate = human.Colors[0];
             _eyeColor.Modulate = human.Colors[4];
             currentHuman = human;
@@ -120,6 +138,8 @@ public partial class EyeDisplay : Node2D, IDisplay
         irisSize = Mathf.Lerp(irisSizeRange.min, irisSizeRange.max, 1 - engagementNorm); 
         blinkRate = Mathf.Lerp(blinkRateRange.min, blinkRateRange.max, engagementNorm);
         moveRate = Mathf.Lerp(moveRateRange.min, moveRateRange.max, 1 - engagementNorm);
+        redEyeAmount = human.Stats.fatigue.GetNormalised();
+        eyebagAmount = human.Stats.longTermFatigue.GetNormalised();
 
         const float minMove = 1f;
         float currentRadius = eyeballMoveRange.max * (1.0f - engagementNorm) + minMove;

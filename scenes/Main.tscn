@@ -20,6 +20,7 @@
 [ext_resource type="Shader" uid="uid://db0ftlnwdwsou" path="res://script/shader/dither.gdshader" id="12_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
+[ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="18_36rkl"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
 [ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="18_ebg2g"]
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
@@ -284,12 +285,14 @@ material = null
 position = Vector2(48.045, 29.425)
 
 [node name="RiskSection" type="Control" parent="UI/WorkArea" unique_id=232227697]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 6.0
 offset_top = -94.0
 offset_right = 99.0
 offset_bottom = -33.0
+script = ExtResource("18_36rkl")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/WorkArea/RiskSection" unique_id=346930113]
 layout_mode = 1
@@ -312,6 +315,7 @@ position = Vector2(6, 10)
 texture = ExtResource("18_ebg2g")
 
 [node name="FeedDataSection" type="Control" parent="UI/WorkArea" unique_id=596890635 node_paths=PackedStringArray("label")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -94.0

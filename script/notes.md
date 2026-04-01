@@ -5,6 +5,7 @@
     - Ability to warn users via email about their issues. lowers the ceiling for getting fired. 
     - Warning when user might leave. Computer risk detection is not always right. Can be upgraded.
     - Upgradable advert injector
+    - Meaningful connections
 
 ## Data Link Ideas
 

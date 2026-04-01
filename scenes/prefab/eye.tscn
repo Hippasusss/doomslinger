@@ -82,8 +82,8 @@ _clipCRT = NodePath("ClipCRT")
 _iris = NodePath("ClipCRT/Eyeball/iris")
 _eyelid = NodePath("ClipCRT/eyelid")
 _eyeColor = NodePath("ClipCRT/Eyeball/colour")
-_eyeBag = NodePath("ClipCRT/Eyeball/red")
-_eyeRed = NodePath("ClipCRT/eyelid/eyebag")
+_eyeBag = NodePath("ClipCRT/eyelid/eyebag")
+_eyeRed = NodePath("ClipCRT/Eyeball/red")
 _eyeTrackingText = NodePath("RichTextLabel")
 _animation = NodePath("ClipCRT/eyelid/AnimationPlayer")
 
@@ -101,6 +101,7 @@ texture = ExtResource("5_2ngl1")
 visible = false
 texture = ExtResource("4_2ngl1")
 hframes = 5
+frame = 3
 
 [node name="colour" type="Sprite2D" parent="ClipCRT/Eyeball" unique_id=1363281362]
 material = SubResource("ShaderMaterial_k7uwh")

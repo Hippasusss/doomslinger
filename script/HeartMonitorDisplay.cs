@@ -6,6 +6,7 @@ public partial class HeartMonitorDisplay : Control, IDisplay
 {
     [Export] private Line2D line;
     [Export] private RichTextLabel BPMText;
+    private Human currentHuman;
 
     public bool Enabled {get; set;} = true;
 
@@ -113,6 +114,11 @@ public partial class HeartMonitorDisplay : Control, IDisplay
 
     public void UpdateDisplay(Human human)
     {
+        if(currentHuman != human)
+        {
+            Wipe();
+            currentHuman = human;
+        }
         SetBPM(CalculateBPM(human));
     }
 

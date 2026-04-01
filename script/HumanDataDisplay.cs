@@ -9,7 +9,6 @@
 
 
 using Godot;
-using System;
 using Utils;
 
 public partial class HumanDataDisplay : Sprite2D

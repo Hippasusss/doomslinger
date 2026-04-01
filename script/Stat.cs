@@ -5,6 +5,7 @@ public class Stat
     private readonly string name;
     private float value;
     private float targetValue;
+    private Stat targetStat;
     private readonly float coolValue;
 
     private readonly float rate;
@@ -24,7 +25,7 @@ public class Stat
     }
     public string Name => name;
 
-    public Stat(string name, float value = 0, float rate = 0, (float min, float max) range = default)
+    public Stat(string name, float value = 0, float rate = 0, (float min, float max) range = default, Stat targetStat = null)
     {
         this.name = name;
         this.value = value;
@@ -32,6 +33,7 @@ public class Stat
         this.targetValue = value;
         this.coolValue = value;
         this.range = range == (0,0) ? (0, 10) : range;
+        this.targetStat = targetStat;
     }
 
     public static Stat operator + (Stat a, float b)
@@ -50,6 +52,10 @@ public class Stat
         return b.targetValue;
     }
 
+    public void SetChaseStat(Stat other)
+    {
+        targetStat = other;
+    }
     public void Randomize(float min = 0, float max = 0)
     {
         if (min == 0 && max == 0)
@@ -77,7 +83,8 @@ public class Stat
 
     public void Update(double delta)
     {
-        value = Mathf.Lerp(value, targetValue, rate * (float)delta);
+        float currentValue = targetStat == null ? targetValue : targetStat.Value;
+        value = Mathf.Lerp(value, currentValue , rate * (float)delta);
     }
      
     public void CoolDown(double delta)

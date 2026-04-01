@@ -27,7 +27,7 @@ public class HumanStats
         this.fatigue = new("fatigue", fatigue, rate);
 
         engagement = new("engagement", 5);
-        longTermFatigue = new("fatigue", fatigue, rate * 10);
+        longTermFatigue = new("fatigue", fatigue, rate * 100, targetStat: this.fatigue);
         addiction = new("addiction", 0);
         mentalStability = new("mental stability", 10);
 

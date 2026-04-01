@@ -16,7 +16,7 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     public bool Enabled {get; set;} = true;
 
-    private readonly (float min, float max) eyeballMoveRange = (0, 18);
+    private readonly (float min, float max) eyeballMoveRange = (0, 14);
     private readonly (float min, float max) moveRateRange = (0.05f, 8);
     private readonly (float min, float max) irisSizeRange = (0.4f, 2);
     private readonly (float min, float max) blinkRateRange = (0.2f, 10);
@@ -74,9 +74,9 @@ public partial class EyeDisplay : Node2D, IDisplay
     public void ScaleIris(float targetScale, float duration = 0.2f)
     {
         if (_iris == null) return;
+        irisTween?.Kill();
         if(duration <= float.Epsilon)
         {
-            irisTween?.Kill();
             _iris.Scale = new(targetScale, targetScale);
         }
         else

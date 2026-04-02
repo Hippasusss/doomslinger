@@ -6,7 +6,6 @@
 
 
 
-using System;
 using Godot;
 
 public partial class FaceComponent : Sprite2D

@@ -30,7 +30,7 @@ public partial class FeedDataDisplay : Control, IDisplay
     public static string GetStatsString(HumanStats humanStats)
     {
         const int spacing = -2;
-        return $"{FormatStat(humanStats.fear.Value), spacing} {FormatStat(humanStats.rage.Value), spacing} {FormatStat(humanStats.mood.Value), spacing} {FormatStat(humanStats.hunger.Value), spacing} {FormatStat(humanStats.fatigue.Value), spacing}";
+        return $"{FormatStat(humanStats.fear.Value), spacing} {FormatStat(humanStats.rage.Value), spacing} {FormatStat(humanStats.dopamine.Value), spacing} {FormatStat(humanStats.hunger.Value), spacing} {FormatStat(humanStats.fatigue.Value), spacing}";
     }
 
     private static string FormatStat(float value) 

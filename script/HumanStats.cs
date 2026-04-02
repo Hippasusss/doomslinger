@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class HumanStats
 {
-    public Stat mood;
+    public Stat dopamine;
     public Stat rage;
     public Stat fear;
     public Stat hunger;
@@ -18,9 +18,9 @@ public class HumanStats
     public readonly List<Stat> deepStats = [];
     public readonly List<Stat> allStats = [];
 
-    public HumanStats(float mood = 5, float rage = 0, float hunger = 0, float fatigue = 0, float fear = 0, float rate = 0)
+    public HumanStats(float dopamine = 5, float rage = 0, float hunger = 0, float fatigue = 0, float fear = 0, float rate = 0)
     {
-        this.mood = new("mood", mood, rate);
+        this.dopamine = new("dopamine", dopamine, rate);
         this.rage = new("rage", rage, rate);
         this.fear = new("fear", fear, rate);
         this.hunger = new("hunger", hunger, rate);
@@ -31,15 +31,15 @@ public class HumanStats
         addiction = new("addiction", 0);
         mentalStability = new("mental stability", 10);
 
-        allStats.AddRange([this.mood, this.rage, this.fear, this.hunger, this.fatigue, engagement, longTermFatigue, addiction, mentalStability]);
-        mainStats.AddRange([this.mood, this.rage, this.fear, this.hunger, this.fatigue]);
+        allStats.AddRange([this.dopamine, this.rage, this.fear, this.hunger, this.fatigue, engagement, longTermFatigue, addiction, mentalStability]);
+        mainStats.AddRange([this.dopamine, this.rage, this.fear, this.hunger, this.fatigue]);
         deepStats.AddRange([engagement, longTermFatigue, addiction, mentalStability]);
     }
 
     public static HumanStats operator + (HumanStats a, HumanStats b)
     {
         a.rage += b.rage;
-        a.mood += b.mood;
+        a.dopamine += b.dopamine;
         a.fear += b.fear;
         a.hunger += b.hunger;
         a.fatigue += b.fatigue;
@@ -49,7 +49,7 @@ public class HumanStats
 
     public void RandomizeStats(float rangeLow, float rangeHigh)
     {
-        mood.Randomize(rangeLow, rangeHigh);
+        dopamine.Randomize(rangeLow, rangeHigh);
         rage.Randomize(rangeLow, rangeHigh);
         fear.Randomize(rangeLow, rangeHigh);
         hunger.Randomize(rangeLow, rangeHigh);

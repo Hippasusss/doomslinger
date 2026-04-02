@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvwf1adei3d8l"
-path="res://.godot/imported/MaleFaceComponents.png-76c42dd86e151a24f823cbd270012bb5.ctex"
+uid="uid://bkah3lo36vkis"
+path="res://.godot/imported/FemaleFaceComponentsReSize.png-b0722102a9b8d007d6020e3fbb0dbe26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/face/MaleFaceComponents.png"
-dest_files=["res://.godot/imported/MaleFaceComponents.png-76c42dd86e151a24f823cbd270012bb5.ctex"]
+source_file="res://sprite/face/FemaleFaceComponentsReSize.png"
+dest_files=["res://.godot/imported/FemaleFaceComponentsReSize.png-b0722102a9b8d007d6020e3fbb0dbe26.ctex"]
 
 [params]
 

@@ -11,7 +11,8 @@ using System;
 
 public partial class IDDisplay : Control, IDisplay
 {
-    [Export] private RichTextLabel text;
+    [Export] private RichTextLabel textName;
+    [Export] private RichTextLabel textData;
     [Export] private Sprite2D face;
 
     public bool Enabled {get; set;} = true;
@@ -19,18 +20,19 @@ public partial class IDDisplay : Control, IDisplay
     public void UpdateDisplay(Human human)
     {
         if(!Enabled) return;
-        string displayText = $"""
+        string nameText = $"NAME: [color=white][font_size=8]{human.Data.name}[/font_size][/color]";
+        string dataText = $"""
             [table=2]
-            [cell][right][b]NAME:[/b][/right][/cell] [cell expand=true][right]{human.Data.name}[/right][/cell]
-            [cell][right][b]DOB:[/b][/right][/cell]  [cell expand=true][right]{human.Data.DOB}[/right][/cell]
-            [cell][right][b]HT:[/b][/right][/cell]   [cell expand=true][right]{human.Data.height}[/right][/cell]
-            [cell][right][b]GEN:[/b][/right][/cell]  [cell expand=true][right]{human.Data.gender}[/right][/cell]
-            [cell][right][b]UID:[/b][/right][/cell]  [cell expand=true][right]{human.Data.UID}[/right][/cell]
-            [cell][right][b]NAT:[/b][/right][/cell]  [cell expand=true][right]{human.Data.nationality}[/right][/cell]
+            [cell][right][b]DOB:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.DOB}[/right][/color][/cell]
+            [cell][right][b]HT:[/b][/right][/cell]   [cell expand=true][color=white][right]{human.Data.height}[/right][/color][/cell]
+            [cell][right][b]GEN:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.gender}[/right][/color][/cell]
+            [cell][right][b]UID:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.UID}[/right][/color][/cell]
+            [cell][right][b]NAT:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.nationality}[/right][/color][/cell]
             [/table]
             """;
 
-        text.Text = displayText;
+        textName.Text = nameText;
+        textData.Text = dataText;
 
         face.Texture = human.Face.Texture;
     }
@@ -41,7 +43,6 @@ public partial class IDDisplay : Control, IDisplay
         {
             string displayText = $"""
                 [table=2]
-                [cell][b]NAME:[/b][/cell] [cell expand=true][right]no data[/right][/cell]
                 [cell][b]DOB:[/b][/cell]  [cell expand=true][right]no data[/right][/cell]
                 [cell][b]HT:[/b][/cell]   [cell expand=true][right]no data[/right][/cell]
                 [cell][b]GEN:[/b][/cell]  [cell expand=true][right]no data[/right][/cell]
@@ -50,7 +51,7 @@ public partial class IDDisplay : Control, IDisplay
                 [/table]
                 """;
 
-            text.Text = displayText;
+            textData.Text = displayText;
 
             face.Texture = null;
         }

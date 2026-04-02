@@ -90,12 +90,12 @@ public partial class HeartMonitorDisplay : Control, IDisplay
         BPM = Mathf.Clamp(BPM, BPMRange.min, BPMRange.max);
 
         return BPM;
-
     }
 
     public void Wipe()
     {
         beepTween?.Kill();
+        SetBPM(0);
         targetValue = 0;
         for(int i = 1; i < numPoints; i++)
         {

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://df18o2j6ric03" path="res://sprite/eye/eyeiris.png" id="2_7mg6a"]
 [ext_resource type="Texture2D" uid="uid://7uibvpiyd8mr" path="res://sprite/eye/eyecolour.png" id="3_k7uwh"]
 [ext_resource type="Texture2D" uid="uid://dy5aolthkdxha" path="res://sprite/eye/redeye.png" id="4_2ngl1"]
+[ext_resource type="Texture2D" uid="uid://b7bcv3ms3nl4v" path="res://sprite/eye/eyeback.png" id="4_jnpku"]
 [ext_resource type="Texture2D" uid="uid://bue83t6qgb8p7" path="res://sprite/eye/eyewhite.png" id="5_2ngl1"]
 [ext_resource type="Texture2D" uid="uid://gun8qgvj5hs8" path="res://sprite/eye/eyelid.png" id="6_7mg6a"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="6_k7uwh"]
@@ -95,7 +96,7 @@ texture = ExtResource("5_2ngl1")
 [node name="Eyeball" type="Node2D" parent="ClipCRT" unique_id=1656491265]
 
 [node name="white" type="Sprite2D" parent="ClipCRT/Eyeball" unique_id=1110568816]
-texture = ExtResource("5_2ngl1")
+texture = ExtResource("4_jnpku")
 
 [node name="red" type="Sprite2D" parent="ClipCRT/Eyeball" unique_id=1234116340]
 visible = false

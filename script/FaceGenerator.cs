@@ -22,6 +22,8 @@ public partial class FaceGenerator : SubViewport
         _ = GenerateAsync(Data); 
     } } }
 
+    private const float stretchCoefficient = 0.2f;
+
 
     public override void _Ready()
     {
@@ -112,6 +114,16 @@ public partial class FaceGenerator : SubViewport
                 part.Modulate = faceColor;
             }
         }
+
+        float clampedHeight = Mathf.Clamp(data.height, 140f, 210f);
+        float stretchFactor = (clampedHeight - 140f) / 70f; 
+        float scaleY = 1.0f + (stretchCoefficient * stretchFactor);
+
+        CanvasTransform = new Transform2D(
+            new Vector2(1f, 0f),  
+            new Vector2(0f, scaleY),
+            new Vector2(0f, Size.Y * (1f - scaleY))  
+        );
 
         RenderTargetUpdateMode = UpdateMode.Always;
 

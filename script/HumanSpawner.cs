@@ -67,22 +67,44 @@ public partial class HumanSpawner : Node2D
 
     private static int GetRandomHeight(string gender)
     {
+        (int min, int max) = (155, 210);
+        double mean, stdDev;
+
         if (gender == "M")
         {
-            int baseHeight = GD.RandRange(140, 210);
-            int skewedHeight = baseHeight + (int)((210 - baseHeight) * 0.3);
-            return Mathf.Clamp(skewedHeight, 140, 210);
+            mean = 177.0;
+            stdDev = 8.0;
         }
         else if (gender == "F")
         {
-            int baseHeight = GD.RandRange(140, 180);
-            int skewedHeight = baseHeight - (int)((baseHeight - 140) * 0.3);
-            return Mathf.Clamp(skewedHeight, 140, 180);
+            mean = 164.0;
+            stdDev = 7.0;
         }
         else
         {
-            return GD.RandRange(140, 210);
+            mean = 170.0;
+            stdDev = 15.0;
         }
+
+        return GenerateNormallyDistributedHeight(min, max, mean, stdDev);
+    }
+
+    private static int GenerateNormallyDistributedHeight(int min, int max, double mean, double stdDev)
+    {
+        double height;
+        do
+        {
+            double u1;
+            do {
+                u1 = GD.Randf();
+            } while (u1 <= double.Epsilon);
+
+            double u2 = GD.Randf();
+            double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+            height = mean + stdDev * randStdNormal;
+        } while (height < min || height > max);
+
+        return (int)Math.Round(height);
     }
 
     private static string GetRandomGender()

@@ -87,9 +87,6 @@ public partial class FaceGenerator : SubViewport
                 var hairback = children.FirstOrDefault(x => x.Name.ToString().Equals("hairback", System.StringComparison.CurrentCultureIgnoreCase));
                 hairback.Modulate = hairColor;
                 hairback.Frame = hairback.StartFrame + frame;
-                GD.Print(name);
-                GD.Print(hairColor);
-                GD.Print(hairback.Name);
             }
             else if (name.Contains("beard"))
             {

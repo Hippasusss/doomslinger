@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
+[ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
 shader = ExtResource("10_lhr70")
@@ -79,14 +80,73 @@ shader = ExtResource("9_mwfav")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36rkl"]
+size = Vector2(15, 66)
+
+[sub_resource type="Animation" id="Animation_36rkl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(746, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_ma7h6"]
+resource_name = "close"
+length = 0.3
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.8705505, 0.9012505),
+"update": 2,
+"values": [Vector2(534, 180), Vector2(746, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_fs0b5"]
+resource_name = "open"
+length = 0.5
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.36666667, 0.43323335, 0.43333334, 0.4999, 0.5),
+"transitions": PackedFloat32Array(0.933033, 0.933033, 1, 1, 1, 0.933033, 1),
+"update": 2,
+"values": [Vector2(746, 180), Vector2(534, 180), Vector2(544.435, 180), Vector2(538.315, 180), Vector2(538.315, 180), Vector2(534, 180), Vector2(534, 180)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2s0e"]
+_data = {
+&"RESET": SubResource("Animation_36rkl"),
+&"close": SubResource("Animation_ma7h6"),
+&"open": SubResource("Animation_fs0b5")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb450"]
 size = Vector2(10, 46)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxlcp"]
-size = Vector2(11.93, 40.755)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1iba3"]
 size = Vector2(11, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxlcp"]
+size = Vector2(11.93, 40.755)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wp0k4"]
 shader = ExtResource("10_lhr70")
@@ -152,7 +212,7 @@ frame = 32
 [node name="WorkArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
 z_index = 5
 texture_filter = 1
-position = Vector2(534, 180)
+position = Vector2(746, 180)
 texture = ExtResource("7_mwfav")
 script = ExtResource("8_cvmbd")
 idDisplay = NodePath("IDSection")
@@ -349,10 +409,27 @@ text = "
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="Node2D" type="Node2D" parent="UI" unique_id=951621444]
+[node name="HideReveal" type="Node2D" parent="UI/WorkArea" unique_id=473631 node_paths=PackedStringArray("animationPlayer")]
+script = ExtResource("17_ft6cd")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="button" type="Sprite2D" parent="UI/WorkArea/HideReveal" unique_id=5486282]
+position = Vector2(-113.55499, -47)
+texture = ExtResource("22_fs0b5")
+
+[node name="Area2D" type="Area2D" parent="UI/WorkArea/HideReveal" unique_id=29789630]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/WorkArea/HideReveal/Area2D" unique_id=758258081]
+position = Vector2(-113.5, -47)
+shape = SubResource("RectangleShape2D_36rkl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/WorkArea/HideReveal" unique_id=299123577]
+libraries/ = SubResource("AnimationLibrary_e2s0e")
+
+[node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
 position = Vector2(-142.16, 170.12)
 
-[node name="FileCabinet" type="RigidBody2D" parent="UI/Node2D" unique_id=770060897]
+[node name="FileCabinet" type="RigidBody2D" parent="UI/AdMachine" unique_id=770060897]
 mass = 20.972
 gravity_scale = 0.0
 inertia = 18.87
@@ -361,28 +438,43 @@ freeze_mode = 1
 continuous_cd = 2
 linear_damp = 0.36
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Node2D/FileCabinet" unique_id=749621471]
+[node name="Container" type="CollisionPolygon2D" parent="UI/AdMachine/FileCabinet" unique_id=749621471]
 position = Vector2(-42, 16)
 polygon = PackedVector2Array(79, -37, -108, -37, -128.955, -46, -129.955, -59, -110.955, -60, -111, -45, 81, -45, 184, -45, 184.045, -62, 203.045, -61, 196.045, 15, -123.955, 14, -128.955, -46, -108, -37, -108, 6, 79, 6)
 
-[node name="Revealer" type="Node2D" parent="UI/Node2D/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
+[node name="Revealer" type="Node2D" parent="UI/AdMachine/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
 script = ExtResource("17_ft6cd")
 rigidBody2D = NodePath("..")
 
-[node name="OpenCloseArea" type="Area2D" parent="UI/Node2D/FileCabinet" unique_id=61395713]
+[node name="OpenCloseArea" type="Area2D" parent="UI/AdMachine/FileCabinet" unique_id=61395713]
 
-[node name="Shape" type="CollisionShape2D" parent="UI/Node2D/FileCabinet/OpenCloseArea" unique_id=1705947655]
+[node name="Shape" type="CollisionShape2D" parent="UI/AdMachine/FileCabinet/OpenCloseArea" unique_id=1705947655]
 position = Vector2(147, 1)
 shape = SubResource("RectangleShape2D_bb450")
 
-[node name="FileCabinet" type="Sprite2D" parent="UI/Node2D/FileCabinet" unique_id=604660609]
+[node name="FileCabinet" type="Sprite2D" parent="UI/AdMachine/FileCabinet" unique_id=604660609]
 texture_filter = 1
 texture = ExtResource("15_3p2gp")
 
-[node name="ScreenCenterPos" type="Node2D" parent="UI/Node2D/FileCabinet/FileCabinet" unique_id=2082215201]
+[node name="ScreenCenterPos" type="Node2D" parent="UI/AdMachine/FileCabinet/FileCabinet" unique_id=2082215201]
 position = Vector2(83, 0)
 
-[node name="Adblock" type="RigidBody2D" parent="UI/Node2D" unique_id=984209564]
+[node name="Stopper" type="RigidBody2D" parent="UI/AdMachine" unique_id=1992939175]
+position = Vector2(3.79, 0)
+mass = 1000.0
+inertia = 1000.0
+lock_rotation = true
+freeze = true
+continuous_cd = 2
+linear_damp = 45.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/AdMachine/Stopper" unique_id=121083324]
+position = Vector2(132.755, -39)
+shape = SubResource("RectangleShape2D_1iba3")
+
+[node name="AdBlocks" type="Node2D" parent="UI/AdMachine" unique_id=1857006461]
+
+[node name="Adblock" type="RigidBody2D" parent="UI/AdMachine/AdBlocks" unique_id=984209564]
 texture_filter = 1
 mass = 0.492
 physics_material_override = ExtResource("20_yxlcp")
@@ -392,17 +484,17 @@ lock_rotation = true
 continuous_cd = 2
 linear_damp = 4.329
 
-[node name="AdBlock" type="Sprite2D" parent="UI/Node2D/Adblock" unique_id=1789840487]
+[node name="AdBlock" type="Sprite2D" parent="UI/AdMachine/AdBlocks/Adblock" unique_id=1789840487]
 texture_filter = 1
 texture = ExtResource("18_nfivy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Node2D/Adblock" unique_id=1690506586]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/AdMachine/AdBlocks/Adblock" unique_id=1690506586]
 position = Vector2(-0.16000366, 0)
 shape = SubResource("RectangleShape2D_yxlcp")
 
-[node name="Adblock2" type="RigidBody2D" parent="UI/Node2D" unique_id=1320607208]
+[node name="Adblock2" type="RigidBody2D" parent="UI/AdMachine/AdBlocks" unique_id=1320607208]
 texture_filter = 1
-position = Vector2(-14.815, 0)
+position = Vector2(-14.815002, 0)
 mass = 0.386
 physics_material_override = ExtResource("20_yxlcp")
 gravity_scale = 0.0
@@ -411,26 +503,13 @@ lock_rotation = true
 continuous_cd = 2
 linear_damp = 1.804
 
-[node name="AdBlock" type="Sprite2D" parent="UI/Node2D/Adblock2" unique_id=1244489767]
+[node name="AdBlock" type="Sprite2D" parent="UI/AdMachine/AdBlocks/Adblock2" unique_id=1244489767]
 texture_filter = 1
 texture = ExtResource("18_nfivy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Node2D/Adblock2" unique_id=1318608411]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/AdMachine/AdBlocks/Adblock2" unique_id=1318608411]
 position = Vector2(-0.16000366, 0)
 shape = SubResource("RectangleShape2D_yxlcp")
-
-[node name="Stopper" type="RigidBody2D" parent="UI/Node2D" unique_id=1992939175]
-position = Vector2(3.79, 0)
-mass = 1000.0
-inertia = 1000.0
-lock_rotation = true
-freeze = true
-continuous_cd = 2
-linear_damp = 45.08
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Node2D/Stopper" unique_id=121083324]
-position = Vector2(132.755, -39)
-shape = SubResource("RectangleShape2D_1iba3")
 
 [node name="ActionBar" type="Node2D" parent="UI" unique_id=1924222355]
 visible = false
@@ -457,6 +536,7 @@ volume_db = -9.055
 autoplay = true
 parameters/looping = true
 
-[connection signal="input_event" from="UI/Node2D/FileCabinet/OpenCloseArea" to="UI/Node2D/FileCabinet/Revealer" method="OnClick"]
+[connection signal="input_event" from="UI/WorkArea/HideReveal/Area2D" to="UI/WorkArea/HideReveal" method="OnClick"]
+[connection signal="input_event" from="UI/AdMachine/FileCabinet/OpenCloseArea" to="UI/AdMachine/FileCabinet/Revealer" method="OnClick"]
 
 [editable path="HumanArea/Spawner/FaceGenerator"]

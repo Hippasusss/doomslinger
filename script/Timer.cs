@@ -37,7 +37,6 @@ namespace Utils
             return false;
         }
 
-
         public void SetResetTime(double time, bool forceImmediateReset = false)
         {
             SetResetRange(time, time, forceImmediateReset);

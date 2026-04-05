@@ -36,7 +36,6 @@ public partial class Human : Node2D
     public Feed Feed { get => feed; set => feed = value; }
     public bool IsOnline { get => isOnline;}
 
-
     public override void _Ready()
     {
         stats = new(rate: 0.7f);

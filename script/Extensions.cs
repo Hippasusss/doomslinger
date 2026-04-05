@@ -26,6 +26,7 @@ public static class SpriteExtensions
 {
     public static void SetFrameFromPercent(this Sprite2D source, float percent)
     {
+        percent = Mathf.Clamp(percent,0f,1f);
         if (percent < float.Epsilon)
         {
             source.Visible = false;

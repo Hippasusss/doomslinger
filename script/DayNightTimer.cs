@@ -1,23 +1,39 @@
 using Godot;
 using Utils;
-using System;
 
 public partial class DayNightTimer : Node2D
 {
-    private readonly DeltaTimer dayLength = new(3*60);
+    [Signal] public delegate void DayEndEventHandler();
+    [Signal] public delegate void DayBeginEventHandler();
+
+    [Export] public float dayLengthMins = 3;
+
+    private readonly DeltaTimer dayTimer = new(3*60);
+
+    public override void _Ready()
+    {
+        dayTimer.SetResetTime(dayLengthMins, true);
+    }
+
     public override void _Process(double delta)
     {
-        if(dayLength.Delta(delta))
+        if(dayTimer.Delta(delta))
         {
             EndDay();
         }
     }
 
-    private void EndDay()
-    {
-    }
-
     private void BeginDay()
     {
+        dayTimer.Reset();
+        dayTimer.Start();
+        EmitSignal(SignalName.DayBegin);
     }
+
+    private void EndDay()
+    {
+        dayTimer.Stop();
+        EmitSignal(SignalName.DayEnd);
+    }
+
 }

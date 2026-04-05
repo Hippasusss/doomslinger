@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://d2iofbakvf44f" path="res://script/CameraController.cs" id="1_mwfav"]
 [ext_resource type="Script" uid="uid://vqum7ak6ukpm" path="res://script/HumanSpawner.cs" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://cg0jst0bit7ga" path="res://scenes/prefab/human.tscn" id="2_0bbpv"]
-[ext_resource type="PackedScene" uid="uid://bcaiiynn7r52i" path="res://scenes/BGGenerator.tscn" id="3_1nqs0"]
-[ext_resource type="PackedScene" uid="uid://dfv4wku4lcbuj" path="res://scenes/FaceGenerator.tscn" id="3_bjd11"]
+[ext_resource type="PackedScene" uid="uid://bcaiiynn7r52i" path="res://scenes/prefab/BGGenerator.tscn" id="3_1nqs0"]
+[ext_resource type="PackedScene" uid="uid://dfv4wku4lcbuj" path="res://scenes/prefab/FaceGenerator.tscn" id="3_bjd11"]
 [ext_resource type="Texture2D" uid="uid://dme683wdl5jx" path="res://sprite/workArea.png" id="7_mwfav"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
@@ -27,6 +27,10 @@
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
+[ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
+[ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
+[ext_resource type="Script" uid="uid://c5l1db4agg0l2" path="res://script/TextTreeObject.cs" id="29_gsxep"]
+[ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
 shader = ExtResource("10_lhr70")
@@ -100,7 +104,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ma7h6"]
 resource_name = "close"
-length = 0.3
+length = 0.5
 capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -109,10 +113,10 @@ tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.8705505, 0.9012505),
+"times": PackedFloat32Array(0, 0.36666667, 0.43333334, 0.5),
+"transitions": PackedFloat32Array(0.8705505, 0.9012505, 0.9012505, 0.9012505),
 "update": 2,
-"values": [Vector2(534, 180), Vector2(746, 180)]
+"values": [Vector2(534, 180), Vector2(746, 180), Vector2(733.15, 180), Vector2(746, 180)]
 }
 
 [sub_resource type="Animation" id="Animation_fs0b5"]
@@ -153,6 +157,9 @@ shader = ExtResource("10_lhr70")
 shader_parameter/dither_size = 1.0
 shader_parameter/color_levels = 148.0
 shader_parameter/dither_strength = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2s0e"]
+size = Vector2(637, 356)
 
 [node name="World" type="Node2D" unique_id=889943719]
 
@@ -210,7 +217,6 @@ frame = 32
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262]
 
 [node name="WorkArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
-z_index = 5
 texture_filter = 1
 position = Vector2(746, 180)
 texture = ExtResource("7_mwfav")
@@ -530,6 +536,47 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.30588236, 0.30588236, 0.30588236, 1)
 
+[node name="Blackout" type="Node2D" parent="UI" unique_id=2015092074 node_paths=PackedStringArray("blackout", "textTree")]
+z_index = 1
+script = ExtResource("27_e2s0e")
+blackout = NodePath("Sprite2D")
+textTree = NodePath("Sprite2D/RichTextLabel")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Blackout" unique_id=1832455364]
+texture = ExtResource("27_ma7h6")
+offset = Vector2(320, 180)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Blackout/Sprite2D" unique_id=466284308]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = -61.0
+offset_right = 319.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 14
+text = "The work day is over"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("29_gsxep")
+textList = PackedStringArray("Your shift is over", "you did well today", "performance report", "click to continue")
+
+[node name="Area2D" type="Area2D" parent="UI/Blackout/Sprite2D/RichTextLabel" unique_id=145658284]
+position = Vector2(-2, -119)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Blackout/Sprite2D/RichTextLabel/Area2D" unique_id=1669029816]
+position = Vector2(319.5, 180)
+shape = SubResource("RectangleShape2D_e2s0e")
+
+[node name="DayNightTimer" type="Node2D" parent="UI/Blackout" unique_id=2021218286]
+script = ExtResource("30_v0vrg")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1870095868]
 stream = ExtResource("18_bb450")
 volume_db = -9.055
@@ -538,5 +585,6 @@ parameters/looping = true
 
 [connection signal="input_event" from="UI/WorkArea/HideReveal/Area2D" to="UI/WorkArea/HideReveal" method="OnClick"]
 [connection signal="input_event" from="UI/AdMachine/FileCabinet/OpenCloseArea" to="UI/AdMachine/FileCabinet/Revealer" method="OnClick"]
+[connection signal="input_event" from="UI/Blackout/Sprite2D/RichTextLabel/Area2D" to="UI/Blackout" method="OnClick"]
 
 [editable path="HumanArea/Spawner/FaceGenerator"]

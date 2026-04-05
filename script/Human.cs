@@ -135,11 +135,11 @@ public partial class Human : Node2D
         warnignSymbol.Visible = onOff;
     }
 
-    public void OnMouseEnter()
-    {
-    }
-
-    public void OnMouseExit()
-    {
-    }
+    // public void OnMouseEnter()
+    // {
+    // }
+    //
+    // public void OnMouseExit()
+    // {
+    // }
 }

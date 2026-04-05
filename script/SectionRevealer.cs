@@ -32,7 +32,6 @@ public partial class SectionRevealer : Node2D
             if (mouseEvent.ButtonIndex == MouseButton.Left)
             {
                 Toggle();
-                GD.Print("clicked");
             }
         }
     }

@@ -548,6 +548,7 @@ dayLengthMins = 0.2
 
 [connection signal="input_event" from="UI/DataArea/DataHideReveal/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
 [connection signal="input_event" from="UI/AdMachine/ADHideReveal/OpenCloseArea" to="UI/AdMachine/ADHideReveal" method="OnClick"]
+[connection signal="BlackoutFinished" from="UI/Blackout" to="UI/Blackout/Sprite2D/TextSequence" method="OnBlackOutFinished"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="DayNightTimer" method="OnBlackoutFinished"]
 [connection signal="EndOfText" from="UI/Blackout/Sprite2D/TextSequence" to="UI/Blackout" method="OnTextFinishedSignal"]
 [connection signal="DayBegin" from="DayNightTimer" to="HumanArea" method="OnDayBegin"]

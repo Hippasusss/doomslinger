@@ -7,10 +7,7 @@ public partial class TextTreeObject : RichTextLabel
 
     [Export]private string[] textList = [];
     private int index = 0;
-    public override void _Ready()
-    {
-        SetText(textList[0], 0f);
-    }
+    private bool enabled = true;
 
     private void SetText(string text, float speed = 0.2f)
     {
@@ -25,22 +22,19 @@ public partial class TextTreeObject : RichTextLabel
         index += 1;
         if(index >= textList.Length) 
         {
+            enabled = false;
             index = 0;
-            SetText(textList[0], 0.5f);
+            SetText("");
             EmitSignal(SignalName.EndOfText);
             return false;
         }
-
         SetText(textList[index]);
         return true;
     }
 
     public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)
     {
-        if(!Visible) 
-        {
-            return;
-        }
+        if(!Visible || !enabled) { return; }
         if (clickEvent is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
         {
             if (mouseEvent.ButtonIndex == MouseButton.Left)
@@ -48,5 +42,11 @@ public partial class TextTreeObject : RichTextLabel
                 ShowNext();
             }
         }
+    }
+
+    public void OnBlackOutFinished(bool enable)
+    {
+        enabled = enable;
+        if(enable) SetText(textList[index]);
     }
 }

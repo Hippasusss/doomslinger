@@ -4,10 +4,10 @@ using System;
 public partial class BlackoutController : Node2D
 {
 
-    [Signal] public delegate void BlackoutFinishedEventHandler();
+    [Signal] public delegate void BlackoutFinishedEventHandler(bool start);
 
     [Export] private Sprite2D blackout;
-    private const float transitionSpeed = 1f;
+    private const float transitionSpeed = 2f;
 
     public void ToggleBlackout(bool enable)
     {
@@ -22,7 +22,7 @@ public partial class BlackoutController : Node2D
             tween.TweenProperty(blackout, "modulate:a", 0f, transitionSpeed);
         }
         tween.TweenCallback(Callable.From(() => {Visible = enable;}));
-        tween.TweenCallback(Callable.From(() => {if(!enable) EmitSignal(SignalName.BlackoutFinished);}));
+        tween.TweenCallback(Callable.From(() => {EmitSignal(SignalName.BlackoutFinished, enable);}));
     }
 
     public void OnDayEnd()

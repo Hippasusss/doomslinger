@@ -42,7 +42,7 @@ public partial class Human : Node2D
     }
 
     private readonly DeltaTimer warningTimerCheck = new(0.2);
-    private readonly DeltaTimer exitTimer =  new(10);
+    private readonly DeltaTimer offlineReturnTimer =  new(10);
     private readonly DeltaTimer statUpdateTimer =  new(0.1);
     public override void _Process(double delta)
     {
@@ -65,7 +65,7 @@ public partial class Human : Node2D
         }
         if(!isOnline)
         {
-            if(exitTimer.Delta(delta))
+            if(offlineReturnTimer.Delta(delta))
             {
                 SetUserOnline(true);
             }
@@ -77,22 +77,33 @@ public partial class Human : Node2D
         }
     }
 
-    public void SetUserOnline(bool onOff)
+    public void SetUserOnline(bool setOnline, bool withCooldown = true)
     {
-        GD.Print(onOff);
-        isOnline = onOff;
-        feed.ToggleOnOff(onOff);
-        light.Enabled = onOff;
-        if(!onOff)
+        isOnline = setOnline;
+        feed.ToggleOnOff(setOnline);
+        light.Enabled = setOnline;
+        if(!setOnline)
         {
+            Select(false);
             warningTimerCheck.Stop();
-            exitTimer.ForceFinish();
             statUpdateTimer.Stop();
+            if(withCooldown)
+            {
+                offlineReturnTimer.Reset();
+                offlineReturnTimer.Start();
+            }
+            else
+            {
+                offlineReturnTimer.Reset();
+                offlineReturnTimer.Stop();
+            }
         }
         else
         {
             warningTimerCheck.Start();
             statUpdateTimer.Start();
+            offlineReturnTimer.Reset();
+            offlineReturnTimer.Stop();
         }
 
     }
@@ -102,22 +113,18 @@ public partial class Human : Node2D
         Stats += block.stats;
     }
 
-    public void Select()
+    public void Select(bool setSelected)
     {
-        if(!selected)
+        if(setSelected && !selected && isOnline)
         {
             animation.Play("hover");
-            EmitSignal(SignalName.HumanSelected, this);
             selected = true;
+            EmitSignal(SignalName.HumanSelected, this);
         }
-    }
-
-    public void DeSelect()
-    {
-        if(selected)
+        else if (!setSelected && selected)
         {
-            selected = false;
             animation.PlayBackwards("hover");
+            selected = false;
         }
     }
 
@@ -127,7 +134,7 @@ public partial class Human : Node2D
         {
             if (mouseEvent.ButtonIndex == MouseButton.Left)
             {
-                Select();
+                Select(!selected);
             }
         }
     }
@@ -136,12 +143,4 @@ public partial class Human : Node2D
     {
         warnignSymbol.Visible = onOff;
     }
-
-    // public void OnMouseEnter()
-    // {
-    // }
-    //
-    // public void OnMouseExit()
-    // {
-    // }
 }

@@ -173,5 +173,3 @@ position = Vector2(-13.1, 32)
 texture = ExtResource("14_2pby3")
 
 [connection signal="input_event" from="." to="." method="OnClick"]
-[connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
-[connection signal="mouse_exited" from="." to="." method="OnMouseExit"]

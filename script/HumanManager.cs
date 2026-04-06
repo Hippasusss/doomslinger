@@ -16,19 +16,17 @@ public partial class HumanManager : Node2D
     {
         foreach(Human human in humans)
         {
-            human.SetUserOnline(onOff);
+            human.SetUserOnline(onOff, false);
         }
     }
 
     public void OnDayEnd()
     {
-        GD.Print("dayendhumanmanager");
         SetAllOfflineState(false);
     }
 
     public void OnDayBegin()
     {
-        GD.Print("daybeginhumanmanager");
         SetAllOfflineState(true);
     }
 
@@ -37,7 +35,7 @@ public partial class HumanManager : Node2D
         foreach(Human otherHuman in humans)
         {
             if(human == otherHuman) continue;
-            otherHuman.DeSelect();
+            otherHuman.Select(false);
         }
     }
 }

@@ -36,9 +36,9 @@ public partial class DayNightTimer : Node2D
         EmitSignal(SignalName.DayEnd);
     }
 
-    public void OnBlackoutFinished()
+    public void OnBlackoutFinished(bool enable)
     {
-        BeginDay();
+        if(!enable) BeginDay();
     }
 
 }

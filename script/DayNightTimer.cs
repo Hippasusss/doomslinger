@@ -12,7 +12,7 @@ public partial class DayNightTimer : Node2D
 
     public override void _Ready()
     {
-        dayTimer.SetResetTime(dayLengthMins, true);
+        dayTimer.SetResetTime(dayLengthMins * 60, true);
     }
 
     public override void _Process(double delta)
@@ -34,6 +34,11 @@ public partial class DayNightTimer : Node2D
     {
         dayTimer.Stop();
         EmitSignal(SignalName.DayEnd);
+    }
+
+    public void OnBlackoutFinished()
+    {
+        BeginDay();
     }
 
 }

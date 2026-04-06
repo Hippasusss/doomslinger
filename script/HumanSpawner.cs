@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public partial class HumanSpawner : Node2D
 {
 
+    [Export] private HumanManager humanManager;
     [Export] private HumanDataDisplay displayData;
     [Export] private CameraController camera;
     [Export] private PackedScene human;
@@ -13,7 +14,6 @@ public partial class HumanSpawner : Node2D
     [Export] private int numHumans = 1;
     [Export] private FaceGenerator faceGenerator;
     private const int humanSpacing = 50;
-    private readonly List<Human> humans = [];
     private static readonly string[] nationalities = [ "Scottish", "English", "Welsh", "Irish", "French", "German", "Spanish", "Italian", "American", "Canadian", "Australian", "Japanese", "Chinese", "Indian", "Brazilian", "Mexican", "Russian", "Danish", "Swedish", "Norwegian" ];
     private static readonly string[] femaleNames = [ "Jane", "Alice", "Diana", "Fiona", "Hannah", "Julia", "Laura", "Nora", "Paula", "Sarah", "Ursula", "Wendy", "Yara" ];
     private static readonly string[] maleNames = [ "John", "Bob", "Charlie", "Edward", "George", "Ian", "Kevin", "Mike", "Oscar", "Quinn", "Ryan", "Tom", "Victor", "Xander", "Zack" ];
@@ -32,8 +32,8 @@ public partial class HumanSpawner : Node2D
     {
         Human newHuman = human.Instantiate<Human>();
         AddChild(newHuman);
-        humans.Add(newHuman);
-        newHuman.Position = new Vector2(initPosition.Position.X + (humans.Count * humanSpacing), initPosition.Position.Y );
+        humanManager.AddHuman(newHuman);
+        newHuman.Position = new Vector2(initPosition.Position.X + (humanManager.HumanCount * humanSpacing), initPosition.Position.Y );
         string gender = GetRandomGender();
         newHuman.Data = new HumanPersonalData(GetRandomName(gender),GetRandomDate(), GetRandomHeight(gender), gender, GetRandomNationality() , 5);
 

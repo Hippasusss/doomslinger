@@ -25,7 +25,6 @@ public partial class Human : Node2D
     private Color[] colors;
     private bool isOnline = true;
 
-    private static List<Human> allHumans = [];
     private bool selected = false;
 
     public Sprite2D Face { get => face; set => face = value; }
@@ -40,19 +39,11 @@ public partial class Human : Node2D
     {
         stats = new(rate: 0.7f);
         Feed.newMainFeedBlockCallBack += ReadFeedBlock;
-        allHumans.Add(this);
-        HumanSelected += selected => {
-            foreach(Human human in allHumans)
-            {
-                if(human == this) continue;
-                human.DeSelect();
-            };
-        };
     }
 
-    DeltaTimer warningTimerCheck = new(0.2);
-    DeltaTimer exitTimer =  new(10);
-    DeltaTimer statUpdateTimer =  new(0.1);
+    private readonly DeltaTimer warningTimerCheck = new(0.2);
+    private readonly DeltaTimer exitTimer =  new(10);
+    private readonly DeltaTimer statUpdateTimer =  new(0.1);
     public override void _Process(double delta)
     {
         const float warningLevel = 0.79f;
@@ -88,16 +79,28 @@ public partial class Human : Node2D
 
     public void SetUserOnline(bool onOff)
     {
+        GD.Print(onOff);
         isOnline = onOff;
         feed.ToggleOnOff(onOff);
         light.Enabled = onOff;
+        if(!onOff)
+        {
+            warningTimerCheck.Stop();
+            exitTimer.ForceFinish();
+            statUpdateTimer.Stop();
+        }
+        else
+        {
+            warningTimerCheck.Start();
+            statUpdateTimer.Start();
+        }
+
     }
 
     private void ReadFeedBlock(Feedblock block)
     {
         Stats += block.stats;
     }
-
 
     public void Select()
     {

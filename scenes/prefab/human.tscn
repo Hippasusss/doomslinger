@@ -97,7 +97,7 @@ position = Vector2(0, -295)
 texture = ExtResource("2_5jfd8")
 offset = Vector2(0.22699404, 14.779182)
 
-[node name="Feed" type="CanvasGroup" parent="." unique_id=2075176353 node_paths=PackedStringArray("screenLight", "generator", "face")]
+[node name="Feed" type="CanvasGroup" parent="." unique_id=2075176353 node_paths=PackedStringArray("screenLight", "generator")]
 process_mode = 3
 z_index = -2
 material = SubResource("ShaderMaterial_5jfd8")
@@ -107,7 +107,6 @@ feedBlockSN = ExtResource("4_b524o")
 feedBlockPalette = ExtResource("7_2b3g0")
 screenLight = NodePath("../Phone/ScreenLight")
 generator = NodePath("../FeedMachine")
-face = NodePath("../Face")
 
 [node name="Face" type="Sprite2D" parent="." unique_id=590860739]
 light_mask = 2

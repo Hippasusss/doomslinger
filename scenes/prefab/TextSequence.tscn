@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dwscg668o2gu2"]
+
+[ext_resource type="Script" uid="uid://c5l1db4agg0l2" path="res://script/TextTreeObject.cs" id="1_pfv4b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2s0e"]
+size = Vector2(637, 356)
+
+[node name="TextSequence" type="RichTextLabel" unique_id=1923442456]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = -61.0
+offset_right = 319.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 14
+text = "The work day is over"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_pfv4b")
+textList = PackedStringArray("Your shift is over", "you did well today", "performance report", "click to continue")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2016310148]
+position = Vector2(-2, -119)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1783889016]
+position = Vector2(319.5, 180)
+shape = SubResource("RectangleShape2D_e2s0e")
+debug_color = Color(0.13727692, 0.14009929, 0.15100786, 0.41960785)
+
+[connection signal="input_event" from="Area2D" to="." method="OnClick"]

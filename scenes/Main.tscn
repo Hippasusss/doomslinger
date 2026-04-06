@@ -5,9 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cg0jst0bit7ga" path="res://scenes/prefab/human.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://bcaiiynn7r52i" path="res://scenes/prefab/BGGenerator.tscn" id="3_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://dfv4wku4lcbuj" path="res://scenes/prefab/FaceGenerator.tscn" id="3_bjd11"]
+[ext_resource type="ColorPalette" uid="uid://d32pqxf3o0s7l" path="res://resources/ColorPalettes/Face/clothesPalette.tres" id="7_2c4at"]
 [ext_resource type="Texture2D" uid="uid://dme683wdl5jx" path="res://sprite/workArea.png" id="7_mwfav"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
+[ext_resource type="Script" uid="uid://b6c4jb6obonfh" path="res://script/UIManager.cs" id="8_dg70y"]
+[ext_resource type="Script" uid="uid://bgc0gotw2o688" path="res://script/HumanManager.cs" id="8_pnhog"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="8_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://bkn0gbxuvg7jh" path="res://sprite/controls.png" id="8_xa025"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_bjd11"]
@@ -29,7 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
-[ext_resource type="Script" uid="uid://c5l1db4agg0l2" path="res://script/TextTreeObject.cs" id="29_gsxep"]
+[ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
@@ -152,15 +155,6 @@ size = Vector2(11, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxlcp"]
 size = Vector2(11.93, 40.755)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp0k4"]
-shader = ExtResource("10_lhr70")
-shader_parameter/dither_size = 1.0
-shader_parameter/color_levels = 148.0
-shader_parameter/dither_strength = 1.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2s0e"]
-size = Vector2(637, 356)
-
 [node name="World" type="Node2D" unique_id=889943719]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1338437481]
@@ -172,11 +166,13 @@ script = ExtResource("1_mwfav")
 position = Vector2(27.999998, 73)
 
 [node name="HumanArea" type="Node2D" parent="." unique_id=1781715270]
+script = ExtResource("8_pnhog")
 
-[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("displayData", "camera", "initPosition", "faceGenerator")]
+[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("humanManager", "displayData", "camera", "initPosition", "faceGenerator")]
 texture_filter = 1
 script = ExtResource("1_rvslj")
-displayData = NodePath("../../UI/WorkArea")
+humanManager = NodePath("..")
+displayData = NodePath("../../UI/DataArea")
 camera = NodePath("../../Camera2D")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
@@ -187,6 +183,7 @@ faceGenerator = NodePath("FaceGenerator")
 position = Vector2(0, 320)
 
 [node name="FaceGenerator" parent="HumanArea/Spawner" unique_id=828249479 instance=ExtResource("3_bjd11")]
+trimPalette = ExtResource("7_2c4at")
 
 [node name="Body" parent="HumanArea/Spawner/FaceGenerator" index="1" unique_id=1721584226]
 material = SubResource("ShaderMaterial_mwfav")
@@ -214,9 +211,12 @@ material = SubResource("ShaderMaterial_1nqs0")
 material = SubResource("ShaderMaterial_1iba3")
 frame = 32
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=277055262]
+[node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController")]
+script = ExtResource("8_dg70y")
+UISections = [NodePath("DataArea/DataHideReveal"), NodePath("AdMachine/ADHideReveal")]
+blackoutController = NodePath("Blackout")
 
-[node name="WorkArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
+[node name="DataArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
 texture_filter = 1
 position = Vector2(746, 180)
 texture = ExtResource("7_mwfav")
@@ -226,7 +226,7 @@ heartMonitorDisplay = NodePath("HeartMonitor")
 eyeDisplay = NodePath("EyeSection/Eye")
 feedDataDisplay = NodePath("FeedDataSection")
 
-[node name="IDSection" type="Control" parent="UI/WorkArea" unique_id=147275066 node_paths=PackedStringArray("textName", "textData", "face")]
+[node name="IDSection" type="Control" parent="UI/DataArea" unique_id=147275066 node_paths=PackedStringArray("textName", "textData", "face")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0
@@ -238,7 +238,7 @@ textName = NodePath("Name")
 textData = NodePath("IDText")
 face = NodePath("ColorRect/Dither/Headshot")
 
-[node name="IDText" type="RichTextLabel" parent="UI/WorkArea/IDSection" unique_id=806655714]
+[node name="IDText" type="RichTextLabel" parent="UI/DataArea/IDSection" unique_id=806655714]
 texture_filter = 1
 texture_repeat = 1
 layout_direction = 2
@@ -268,7 +268,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_direction = 1
 
-[node name="ColorRect" type="ColorRect" parent="UI/WorkArea/IDSection" unique_id=1804732182]
+[node name="ColorRect" type="ColorRect" parent="UI/DataArea/IDSection" unique_id=1804732182]
 material = SubResource("ShaderMaterial_2ofn6")
 layout_mode = 0
 offset_left = 139.0
@@ -277,19 +277,19 @@ offset_right = 188.0
 offset_bottom = 67.0
 color = Color(0.4, 0.48235294, 0.5254902, 0.25882354)
 
-[node name="Dither" type="Sprite2D" parent="UI/WorkArea/IDSection/ColorRect" unique_id=672352738]
+[node name="Dither" type="Sprite2D" parent="UI/DataArea/IDSection/ColorRect" unique_id=672352738]
 clip_children = 1
 material = SubResource("ShaderMaterial_xa025")
 position = Vector2(25, 30)
 texture = ExtResource("12_1iba3")
 
-[node name="Headshot" type="Sprite2D" parent="UI/WorkArea/IDSection/ColorRect/Dither" unique_id=1005073743]
+[node name="Headshot" type="Sprite2D" parent="UI/DataArea/IDSection/ColorRect/Dither" unique_id=1005073743]
 material = SubResource("ShaderMaterial_36rkl")
 position = Vector2(0, 2.000002)
 scale = Vector2(0.8, 0.74999994)
 texture = ExtResource("10_mwfav")
 
-[node name="Name" type="RichTextLabel" parent="UI/WorkArea/IDSection" unique_id=983701997]
+[node name="Name" type="RichTextLabel" parent="UI/DataArea/IDSection" unique_id=983701997]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 5.0
@@ -300,7 +300,7 @@ text = "NAME: [color=white][font_size=8]DANNY HERBERT[/font_size][/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HeartMonitor" type="Control" parent="UI/WorkArea" unique_id=1577979279 node_paths=PackedStringArray("line", "BPMText")]
+[node name="HeartMonitor" type="Control" parent="UI/DataArea" unique_id=1577979279 node_paths=PackedStringArray("line", "BPMText")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0
@@ -311,14 +311,14 @@ script = ExtResource("10_qmy6f")
 line = NodePath("Line2D")
 BPMText = NodePath("BPM Readout/Value")
 
-[node name="Line2D" type="Line2D" parent="UI/WorkArea/HeartMonitor" unique_id=440793788]
+[node name="Line2D" type="Line2D" parent="UI/DataArea/HeartMonitor" unique_id=440793788]
 position = Vector2(1, 16)
 scale = Vector2(1.0215054, 1)
 points = PackedVector2Array(1, 0, 160.5474, 0)
 width = 1.0
 default_color = Color(0.4, 0.48235294, 0.5254902, 1)
 
-[node name="BPM Readout" type="Control" parent="UI/WorkArea/HeartMonitor" unique_id=1734247390]
+[node name="BPM Readout" type="Control" parent="UI/DataArea/HeartMonitor" unique_id=1734247390]
 clip_children = 1
 anchors_preset = 0
 offset_left = 167.0
@@ -326,7 +326,7 @@ offset_top = 1.0
 offset_right = 192.0
 offset_bottom = 32.0
 
-[node name="Label" type="RichTextLabel" parent="UI/WorkArea/HeartMonitor/BPM Readout" unique_id=154003182]
+[node name="Label" type="RichTextLabel" parent="UI/DataArea/HeartMonitor/BPM Readout" unique_id=154003182]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 5.0
@@ -336,7 +336,7 @@ text = "BPM
 "
 scroll_active = false
 
-[node name="Value" type="RichTextLabel" parent="UI/WorkArea/HeartMonitor/BPM Readout" unique_id=213886279]
+[node name="Value" type="RichTextLabel" parent="UI/DataArea/HeartMonitor/BPM Readout" unique_id=213886279]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 12.0
@@ -347,7 +347,7 @@ text = "150
 "
 scroll_active = false
 
-[node name="EyeSection" type="Control" parent="UI/WorkArea" unique_id=1267227362]
+[node name="EyeSection" type="Control" parent="UI/DataArea" unique_id=1267227362]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0
@@ -355,11 +355,11 @@ offset_top = -93.0
 offset_right = 1.0
 offset_bottom = -34.0
 
-[node name="Eye" parent="UI/WorkArea/EyeSection" unique_id=517888025 instance=ExtResource("9_bjd11")]
+[node name="Eye" parent="UI/DataArea/EyeSection" unique_id=517888025 instance=ExtResource("9_bjd11")]
 material = null
 position = Vector2(48.045, 29.425)
 
-[node name="RiskSection" type="Control" parent="UI/WorkArea" unique_id=232227697]
+[node name="RiskSection" type="Control" parent="UI/DataArea" unique_id=232227697]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -369,7 +369,7 @@ offset_right = 99.0
 offset_bottom = -33.0
 script = ExtResource("18_36rkl")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/WorkArea/RiskSection" unique_id=346930113]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/RiskSection" unique_id=346930113]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -385,11 +385,11 @@ text = " Exit risk: Intense Emotion
  "
 scroll_active = false
 
-[node name="WarningSymbold" type="Sprite2D" parent="UI/WorkArea/RiskSection" unique_id=356295528]
+[node name="WarningSymbold" type="Sprite2D" parent="UI/DataArea/RiskSection" unique_id=356295528]
 position = Vector2(6, 10)
 texture = ExtResource("18_ebg2g")
 
-[node name="FeedDataSection" type="Control" parent="UI/WorkArea" unique_id=596890635 node_paths=PackedStringArray("label")]
+[node name="FeedDataSection" type="Control" parent="UI/DataArea" unique_id=596890635 node_paths=PackedStringArray("label")]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -400,7 +400,7 @@ offset_bottom = 108.0
 script = ExtResource("19_2ofn6")
 label = NodePath("RichTextLabel")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/WorkArea/FeedDataSection" unique_id=149028222]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/FeedDataSection" unique_id=149028222]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -415,25 +415,35 @@ text = "
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="HideReveal" type="Node2D" parent="UI/WorkArea" unique_id=473631 node_paths=PackedStringArray("animationPlayer")]
+[node name="DataHideReveal" type="Node2D" parent="UI/DataArea" unique_id=473631 node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("17_ft6cd")
 animationPlayer = NodePath("AnimationPlayer")
 
-[node name="button" type="Sprite2D" parent="UI/WorkArea/HideReveal" unique_id=5486282]
+[node name="button" type="Sprite2D" parent="UI/DataArea/DataHideReveal" unique_id=5486282]
 position = Vector2(-113.55499, -47)
 texture = ExtResource("22_fs0b5")
 
-[node name="Area2D" type="Area2D" parent="UI/WorkArea/HideReveal" unique_id=29789630]
+[node name="OpenCloseArea" type="Area2D" parent="UI/DataArea/DataHideReveal" unique_id=29789630]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/WorkArea/HideReveal/Area2D" unique_id=758258081]
+[node name="Shape" type="CollisionShape2D" parent="UI/DataArea/DataHideReveal/OpenCloseArea" unique_id=758258081]
 position = Vector2(-113.5, -47)
 shape = SubResource("RectangleShape2D_36rkl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/WorkArea/HideReveal" unique_id=299123577]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DataArea/DataHideReveal" unique_id=299123577]
 libraries/ = SubResource("AnimationLibrary_e2s0e")
 
 [node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
 position = Vector2(-142.16, 170.12)
+
+[node name="ADHideReveal" type="Node2D" parent="UI/AdMachine" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
+script = ExtResource("17_ft6cd")
+rigidBody2D = NodePath("../FileCabinet")
+
+[node name="OpenCloseArea" type="Area2D" parent="UI/AdMachine/ADHideReveal" unique_id=61395713]
+
+[node name="Shape" type="CollisionShape2D" parent="UI/AdMachine/ADHideReveal/OpenCloseArea" unique_id=1705947655]
+position = Vector2(147, 1)
+shape = SubResource("RectangleShape2D_bb450")
 
 [node name="FileCabinet" type="RigidBody2D" parent="UI/AdMachine" unique_id=770060897]
 mass = 20.972
@@ -447,16 +457,6 @@ linear_damp = 0.36
 [node name="Container" type="CollisionPolygon2D" parent="UI/AdMachine/FileCabinet" unique_id=749621471]
 position = Vector2(-42, 16)
 polygon = PackedVector2Array(79, -37, -108, -37, -128.955, -46, -129.955, -59, -110.955, -60, -111, -45, 81, -45, 184, -45, 184.045, -62, 203.045, -61, 196.045, 15, -123.955, 14, -128.955, -46, -108, -37, -108, 6, 79, 6)
-
-[node name="Revealer" type="Node2D" parent="UI/AdMachine/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
-script = ExtResource("17_ft6cd")
-rigidBody2D = NodePath("..")
-
-[node name="OpenCloseArea" type="Area2D" parent="UI/AdMachine/FileCabinet" unique_id=61395713]
-
-[node name="Shape" type="CollisionShape2D" parent="UI/AdMachine/FileCabinet/OpenCloseArea" unique_id=1705947655]
-position = Vector2(147, 1)
-shape = SubResource("RectangleShape2D_bb450")
 
 [node name="FileCabinet" type="Sprite2D" parent="UI/AdMachine/FileCabinet" unique_id=604660609]
 texture_filter = 1
@@ -525,57 +525,16 @@ texture_filter = 1
 position = Vector2(199, 345)
 texture = ExtResource("8_xa025")
 
-[node name="ScreenShader" type="ColorRect" parent="UI" unique_id=1731287264]
-visible = false
-z_index = 10
-material = SubResource("ShaderMaterial_wp0k4")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.30588236, 0.30588236, 0.30588236, 1)
-
-[node name="Blackout" type="Node2D" parent="UI" unique_id=2015092074 node_paths=PackedStringArray("blackout", "textTree")]
+[node name="Blackout" type="Node2D" parent="UI" unique_id=2015092074 node_paths=PackedStringArray("blackout")]
 z_index = 1
 script = ExtResource("27_e2s0e")
 blackout = NodePath("Sprite2D")
-textTree = NodePath("Sprite2D/RichTextLabel")
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/Blackout" unique_id=1832455364]
 texture = ExtResource("27_ma7h6")
 offset = Vector2(320, 180)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Blackout/Sprite2D" unique_id=466284308]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -318.0
-offset_top = -61.0
-offset_right = 319.0
-offset_bottom = 69.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 14
-text = "The work day is over"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("29_gsxep")
-textList = PackedStringArray("Your shift is over", "you did well today", "performance report", "click to continue")
-
-[node name="Area2D" type="Area2D" parent="UI/Blackout/Sprite2D/RichTextLabel" unique_id=145658284]
-position = Vector2(-2, -119)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Blackout/Sprite2D/RichTextLabel/Area2D" unique_id=1669029816]
-position = Vector2(319.5, 180)
-shape = SubResource("RectangleShape2D_e2s0e")
-
-[node name="DayNightTimer" type="Node2D" parent="UI/Blackout" unique_id=2021218286]
-script = ExtResource("30_v0vrg")
+[node name="TextSequence" parent="UI/Blackout/Sprite2D" unique_id=1923442456 instance=ExtResource("29_v0vrg")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1870095868]
 stream = ExtResource("18_bb450")
@@ -583,8 +542,16 @@ volume_db = -9.055
 autoplay = true
 parameters/looping = true
 
-[connection signal="input_event" from="UI/WorkArea/HideReveal/Area2D" to="UI/WorkArea/HideReveal" method="OnClick"]
-[connection signal="input_event" from="UI/AdMachine/FileCabinet/OpenCloseArea" to="UI/AdMachine/FileCabinet/Revealer" method="OnClick"]
-[connection signal="input_event" from="UI/Blackout/Sprite2D/RichTextLabel/Area2D" to="UI/Blackout" method="OnClick"]
+[node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]
+script = ExtResource("30_v0vrg")
+dayLengthMins = 0.2
+
+[connection signal="input_event" from="UI/DataArea/DataHideReveal/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
+[connection signal="input_event" from="UI/AdMachine/ADHideReveal/OpenCloseArea" to="UI/AdMachine/ADHideReveal" method="OnClick"]
+[connection signal="BlackoutFinished" from="UI/Blackout" to="DayNightTimer" method="OnBlackoutFinished"]
+[connection signal="EndOfText" from="UI/Blackout/Sprite2D/TextSequence" to="UI/Blackout" method="OnTextFinishedSignal"]
+[connection signal="DayBegin" from="DayNightTimer" to="HumanArea" method="OnDayBegin"]
+[connection signal="DayEnd" from="DayNightTimer" to="HumanArea" method="OnDayEnd"]
+[connection signal="DayEnd" from="DayNightTimer" to="UI" method="OnDayEnd"]
 
 [editable path="HumanArea/Spawner/FaceGenerator"]

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://nonqf0uj3pba"]
 
 [ext_resource type="Shader" uid="uid://p610b3wyc18t" path="res://script/shader/ditherNew.gdshader" id="1_u3x3g"]
-[ext_resource type="Script" uid="uid://c5l1db4agg0l2" path="res://script/TextTreeObject.cs" id="2_yb4nt"]
+[ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="2_yb4nt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3x3g"]
 shader = ExtResource("1_u3x3g")
@@ -147,23 +147,14 @@ autoplay = &"spin"
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/phone" unique_id=1578513801]
 environment = SubResource("Environment_fabi1")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=168899823]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = 113.0
-offset_right = 399.0
-offset_bottom = 243.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 14
-text = "Welcome to bigTek"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_yb4nt")
-textList = PackedStringArray("Welcome to bigTek", "you\'ll be controlling our most product", "bigTek phone", "don\'t fuck up!")
+[node name="TextSequence" parent="." unique_id=1923442456 instance=ExtResource("2_yb4nt")]
+offset_left = -76.0
+offset_top = 124.0
+offset_right = 561.0
+offset_bottom = 254.0
+textList = PackedStringArray("hello", "welcome to bigtek", "check this sick phone we made", "wooooooo")
+
+[node name="CollisionShape2D" parent="TextSequence/Area2D" parent_id_path=PackedInt32Array(1923442456, 2016310148) index="0" unique_id=1783889016]
+position = Vector2(400, 167)
+
+[editable path="TextSequence"]

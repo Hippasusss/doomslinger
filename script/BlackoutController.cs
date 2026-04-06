@@ -4,21 +4,10 @@ using System;
 public partial class BlackoutController : Node2D
 {
 
-    [Export] private Sprite2D blackout;
-    [Export] private TextTreeObject textTree;
-    private bool enabled = true;
-    private const float transitionSpeed = 1f;
-    private const float dayLength = 20;
+    [Signal] public delegate void BlackoutFinishedEventHandler();
 
-    private readonly Utils.DeltaTimer timer = new(dayLength);
-    public override void _Process(double delta)
-    {
-        if(enabled) return;
-        if (timer.Delta(delta))
-        {
-            ToggleBlackout(true);
-        }
-    }
+    [Export] private Sprite2D blackout;
+    private const float transitionSpeed = 1f;
 
     public void ToggleBlackout(bool enable)
     {
@@ -27,35 +16,22 @@ public partial class BlackoutController : Node2D
         { 
             Visible = true;
             tween.TweenProperty(blackout, "modulate:a", 1f, transitionSpeed);
-            textTree.ShowNext();
         }
         else
         {
             tween.TweenProperty(blackout, "modulate:a", 0f, transitionSpeed);
         }
-        tween.TweenCallback(Callable.From(() => {Visible = enable; enabled = enable;}));
+        tween.TweenCallback(Callable.From(() => {Visible = enable;}));
+        tween.TweenCallback(Callable.From(() => {if(!enable) EmitSignal(SignalName.BlackoutFinished);}));
     }
 
-    public void Continue()
+    public void OnDayEnd()
     {
-        if(!textTree.ShowNext())
-        {
-            ToggleBlackout(false);
-        }
+        ToggleBlackout(true);
     }
 
-    public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)
+    public void OnTextFinishedSignal()
     {
-        if(!enabled) 
-        {
-            return;
-        }
-        if (clickEvent is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
-        {
-            if (mouseEvent.ButtonIndex == MouseButton.Left)
-            {
-                Continue();
-            }
-        }
+        ToggleBlackout(false);
     }
 }

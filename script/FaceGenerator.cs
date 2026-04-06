@@ -2,7 +2,6 @@ using Godot;
 using System.Linq;
 using System.Threading.Tasks;
 
-[Tool]
 public partial class FaceGenerator : SubViewport
 {
     [Export] public float HairChance = 0.8f;
@@ -17,10 +16,6 @@ public partial class FaceGenerator : SubViewport
     [Export] public ColorPalette jewleryPalette;
     [Export] public Texture2D maleSpriteSheet;
     [Export] public Texture2D femaleSpriteSheet;
-    [Export] public bool ReGenerate { get => false; set { if (value) { 
-        var Data = new HumanPersonalData("Danny Herbert", System.DateOnly.MaxValue, 160, "M", "Scottish", 3);
-        _ = GenerateAsync(Data); 
-    } } }
 
     private const float stretchCoefficient = 0.2f;
 

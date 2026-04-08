@@ -9,6 +9,11 @@ public partial class TextTreeObject : RichTextLabel
     private int index = 0;
     private bool enabled = true;
 
+    public override void _Ready()
+    {
+        Text = textList[index];
+    }
+
     private void SetText(string text, float speed = 0.2f)
     {
         Tween tween = CreateTween();

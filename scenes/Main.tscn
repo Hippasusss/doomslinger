@@ -30,7 +30,10 @@
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
+[ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="25_kxyth"]
+[ext_resource type="Texture2D" uid="uid://dl8oqg7flu8uu" path="res://sprite/AlgoSection.png" id="26_hq6as"]
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
+[ext_resource type="Texture2D" uid="uid://d0t883md1byky" path="res://sprite/AlgoSectionButton.png" id="27_kxyth"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
@@ -88,7 +91,7 @@ shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36rkl"]
-size = Vector2(15, 66)
+size = Vector2(15, 60)
 
 [sub_resource type="Animation" id="Animation_36rkl"]
 length = 0.001
@@ -146,6 +149,60 @@ _data = {
 &"open": SubResource("Animation_fs0b5")
 }
 
+[sub_resource type="Animation" id="Animation_cobve"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-178.495, 92.5)]
+}
+
+[sub_resource type="Animation" id="Animation_cmqll"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(178.495, 92.5), Vector2(-178.495, 92.5), Vector2(-173.395, 92.5), Vector2(-178.495, 92.5)]
+}
+
+[sub_resource type="Animation" id="Animation_8cp6k"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-178.495, 92.5), Vector2(178.5, 92.5), Vector2(173.775, 92.5), Vector2(178.5, 92.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8b871"]
+_data = {
+&"RESET": SubResource("Animation_cobve"),
+&"close": SubResource("Animation_cmqll"),
+&"open": SubResource("Animation_8cp6k")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb450"]
 size = Vector2(10, 46)
 
@@ -165,15 +222,15 @@ script = ExtResource("1_mwfav")
 [node name="BGGenerator" parent="." unique_id=917973400 instance=ExtResource("3_1nqs0")]
 position = Vector2(27.999998, 73)
 
-[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270]
+[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataDisplay")]
 script = ExtResource("8_pnhog")
+camera = NodePath("../Camera2D")
+humanDataDisplay = NodePath("../UI/DataArea")
 
-[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("humanManager", "displayData", "camera", "initPosition", "faceGenerator")]
+[node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("humanManager", "initPosition", "faceGenerator")]
 texture_filter = 1
 script = ExtResource("1_rvslj")
 humanManager = NodePath("..")
-displayData = NodePath("../../UI/DataArea")
-camera = NodePath("../../Camera2D")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
 numHumans = 8
@@ -213,7 +270,7 @@ frame = 32
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataArea/DataHideReveal"), NodePath("AdMachine/ADHideReveal")]
+UISections = [NodePath("DataArea/DataHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("AlgoSection/AlgoHideReveal")]
 blackoutController = NodePath("Blackout")
 
 [node name="DataArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
@@ -316,7 +373,7 @@ position = Vector2(1, 16)
 scale = Vector2(1.0215054, 1)
 points = PackedVector2Array(1, 0, 160.5474, 0)
 width = 1.0
-default_color = Color(0.4, 0.48235294, 0.5254902, 1)
+default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
 
 [node name="BPM Readout" type="Control" parent="UI/DataArea/HeartMonitor" unique_id=1734247390]
 clip_children = 1
@@ -360,7 +417,6 @@ material = null
 position = Vector2(48.045, 29.425)
 
 [node name="RiskSection" type="Control" parent="UI/DataArea" unique_id=232227697]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 6.0
@@ -390,7 +446,6 @@ position = Vector2(6, 10)
 texture = ExtResource("18_ebg2g")
 
 [node name="FeedDataSection" type="Control" parent="UI/DataArea" unique_id=596890635 node_paths=PackedStringArray("label")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -94.0
@@ -415,9 +470,11 @@ text = "
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="DataHideReveal" type="Node2D" parent="UI/DataArea" unique_id=473631 node_paths=PackedStringArray("animationPlayer")]
+[node name="DataHideReveal" type="Node2D" parent="UI/DataArea" unique_id=473631 node_paths=PackedStringArray("parentSprite")]
 script = ExtResource("17_ft6cd")
-animationPlayer = NodePath("AnimationPlayer")
+parentSprite = NodePath("..")
+directionRight = false
+tweenCurve = ExtResource("25_kxyth")
 
 [node name="button" type="Sprite2D" parent="UI/DataArea/DataHideReveal" unique_id=5486282]
 position = Vector2(-113.55499, -47)
@@ -426,24 +483,37 @@ texture = ExtResource("22_fs0b5")
 [node name="OpenCloseArea" type="Area2D" parent="UI/DataArea/DataHideReveal" unique_id=29789630]
 
 [node name="Shape" type="CollisionShape2D" parent="UI/DataArea/DataHideReveal/OpenCloseArea" unique_id=758258081]
-position = Vector2(-113.5, -47)
+position = Vector2(-113.495, -47)
 shape = SubResource("RectangleShape2D_36rkl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DataArea/DataHideReveal" unique_id=299123577]
 libraries/ = SubResource("AnimationLibrary_e2s0e")
 
-[node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
-position = Vector2(-142.16, 170.12)
+[node name="AlgoSection" type="Sprite2D" parent="UI" unique_id=1869736425]
+texture_filter = 1
+position = Vector2(-178.495, 92.5)
+texture = ExtResource("26_hq6as")
 
-[node name="ADHideReveal" type="Node2D" parent="UI/AdMachine" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
+[node name="AlgoHideReveal" type="Node2D" parent="UI/AlgoSection" unique_id=1733859049 node_paths=PackedStringArray("parentSprite")]
 script = ExtResource("17_ft6cd")
-rigidBody2D = NodePath("../FileCabinet")
+parentSprite = NodePath("..")
+tweenCurve = ExtResource("25_kxyth")
 
-[node name="OpenCloseArea" type="Area2D" parent="UI/AdMachine/ADHideReveal" unique_id=61395713]
+[node name="AlgoSectionButton" type="Sprite2D" parent="UI/AlgoSection/AlgoHideReveal" unique_id=557963205]
+position = Vector2(186, 62.5)
+texture = ExtResource("27_kxyth")
 
-[node name="Shape" type="CollisionShape2D" parent="UI/AdMachine/ADHideReveal/OpenCloseArea" unique_id=1705947655]
-position = Vector2(147, 1)
-shape = SubResource("RectangleShape2D_bb450")
+[node name="OpenCloseArea" type="Area2D" parent="UI/AlgoSection/AlgoHideReveal" unique_id=58056620]
+
+[node name="Shape" type="CollisionShape2D" parent="UI/AlgoSection/AlgoHideReveal/OpenCloseArea" unique_id=1423586492]
+position = Vector2(186, 62.5)
+shape = SubResource("RectangleShape2D_36rkl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/AlgoSection/AlgoHideReveal" unique_id=375323234]
+libraries/ = SubResource("AnimationLibrary_8b871")
+
+[node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
+position = Vector2(-142, 227)
 
 [node name="FileCabinet" type="RigidBody2D" parent="UI/AdMachine" unique_id=770060897]
 mass = 20.972
@@ -453,6 +523,16 @@ lock_rotation = true
 freeze_mode = 1
 continuous_cd = 2
 linear_damp = 0.36
+
+[node name="ADHideReveal" type="Node2D" parent="UI/AdMachine/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
+script = ExtResource("17_ft6cd")
+rigidBody2D = NodePath("..")
+
+[node name="OpenCloseArea" type="Area2D" parent="UI/AdMachine/FileCabinet/ADHideReveal" unique_id=61395713]
+
+[node name="Shape" type="CollisionShape2D" parent="UI/AdMachine/FileCabinet/ADHideReveal/OpenCloseArea" unique_id=1705947655]
+position = Vector2(147, 1)
+shape = SubResource("RectangleShape2D_bb450")
 
 [node name="Container" type="CollisionPolygon2D" parent="UI/AdMachine/FileCabinet" unique_id=749621471]
 position = Vector2(-42, 16)
@@ -526,6 +606,7 @@ position = Vector2(199, 345)
 texture = ExtResource("8_xa025")
 
 [node name="Blackout" type="Node2D" parent="UI" unique_id=2015092074 node_paths=PackedStringArray("blackout")]
+visible = false
 z_index = 1
 script = ExtResource("27_e2s0e")
 blackout = NodePath("Sprite2D")
@@ -544,10 +625,11 @@ parameters/looping = true
 
 [node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]
 script = ExtResource("30_v0vrg")
-dayLengthMins = 0.2
+dayLengthMins = 2.0
 
 [connection signal="input_event" from="UI/DataArea/DataHideReveal/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
-[connection signal="input_event" from="UI/AdMachine/ADHideReveal/OpenCloseArea" to="UI/AdMachine/ADHideReveal" method="OnClick"]
+[connection signal="input_event" from="UI/AlgoSection/AlgoHideReveal/OpenCloseArea" to="UI/AlgoSection/AlgoHideReveal" method="OnClick"]
+[connection signal="input_event" from="UI/AdMachine/FileCabinet/ADHideReveal/OpenCloseArea" to="UI/AdMachine/FileCabinet/ADHideReveal" method="OnClick"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="UI/Blackout/Sprite2D/TextSequence" method="OnBlackOutFinished"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="DayNightTimer" method="OnBlackoutFinished"]
 [connection signal="EndOfText" from="UI/Blackout/Sprite2D/TextSequence" to="UI/Blackout" method="OnTextFinishedSignal"]

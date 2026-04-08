@@ -3,43 +3,56 @@ using System;
 
 public partial class SectionRevealer : Node2D
 {
+
     [Export] public RigidBody2D rigidBody2D;
     [Export] public AnimationPlayer animationPlayer;
+    [Export] public Sprite2D parentSprite;
+    [Export] public bool directionRight = true;
+    [Export] public Curve tweenCurve;
     private bool open = false;
 
     private const int force = 20000;
     private const string animationCloseName = "close";
     private const string animationOpenName = "open";
+    private const float tweenDuration = 0.5f;
 
     public void Toggle()
     {
-        if(rigidBody2D != null)
+        if(open)
         {
-            int sign = open ? -1 : 1;
-            rigidBody2D.ApplyCentralImpulse(new(force * sign,0));
-            open = !open;
+            SetOpen(false);
+            return;
         }
-        else if (animationPlayer != null)
-        {
-            string animationToPlay = open ? animationCloseName : animationOpenName;
-            animationPlayer.Play(animationToPlay);
-            open = !open;
-        }
+
+        SetOpen(true);
     }
 
-    public void Close()
+    public void SetOpen(bool shouldOpen)
     {
-        if(!open) return;
+        if(open == shouldOpen) return;
+
+        int direction = shouldOpen ? 1 : -1;
+        direction *= directionRight ? 1 : -1;
+
         if(rigidBody2D != null)
         {
-            rigidBody2D.ApplyCentralImpulse(new(-force,0));
-            open = !open;
+            rigidBody2D.ApplyCentralImpulse(new(force * direction,0));
         }
         else if (animationPlayer != null)
         {
-            animationPlayer.Play(animationCloseName);
-            open = !open;
+            animationPlayer.Play(shouldOpen ? animationOpenName : animationCloseName);
         }
+        else if (parentSprite != null)
+        {
+            float width = parentSprite.GetRect().Size.X;
+            float movement = width * direction; 
+            Tween openCloseTween = CreateTween();
+            Callable tweenCurveCallable = Callable.From<float, float>(tweenCurve.SampleBaked);
+            openCloseTween.TweenProperty(parentSprite, "position:x", movement, tweenDuration)
+                .AsRelative() 
+                .SetCustomInterpolator(tweenCurveCallable);
+        }
+        open = shouldOpen;
     }
 
     public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)

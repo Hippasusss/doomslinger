@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public partial class HumanManager : Node2D
 {
+    [Export] private CameraController camera;
+    [Export] private HumanDataDisplay humanDataDisplay;
     private List<Human> humans = [];
     public int HumanCount => humans.Count;
 
@@ -32,6 +34,8 @@ public partial class HumanManager : Node2D
 
     public void OnHumanSelected(Human human)
     {
+        camera.MovePositionToNode(human);
+        humanDataDisplay.DisplayHuman(human);
         foreach(Human otherHuman in humans)
         {
             if(human == otherHuman) continue;

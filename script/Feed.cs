@@ -24,6 +24,7 @@ public partial class Feed : CanvasGroup
 
     private const int numBlocks = 9;
     private const int blockSpacing = 52;
+    private const float turnOffRate = 0.5f;
     private readonly List<Feedblock> feedBlocks = [];
     private bool enabled = true;
 
@@ -108,7 +109,7 @@ public partial class Feed : CanvasGroup
         if(onOff)
         {
             Tween tween = CreateTween();
-            tween.TweenProperty(this, "modulate", Colors.White, 0.4f)
+            tween.TweenProperty(this, "modulate", Colors.White, turnOffRate)
                 .SetTrans(Tween.TransitionType.Quart)
                 .SetEase(Tween.EaseType.Out);
         }
@@ -117,10 +118,9 @@ public partial class Feed : CanvasGroup
             const float darkness = 0.2f;
             Color dark = new(darkness,darkness,darkness,1);
             Tween tween = CreateTween();
-            tween.TweenProperty(this, "modulate", dark, 0.4f)
+            tween.TweenProperty(this, "modulate", dark, turnOffRate)
                 .SetTrans(Tween.TransitionType.Quart)
                 .SetEase(Tween.EaseType.Out);
-            // Modulate = dark;
         }
     }
 

@@ -33,12 +33,21 @@ public partial class HumanDataDisplay : Sprite2D
         }
     }
 
-    public void DisplayNewHuman(Human newHuman)
+    public void DisplayHuman(Human newHuman)
     {
         currentHuman = newHuman;
         if(newHuman.IsOnline)
         {
             UpdateCurrentHumanData();
+        }
+    }
+
+    public void ClearDisplay()
+    {
+        currentHuman = null;
+        foreach(IDisplay display in displays)
+        {
+            display.ToggleOnOff(false);
         }
     }
 
@@ -52,10 +61,6 @@ public partial class HumanDataDisplay : Sprite2D
         }
     }
 
-    private void ClearDisplay()
-    {
-        currentHuman = null;
-    }
 
 
 }

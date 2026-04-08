@@ -7,7 +7,6 @@
 
 
 using Godot;
-using System.Collections.Generic;
 using Utils;
 
 public partial class Human : Node2D

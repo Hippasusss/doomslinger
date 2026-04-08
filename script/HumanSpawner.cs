@@ -7,8 +7,6 @@ public partial class HumanSpawner : Node2D
 {
 
     [Export] private HumanManager humanManager;
-    [Export] private HumanDataDisplay displayData;
-    [Export] private CameraController camera;
     [Export] private PackedScene human;
     [Export] private Node2D initPosition;
     [Export] private int numHumans = 1;
@@ -41,8 +39,6 @@ public partial class HumanSpawner : Node2D
         var (texture, colours) = await faceGenerator.GenerateAsync(newHuman.Data);
         newHuman.Face.Texture = texture;
         newHuman.Colors = colours;
-        newHuman.HumanSelected += camera.MovePositionToNode;
-        newHuman.HumanSelected += displayData.DisplayNewHuman;
         newHuman.Phone.Modulate = newHuman.Colors[5];
     }
 

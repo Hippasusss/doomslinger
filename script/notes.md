@@ -41,7 +41,6 @@
 
 - Heart arythmia leading to death. Big Tek denies knowledge. Removes info from employee hand book.
 
-
 # TODO
 
 ## Feed an advert into the user's feed
@@ -57,9 +56,9 @@
 - [] Upgrades
 
 ## Day and night
-- [] Timer for day
-- [] Click through with debreif at end of day
-- [] Start New Day
+- [x] Timer for day
+- [x] Click through with debreif at end of day
+- [x] Start New Day
 - [] performance report at end of day
 - [] New info from BigTek in the morning (rules  etc)
 
@@ -73,12 +72,16 @@
 ## Data
 - [] Hook up feed to affect data correctly
 - [] Perspiration?
-- [] Sleep Score?
 - [] Photo feed?
-- [] Voice recording?
 - [] IOT devices Scan
 - [] Location Scan
+
 - [] Warnings. (flight risk, High Emotion, Locked in etc. player has to work out why)
+- [] Meaning full connections
+- [] Social Credit
+- [] Waveform - can be probed for info (wife is trying to talk OR grunts and farts OR 
+- [] Uptime 
+- [] Sleep Score?
 
 ### interesting data human emotions:
 - Rage
@@ -94,3 +97,7 @@
 
 ## Input
 - [] Learn better way to do input. Input Map?
+
+- [] Blue light controll - keep awake
+- [] Push notification - get back if off phone
+- [] Sliders(?) for feed emotions

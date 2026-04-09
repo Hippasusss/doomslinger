@@ -11,7 +11,7 @@ public partial class TextTreeObject : RichTextLabel
 
     public override void _Ready()
     {
-        Text = textList[index];
+        enabled = Visible;
     }
 
     private void SetText(string text, float speed = 0.2f)

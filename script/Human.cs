@@ -33,6 +33,8 @@ public partial class Human : Node2D
     public Sprite2D Phone { get => phone; set => phone = value; }
     public Feed Feed { get => feed; set => feed = value; }
     public bool IsOnline { get => isOnline;}
+    public bool Selected { get => selected; }
+
 
     public override void _Ready()
     {
@@ -112,18 +114,19 @@ public partial class Human : Node2D
         Stats += block.stats;
     }
 
-    public void Select(bool setSelected)
+    public void Select(bool setSelected, bool emit = true)
     {
         if(setSelected && !selected && isOnline)
         {
             animation.Play("hover");
             selected = true;
-            EmitSignal(SignalName.HumanSelected, this);
+            if(emit) EmitSignal(SignalName.HumanSelected, this);
         }
         else if (!setSelected && selected)
         {
             animation.PlayBackwards("hover");
             selected = false;
+            if(emit) EmitSignal(SignalName.HumanSelected, this);
         }
     }
 

@@ -35,11 +35,12 @@ public partial class HumanManager : Node2D
     public void OnHumanSelected(Human human)
     {
         camera.MovePositionToNode(human);
-        humanDataDisplay.DisplayHuman(human);
+        if(human.Selected)humanDataDisplay.DisplayHuman(human);
+        else humanDataDisplay.ClearDisplay();
         foreach(Human otherHuman in humans)
         {
             if(human == otherHuman) continue;
-            otherHuman.Select(false);
+            otherHuman.Select(false, false);
         }
     }
 }

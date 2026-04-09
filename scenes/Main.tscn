@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
+[ext_resource type="Script" uid="uid://bwj76dqlxv73p" path="res://script/WaveFormDisplay.cs" id="24_cobve"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="25_kxyth"]
 [ext_resource type="Texture2D" uid="uid://dl8oqg7flu8uu" path="res://sprite/AlgoSection.png" id="26_hq6as"]
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
@@ -236,8 +237,9 @@ initPosition = NodePath("Positioner")
 numHumans = 8
 faceGenerator = NodePath("FaceGenerator")
 
-[node name="Positioner" type="Node2D" parent="HumanArea/Spawner" unique_id=1753962803]
+[node name="Positioner" type="Marker2D" parent="HumanArea/Spawner" unique_id=2019220739]
 position = Vector2(0, 320)
+gizmo_extents = 620.9
 
 [node name="FaceGenerator" parent="HumanArea/Spawner" unique_id=828249479 instance=ExtResource("3_bjd11")]
 trimPalette = ExtResource("7_2c4at")
@@ -268,10 +270,11 @@ material = SubResource("ShaderMaterial_1nqs0")
 material = SubResource("ShaderMaterial_1iba3")
 frame = 32
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController", "humanDataDisplay")]
 script = ExtResource("8_dg70y")
 UISections = [NodePath("DataArea/DataHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("AlgoSection/AlgoHideReveal")]
 blackoutController = NodePath("Blackout")
+humanDataDisplay = NodePath("DataArea")
 
 [node name="DataArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
 texture_filter = 1
@@ -287,9 +290,9 @@ feedDataDisplay = NodePath("FeedDataSection")
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0
-offset_top = -172.0
-offset_right = 99.0
-offset_bottom = -101.0
+offset_top = -171.0
+offset_right = 98.0
+offset_bottom = -100.0
 script = ExtResource("9_ft6cd")
 textName = NodePath("Name")
 textData = NodePath("IDText")
@@ -419,10 +422,10 @@ position = Vector2(48.045, 29.425)
 [node name="RiskSection" type="Control" parent="UI/DataArea" unique_id=232227697]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 6.0
-offset_top = -94.0
-offset_right = 99.0
-offset_bottom = -33.0
+offset_left = 5.0
+offset_top = -93.0
+offset_right = 97.0
+offset_bottom = -34.0
 script = ExtResource("18_36rkl")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/RiskSection" unique_id=346930113]
@@ -469,6 +472,36 @@ text = "
 "
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="WaveFormSection" type="Control" parent="UI/DataArea" unique_id=344298562]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -26.0
+offset_top = 14.0
+offset_right = 98.0
+offset_bottom = 47.0
+
+[node name="WaveFormDisplay" type="Control" parent="UI/DataArea/WaveFormSection" unique_id=2098131099]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("24_cobve")
+
+[node name="Section" type="Control" parent="UI/DataArea" unique_id=504007933]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -26.0
+offset_top = 52.0
+offset_right = 98.0
+offset_bottom = 109.0
+
+[node name="Section2" type="Control" parent="UI/DataArea" unique_id=655456620]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -95.0
+offset_top = 118.0
+offset_right = 98.0
+offset_bottom = 169.0
 
 [node name="DataHideReveal" type="Node2D" parent="UI/DataArea" unique_id=473631 node_paths=PackedStringArray("parentSprite")]
 script = ExtResource("17_ft6cd")
@@ -616,6 +649,7 @@ texture = ExtResource("27_ma7h6")
 offset = Vector2(320, 180)
 
 [node name="TextSequence" parent="UI/Blackout/Sprite2D" unique_id=1923442456 instance=ExtResource("29_v0vrg")]
+text = ""
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1870095868]
 stream = ExtResource("18_bb450")
@@ -625,7 +659,7 @@ parameters/looping = true
 
 [node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]
 script = ExtResource("30_v0vrg")
-dayLengthMins = 2.0
+dayLengthMins = 0.255
 
 [connection signal="input_event" from="UI/DataArea/DataHideReveal/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
 [connection signal="input_event" from="UI/AlgoSection/AlgoHideReveal/OpenCloseArea" to="UI/AlgoSection/AlgoHideReveal" method="OnClick"]

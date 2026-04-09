@@ -9,7 +9,12 @@ public partial class BlackoutController : Node2D
     [Export] private Sprite2D blackout;
     private const float transitionSpeed = 2f;
 
-    public void ToggleBlackout(bool enable)
+    public override void _Ready()
+    {
+        if(!Visible) ToggleBlackout(false, 0f);
+    }
+
+    public void ToggleBlackout(bool enable, float speed = transitionSpeed)
     {
         Tween tween = CreateTween();
         if(enable) 

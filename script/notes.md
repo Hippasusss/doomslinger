@@ -38,8 +38,12 @@
     - Big Tek covers it up
 
 - Big Tek Share holder meeting
+- watch introduced
 
 - Heart arythmia leading to death. Big Tek denies knowledge. Removes info from employee hand book.
+
+- Winning the game is having lots of money at the expense of everything else. Everyone is a husk of themselves and has no meaningful connections. 
+All they feel is extreme emotions of rage and fear and max out their screen time buying random shit online. gg.
 
 # TODO
 
@@ -101,3 +105,4 @@
 - [] Blue light controll - keep awake
 - [] Push notification - get back if off phone
 - [] Sliders(?) for feed emotions
+- [] algo controll like the ams dmx

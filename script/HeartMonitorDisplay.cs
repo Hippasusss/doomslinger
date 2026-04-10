@@ -70,9 +70,16 @@ public partial class HeartMonitorDisplay : Control, IDisplay
 
     private void SetBPM(int newBPM)
     {
-        if (newBPM < 5) return;
-        beepTimer.SetResetTime(60f/newBPM);
-        BPMText.Text = newBPM.ToString();
+        if (newBPM > 5) 
+        {
+            beepTimer.SetResetTime(60f/newBPM);
+            BPMText.Text = newBPM.ToString();
+        }
+        else
+        {
+            BPMText.Text = "--";
+
+        }
     }
 
     private int CalculateBPM(Human human)
@@ -97,6 +104,7 @@ public partial class HeartMonitorDisplay : Control, IDisplay
         beepTween?.Kill();
         SetBPM(0);
         targetValue = 0;
+        currentHuman = null;
         for(int i = 1; i < numPoints; i++)
         {
             line.SetPointPosition(i, new(line.GetPointPosition(i).X, 0));

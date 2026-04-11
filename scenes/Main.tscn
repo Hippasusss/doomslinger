@@ -483,9 +483,12 @@ offset_bottom = 47.0
 
 [node name="WaveFormDisplay" type="Control" parent="UI/DataArea/WaveFormSection" unique_id=2098131099]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 1.0
+offset_right = 123.0
+offset_bottom = 33.0
 script = ExtResource("24_cobve")
+colour = Color(0.7176471, 0.7647059, 0.95686275, 1)
+Amplitude = 0.53
 
 [node name="Section" type="Control" parent="UI/DataArea" unique_id=504007933]
 layout_mode = 3
@@ -659,7 +662,7 @@ parameters/looping = true
 
 [node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]
 script = ExtResource("30_v0vrg")
-dayLengthMins = 0.255
+dayLengthMins = 1.0
 
 [connection signal="input_event" from="UI/DataArea/DataHideReveal/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
 [connection signal="input_event" from="UI/AlgoSection/AlgoHideReveal/OpenCloseArea" to="UI/AlgoSection/AlgoHideReveal" method="OnClick"]

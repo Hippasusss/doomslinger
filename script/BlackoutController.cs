@@ -11,11 +11,6 @@ public partial class BlackoutController : Node2D
     
     public override void _Ready()
     {
-        ToggleBlackout(false);
-    }
-
-    public override void _Ready()
-    {
         if(!Visible) ToggleBlackout(false, 0f);
     }
 

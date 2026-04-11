@@ -18,13 +18,13 @@
     - Affect reaction to violence. 
     - Affect reaction to Adverts.
 
-- Iris size -> Emotion (small rage or interest, large love or calm)
+- Iris size -> Interest in current Video
 - blink rate -> Distraction (fast more)
-- Eye move speed -> Interest
+- Eye move speed -> Overall engagement
 - Red eye -> Fatigue Short Term
 - Eye bags -> Fatigue Long Term
 
-- Heart bpm -> 
+- Heart bpm -> Rage or Fear
 - Heart beat shape ->
 
 - Perspiration -> 

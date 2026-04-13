@@ -1,8 +1,11 @@
 [gd_resource type="Theme" format=3 uid="uid://dqooghemw7a8d"]
 
+[ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="1_5l7g6"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="1_8ki28"]
 
 [resource]
 default_font = ExtResource("1_8ki28")
-default_font_size = 6
+default_font_size = 8
 RichTextLabel/colors/default_color = Color(0.71692264, 0.7664014, 0.95715314, 1)
+RichTextLabel/fonts/bold_font = ExtResource("1_5l7g6")
+RichTextLabel/fonts/normal_font = ExtResource("1_5l7g6")

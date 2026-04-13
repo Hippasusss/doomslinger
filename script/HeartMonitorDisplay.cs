@@ -10,7 +10,7 @@ public partial class HeartMonitorDisplay : Control, IDisplay
 
     public bool Enabled {get; set;} = true;
 
-    private const int numPoints = 300;
+    private const int numPoints = 100;
     private const float beepLength = 0.1f;
     private const float amplitude = 15f;
     private readonly (int min, int max) BPMRange = (35, 199);

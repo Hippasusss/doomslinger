@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
 [ext_resource type="Script" uid="uid://b6c4jb6obonfh" path="res://script/UIManager.cs" id="8_dg70y"]
 [ext_resource type="Script" uid="uid://bgc0gotw2o688" path="res://script/HumanManager.cs" id="8_pnhog"]
-[ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="8_wp0k4"]
 [ext_resource type="Texture2D" uid="uid://bkn0gbxuvg7jh" path="res://sprite/controls.png" id="8_xa025"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_bjd11"]
 [ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="9_ft6cd"]
@@ -21,6 +20,7 @@
 [ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="10_qmy6f"]
 [ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="13_cmqll"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/globalTheme.tres" id="15_hq6as"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
 [ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="18_36rkl"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
@@ -326,18 +326,17 @@ offset_right = 84.0
 offset_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("15_hq6as")
 theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 0.187)
 theme_override_constants/table_h_separation = 12
 theme_override_constants/table_v_separation = 0
-theme_override_fonts/normal_font = ExtResource("8_wp0k4")
-theme_override_font_sizes/normal_font_size = 6
 bbcode_enabled = true
 text = "[table=2]
-    [cell][b]DOB:[/b][/cell]  [cell][color=white]09/03/1994[/color][/cell]
-    [cell][b]HT:[/b][/cell]   [cell][color=white]187cm[/color][/cell]
-    [cell][b]GEN:[/b][/cell]  [cell][color=white]M[/color][/cell]
-    [cell][b]UID:[/b][/cell]  [cell][color=white]7387387[/color][/cell]
-    [cell][b]NAT:[/b][/cell]  [cell][color=white]scottish[/color][/cell]
+    [cell]DOB:[/cell]  [cell][color=white]09/03/1994[/color][/cell]
+    [cell]HT:[/cell]   [cell][color=white]187cm[/color][/cell]
+    [cell]GEN:[/cell]  [cell][color=white]M[/color][/cell]
+    [cell]UID:[/cell]  [cell][color=white]7387387[/color][/cell]
+    [cell]NAT:[/cell]  [cell][color=white]scottish[/color][/cell]
 [/table]"
 autowrap_mode = 0
 autowrap_trim_flags = 0
@@ -364,11 +363,11 @@ offset_left = 130.0
 offset_top = 5.0
 offset_right = 189.0
 offset_bottom = 66.0
-theme_override_font_sizes/normal_font_size = 5
-text = "MC: 4
-DP: 5 
-KD: 2
-ZZ: 4"
+text = "Meaningful Connections: 4
+Interests:
+Football
+Fighting
+Cocaine"
 
 [node name="HeartMonitor" type="Panel" parent="UI/DataArea" unique_id=344411435 node_paths=PackedStringArray("line", "BPMText")]
 offset_left = -26.0
@@ -411,7 +410,7 @@ offset_left = -69.00006
 offset_top = 7.0
 offset_right = -44.00006
 offset_bottom = 20.0
-theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/normal_font_size = 13
 text = "150
 "
 scroll_active = false
@@ -446,8 +445,8 @@ offset_right = -4.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 4
-text = " Exit risk: Intense Emotion
+theme_override_font_sizes/normal_font_size = 6
+text = " ⚠ Exit risk: Intense Emotion
  "
 scroll_active = false
 
@@ -465,6 +464,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 5

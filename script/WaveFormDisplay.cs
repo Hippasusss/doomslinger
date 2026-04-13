@@ -3,8 +3,9 @@ using System;
 
 public partial class WaveFormDisplay : Control, IDisplay
 {
-    public bool Enabled { get; set; }
-    [Export] private Vector2[] points = new Vector2[100];
+    public bool Enabled { get; set; } 
+    private const int numBars = 50;
+    [Export] private Vector2[] points = new Vector2[numBars * 2];
     [Export] private Color colour = Colors.Red;
     
     [Export] public float Speed = 5.0f;
@@ -14,18 +15,19 @@ public partial class WaveFormDisplay : Control, IDisplay
 
     public override void _Process(double delta)
     {
-        // Increment time and request a redraw every frame
         _time += (float)delta * Speed;
         QueueRedraw();
     }
 
     public override void _Draw()
     {
-        UpdatePoints();
-        DrawMultiline(points, colour, 2);
+        if(Enabled) 
+        {
+            DrawMultiline(points, colour, 2);
+        }
     }
 
-    private void UpdatePoints()
+    private void UpdatePoints(Human human)
     {
         Rect2 bounds = GetRect();
         float width = bounds.Size.X;
@@ -37,20 +39,25 @@ public partial class WaveFormDisplay : Control, IDisplay
             float t = i / (float)(points.Length - 2);
             float xpos = t * width;
 
-            float wave1 = Mathf.Sin((4 * t * Mathf.Tau) + _time);
-            float wave2 = Mathf.Sin((3 * t * Mathf.Tau) + _time);
+            float wave1 = Mathf.Sin((human.Stats.rage * t * Mathf.Tau) + _time);
+            float wave2 = Mathf.Sin((human.Stats.fear * t * Mathf.Tau) + _time);
 
             float combinedWave = wave1 * wave2;
-            float finalYOffset = combinedWave * (centerY * Amplitude);
+            float finalYOffset = combinedWave * (centerY * Amplitude * ((human.Stats.rage + human.Stats.fear) / 10f));
 
             points[i] = new Vector2(xpos, centerY + finalYOffset);
             points[i + 1] = new Vector2(xpos, centerY - finalYOffset);
         }
     }
 
-    public void ToggleOnOff(bool onOff) => Enabled = onOff;
+    public void ToggleOnOff(bool onOff) 
+    {
+        Enabled = onOff;
+    }
 
     public void UpdateDisplay(Human human) 
     {
+        UpdatePoints(human);
+        Enabled = true;
     }
 }

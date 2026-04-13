@@ -17,12 +17,14 @@ public partial class HumanDataDisplay : Sprite2D
     [Export] private HeartMonitorDisplay heartMonitorDisplay;
     [Export] private EyeDisplay eyeDisplay;
     [Export] private FeedDataDisplay feedDataDisplay;
+    [Export] private WaveFormDisplay waveFormDisplay;
     private IDisplay[] displays;
     private Human currentHuman;
 
     public override void _Ready()
     {
-        displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay];
+        displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay, waveFormDisplay];
+        ClearDisplay();
     }
     private readonly DeltaTimer updateTimer = new (0.2);
     public override void _Process(double delta)

@@ -19,13 +19,11 @@
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
 [ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="10_mwfav"]
 [ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="10_qmy6f"]
-[ext_resource type="Texture2D" uid="uid://qnnk5d38udbv" path="res://sprite/face/Faceback.png" id="12_1iba3"]
-[ext_resource type="Shader" uid="uid://db0ftlnwdwsou" path="res://script/shader/dither.gdshader" id="12_yxlcp"]
+[ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="13_cmqll"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
 [ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="18_36rkl"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
-[ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="18_ebg2g"]
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
@@ -77,14 +75,15 @@ shader_parameter/intensity = 1.0
 shader = ExtResource("8_1iba3")
 shader_parameter/intensity = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ofn6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xa025"]
-shader = ExtResource("12_yxlcp")
-shader_parameter/dither_size = 1.0
-shader_parameter/color_levels = 8.0
-shader_parameter/dither_strength = 0.1
-shader_parameter/use_edge_mask = true
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cobve"]
+bg_color = Color(0.27450982, 0.33333334, 0.33333334, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.18394011, 0.22801757, 0.22802815, 1)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_36rkl"]
 shader = ExtResource("9_mwfav")
@@ -276,42 +275,55 @@ UISections = [NodePath("DataArea/DataHideReveal"), NodePath("AdMachine/FileCabin
 blackoutController = NodePath("Blackout")
 humanDataDisplay = NodePath("DataArea")
 
-[node name="DataArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay")]
+[node name="DataArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay")]
 texture_filter = 1
 position = Vector2(746, 180)
 texture = ExtResource("7_mwfav")
 script = ExtResource("8_cvmbd")
-idDisplay = NodePath("IDSection")
+idDisplay = NodePath("InfoSection/IDCardSection")
 heartMonitorDisplay = NodePath("HeartMonitor")
 eyeDisplay = NodePath("EyeSection/Eye")
 feedDataDisplay = NodePath("FeedDataSection")
+waveFormDisplay = NodePath("WaveFormSection/WaveFormDisplay")
 
-[node name="IDSection" type="Control" parent="UI/DataArea" unique_id=147275066 node_paths=PackedStringArray("textName", "textData", "face")]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -95.0
-offset_top = -171.0
+[node name="InfoSection" type="Panel" parent="UI/DataArea" unique_id=224137]
+offset_left = -96.0
+offset_top = -172.0
 offset_right = 98.0
 offset_bottom = -100.0
+theme_override_styles/panel = ExtResource("13_cmqll")
+
+[node name="IDCardSection" type="Panel" parent="UI/DataArea/InfoSection" unique_id=422255932 node_paths=PackedStringArray("textName", "textData", "face")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 124.0
+offset_bottom = 66.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cobve")
 script = ExtResource("9_ft6cd")
-textName = NodePath("IDCard/Name")
-textData = NodePath("IDCard/IDText")
-face = NodePath("IDCard/ColorRect/Dither/Headshot")
+textName = NodePath("Name")
+textData = NodePath("IDText")
+face = NodePath("FaceSection/Headshot")
 
-[node name="IDCard" type="Control" parent="UI/DataArea/IDSection" unique_id=523564319]
-anchors_preset = 0
-offset_right = 122.0
-offset_bottom = 71.0
+[node name="Name" type="RichTextLabel" parent="UI/DataArea/InfoSection/IDCardSection" unique_id=983701997]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 118.0
+offset_bottom = 13.0
+bbcode_enabled = true
+text = "NAME: [color=white][font_size=8]DANNY HERBERT[/font_size][/color]"
+vertical_alignment = 1
 
-[node name="IDText" type="RichTextLabel" parent="UI/DataArea/IDSection/IDCard" unique_id=806655714]
+[node name="IDText" type="RichTextLabel" parent="UI/DataArea/InfoSection/IDCardSection" unique_id=806655714]
 texture_filter = 1
 texture_repeat = 1
 layout_direction = 2
 layout_mode = 0
 offset_left = 6.0
-offset_top = 16.0
+offset_top = 11.0
 offset_right = 84.0
-offset_bottom = 66.0
+offset_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 0.187)
@@ -333,52 +345,44 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_direction = 1
 
-[node name="ColorRect" type="ColorRect" parent="UI/DataArea/IDSection/IDCard" unique_id=1804732182]
-material = SubResource("ShaderMaterial_2ofn6")
+[node name="FaceSection" type="Panel" parent="UI/DataArea/InfoSection/IDCardSection" unique_id=2068549372]
 layout_mode = 0
 offset_left = 86.0
-offset_top = 20.551022
+offset_top = 15.551022
 offset_right = 117.0
-offset_bottom = 61.0
-color = Color(0.24261022, 0.3923898, 0.40926856, 0.25882354)
+offset_bottom = 56.0
 
-[node name="Dither" type="Sprite2D" parent="UI/DataArea/IDSection/IDCard/ColorRect" unique_id=672352738]
-clip_children = 1
-material = SubResource("ShaderMaterial_xa025")
-position = Vector2(15.499978, 18.899984)
-scale = Vector2(0.5636366, 0.5636367)
-texture = ExtResource("12_1iba3")
-
-[node name="Headshot" type="Sprite2D" parent="UI/DataArea/IDSection/IDCard/ColorRect/Dither" unique_id=1005073743]
+[node name="Headshot" type="Sprite2D" parent="UI/DataArea/InfoSection/IDCardSection/FaceSection" unique_id=1005073743]
 material = SubResource("ShaderMaterial_36rkl")
-position = Vector2(0.88711625, 2.748218)
-scale = Vector2(0.9580655, 0.8981865)
+position = Vector2(15.5625, 20.548985)
+scale = Vector2(0.49750066, 0.4975007)
 texture = ExtResource("10_mwfav")
 
-[node name="Name" type="RichTextLabel" parent="UI/DataArea/IDSection/IDCard" unique_id=983701997]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/InfoSection" unique_id=1110700049]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 7.0
-offset_right = 138.0
-offset_bottom = 18.0
-bbcode_enabled = true
-text = "NAME: [color=white][font_size=8]DANNY HERBERT[/font_size][/color]"
-vertical_alignment = 1
+offset_left = 130.0
+offset_top = 5.0
+offset_right = 189.0
+offset_bottom = 66.0
+theme_override_font_sizes/normal_font_size = 5
+text = "MC: 4
+DP: 5 
+KD: 2
+ZZ: 4"
 
-[node name="HeartMonitor" type="Control" parent="UI/DataArea" unique_id=1577979279 node_paths=PackedStringArray("line", "BPMText")]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -95.0
+[node name="HeartMonitor" type="Panel" parent="UI/DataArea" unique_id=344411435 node_paths=PackedStringArray("line", "BPMText")]
+offset_left = -26.0
 offset_top = -27.0
 offset_right = 98.0
 offset_bottom = 6.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("10_qmy6f")
 line = NodePath("Line2D")
 BPMText = NodePath("BPM Readout/Value")
 
 [node name="Line2D" type="Line2D" parent="UI/DataArea/HeartMonitor" unique_id=440793788]
-position = Vector2(1, 16)
-scale = Vector2(1.0215054, 1)
+position = Vector2(0.9999924, 17)
+scale = Vector2(0.5881957, 1)
 points = PackedVector2Array(1, 0, 160.5474, 0)
 width = 1.0
 default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
@@ -393,44 +397,42 @@ offset_bottom = 32.0
 
 [node name="Label" type="RichTextLabel" parent="UI/DataArea/HeartMonitor/BPM Readout" unique_id=154003182]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 5.0
-offset_right = 25.0
-offset_bottom = 13.0
+offset_left = -68.00006
+offset_top = 2.0
+offset_right = -45.00006
+offset_bottom = 10.0
 text = "BPM
 "
 scroll_active = false
 
 [node name="Value" type="RichTextLabel" parent="UI/DataArea/HeartMonitor/BPM Readout" unique_id=213886279]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 12.0
-offset_right = 25.0
-offset_bottom = 31.0
-theme_override_font_sizes/normal_font_size = 12
+offset_left = -69.00006
+offset_top = 7.0
+offset_right = -44.00006
+offset_bottom = 20.0
+theme_override_font_sizes/normal_font_size = 10
 text = "150
 "
 scroll_active = false
 
-[node name="EyeSection" type="Control" parent="UI/DataArea" unique_id=1267227362]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -95.0
-offset_top = -93.0
-offset_right = 1.0
+[node name="EyeSection" type="Panel" parent="UI/DataArea" unique_id=1959998522]
+offset_left = -96.0
+offset_top = -95.0
+offset_right = 2.0
 offset_bottom = -34.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="Eye" parent="UI/DataArea/EyeSection" unique_id=517888025 instance=ExtResource("9_bjd11")]
 material = null
-position = Vector2(48.045, 29.425)
+position = Vector2(49, 30.5)
 
-[node name="RiskSection" type="Control" parent="UI/DataArea" unique_id=232227697]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 5.0
-offset_top = -93.0
-offset_right = 97.0
+[node name="RiskSection" type="Panel" parent="UI/DataArea" unique_id=1641152237]
+offset_left = 8.0
+offset_top = -95.0
+offset_right = 98.0
 offset_bottom = -34.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("18_36rkl")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/RiskSection" unique_id=346930113]
@@ -438,28 +440,23 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 6.0
-offset_right = -5.0
-offset_bottom = -48.0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 5
+theme_override_font_sizes/normal_font_size = 4
 text = " Exit risk: Intense Emotion
  "
 scroll_active = false
 
-[node name="WarningSymbold" type="Sprite2D" parent="UI/DataArea/RiskSection" unique_id=356295528]
-position = Vector2(6, 10)
-texture = ExtResource("18_ebg2g")
-
-[node name="FeedDataSection" type="Control" parent="UI/DataArea" unique_id=596890635 node_paths=PackedStringArray("label")]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -94.0
-offset_top = 15.0
+[node name="FeedDataSection" type="Panel" parent="UI/DataArea" unique_id=2001932955 node_paths=PackedStringArray("label")]
+offset_left = -96.0
+offset_top = 14.0
 offset_right = -32.0
-offset_bottom = 108.0
+offset_bottom = 109.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("19_2ofn6")
 label = NodePath("RichTextLabel")
 
@@ -478,38 +475,36 @@ text = "
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="WaveFormSection" type="Control" parent="UI/DataArea" unique_id=344298562]
-layout_mode = 3
-anchors_preset = 0
+[node name="WaveFormSection" type="Panel" parent="UI/DataArea" unique_id=1815387752]
 offset_left = -26.0
 offset_top = 14.0
 offset_right = 98.0
 offset_bottom = 47.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="WaveFormDisplay" type="Control" parent="UI/DataArea/WaveFormSection" unique_id=2098131099]
 anchors_preset = 0
-offset_left = 1.0
-offset_right = 123.0
-offset_bottom = 33.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 122.0
+offset_bottom = 32.0
 script = ExtResource("24_cobve")
 colour = Color(0.7176471, 0.7647059, 0.95686275, 1)
 Amplitude = 0.53
 
-[node name="Section" type="Control" parent="UI/DataArea" unique_id=504007933]
-layout_mode = 3
-anchors_preset = 0
+[node name="Section" type="Panel" parent="UI/DataArea" unique_id=649410363]
 offset_left = -26.0
 offset_top = 52.0
 offset_right = 98.0
 offset_bottom = 109.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="Section2" type="Control" parent="UI/DataArea" unique_id=655456620]
-layout_mode = 3
-anchors_preset = 0
+[node name="Section2" type="Panel" parent="UI/DataArea" unique_id=1476674157]
 offset_left = -95.0
 offset_top = 118.0
 offset_right = 98.0
 offset_bottom = 169.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="DataHideReveal" type="Node2D" parent="UI/DataArea" unique_id=473631 node_paths=PackedStringArray("parentSprite")]
 script = ExtResource("17_ft6cd")
@@ -529,6 +524,13 @@ shape = SubResource("RectangleShape2D_36rkl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DataArea/DataHideReveal" unique_id=299123577]
 libraries/ = SubResource("AnimationLibrary_e2s0e")
+
+[node name="Panel" type="Panel" parent="UI/DataArea" unique_id=1395904642]
+offset_left = -96.0
+offset_top = -27.0
+offset_right = -32.0
+offset_bottom = 6.0
+theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="AlgoSection" type="Sprite2D" parent="UI" unique_id=1869736425]
 texture_filter = 1

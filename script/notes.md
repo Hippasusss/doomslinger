@@ -80,8 +80,9 @@ All they feel is extreme emotions of rage and fear and max out their screen time
 - [] IOT devices Scan
 - [] Location Scan
 
-- [] Warnings. (flight risk, High Emotion, Locked in etc. player has to work out why)
+- [] Warnings feed from all panels. (flight risk, High Emotion, Locked in etc. player has to work out why)
 - [] Meaning full connections
+- [] Battery level
 - [] Social Credit
 - [] Waveform - can be probed for info (wife is trying to talk OR grunts and farts OR 
 - [] Uptime 
@@ -106,3 +107,4 @@ All they feel is extreme emotions of rage and fear and max out their screen time
 - [] Push notification - get back if off phone
 - [] Sliders(?) for feed emotions
 - [] algo controll like the ams dmx
+- [] patchbay

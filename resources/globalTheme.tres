@@ -2,6 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="1_5l7g6"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="1_8ki28"]
+[ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="2_23km4"]
 
 [resource]
 default_font = ExtResource("1_8ki28")
@@ -9,3 +10,8 @@ default_font_size = 8
 RichTextLabel/colors/default_color = Color(0.71692264, 0.7664014, 0.95715314, 1)
 RichTextLabel/fonts/bold_font = ExtResource("1_5l7g6")
 RichTextLabel/fonts/normal_font = ExtResource("1_5l7g6")
+VScrollBar/styles/grabber = ExtResource("2_23km4")
+VScrollBar/styles/grabber_highlight = ExtResource("2_23km4")
+VScrollBar/styles/grabber_pressed = ExtResource("2_23km4")
+VScrollBar/styles/scroll = ExtResource("2_23km4")
+VScrollBar/styles/scroll_focus = ExtResource("2_23km4")

@@ -440,15 +440,26 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -3.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 6
 text = " ⚠ Exit risk: Intense Emotion
+gs
+gs
+sgd
+gsd
+g
+sgd
+gs
+gs
+gds
+sgd
+
  "
-scroll_active = false
+scroll_following = true
 
 [node name="FeedDataSection" type="Panel" parent="UI/DataArea" unique_id=2001932955 node_paths=PackedStringArray("label")]
 offset_left = -96.0
@@ -468,7 +479,7 @@ offset_top = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 5
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "
 

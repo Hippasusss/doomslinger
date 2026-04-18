@@ -91,7 +91,7 @@ shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36rkl"]
-size = Vector2(17.99997, 66)
+size = Vector2(15.997482, 61)
 
 [sub_resource type="Animation" id="Animation_36rkl"]
 length = 0.001
@@ -147,60 +147,6 @@ _data = {
 &"RESET": SubResource("Animation_36rkl"),
 &"close": SubResource("Animation_ma7h6"),
 &"open": SubResource("Animation_fs0b5")
-}
-
-[sub_resource type="Animation" id="Animation_cobve"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-178.495, 92.5)]
-}
-
-[sub_resource type="Animation" id="Animation_cmqll"]
-resource_name = "close"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(178.495, 92.5), Vector2(-178.495, 92.5), Vector2(-173.395, 92.5), Vector2(-178.495, 92.5)]
-}
-
-[sub_resource type="Animation" id="Animation_8cp6k"]
-resource_name = "open"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-178.495, 92.5), Vector2(178.5, 92.5), Vector2(173.775, 92.5), Vector2(178.5, 92.5)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8b871"]
-_data = {
-&"RESET": SubResource("Animation_cobve"),
-&"close": SubResource("Animation_cmqll"),
-&"open": SubResource("Animation_8cp6k")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb450"]
@@ -363,11 +309,13 @@ offset_left = 130.0
 offset_top = 5.0
 offset_right = 189.0
 offset_bottom = 66.0
-text = "Meaningful Connections: 4
-Interests:
+text = "MC: 
+I:
 Football
-Fighting
-Cocaine"
+Cocaine 
+Cycling
+Medical:
+"
 
 [node name="HeartMonitor" type="Panel" parent="UI/DataArea" unique_id=344411435 node_paths=PackedStringArray("line", "BPMText")]
 offset_left = -26.0
@@ -427,10 +375,11 @@ material = null
 position = Vector2(49, 30.5)
 
 [node name="RiskSection" type="Panel" parent="UI/DataArea" unique_id=1641152237 node_paths=PackedStringArray("displayText")]
-offset_left = 8.0
-offset_top = -95.0
-offset_right = 98.0
-offset_bottom = -34.0
+offset_left = -96.0
+offset_top = 115.0
+offset_right = -6.0
+offset_bottom = 176.0
+scale = Vector2(1, 0.9200049)
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("18_36rkl")
 displayText = NodePath("RiskText")
@@ -447,18 +396,7 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 6
-text = " ⚠ Exit risk: Intense Emotion
-gs
-gs
-sgd
-gsd
-g
-sgd
-gs
-gs
-gds
-sgd
-
+text = "
  "
 scroll_following = true
 
@@ -480,7 +418,7 @@ offset_top = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/normal_font_size = 7
 bbcode_enabled = true
 text = "
 
@@ -507,16 +445,16 @@ Amplitude = 0.53
 
 [node name="Section" type="Panel" parent="UI/DataArea" unique_id=649410363]
 offset_left = -26.0
-offset_top = 52.0
+offset_top = 54.0
 offset_right = 98.0
 offset_bottom = 109.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="Section2" type="Panel" parent="UI/DataArea" unique_id=1476674157]
-offset_left = -95.0
-offset_top = 118.0
+offset_left = 9.0
+offset_top = -95.0
 offset_right = 98.0
-offset_bottom = 169.0
+offset_bottom = -34.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="DataHideReveal" type="Node2D" parent="UI/DataArea" unique_id=473631 node_paths=PackedStringArray("parentSprite")]
@@ -526,13 +464,14 @@ directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="button" type="Sprite2D" parent="UI/DataArea/DataHideReveal" unique_id=5486282]
-position = Vector2(-113.55499, -47)
+position = Vector2(-113, -147)
 texture = ExtResource("22_fs0b5")
 
-[node name="OpenCloseArea" type="Area2D" parent="UI/DataArea/DataHideReveal" unique_id=29789630]
+[node name="OpenCloseArea" type="Area2D" parent="UI/DataArea/DataHideReveal/button" unique_id=29789630]
+position = Vector2(113.55499, 47)
 
-[node name="Shape" type="CollisionShape2D" parent="UI/DataArea/DataHideReveal/OpenCloseArea" unique_id=758258081]
-position = Vector2(-112, -47)
+[node name="Shape" type="CollisionShape2D" parent="UI/DataArea/DataHideReveal/button/OpenCloseArea" unique_id=758258081]
+position = Vector2(-112, -46.5)
 shape = SubResource("RectangleShape2D_36rkl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DataArea/DataHideReveal" unique_id=299123577]
@@ -545,31 +484,43 @@ offset_right = -32.0
 offset_bottom = 6.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
+[node name="Label" type="Label" parent="UI/DataArea/Panel" unique_id=1785488370]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 32.0
+offset_bottom = 12.0
+
+[node name="Panel2" type="Panel" parent="UI/DataArea" unique_id=23966203]
+offset_top = 115.0
+offset_right = 98.0
+offset_bottom = 171.0
+theme_override_styles/panel = ExtResource("13_cmqll")
+
 [node name="AlgoSection" type="Sprite2D" parent="UI" unique_id=1869736425]
 texture_filter = 1
-position = Vector2(-178.495, 92.5)
+position = Vector2(819, 93)
 texture = ExtResource("26_hq6as")
 
 [node name="AlgoHideReveal" type="Node2D" parent="UI/AlgoSection" unique_id=1733859049 node_paths=PackedStringArray("parentSprite")]
 script = ExtResource("17_ft6cd")
 parentSprite = NodePath("..")
+directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="AlgoSectionButton" type="Sprite2D" parent="UI/AlgoSection/AlgoHideReveal" unique_id=557963205]
-position = Vector2(186, 62.5)
+position = Vector2(-186, 5)
 texture = ExtResource("27_kxyth")
 
-[node name="OpenCloseArea" type="Area2D" parent="UI/AlgoSection/AlgoHideReveal" unique_id=58056620]
+[node name="OpenCloseArea" type="Area2D" parent="UI/AlgoSection/AlgoHideReveal/AlgoSectionButton" unique_id=58056620]
+position = Vector2(-186, -62.5)
 
-[node name="Shape" type="CollisionShape2D" parent="UI/AlgoSection/AlgoHideReveal/OpenCloseArea" unique_id=1423586492]
-position = Vector2(184.9975, 62.5)
+[node name="Shape" type="CollisionShape2D" parent="UI/AlgoSection/AlgoHideReveal/AlgoSectionButton/OpenCloseArea" unique_id=1423586492]
+position = Vector2(185.99872, 62.5)
 shape = SubResource("RectangleShape2D_36rkl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/AlgoSection/AlgoHideReveal" unique_id=375323234]
-libraries/ = SubResource("AnimationLibrary_8b871")
-
 [node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
-position = Vector2(-142, 227)
+position = Vector2(-142, 41)
 
 [node name="FileCabinet" type="RigidBody2D" parent="UI/AdMachine" unique_id=770060897]
 mass = 20.972
@@ -684,8 +635,8 @@ parameters/looping = true
 script = ExtResource("30_v0vrg")
 dayLengthMins = 1.0
 
-[connection signal="input_event" from="UI/DataArea/DataHideReveal/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
-[connection signal="input_event" from="UI/AlgoSection/AlgoHideReveal/OpenCloseArea" to="UI/AlgoSection/AlgoHideReveal" method="OnClick"]
+[connection signal="input_event" from="UI/DataArea/DataHideReveal/button/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
+[connection signal="input_event" from="UI/AlgoSection/AlgoHideReveal/AlgoSectionButton/OpenCloseArea" to="UI/AlgoSection/AlgoHideReveal" method="OnClick"]
 [connection signal="input_event" from="UI/AdMachine/FileCabinet/ADHideReveal/OpenCloseArea" to="UI/AdMachine/FileCabinet/ADHideReveal" method="OnClick"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="UI/Blackout/Sprite2D/TextSequence" method="OnBlackOutFinished"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="DayNightTimer" method="OnBlackoutFinished"]

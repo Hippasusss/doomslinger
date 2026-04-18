@@ -1,4 +1,42 @@
 
+
+# TODO
+- [] Finish All Data Panels
+    - [] Top ID (Meaningfull connections, Interests)
+    - [] Left of BPM (SleepScore, Steps, Money, Uptime, )
+    - [] Right of eye. 
+    - [] Feed Data (Show data of current feed item)
+    - [] Waveform (have react to random events in real world) Banned words must be reported
+    - [] Browser history. Banned websites must be reported
+    - [] Bottom left. location. Gatherings of certain groups must be reported. plot on map
+    - [] Bottom right
+
+- [] Algo Section
+    - how
+        - modular patchbay?
+        - simple sliders/numbers?
+        - Interest based?
+        - 
+
+
+- [] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Mechanic Ideas
 
 - if user eye is certain way (undilated?) send push notification to pull them back in
@@ -30,6 +68,8 @@
 - Perspiration -> 
 
 ## Scripted Moments
+- Assigned local area of users for new rollout.
+
 
 - Unconvicted Pedo
     - How does the user respond

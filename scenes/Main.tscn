@@ -426,15 +426,16 @@ theme_override_styles/panel = ExtResource("13_cmqll")
 material = null
 position = Vector2(49, 30.5)
 
-[node name="RiskSection" type="Panel" parent="UI/DataArea" unique_id=1641152237]
+[node name="RiskSection" type="Panel" parent="UI/DataArea" unique_id=1641152237 node_paths=PackedStringArray("displayText")]
 offset_left = 8.0
 offset_top = -95.0
 offset_right = 98.0
 offset_bottom = -34.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("18_36rkl")
+displayText = NodePath("RiskText")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/RiskSection" unique_id=346930113]
+[node name="RiskText" type="RichTextLabel" parent="UI/DataArea/RiskSection" unique_id=346930113]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -468,9 +469,9 @@ offset_right = -32.0
 offset_bottom = 109.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("19_2ofn6")
-label = NodePath("RichTextLabel")
+label = NodePath("FeedDataText")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/FeedDataSection" unique_id=149028222]
+[node name="FeedDataText" type="RichTextLabel" parent="UI/DataArea/FeedDataSection" unique_id=149028222]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

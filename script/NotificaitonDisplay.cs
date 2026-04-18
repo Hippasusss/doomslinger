@@ -25,6 +25,4 @@ public partial class NotificaitonDisplay : Control
         string prepend = WarningTypeNames[warningType];
         displayText.Text += prepend + notification;
     }
-
 }
-

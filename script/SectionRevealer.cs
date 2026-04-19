@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class SectionRevealer : Node2D
+public partial class SectionRevealer : Button 
 {
 
     [Export] public RigidBody2D rigidBody2D;
@@ -15,6 +15,11 @@ public partial class SectionRevealer : Node2D
     private const string animationCloseName = "close";
     private const string animationOpenName = "open";
     private const float tweenDuration = 0.5f;
+    
+    public override void _Ready()
+    {
+        Pressed += Toggle;
+    }
 
     public void Toggle()
     {
@@ -54,17 +59,4 @@ public partial class SectionRevealer : Node2D
         }
         open = shouldOpen;
     }
-
-    public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)
-    {
-        if (clickEvent is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
-        {
-            if (mouseEvent.ButtonIndex == MouseButton.Left)
-            {
-                Toggle();
-            }
-        }
-    }
-
-
 }

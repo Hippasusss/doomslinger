@@ -34,6 +34,7 @@
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://d0t883md1byky" path="res://sprite/AlgoSectionButton.png" id="27_kxyth"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
+[ext_resource type="Script" uid="uid://c7kq7idb3qqk6" path="res://script/Selector.cs" id="28_kxyth"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 
@@ -89,9 +90,6 @@ shadow_offset = Vector2(1, 1)
 shader = ExtResource("9_mwfav")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_36rkl"]
-size = Vector2(15.997482, 61)
 
 [sub_resource type="Animation" id="Animation_36rkl"]
 length = 0.001
@@ -217,7 +215,7 @@ frame = 32
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController", "humanDataDisplay")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataArea/DataHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("AlgoSection/AlgoHideReveal")]
+UISections = [NodePath(""), NodePath(""), NodePath("")]
 blackoutController = NodePath("Blackout")
 humanDataDisplay = NodePath("DataArea")
 
@@ -457,22 +455,18 @@ offset_right = 98.0
 offset_bottom = -34.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="DataHideReveal" type="Node2D" parent="UI/DataArea" unique_id=473631 node_paths=PackedStringArray("parentSprite")]
+[node name="DataHideReveal" type="Button" parent="UI/DataArea" unique_id=752823811 node_paths=PackedStringArray("parentSprite")]
+offset_left = -121.0
+offset_top = -180.0
+offset_right = -106.0
+offset_bottom = -114.0
+action_mode = 0
+icon = ExtResource("22_fs0b5")
+vertical_icon_alignment = 0
 script = ExtResource("17_ft6cd")
 parentSprite = NodePath("..")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
-
-[node name="button" type="Sprite2D" parent="UI/DataArea/DataHideReveal" unique_id=5486282]
-position = Vector2(-113, -147)
-texture = ExtResource("22_fs0b5")
-
-[node name="OpenCloseArea" type="Area2D" parent="UI/DataArea/DataHideReveal/button" unique_id=29789630]
-position = Vector2(113.55499, 47)
-
-[node name="Shape" type="CollisionShape2D" parent="UI/DataArea/DataHideReveal/button/OpenCloseArea" unique_id=758258081]
-position = Vector2(-112, -46.5)
-shape = SubResource("RectangleShape2D_36rkl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DataArea/DataHideReveal" unique_id=299123577]
 libraries/ = SubResource("AnimationLibrary_e2s0e")
@@ -502,22 +496,51 @@ texture_filter = 1
 position = Vector2(819, 93)
 texture = ExtResource("26_hq6as")
 
-[node name="AlgoHideReveal" type="Node2D" parent="UI/AlgoSection" unique_id=1733859049 node_paths=PackedStringArray("parentSprite")]
+[node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203 node_paths=PackedStringArray("parentSprite")]
+offset_left = -193.0
+offset_top = -26.0
+offset_right = -178.0
+offset_bottom = 34.0
+theme = ExtResource("15_hq6as")
+icon = ExtResource("27_kxyth")
+vertical_icon_alignment = 0
 script = ExtResource("17_ft6cd")
 parentSprite = NodePath("..")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
-[node name="AlgoSectionButton" type="Sprite2D" parent="UI/AlgoSection/AlgoHideReveal" unique_id=557963205]
-position = Vector2(-186, 5)
-texture = ExtResource("27_kxyth")
+[node name="Selector" type="Panel" parent="UI/AlgoSection" unique_id=771204430 node_paths=PackedStringArray("upButton", "downButton", "label")]
+offset_left = -152.0
+offset_top = 34.0
+offset_right = -112.0
+offset_bottom = 74.0
+script = ExtResource("28_kxyth")
+upButton = NodePath("up")
+downButton = NodePath("down")
+label = NodePath("Label")
 
-[node name="OpenCloseArea" type="Area2D" parent="UI/AlgoSection/AlgoHideReveal/AlgoSectionButton" unique_id=58056620]
-position = Vector2(-186, -62.5)
+[node name="up" type="Button" parent="UI/AlgoSection/Selector" unique_id=182680735]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 3.0
+offset_right = 23.0
+offset_bottom = 11.0
 
-[node name="Shape" type="CollisionShape2D" parent="UI/AlgoSection/AlgoHideReveal/AlgoSectionButton/OpenCloseArea" unique_id=1423586492]
-position = Vector2(185.99872, 62.5)
-shape = SubResource("RectangleShape2D_36rkl")
+[node name="down" type="Button" parent="UI/AlgoSection/Selector" unique_id=162515189]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 29.0
+offset_right = 23.0
+offset_bottom = 37.0
+
+[node name="Label" type="Label" parent="UI/AlgoSection/Selector" unique_id=2091177246]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 14.0
+offset_right = 34.0
+offset_bottom = 25.0
+text = "0"
+horizontal_alignment = 1
 
 [node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
 position = Vector2(-142, 41)
@@ -531,7 +554,7 @@ freeze_mode = 1
 continuous_cd = 2
 linear_damp = 0.36
 
-[node name="ADHideReveal" type="Node2D" parent="UI/AdMachine/FileCabinet" unique_id=1924046808 node_paths=PackedStringArray("rigidBody2D")]
+[node name="ADHideReveal" type="Button" parent="UI/AdMachine/FileCabinet" unique_id=1930659280 node_paths=PackedStringArray("rigidBody2D")]
 script = ExtResource("17_ft6cd")
 rigidBody2D = NodePath("..")
 
@@ -635,9 +658,6 @@ parameters/looping = true
 script = ExtResource("30_v0vrg")
 dayLengthMins = 1.0
 
-[connection signal="input_event" from="UI/DataArea/DataHideReveal/button/OpenCloseArea" to="UI/DataArea/DataHideReveal" method="OnClick"]
-[connection signal="input_event" from="UI/AlgoSection/AlgoHideReveal/AlgoSectionButton/OpenCloseArea" to="UI/AlgoSection/AlgoHideReveal" method="OnClick"]
-[connection signal="input_event" from="UI/AdMachine/FileCabinet/ADHideReveal/OpenCloseArea" to="UI/AdMachine/FileCabinet/ADHideReveal" method="OnClick"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="UI/Blackout/Sprite2D/TextSequence" method="OnBlackOutFinished"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="DayNightTimer" method="OnBlackoutFinished"]
 [connection signal="EndOfText" from="UI/Blackout/Sprite2D/TextSequence" to="UI/Blackout" method="OnTextFinishedSignal"]

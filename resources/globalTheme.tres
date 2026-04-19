@@ -4,9 +4,24 @@
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="1_8ki28"]
 [ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="2_23km4"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23km4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d0ctx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bc8qu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhohs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f842f"]
+
 [resource]
 default_font = ExtResource("1_8ki28")
 default_font_size = 8
+Button/styles/disabled = SubResource("StyleBoxEmpty_23km4")
+Button/styles/focus = SubResource("StyleBoxEmpty_d0ctx")
+Button/styles/hover = SubResource("StyleBoxEmpty_bc8qu")
+Button/styles/normal = SubResource("StyleBoxEmpty_nhohs")
+Button/styles/pressed = SubResource("StyleBoxEmpty_f842f")
 RichTextLabel/colors/default_color = Color(0.71692264, 0.7664014, 0.95715314, 1)
 RichTextLabel/fonts/bold_font = ExtResource("1_5l7g6")
 RichTextLabel/fonts/normal_font = ExtResource("1_5l7g6")

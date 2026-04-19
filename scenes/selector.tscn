@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dcwgg4mte8l3q"]
+
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/globalTheme.tres" id="1_6stev"]
+[ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="2_esnui"]
+[ext_resource type="Script" uid="uid://c7kq7idb3qqk6" path="res://script/Selector.cs" id="3_buvdd"]
+[ext_resource type="Texture2D" uid="uid://b3d1xh8n4jv6v" path="res://sprite/arrow.png" id="4_puhoh"]
+
+[node name="Selector" type="Panel" unique_id=929270317 node_paths=PackedStringArray("upButton", "downButton", "label")]
+offset_right = 30.0
+offset_bottom = 40.0
+theme = ExtResource("1_6stev")
+theme_override_styles/panel = ExtResource("2_esnui")
+script = ExtResource("3_buvdd")
+upButton = NodePath("up")
+downButton = NodePath("down")
+label = NodePath("Label")
+
+[node name="up" type="Button" parent="." unique_id=831971236]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 3.0
+offset_right = 18.0
+offset_bottom = 11.0
+icon = ExtResource("4_puhoh")
+
+[node name="down" type="Button" parent="." unique_id=1847425262]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 35.0
+offset_right = 26.0
+offset_bottom = 43.0
+rotation = 3.1415927
+icon = ExtResource("4_puhoh")
+
+[node name="Label" type="Label" parent="." unique_id=850922771]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 14.0
+offset_right = 29.0
+offset_bottom = 25.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=1001579099]
+layout_mode = 0
+offset_left = -6.0
+offset_top = -12.0
+offset_right = 34.0
+offset_bottom = -1.0
+text = "name"
+horizontal_alignment = 1
+vertical_alignment = 1

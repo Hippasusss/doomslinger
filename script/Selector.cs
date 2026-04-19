@@ -6,8 +6,9 @@ public partial class Selector : Panel
     [Export] Button upButton;
     [Export] Button downButton;
     [Export] Label label;
+    [Export] private int maxValue = 9;
+
     private int currentValue = 0;
-    private const int maxValue = 9;
 
     public int CurrentValue { 
         get { return currentValue; } 

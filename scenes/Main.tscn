@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
+[ext_resource type="Script" uid="uid://bmjqjuqq64p7b" path="res://script/MapDisplay.cs" id="23_cmqll"]
 [ext_resource type="Texture2D" uid="uid://b7h6lhfodrq36" path="res://sprite/Map.png" id="23_cobve"]
 [ext_resource type="Script" uid="uid://bwj76dqlxv73p" path="res://script/WaveFormDisplay.cs" id="24_cobve"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="25_kxyth"]
@@ -38,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://dcwgg4mte8l3q" path="res://scenes/selector.tscn" id="28_kxyth"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
+[ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="39_8cp6k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
 shader = ExtResource("10_lhr70")
@@ -91,8 +93,6 @@ shadow_offset = Vector2(1, 1)
 shader = ExtResource("9_mwfav")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmqll"]
 
 [sub_resource type="Animation" id="Animation_36rkl"]
 length = 0.001
@@ -442,20 +442,60 @@ colour = Color(0.7176471, 0.7647059, 0.95686275, 1)
 Amplitude = 0.53
 
 [node name="LocationSection" type="Panel" parent="UI/DataArea" unique_id=649410363]
+texture_filter = 1
 offset_left = -26.0
 offset_top = 54.0
 offset_right = 98.0
 offset_bottom = 109.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="MapWindow" type="Panel" parent="UI/DataArea/LocationSection" unique_id=2013072529]
+[node name="MapWindow" type="Control" parent="UI/DataArea/LocationSection" unique_id=12062651 node_paths=PackedStringArray("subView", "mapButton")]
 clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_cmqll")
+subView = NodePath("SubViewportContainer/SubViewport")
+mapButton = NodePath("Button")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/DataArea/LocationSection/MapWindow" unique_id=577594060]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/DataArea/LocationSection/MapWindow/SubViewportContainer" unique_id=1913069384]
+handle_input_locally = false
+size = Vector2i(122, 53)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="UI/DataArea/LocationSection/MapWindow/SubViewportContainer/SubViewport" unique_id=467560269]
+position = Vector2(916, 805)
+scale = Vector2(0.28, 0.28)
+zoom = Vector2(1.37, 1.37)
+
+[node name="TextureRect" type="TextureRect" parent="UI/DataArea/LocationSection/MapWindow" unique_id=1715767936]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="UI/DataArea/LocationSection/MapWindow" unique_id=439587712]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 123.0
 offset_bottom = 54.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_cmqll")
 
 [node name="Section2" type="Panel" parent="UI/DataArea" unique_id=1476674157]
 offset_left = 9.0
@@ -649,28 +689,38 @@ volume_db = -9.055
 autoplay = true
 parameters/looping = true
 
-[node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]
-script = ExtResource("30_v0vrg")
-dayLengthMins = 1.0
-
 [node name="Map" type="Control" parent="." unique_id=580469791]
+texture_filter = 1
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 641.0
+offset_top = 643.0
+offset_right = 2640.9998
+offset_bottom = 1825.1427
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.28, 0.28)
 
 [node name="Sprite2D" type="Sprite2D" parent="Map" unique_id=331929307]
-position = Vector2(1257.1428, -946.4286)
+z_index = -1
+texture_filter = 1
+position = Vector2(992.857, 596.4286)
 texture = ExtResource("23_cobve")
 
-[node name="Camera2D" type="Camera2D" parent="Map/Sprite2D" unique_id=1456689943]
-position = Vector2(-21.428572, 0)
-zoom = Vector2(5, 5)
+[node name="point" type="Sprite2D" parent="Map/Sprite2D" unique_id=566990785]
+position = Vector2(-3.5714417, -17.857147)
+texture = ExtResource("39_8cp6k")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Map" unique_id=2053365104]
+texture_filter = 1
+position = Vector2(982.1428, 578.5714)
+remote_path = NodePath("../../UI/DataArea/LocationSection/MapWindow/SubViewportContainer/SubViewport/Camera2D")
+
+[node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]
+script = ExtResource("30_v0vrg")
+dayLengthMins = 1.0
 
 [connection signal="BlackoutFinished" from="UI/Blackout" to="UI/Blackout/Sprite2D/TextSequence" method="OnBlackOutFinished"]
 [connection signal="BlackoutFinished" from="UI/Blackout" to="DayNightTimer" method="OnBlackoutFinished"]

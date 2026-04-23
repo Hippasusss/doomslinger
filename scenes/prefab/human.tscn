@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bw00aalnwo6e4" path="res://script/PhoneLight.cs" id="7_2baw4"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="9_b524o"]
 [ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="14_2pby3"]
+[ext_resource type="Texture2D" uid="uid://dsciiy7ee7fmj" path="res://sprite/MovingSymbold.png" id="15_5jfd8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5jfd8"]
 shader = ExtResource("1_2pby3")
@@ -167,9 +168,13 @@ debug_color = Color(0, 0.6, 0.69803923, 0.3137255)
 libraries/ = SubResource("AnimationLibrary_5jfd8")
 
 [node name="WarningSymbold" type="Sprite2D" parent="." unique_id=1496949490]
-visible = false
 texture_filter = 1
 position = Vector2(-13.1, 32)
 texture = ExtResource("14_2pby3")
+
+[node name="MovingSymbold" type="Sprite2D" parent="." unique_id=1033043765]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("15_5jfd8")
 
 [connection signal="input_event" from="." to="." method="OnClick"]

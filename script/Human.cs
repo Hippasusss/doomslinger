@@ -19,6 +19,7 @@ public partial class Human : Node2D
     [Export] private AnimationPlayer animation;
     [Export] private Sprite2D phone;
     [Export] private Sprite2D warnignSymbol;
+    [Export] private Sprite2D movingSymbol;
     private HumanStats stats = new();
     private HumanPersonalData data = new();
     private Color[] colors;
@@ -144,5 +145,10 @@ public partial class Human : Node2D
     private void ToggleWarning(bool onOff)
     {
         warnignSymbol.Visible = onOff;
+    }
+
+    private void ToggleMoving(bool onOff)
+    {
+        movingSymbol.Visible = onOff;
     }
 }

@@ -162,7 +162,7 @@ frame = 32
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController", "humanDataDisplay")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataSection/DataHideReveal"), NodePath("AlgoSection/AlgoHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal")]
+UISections = [NodePath("DataSection/DataHideReveal"), NodePath("AlgoSection/AlgoHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal")]
 blackoutController = NodePath("Blackout")
 humanDataDisplay = NodePath("DataSection")
 

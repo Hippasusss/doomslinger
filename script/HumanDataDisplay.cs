@@ -11,7 +11,7 @@
 using Godot;
 using Utils;
 
-public partial class HumanDataDisplay : Sprite2D
+public partial class HumanDataDisplay : Panel 
 {
     [Export] private IDDisplay idDisplay;
     [Export] private HeartMonitorDisplay heartMonitorDisplay;

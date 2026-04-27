@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bcaiiynn7r52i" path="res://scenes/prefab/BGGenerator.tscn" id="3_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://dfv4wku4lcbuj" path="res://scenes/prefab/FaceGenerator.tscn" id="3_bjd11"]
 [ext_resource type="ColorPalette" uid="uid://d32pqxf3o0s7l" path="res://resources/ColorPalettes/Face/clothesPalette.tres" id="7_2c4at"]
-[ext_resource type="Texture2D" uid="uid://dme683wdl5jx" path="res://sprite/workArea.png" id="7_mwfav"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
 [ext_resource type="Script" uid="uid://b6c4jb6obonfh" path="res://script/UIManager.cs" id="8_dg70y"]
@@ -32,14 +31,15 @@
 [ext_resource type="Texture2D" uid="uid://b7h6lhfodrq36" path="res://sprite/Map.png" id="23_cobve"]
 [ext_resource type="Script" uid="uid://bwj76dqlxv73p" path="res://script/WaveFormDisplay.cs" id="24_cobve"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="25_kxyth"]
-[ext_resource type="Texture2D" uid="uid://dl8oqg7flu8uu" path="res://sprite/AlgoSection.png" id="26_hq6as"]
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://d0t883md1byky" path="res://sprite/AlgoSectionButton.png" id="27_kxyth"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
 [ext_resource type="PackedScene" uid="uid://dcwgg4mte8l3q" path="res://scenes/selector.tscn" id="28_kxyth"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
+[ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
-[ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="39_8cp6k"]
+[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="31_8cp6k"]
+[ext_resource type="Script" uid="uid://bsw3a7m0xw5ug" path="res://script/MapManager.cs" id="39_8b871"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
 shader = ExtResource("10_lhr70")
@@ -94,61 +94,7 @@ shader = ExtResource("9_mwfav")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
 
-[sub_resource type="Animation" id="Animation_36rkl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(746, 180)]
-}
-
-[sub_resource type="Animation" id="Animation_ma7h6"]
-resource_name = "close"
-length = 0.5
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.43333334, 0.5),
-"transitions": PackedFloat32Array(0.8705505, 0.9012505, 0.9012505, 0.9012505),
-"update": 2,
-"values": [Vector2(534, 180), Vector2(746, 180), Vector2(733.15, 180), Vector2(746, 180)]
-}
-
-[sub_resource type="Animation" id="Animation_fs0b5"]
-resource_name = "open"
-length = 0.5
-capture_included = true
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.36666667, 0.43323335, 0.43333334, 0.4999, 0.5),
-"transitions": PackedFloat32Array(0.933033, 0.933033, 1, 1, 1, 0.933033, 1),
-"update": 2,
-"values": [Vector2(746, 180), Vector2(534, 180), Vector2(544.435, 180), Vector2(538.315, 180), Vector2(538.315, 180), Vector2(534, 180), Vector2(534, 180)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2s0e"]
-_data = {
-&"RESET": SubResource("Animation_36rkl"),
-&"close": SubResource("Animation_ma7h6"),
-&"open": SubResource("Animation_fs0b5")
-}
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pdwbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1iba3"]
 size = Vector2(11, 19)
@@ -166,10 +112,11 @@ script = ExtResource("1_mwfav")
 [node name="BGGenerator" parent="." unique_id=917973400 instance=ExtResource("3_1nqs0")]
 position = Vector2(27.999998, 73)
 
-[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataDisplay")]
+[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataDisplay", "mapManager")]
 script = ExtResource("8_pnhog")
 camera = NodePath("../Camera2D")
-humanDataDisplay = NodePath("../UI/DataArea")
+humanDataDisplay = NodePath("../UI/DataSection")
+mapManager = NodePath("../UI/MapSection/SubViewportContainer/SubViewport/Map")
 
 [node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("humanManager", "initPosition", "faceGenerator")]
 texture_filter = 1
@@ -215,14 +162,19 @@ frame = 32
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController", "humanDataDisplay")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataArea/DataHideReveal"), NodePath("AlgoSection/AlgoHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal")]
+UISections = [NodePath("DataSection/DataHideReveal"), NodePath("AlgoSection/AlgoHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal")]
 blackoutController = NodePath("Blackout")
-humanDataDisplay = NodePath("DataArea")
+humanDataDisplay = NodePath("DataSection")
 
-[node name="DataArea" type="Sprite2D" parent="UI" unique_id=1690977494 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay")]
+[node name="DataSection" type="Panel" parent="UI" unique_id=2019699738 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay")]
 texture_filter = 1
-position = Vector2(746, 180)
-texture = ExtResource("7_mwfav")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = 217.0
+offset_bottom = 360.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("8_cvmbd")
 idDisplay = NodePath("InfoSection/IDCardSection")
 heartMonitorDisplay = NodePath("HeartMonitor")
@@ -230,14 +182,15 @@ eyeDisplay = NodePath("EyeSection/Eye")
 feedDataDisplay = NodePath("FeedDataSection")
 waveFormDisplay = NodePath("WaveFormSection/WaveFormDisplay")
 
-[node name="InfoSection" type="Panel" parent="UI/DataArea" unique_id=224137]
-offset_left = -96.0
-offset_top = -172.0
-offset_right = 98.0
-offset_bottom = -100.0
+[node name="InfoSection" type="Panel" parent="UI/DataSection" unique_id=224137]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 11.0
+offset_right = 203.0
+offset_bottom = 83.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="IDCardSection" type="Panel" parent="UI/DataArea/InfoSection" unique_id=422255932 node_paths=PackedStringArray("textName", "textData", "face")]
+[node name="IDCardSection" type="Panel" parent="UI/DataSection/InfoSection" unique_id=422255932 node_paths=PackedStringArray("textName", "textData", "face")]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 4.0
@@ -249,7 +202,7 @@ textName = NodePath("Name")
 textData = NodePath("IDText")
 face = NodePath("FaceSection/Headshot")
 
-[node name="Name" type="RichTextLabel" parent="UI/DataArea/InfoSection/IDCardSection" unique_id=983701997]
+[node name="Name" type="RichTextLabel" parent="UI/DataSection/InfoSection/IDCardSection" unique_id=983701997]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 2.0
@@ -259,7 +212,7 @@ bbcode_enabled = true
 text = "NAME: [color=white][font_size=8]DANNY HERBERT[/font_size][/color]"
 vertical_alignment = 1
 
-[node name="IDText" type="RichTextLabel" parent="UI/DataArea/InfoSection/IDCardSection" unique_id=806655714]
+[node name="IDText" type="RichTextLabel" parent="UI/DataSection/InfoSection/IDCardSection" unique_id=806655714]
 texture_filter = 1
 texture_repeat = 1
 layout_direction = 2
@@ -288,20 +241,20 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_direction = 1
 
-[node name="FaceSection" type="Panel" parent="UI/DataArea/InfoSection/IDCardSection" unique_id=2068549372]
+[node name="FaceSection" type="Panel" parent="UI/DataSection/InfoSection/IDCardSection" unique_id=2068549372]
 layout_mode = 0
 offset_left = 86.0
 offset_top = 15.551022
 offset_right = 117.0
 offset_bottom = 56.0
 
-[node name="Headshot" type="Sprite2D" parent="UI/DataArea/InfoSection/IDCardSection/FaceSection" unique_id=1005073743]
+[node name="Headshot" type="Sprite2D" parent="UI/DataSection/InfoSection/IDCardSection/FaceSection" unique_id=1005073743]
 material = SubResource("ShaderMaterial_36rkl")
 position = Vector2(15.5625, 20.548985)
 scale = Vector2(0.49750066, 0.4975007)
 texture = ExtResource("10_mwfav")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataArea/InfoSection" unique_id=1110700049]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataSection/InfoSection" unique_id=1110700049]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 5.0
@@ -315,24 +268,25 @@ Cycling
 Medical:
 "
 
-[node name="HeartMonitor" type="Panel" parent="UI/DataArea" unique_id=344411435 node_paths=PackedStringArray("line", "BPMText")]
-offset_left = -26.0
-offset_top = -27.0
-offset_right = 98.0
-offset_bottom = 6.0
+[node name="HeartMonitor" type="Panel" parent="UI/DataSection" unique_id=344411435 node_paths=PackedStringArray("line", "BPMText")]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 156.0
+offset_right = 203.0
+offset_bottom = 189.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("10_qmy6f")
 line = NodePath("Line2D")
 BPMText = NodePath("BPM Readout/Value")
 
-[node name="Line2D" type="Line2D" parent="UI/DataArea/HeartMonitor" unique_id=440793788]
+[node name="Line2D" type="Line2D" parent="UI/DataSection/HeartMonitor" unique_id=440793788]
 position = Vector2(0.9999924, 17)
 scale = Vector2(0.5881957, 1)
 points = PackedVector2Array(1, 0, 160.5474, 0)
 width = 1.0
 default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
 
-[node name="BPM Readout" type="Control" parent="UI/DataArea/HeartMonitor" unique_id=1734247390]
+[node name="BPM Readout" type="Control" parent="UI/DataSection/HeartMonitor" unique_id=1734247390]
 clip_children = 1
 anchors_preset = 0
 offset_left = 167.0
@@ -340,7 +294,7 @@ offset_top = 1.0
 offset_right = 192.0
 offset_bottom = 32.0
 
-[node name="Label" type="RichTextLabel" parent="UI/DataArea/HeartMonitor/BPM Readout" unique_id=154003182]
+[node name="Label" type="RichTextLabel" parent="UI/DataSection/HeartMonitor/BPM Readout" unique_id=154003182]
 layout_mode = 0
 offset_left = -68.00006
 offset_top = 2.0
@@ -350,7 +304,7 @@ text = "BPM
 "
 scroll_active = false
 
-[node name="Value" type="RichTextLabel" parent="UI/DataArea/HeartMonitor/BPM Readout" unique_id=213886279]
+[node name="Value" type="RichTextLabel" parent="UI/DataSection/HeartMonitor/BPM Readout" unique_id=213886279]
 layout_mode = 0
 offset_left = -69.00006
 offset_top = 7.0
@@ -361,28 +315,30 @@ text = "150
 "
 scroll_active = false
 
-[node name="EyeSection" type="Panel" parent="UI/DataArea" unique_id=1959998522]
-offset_left = -96.0
-offset_top = -95.0
-offset_right = 2.0
-offset_bottom = -34.0
+[node name="EyeSection" type="Panel" parent="UI/DataSection" unique_id=1959998522]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 88.0
+offset_right = 107.0
+offset_bottom = 149.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="Eye" parent="UI/DataArea/EyeSection" unique_id=517888025 instance=ExtResource("9_bjd11")]
+[node name="Eye" parent="UI/DataSection/EyeSection" unique_id=517888025 instance=ExtResource("9_bjd11")]
 material = null
 position = Vector2(49, 30.5)
 
-[node name="RiskSection" type="Panel" parent="UI/DataArea" unique_id=1641152237 node_paths=PackedStringArray("displayText")]
-offset_left = -96.0
-offset_top = 115.0
-offset_right = -6.0
-offset_bottom = 176.0
+[node name="RiskSection" type="Panel" parent="UI/DataSection" unique_id=1641152237 node_paths=PackedStringArray("displayText")]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 298.0
+offset_right = 99.0
+offset_bottom = 359.0
 scale = Vector2(1, 0.9200049)
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("18_36rkl")
 displayText = NodePath("RiskText")
 
-[node name="RiskText" type="RichTextLabel" parent="UI/DataArea/RiskSection" unique_id=346930113]
+[node name="RiskText" type="RichTextLabel" parent="UI/DataSection/RiskSection" unique_id=346930113]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -398,16 +354,17 @@ text = "
  "
 scroll_following = true
 
-[node name="FeedDataSection" type="Panel" parent="UI/DataArea" unique_id=2001932955 node_paths=PackedStringArray("label")]
-offset_left = -96.0
-offset_top = 14.0
-offset_right = -32.0
-offset_bottom = 109.0
+[node name="FeedDataSection" type="Panel" parent="UI/DataSection" unique_id=2001932955 node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 197.0
+offset_right = 73.0
+offset_bottom = 292.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("19_2ofn6")
 label = NodePath("FeedDataText")
 
-[node name="FeedDataText" type="RichTextLabel" parent="UI/DataArea/FeedDataSection" unique_id=149028222]
+[node name="FeedDataText" type="RichTextLabel" parent="UI/DataSection/FeedDataSection" unique_id=149028222]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -424,14 +381,15 @@ text = "
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="WaveFormSection" type="Panel" parent="UI/DataArea" unique_id=1815387752]
-offset_left = -26.0
-offset_top = 14.0
-offset_right = 98.0
-offset_bottom = 47.0
+[node name="WaveFormSection" type="Panel" parent="UI/DataSection" unique_id=1815387752]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 197.0
+offset_right = 203.0
+offset_bottom = 230.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="WaveFormDisplay" type="Control" parent="UI/DataArea/WaveFormSection" unique_id=2098131099]
+[node name="WaveFormDisplay" type="Control" parent="UI/DataSection/WaveFormSection" unique_id=2098131099]
 anchors_preset = 0
 offset_left = 2.0
 offset_top = 1.0
@@ -441,28 +399,16 @@ script = ExtResource("24_cobve")
 colour = Color(0.7176471, 0.7647059, 0.95686275, 1)
 Amplitude = 0.53
 
-[node name="LocationSection" type="Panel" parent="UI/DataArea" unique_id=649410363]
+[node name="LocationSection" type="Panel" parent="UI/DataSection" unique_id=649410363]
 texture_filter = 1
-offset_left = -26.0
-offset_top = 54.0
-offset_right = 98.0
-offset_bottom = 109.0
+layout_mode = 0
+offset_left = 79.0
+offset_top = 237.0
+offset_right = 203.0
+offset_bottom = 292.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="MapWindow" type="Control" parent="UI/DataArea/LocationSection" unique_id=12062651 node_paths=PackedStringArray("subView", "mapButton")]
-clip_children = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("23_cmqll")
-subView = NodePath("SubViewportContainer/SubViewport")
-mapButton = NodePath("Button")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/DataArea/LocationSection/MapWindow" unique_id=577594060]
-texture_filter = 1
+[node name="MapWindow" type="Control" parent="UI/DataSection/LocationSection" unique_id=12062651 node_paths=PackedStringArray("mapViewport", "mapPreview", "mapButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -473,115 +419,180 @@ offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
+script = ExtResource("23_cmqll")
+mapViewport = NodePath("../../../MapSection/SubViewportContainer/SubViewport")
+mapPreview = NodePath("TextureRect")
+mapButton = NodePath("Button")
 
-[node name="SubViewport" type="SubViewport" parent="UI/DataArea/LocationSection/MapWindow/SubViewportContainer" unique_id=1913069384]
-handle_input_locally = false
-size = Vector2i(122, 53)
-render_target_update_mode = 4
+[node name="TextureRect" type="TextureRect" parent="UI/DataSection/LocationSection/MapWindow" unique_id=1715767936]
+clip_children = 2
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+stretch_mode = 6
 
-[node name="Camera2D" type="Camera2D" parent="UI/DataArea/LocationSection/MapWindow/SubViewportContainer/SubViewport" unique_id=467560269]
-position = Vector2(916, 805)
-scale = Vector2(0.28, 0.28)
-zoom = Vector2(1.37, 1.37)
-
-[node name="TextureRect" type="TextureRect" parent="UI/DataArea/LocationSection/MapWindow" unique_id=1715767936]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Button" type="Button" parent="UI/DataArea/LocationSection/MapWindow" unique_id=439587712]
+[node name="Button" type="Button" parent="UI/DataSection/LocationSection/MapWindow" unique_id=439587712]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 123.0
 offset_bottom = 54.0
 
-[node name="Section2" type="Panel" parent="UI/DataArea" unique_id=1476674157]
-offset_left = 9.0
-offset_top = -95.0
-offset_right = 98.0
-offset_bottom = -34.0
+[node name="Section2" type="Panel" parent="UI/DataSection" unique_id=1476674157]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 88.0
+offset_right = 203.0
+offset_bottom = 149.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="DataHideReveal" type="Button" parent="UI/DataArea" unique_id=752823811 node_paths=PackedStringArray("parentSprite")]
-offset_left = -121.0
-offset_top = -180.0
-offset_right = -106.0
-offset_bottom = -114.0
+[node name="DataHideReveal" type="Button" parent="UI/DataSection" unique_id=752823811 node_paths=PackedStringArray("parentRect")]
+layout_mode = 0
+offset_left = -14.0
+offset_right = 1.0
+offset_bottom = 66.0
 action_mode = 0
 icon = ExtResource("22_fs0b5")
 vertical_icon_alignment = 0
 script = ExtResource("17_ft6cd")
-parentSprite = NodePath("..")
+parentRect = NodePath("..")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DataArea/DataHideReveal" unique_id=299123577]
-libraries/ = SubResource("AnimationLibrary_e2s0e")
-
-[node name="Panel" type="Panel" parent="UI/DataArea" unique_id=1395904642]
-offset_left = -96.0
-offset_top = -27.0
-offset_right = -32.0
-offset_bottom = 6.0
+[node name="Panel" type="Panel" parent="UI/DataSection" unique_id=1395904642]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 156.0
+offset_right = 73.0
+offset_bottom = 189.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="Label" type="Label" parent="UI/DataArea/Panel" unique_id=1785488370]
+[node name="Label" type="Label" parent="UI/DataSection/Panel" unique_id=1785488370]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 1.0
 offset_right = 32.0
 offset_bottom = 12.0
 
-[node name="Panel2" type="Panel" parent="UI/DataArea" unique_id=23966203]
-offset_top = 115.0
-offset_right = 98.0
-offset_bottom = 171.0
+[node name="Panel2" type="Panel" parent="UI/DataSection" unique_id=23966203]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 298.0
+offset_right = 203.0
+offset_bottom = 354.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="AlgoSection" type="Sprite2D" parent="UI" unique_id=1869736425]
-visible = false
+[node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425]
 texture_filter = 1
-position = Vector2(819, 174)
-texture = ExtResource("26_hq6as")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = 63.0
+offset_right = 335.0
+offset_bottom = 227.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203 node_paths=PackedStringArray("parentSprite")]
-offset_left = -193.0
-offset_top = -26.0
-offset_right = -178.0
-offset_bottom = 34.0
+[node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203 node_paths=PackedStringArray("parentRect")]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 14.0
+offset_bottom = 74.0
 theme = ExtResource("15_hq6as")
 icon = ExtResource("27_kxyth")
 vertical_icon_alignment = 0
 script = ExtResource("17_ft6cd")
-parentSprite = NodePath("..")
+parentRect = NodePath("..")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="Selector" parent="UI/AlgoSection" unique_id=929270317 instance=ExtResource("28_kxyth")]
-offset_left = -161.0
-offset_top = -76.0
-offset_right = -131.0
-offset_bottom = -36.0
+layout_mode = 0
+offset_left = 15.0
+offset_top = 12.0
+offset_right = 45.0
+offset_bottom = 52.0
 
 [node name="Selector2" parent="UI/AlgoSection" unique_id=287766970 instance=ExtResource("28_kxyth")]
-offset_left = -132.0
-offset_top = -76.0
-offset_right = -102.0
-offset_bottom = -36.0
+layout_mode = 0
+offset_left = 47.0
+offset_top = 12.0
+offset_right = 77.0
+offset_bottom = 52.0
 
 [node name="Selector3" parent="UI/AlgoSection" unique_id=767723341 instance=ExtResource("28_kxyth")]
-offset_left = -103.0
-offset_top = -76.0
-offset_right = -73.0
-offset_bottom = -36.0
+layout_mode = 0
+offset_left = 79.0
+offset_top = 12.0
+offset_right = 109.0
+offset_bottom = 52.0
 
 [node name="Selector4" parent="UI/AlgoSection" unique_id=1897980541 instance=ExtResource("28_kxyth")]
-offset_left = -73.0
-offset_top = -76.0
-offset_right = -43.0
-offset_bottom = -36.0
+layout_mode = 0
+offset_left = 111.0
+offset_top = 12.0
+offset_right = 141.0
+offset_bottom = 52.0
+
+[node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/MapSection" unique_id=468719036]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.00012207031
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/MapSection/SubViewportContainer" unique_id=830626997]
+handle_input_locally = false
+size = Vector2i(639, 360)
+render_target_update_mode = 4
+
+[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307 node_paths=PackedStringArray("navRegion")]
+z_index = -1
+texture_filter = 1
+position = Vector2(303, 170)
+scale = Vector2(1.8627858, 1.7366667)
+texture = ExtResource("23_cobve")
+script = ExtResource("39_8b871")
+mapMarkerScene = ExtResource("30_8cp6k")
+navRegion = NodePath("NavigationRegion2D")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="UI/MapSection/SubViewportContainer/SubViewport/Map" unique_id=1353232804]
+navigation_polygon = SubResource("NavigationPolygon_pdwbg")
+
+[node name="mapMarker" parent="UI/MapSection/SubViewportContainer/SubViewport/Map/NavigationRegion2D" unique_id=1971367888 instance=ExtResource("30_8cp6k")]
+
+[node name="MapHideReveal" type="Button" parent="UI/MapSection" unique_id=528598141 node_paths=PackedStringArray("parentRect")]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 200.0
+offset_bottom = 266.0
+theme_override_styles/normal = ExtResource("31_8cp6k")
+theme_override_styles/hover = ExtResource("13_cmqll")
+action_mode = 0
+text = "mp"
+vertical_icon_alignment = 0
+script = ExtResource("17_ft6cd")
+parentRect = NodePath("..")
+directionRight = false
+tweenCurve = ExtResource("25_kxyth")
 
 [node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
 position = Vector2(-142, 41)
@@ -688,35 +699,6 @@ stream = ExtResource("18_bb450")
 volume_db = -9.055
 autoplay = true
 parameters/looping = true
-
-[node name="Map" type="Control" parent="." unique_id=580469791]
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 641.0
-offset_top = 643.0
-offset_right = 2640.9998
-offset_bottom = 1825.1427
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.28, 0.28)
-
-[node name="Sprite2D" type="Sprite2D" parent="Map" unique_id=331929307]
-z_index = -1
-texture_filter = 1
-position = Vector2(992.857, 596.4286)
-texture = ExtResource("23_cobve")
-
-[node name="point" type="Sprite2D" parent="Map/Sprite2D" unique_id=566990785]
-position = Vector2(-3.5714417, -17.857147)
-texture = ExtResource("39_8cp6k")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Map" unique_id=2053365104]
-texture_filter = 1
-position = Vector2(982.1428, 578.5714)
-remote_path = NodePath("../../UI/DataArea/LocationSection/MapWindow/SubViewportContainer/SubViewport/Camera2D")
 
 [node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]
 script = ExtResource("30_v0vrg")

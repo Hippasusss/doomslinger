@@ -83,7 +83,7 @@ _data = {
 &"hover": SubResource("Animation_2pby3")
 }
 
-[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol")]
+[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol")]
 script = ExtResource("1_sogvw")
 face = NodePath("Face")
 feed = NodePath("Feed")
@@ -91,6 +91,7 @@ light = NodePath("Phone/ScreenLight")
 animation = NodePath("AnimationPlayer")
 phone = NodePath("Phone")
 warnignSymbol = NodePath("WarningSymbold")
+movingSymbol = NodePath("MovingSymbold")
 
 [node name="FeedMachine" type="Sprite2D" parent="." unique_id=1629747291]
 texture_filter = 1

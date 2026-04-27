@@ -6,7 +6,7 @@ public partial class SectionRevealer : Button
 
     [Export] public RigidBody2D rigidBody2D;
     [Export] public AnimationPlayer animationPlayer;
-    [Export] public Sprite2D parentSprite;
+    [Export] public Control parentRect;
     [Export] public bool directionRight = true;
     [Export] public Curve tweenCurve;
     private bool open = false;
@@ -26,6 +26,7 @@ public partial class SectionRevealer : Button
         if(open)
         {
             SetOpen(false);
+            GD.Print("gggg");
             return;
         }
 
@@ -47,13 +48,13 @@ public partial class SectionRevealer : Button
         {
             animationPlayer.Play(shouldOpen ? animationOpenName : animationCloseName);
         }
-        else if (parentSprite != null)
+        else if (parentRect != null)
         {
-            float width = parentSprite.GetRect().Size.X;
+            float width = parentRect.GetRect().Size.X;
             float movement = width * direction; 
             Tween openCloseTween = CreateTween();
             Callable tweenCurveCallable = Callable.From<float, float>(tweenCurve.SampleBaked);
-            openCloseTween.TweenProperty(parentSprite, "position:x", movement, tweenDuration)
+            openCloseTween.TweenProperty(parentRect, "position:x", movement, tweenDuration)
                 .AsRelative() 
                 .SetCustomInterpolator(tweenCurveCallable);
         }

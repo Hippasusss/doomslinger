@@ -24,6 +24,7 @@ public partial class Human : Node2D
     private HumanPersonalData data = new();
     private Color[] colors;
     private bool isOnline = true;
+    private bool isMoving = false;
 
     private bool selected = false;
 
@@ -34,6 +35,7 @@ public partial class Human : Node2D
     public Sprite2D Phone { get => phone; set => phone = value; }
     public Feed Feed { get => feed; set => feed = value; }
     public bool IsOnline { get => isOnline;}
+    public bool IsMoving { get => isMoving; }
     public bool Selected { get => selected; }
 
 
@@ -87,6 +89,7 @@ public partial class Human : Node2D
         if(!setOnline)
         {
             Select(false);
+            SetMoving(false);
             warningTimerCheck.Stop();
             statUpdateTimer.Stop();
             if(withCooldown)
@@ -108,6 +111,12 @@ public partial class Human : Node2D
             offlineReturnTimer.Stop();
         }
 
+    }
+
+    public void SetMoving(bool setMoving)
+    {
+        isMoving = setMoving;
+        ToggleMoving(setMoving);
     }
 
     private void ReadFeedBlock(Feedblock block)

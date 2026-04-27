@@ -4,7 +4,8 @@ using System;
 public partial class MapDisplay : Control, IDisplay
 
 {
-    [Export] SubViewport subView;
+    [Export] private SubViewport mapViewport;
+    [Export] private TextureRect mapPreview;
     [Export] Button mapButton;
 
 
@@ -29,7 +30,10 @@ public partial class MapDisplay : Control, IDisplay
 
     public override void _Ready()
     {
-        subView.World2D = GetViewport().World2D;
+        if (mapViewport != null && mapPreview != null)
+        {
+            mapPreview.Texture = mapViewport.GetTexture();
+        }
 
         _originalSize = Size;
         _originalPosition = Position;
@@ -41,34 +45,24 @@ public partial class MapDisplay : Control, IDisplay
 
     private void ToggleOpen(bool open)
     {
-
         _currentTween?.Kill();
-        
         ZIndex = 100;
 
-        _currentTween = GetTree().CreateTween();
-        _currentTween.SetParallel(true);
-        
-        if(!open)
-        {
-            _currentTween.TweenProperty(this, "global_position", Vector2.Zero, 0.3f)
-                .SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-            _currentTween.TweenProperty(this, "size", GetViewportRect().Size, 0.3f)
-                .SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-        }
-        else
-        {
+        Vector2 targetPos = !open ? Vector2.Zero : _originalPosition;
+        Vector2 targetSize = !open ? GetViewportRect().Size : _originalSize;
 
-            _currentTween.TweenProperty(this, "position", _originalPosition, 0.3f)
-                .SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-            _currentTween.TweenProperty(this, "size", _originalSize, 0.3f)
-                .SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+        _currentTween = GetTree().CreateTween().SetParallel(true);
 
+        _currentTween.TweenProperty(this, open ? "position" : "global_position", targetPos, 0.3f)
+            .SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 
+        _currentTween.TweenProperty(this, "size", targetSize, 0.3f)
+            .SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+
+        if (open)
             _currentTween.Chain().TweenCallback(Callable.From(() => ZIndex = _originalZIndex));
-        }
-        currentlyOpen = !open;
 
+        currentlyOpen = !open;
     }
 
     private void OnClicked()

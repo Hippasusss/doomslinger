@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://gd8nihd7rfc0"]
+
+[ext_resource type="Script" uid="uid://c7tgvplmdqms" path="res://script/MapMarker.cs" id="2_o6qkj"]
+[ext_resource type="Texture2D" uid="uid://5d2kumv8e5i" path="res://sprite/mapmarker.png" id="2_xituv"]
+
+[node name="point" type="Node2D" unique_id=681980734 node_paths=PackedStringArray("navigationAgent", "markerEmblem")]
+script = ExtResource("2_o6qkj")
+navigationAgent = NodePath("NavigationAgent2D")
+markerEmblem = NodePath("Sprite2D")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=107193225]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1604415333]
+texture_filter = 1
+texture = ExtResource("2_xituv")

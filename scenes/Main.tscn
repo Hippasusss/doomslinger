@@ -94,8 +94,6 @@ shader = ExtResource("9_mwfav")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_pdwbg"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1iba3"]
 size = Vector2(11, 19)
 
@@ -564,7 +562,7 @@ handle_input_locally = false
 size = Vector2i(639, 360)
 render_target_update_mode = 4
 
-[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307 node_paths=PackedStringArray("navRegion")]
+[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307]
 z_index = -1
 texture_filter = 1
 position = Vector2(303, 170)
@@ -572,12 +570,8 @@ scale = Vector2(1.8627858, 1.7366667)
 texture = ExtResource("23_cobve")
 script = ExtResource("39_8b871")
 mapMarkerScene = ExtResource("30_8cp6k")
-navRegion = NodePath("NavigationRegion2D")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="UI/MapSection/SubViewportContainer/SubViewport/Map" unique_id=1353232804]
-navigation_polygon = SubResource("NavigationPolygon_pdwbg")
-
-[node name="mapMarker" parent="UI/MapSection/SubViewportContainer/SubViewport/Map/NavigationRegion2D" unique_id=1971367888 instance=ExtResource("30_8cp6k")]
+[node name="mapMarker" parent="UI/MapSection/SubViewportContainer/SubViewport/Map" unique_id=1971367888 instance=ExtResource("30_8cp6k")]
 
 [node name="MapHideReveal" type="Button" parent="UI/MapSection" unique_id=528598141 node_paths=PackedStringArray("parentRect")]
 layout_mode = 0

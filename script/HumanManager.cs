@@ -37,8 +37,8 @@ public partial class HumanManager : Node2D
     public void OnHumanSelected(Human human)
     {
         camera.MovePositionToNode(human);
-        mapManager.TrackHuman(human);
-        mapManager.MoveHumanMarkerToRandomLocation(human);
+        mapManager.SetHumanToTrack(human);
+        mapManager.SetHumanMarkerDestinationToRandomLocation(human);
         if(human.Selected)humanDataDisplay.DisplayHuman(human);
         else humanDataDisplay.ClearDisplay();
         foreach(Human otherHuman in humans)

@@ -11,7 +11,6 @@ public partial class MapMarker : Node2D
     [Export(PropertyHint.Range, "0.1,2,0.01")] private float pulseDuration = 0.5f;
     private NavigationAgent navigationAgent;
     private Tween pulseTween;
-    private Vector2 baseScale = Vector2.One;
 
     public override void _Ready()
     {
@@ -19,7 +18,6 @@ public partial class MapMarker : Node2D
         AddChild(navigationAgent);
         navigationAgent.MovementFinished += () => EmitSignal(SignalName.MovementFinished);
 
-        baseScale = markerEmblem.Scale;
         SetSelected(false);
     }
 
@@ -39,16 +37,16 @@ public partial class MapMarker : Node2D
         pulseTween = null;
 
         markerEmblem.Modulate = selected ? selectedColor : unselectedColor;
-        markerEmblem.Scale = baseScale;
+        markerEmblem.Scale = Vector2.One;
 
         if(!selected) return;
 
         pulseTween = CreateTween();
         pulseTween.SetLoops();
-        pulseTween.TweenProperty(markerEmblem, "scale", baseScale * selectedPulseScale, pulseDuration)
+        pulseTween.TweenProperty(markerEmblem, "scale", Vector2.One * selectedPulseScale, pulseDuration)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.InOut);
-        pulseTween.TweenProperty(markerEmblem, "scale", baseScale, pulseDuration)
+        pulseTween.TweenProperty(markerEmblem, "scale", Vector2.One, pulseDuration)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.InOut);
     }

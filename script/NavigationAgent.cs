@@ -34,12 +34,6 @@ public partial class NavigationAgent : Node
         EmitSignal(SignalName.MovementFinished);
     }
 
-    public void Stop()
-    {
-        currentPath = [];
-        currentPathIndex = 0;
-    }
-
     public void ProcessMovement(Node2D body, double delta)
     {
         if (!IsMoving) return;

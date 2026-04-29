@@ -17,27 +17,26 @@ public partial class MapManager : Sprite2D
 
     public override void _Process(double delta)
     {
+        TrackHuman();
+    }
+
+    private void TrackHuman()
+    {
         if(currentMarkerToTrack == null) return;
         if(currentMoveTween != null && currentMoveTween.IsRunning()) return;
         if(!currentMarkerToTrack.IsMoving) return;
 
-        Vector2I viewportSize = GetParent<SubViewport>().Size;
-        Vector2 viewportCenter = new(viewportSize.X / 2.0f, viewportSize.Y / 2.0f);
-        Vector2 targetPosition = viewportCenter - (currentMarkerToTrack.Position * Scale);
-
-        Position = targetPosition;
+        Position = GetViewportCenter() - (currentMarkerToTrack.Position * Scale);
     }
 
-    public void TrackHuman(Human human)
+    public void SetHumanToTrack(Human human)
     {
-        if(currentMarkerToTrack != null) currentMarkerToTrack.SetSelected(false);
+        currentMarkerToTrack?.SetSelected(false);
         if(!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
 
         currentMarkerToTrack = marker;
         currentMarkerToTrack.SetSelected(true);
-        Vector2I viewportSize = GetParent<SubViewport>().Size;
-        Vector2 viewportCenter = new(viewportSize.X / 2.0f, viewportSize.Y / 2.0f);
-        Vector2 targetPosition = viewportCenter - (marker.Position * Scale);
+        Vector2 targetPosition = GetViewportCenter() - (marker.Position * Scale);
 
         currentMoveTween?.Kill();
         currentMoveTween = CreateTween();
@@ -51,28 +50,26 @@ public partial class MapManager : Sprite2D
         if(humans.ContainsKey(human)) return;
         MapMarker newMapMarker = mapMarkerScene.Instantiate<MapMarker>();
         AddChild(newMapMarker);
-        newMapMarker.Position = navigationArea.HasPoints
-            ? navigationArea.GetRandomPointPosition()
-            : Vector2.Zero;
+        newMapMarker.Position = navigationArea.HasPoints ? navigationArea.GetRandomPointPosition() : Vector2.Zero;
         newMapMarker.MovementFinished += () => human.SetMoving(false);
         humans.Add(human, newMapMarker);
     }
 
-    public void MoveHumanMarkerToRandomLocation(Human human)
+    public void SetHumanMarkerDestinationToRandomLocation(Human human)
     {
         if(human == null) return;
         if(!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
         if(!navigationArea.HasPoints || navigationArea.PointCount < 2) return;
 
-        int startPointId = navigationArea.FindNearestPointId(marker.Position);
-        int targetPointId = navigationArea.GetRandomPointIdExcluding(startPointId);
+        Vector2[] path = navigationArea.GetPathToRandomPoint(marker.Position);
+        if(path.Length < 2) return;
 
-        Vector2[] rawPath = navigationArea.GetPath(startPointId, targetPointId);
-        if(rawPath.Length <= 1) return;
-
-        marker.SetPath(navigationArea.SimplifyPath(rawPath));
+        marker.SetPath(path);
         human.SetMoving(true);
     }
-
-
+    private Vector2 GetViewportCenter()
+    {
+        Vector2I viewportSize = GetParent<SubViewport>().Size;
+        return new(viewportSize.X / 2.0f, viewportSize.Y / 2.0f);
+    }
 }

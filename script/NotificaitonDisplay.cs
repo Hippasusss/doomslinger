@@ -16,8 +16,8 @@ public partial class NotificaitonDisplay : Control
     private static readonly Dictionary<WarningType, string> WarningTypeNames = new ()
     {
         { WarningType.Info, ">: " },
-        { WarningType.Warning, "> ⚠: " },
-        { WarningType.Error, "> ❌: " }
+        { WarningType.Warning, "> !: " },
+        { WarningType.Error, "> X: " }
     };
 
     public void AddNotification(string notification, WarningType warningType = WarningType.Info)

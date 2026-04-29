@@ -26,7 +26,6 @@ public partial class SectionRevealer : Button
         if(open)
         {
             SetOpen(false);
-            GD.Print("gggg");
             return;
         }
 

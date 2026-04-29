@@ -4,16 +4,10 @@ using System.Collections.Generic;
 public partial class MapManager : Sprite2D
 {
     [Export] private PackedScene mapMarkerScene;
-    private NavigationArea navigationArea = new();
+    [Export] private NavigationArea navigationArea;
     private Dictionary<Human, MapMarker> humans = [];
     private MapMarker currentMarkerToTrack;
     private Tween currentMoveTween;
-
-    public override void _Ready()
-    {
-        navigationArea.BuildFromTexture(Texture);
-        AddChild(navigationArea);
-    }
 
     public override void _Process(double delta)
     {
@@ -49,7 +43,7 @@ public partial class MapManager : Sprite2D
     {
         if(humans.ContainsKey(human)) return;
         MapMarker newMapMarker = mapMarkerScene.Instantiate<MapMarker>();
-        AddChild(newMapMarker);
+        navigationArea.AddChild(newMapMarker);
         newMapMarker.Position = navigationArea.HasPoints ? navigationArea.GetRandomPointPosition() : Vector2.Zero;
         newMapMarker.MovementFinished += () => human.SetMoving(false);
         humans.Add(human, newMapMarker);

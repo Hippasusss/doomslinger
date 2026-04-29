@@ -38,7 +38,9 @@
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
+[ext_resource type="Script" uid="uid://mx0i14vhdisr" path="res://script/NavigationArea.cs" id="31_8b871"]
 [ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="31_8cp6k"]
+[ext_resource type="Resource" uid="uid://b0852h5ufnnj8" path="res://resources/Maps/EdinMap.tres" id="32_pdwbg"]
 [ext_resource type="Script" uid="uid://bsw3a7m0xw5ug" path="res://script/MapManager.cs" id="39_8b871"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
@@ -101,6 +103,7 @@ size = Vector2(11, 19)
 size = Vector2(11.93, 40.755)
 
 [node name="World" type="Node2D" unique_id=889943719]
+metadata/_edit_vertical_guides_ = [757.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1338437481]
 material = SubResource("ShaderMaterial_ebg2g")
@@ -563,7 +566,7 @@ handle_input_locally = false
 size = Vector2i(639, 360)
 render_target_update_mode = 4
 
-[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307]
+[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307 node_paths=PackedStringArray("navigationArea")]
 z_index = -1
 texture_filter = 1
 position = Vector2(779.4227, -96.5)
@@ -571,8 +574,13 @@ scale = Vector2(1.3863631, 1.2925)
 texture = ExtResource("23_cobve")
 script = ExtResource("39_8b871")
 mapMarkerScene = ExtResource("30_8cp6k")
+navigationArea = NodePath("NavigationArea")
 
-[node name="mapMarker" parent="UI/MapSection/SubViewportContainer/SubViewport/Map" unique_id=1971367888 instance=ExtResource("30_8cp6k")]
+[node name="NavigationArea" type="Node2D" parent="UI/MapSection/SubViewportContainer/SubViewport/Map" unique_id=407080664]
+script = ExtResource("31_8b871")
+NavigationGraphData = ExtResource("32_pdwbg")
+
+[node name="mapMarker" parent="UI/MapSection/SubViewportContainer/SubViewport/Map/NavigationArea" unique_id=1971367888 instance=ExtResource("30_8cp6k")]
 
 [node name="MapHideReveal" type="Button" parent="UI/MapSection" unique_id=528598141 node_paths=PackedStringArray("parentRect")]
 layout_mode = 0

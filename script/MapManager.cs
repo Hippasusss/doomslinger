@@ -11,8 +11,11 @@ public partial class MapManager : Sprite2D
 
     private Dictionary<Human, MapMarker> humans = [];
     private MapMarker currentMarkerToTrack;
-    private Tween cameraTween;
+    private Tween zoomTween;
     private bool userControlling = false;
+    private bool _isTriangulating = false;
+    private ulong _trackingStartMsec;
+    private Vector2 _trackingStartCameraPos;
     private const float triangulationTime = 3f;
 
     private Vector2 _defaultMapPosition;
@@ -34,7 +37,8 @@ public partial class MapManager : Sprite2D
         {
             if (mouseButton.ButtonIndex == MouseButton.WheelUp)
             {
-                cameraTween?.Kill();
+                zoomTween?.Kill();
+                _isTriangulating = false;
                 Vector2 zoom = camera.Zoom;
                 zoom = (zoom * 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
                 camera.Zoom = zoom;
@@ -42,7 +46,8 @@ public partial class MapManager : Sprite2D
             }
             else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
             {
-                cameraTween?.Kill();
+                zoomTween?.Kill();
+                _isTriangulating = false;
                 Vector2 zoom = camera.Zoom;
                 zoom = (zoom / 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
                 camera.Zoom = zoom;
@@ -52,7 +57,8 @@ public partial class MapManager : Sprite2D
 
         if (@event is InputEventMouseMotion motion && Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            cameraTween?.Kill();
+            zoomTween?.Kill();
+            _isTriangulating = false;
             camera.Position -= motion.Relative / camera.Zoom;
             userControlling = true;
         }
@@ -63,11 +69,17 @@ public partial class MapManager : Sprite2D
         if (mapSectionToggle.IsOpen)
         {
             if (!userControlling)
-                TrackHuman();
+            {
+                if (_isTriangulating)
+                    SmoothChaseMarker(delta);
+                else
+                    TrackHuman();
+            }
         }
         else
         {
             userControlling = false;
+            _isTriangulating = false;
             camera.Zoom = trackingZoom;
             TrackHuman();
         }
@@ -76,8 +88,21 @@ public partial class MapManager : Sprite2D
     private void TrackHuman()
     {
         if (currentMarkerToTrack == null) return;
-        if (cameraTween != null && cameraTween.IsRunning()) return;
         camera.Position = MarkerWorldPosition(currentMarkerToTrack);
+    }
+
+    private void SmoothChaseMarker(double delta)
+    {
+        if (currentMarkerToTrack == null) return;
+
+        float elapsed = (Time.GetTicksMsec() - _trackingStartMsec) / 1000f;
+        float t = Mathf.Clamp(elapsed / triangulationTime, 0f, 1f);
+        float blend = 1f - (1f - t) * (1f - t) * (1f - t);
+        Vector2 target = MarkerWorldPosition(currentMarkerToTrack);
+        camera.Position = _trackingStartCameraPos.Lerp(target, blend);
+
+        if (t >= 1f)
+            _isTriangulating = false;
     }
 
     public void SetHumanToTrack(Human human)
@@ -88,15 +113,13 @@ public partial class MapManager : Sprite2D
         currentMarkerToTrack = marker;
         currentMarkerToTrack.SetSelected(true);
         userControlling = false;
+        _isTriangulating = true;
+        _trackingStartMsec = Time.GetTicksMsec();
+        _trackingStartCameraPos = camera.Position;
 
-        Vector2 targetPos = MarkerWorldPosition(marker);
-
-        cameraTween?.Kill();
-        cameraTween = CreateTween().SetParallel(true);
-        cameraTween.TweenProperty(camera, "position", targetPos, triangulationTime)
-            .SetTrans(Tween.TransitionType.Cubic)
-            .SetEase(Tween.EaseType.Out);
-        cameraTween.TweenProperty(camera, "zoom", trackingZoom, triangulationTime)
+        zoomTween?.Kill();
+        zoomTween = CreateTween();
+        zoomTween.TweenProperty(camera, "zoom", trackingZoom, triangulationTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.Out);
     }

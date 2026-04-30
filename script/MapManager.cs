@@ -4,138 +4,158 @@ using System.Collections.Generic;
 public partial class MapManager : Sprite2D
 {
     [Export] private PackedScene mapMarkerScene;
-    [Export] private NavigationRegion2D navRegion;
-    [Export(PropertyHint.Range, "0,1,0.01")] private float walkableBrightnessThreshold = 0.35f;
+    [Export] private NavigationArea navigationArea;
+    [Export] private Camera2D camera;
+    [Export] private SectionRevealer mapSectionToggle;
+    [Export] private Vector2 trackingZoom = new(1.5f, 1.5f);
+
     private Dictionary<Human, MapMarker> humans = [];
-    private List<Vector2> walkablePoints = [];
-    private AStar2D walkableGraph = new();
     private MapMarker currentMarkerToTrack;
-    private Tween currentMoveTween;
+    private Tween zoomTween;
+    private bool userControlling = false;
+    private bool _isTriangulating = false;
+    private ulong _trackingStartMsec;
+    private Vector2 _trackingStartCameraPos;
+    private const float triangulationTime = 3f;
+
+    private Vector2 _defaultMapPosition;
 
     public override void _Ready()
     {
-        BuildWalkableGraph();
+        _defaultMapPosition = Position;
+        SetProcessInput(true);
+
+        camera.Position = GetViewportCenter();
+        camera.Zoom = trackingZoom;
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (!mapSectionToggle.IsOpen) return;
+
+        if (@event is InputEventMouseButton mouseButton && mouseButton.Pressed)
+        {
+            if (mouseButton.ButtonIndex == MouseButton.WheelUp)
+            {
+                zoomTween?.Kill();
+                _isTriangulating = false;
+                Vector2 zoom = camera.Zoom;
+                zoom = (zoom * 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
+                camera.Zoom = zoom;
+                userControlling = true;
+            }
+            else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
+            {
+                zoomTween?.Kill();
+                _isTriangulating = false;
+                Vector2 zoom = camera.Zoom;
+                zoom = (zoom / 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
+                camera.Zoom = zoom;
+                userControlling = true;
+            }
+        }
+
+        if (@event is InputEventMouseMotion motion && Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            zoomTween?.Kill();
+            _isTriangulating = false;
+            camera.Position -= motion.Relative / camera.Zoom;
+            userControlling = true;
+        }
     }
 
     public override void _Process(double delta)
     {
-        if(currentMarkerToTrack == null) return;
-        if(currentMoveTween != null && currentMoveTween.IsRunning()) return;
-        if(!currentMarkerToTrack.IsMoving) return;
-
-        Vector2I viewportSize = GetParent<SubViewport>().Size;
-        Vector2 viewportCenter = new(viewportSize.X / 2.0f, viewportSize.Y / 2.0f);
-        Vector2 targetPosition = viewportCenter - (currentMarkerToTrack.Position * Scale);
-
-        Position = targetPosition;
+        if (mapSectionToggle.IsOpen)
+        {
+            if (!userControlling)
+            {
+                if (_isTriangulating)
+                    SmoothChaseMarker(delta);
+                else
+                    TrackHuman();
+            }
+        }
+        else
+        {
+            userControlling = false;
+            _isTriangulating = false;
+            camera.Zoom = trackingZoom;
+            TrackHuman();
+        }
     }
 
-    public void TrackHuman(Human human)
+    private void TrackHuman()
     {
-        if(currentMarkerToTrack != null) currentMarkerToTrack.SetSelected(false);
-        if(!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
+        if (currentMarkerToTrack == null) return;
+        camera.Position = MarkerWorldPosition(currentMarkerToTrack);
+    }
+
+    private void SmoothChaseMarker(double delta)
+    {
+        if (currentMarkerToTrack == null) return;
+
+        float elapsed = (Time.GetTicksMsec() - _trackingStartMsec) / 1000f;
+        float t = Mathf.Clamp(elapsed / triangulationTime, 0f, 1f);
+        float blend = 1f - (1f - t) * (1f - t) * (1f - t);
+        Vector2 target = MarkerWorldPosition(currentMarkerToTrack);
+        camera.Position = _trackingStartCameraPos.Lerp(target, blend);
+
+        if (t >= 1f)
+            _isTriangulating = false;
+    }
+
+    public void SetHumanToTrack(Human human)
+    {
+        currentMarkerToTrack?.SetSelected(false);
+        if (!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
 
         currentMarkerToTrack = marker;
         currentMarkerToTrack.SetSelected(true);
-        Vector2I viewportSize = GetParent<SubViewport>().Size;
-        Vector2 viewportCenter = new(viewportSize.X / 2.0f, viewportSize.Y / 2.0f);
-        Vector2 targetPosition = viewportCenter - (marker.Position * Scale);
+        userControlling = false;
+        _isTriangulating = true;
+        _trackingStartMsec = Time.GetTicksMsec();
+        _trackingStartCameraPos = camera.Position;
 
-        currentMoveTween?.Kill();
-        currentMoveTween = CreateTween();
-        currentMoveTween.TweenProperty(this, "position", targetPosition, 0.25f)
+        zoomTween?.Kill();
+        zoomTween = CreateTween();
+        zoomTween.TweenProperty(camera, "zoom", trackingZoom, triangulationTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.Out);
     }
 
     public void RegisterHumanOnMap(Human human)
     {
-        if(humans.ContainsKey(human)) return;
+        if (humans.ContainsKey(human)) return;
         MapMarker newMapMarker = mapMarkerScene.Instantiate<MapMarker>();
-        navRegion.AddChild(newMapMarker);
-        newMapMarker.Position = walkablePoints.Count == 0
-            ? Vector2.Zero
-            : walkablePoints[GD.RandRange(0, walkablePoints.Count - 1)];
+        navigationArea.AddChild(newMapMarker);
+        newMapMarker.Position = navigationArea.HasPoints ? navigationArea.GetRandomPointPosition() : Vector2.Zero;
+        newMapMarker.Human = human;
         newMapMarker.MovementFinished += () => human.SetMoving(false);
         humans.Add(human, newMapMarker);
     }
 
-    public void MoveHumanMarkerToRandomLocation(Human human)
+    public void SetHumanMarkerDestinationToRandomLocation(Human human)
     {
-        if(human == null) return;
-        if(!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
-        if(walkablePoints.Count < 2 || walkableGraph.GetPointCount() < 2) return;
+        if (human == null) return;
+        if (!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
+        if (!navigationArea.HasPoints || navigationArea.PointCount < 2) return;
 
-        int startPointId = 0;
-        float closestDistanceSquared = marker.Position.DistanceSquaredTo(walkablePoints[0]);
-        for(int i = 1; i < walkablePoints.Count; i++)
-        {
-            float distanceSquared = marker.Position.DistanceSquaredTo(walkablePoints[i]);
-            if(distanceSquared >= closestDistanceSquared) continue;
-
-            closestDistanceSquared = distanceSquared;
-            startPointId = i;
-        }
-
-        int targetPointId = startPointId;
-        while(targetPointId == startPointId)
-        {
-            targetPointId = GD.RandRange(0, walkablePoints.Count - 1);
-        }
-
-        Vector2[] path = walkableGraph.GetPointPath(startPointId, targetPointId);
-        if(path.Length <= 1) return;
+        Vector2[] path = navigationArea.GetPathToRandomPoint(marker.Position);
+        if (path.Length < 2) return;
 
         marker.SetPath(path);
         human.SetMoving(true);
     }
 
-    private void BuildWalkableGraph()
+    private Vector2 MarkerWorldPosition(MapMarker marker)
     {
-        if(Texture == null || navRegion == null) return;
-
-        Image image = Texture.GetImage();
-        if(image == null || image.GetWidth() == 0 || image.GetHeight() == 0) return;
-
-        walkablePoints.Clear();
-        walkableGraph.Clear();
-
-        Vector2I imageSize = new(image.GetWidth(), image.GetHeight());
-        Dictionary<Vector2I, int> pointIds = [];
-        Vector2 halfImageSize = new(imageSize.X / 2.0f, imageSize.Y / 2.0f);
-        int pointId = 0;
-
-        for(int y = 0; y < imageSize.Y; y++)
-        {
-            for(int x = 0; x < imageSize.X; x++)
-            {
-                if(!IsWalkablePixel(image.GetPixel(x, y))) continue;
-
-                Vector2 position = new(x + 0.5f - halfImageSize.X, y + 0.5f - halfImageSize.Y);
-                walkablePoints.Add(position);
-                walkableGraph.AddPoint(pointId, position);
-                pointIds.Add(new(x, y), pointId);
-                pointId++;
-            }
-        }
-
-        Vector2I[] neighborOffsets = [new(0, -1), new(-1, 0), new(1, 0), new(0, 1)];
-        foreach(KeyValuePair<Vector2I, int> point in pointIds)
-        {
-            foreach(Vector2I offset in neighborOffsets)
-            {
-                Vector2I neighbor = point.Key + offset;
-                if(!pointIds.TryGetValue(neighbor, out int neighborId)) continue;
-                if(walkableGraph.ArePointsConnected(point.Value, neighborId)) continue;
-                walkableGraph.ConnectPoints(point.Value, neighborId);
-            }
-        }
+        return _defaultMapPosition + marker.Position * Scale;
     }
 
-    private bool IsWalkablePixel(Color color)
+    private Vector2 GetViewportCenter()
     {
-        if(color.A < 0.1f) return false;
-        float brightness = Mathf.Max(color.R, Mathf.Max(color.G, color.B));
-        return brightness <= walkableBrightnessThreshold;
+        Vector2I viewportSize = GetParent<SubViewport>().Size;
+        return new(viewportSize.X / 2.0f, viewportSize.Y / 2.0f);
     }
 }

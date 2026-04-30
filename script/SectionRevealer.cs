@@ -9,6 +9,7 @@ public partial class SectionRevealer : Button
     [Export] public Control parentRect;
     [Export] public bool directionRight = true;
     [Export] public Curve tweenCurve;
+    public bool IsOpen => open;
     private bool open = false;
 
     private const int force = 20000;

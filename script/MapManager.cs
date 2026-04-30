@@ -5,43 +5,104 @@ public partial class MapManager : Sprite2D
 {
     [Export] private PackedScene mapMarkerScene;
     [Export] private NavigationArea navigationArea;
+    [Export] private Camera2D camera;
+    [Export] private SectionRevealer mapSectionToggle;
+    [Export] private Vector2 trackingZoom = new(1.5f, 1.5f);
+
     private Dictionary<Human, MapMarker> humans = [];
     private MapMarker currentMarkerToTrack;
-    private Tween currentMoveTween;
+    private Tween cameraTween;
+    private bool userControlling = false;
+
+    private Vector2 _defaultMapPosition;
+
+    public override void _Ready()
+    {
+        _defaultMapPosition = Position;
+        SetProcessInput(true);
+
+        camera.Position = GetViewportCenter();
+        camera.Zoom = trackingZoom;
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (!IsMapSectionVisible()) return;
+
+        if (@event is InputEventMouseButton mouseButton && mouseButton.Pressed)
+        {
+            if (mouseButton.ButtonIndex == MouseButton.WheelUp)
+            {
+                cameraTween?.Kill();
+                Vector2 zoom = camera.Zoom;
+                zoom = (zoom * 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
+                camera.Zoom = zoom;
+                userControlling = true;
+            }
+            else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
+            {
+                cameraTween?.Kill();
+                Vector2 zoom = camera.Zoom;
+                zoom = (zoom / 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
+                camera.Zoom = zoom;
+                userControlling = true;
+            }
+        }
+
+        if (@event is InputEventMouseMotion motion && Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            cameraTween?.Kill();
+            camera.Position -= motion.Relative / camera.Zoom;
+            userControlling = true;
+        }
+    }
 
     public override void _Process(double delta)
     {
-        TrackHuman();
+        if (IsMapSectionVisible())
+        {
+            if (!userControlling)
+                TrackHuman();
+        }
+        else
+        {
+            userControlling = false;
+            camera.Zoom = trackingZoom;
+            TrackHuman();
+        }
     }
 
     private void TrackHuman()
     {
-        if(currentMarkerToTrack == null) return;
-        if(currentMoveTween != null && currentMoveTween.IsRunning()) return;
-        if(!currentMarkerToTrack.IsMoving) return;
-
-        Position = GetViewportCenter() - (currentMarkerToTrack.Position * Scale);
+        if (currentMarkerToTrack == null) return;
+        if (cameraTween != null && cameraTween.IsRunning()) return;
+        camera.Position = MarkerWorldPosition(currentMarkerToTrack);
     }
 
     public void SetHumanToTrack(Human human)
     {
         currentMarkerToTrack?.SetSelected(false);
-        if(!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
+        if (!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
 
         currentMarkerToTrack = marker;
         currentMarkerToTrack.SetSelected(true);
-        Vector2 targetPosition = GetViewportCenter() - (marker.Position * Scale);
+        userControlling = false;
 
-        currentMoveTween?.Kill();
-        currentMoveTween = CreateTween();
-        currentMoveTween.TweenProperty(this, "position", targetPosition, 0.25f)
+        Vector2 targetPos = MarkerWorldPosition(marker);
+
+        cameraTween?.Kill();
+        cameraTween = CreateTween().SetParallel(true);
+        cameraTween.TweenProperty(camera, "position", targetPos, 0.25f)
+            .SetTrans(Tween.TransitionType.Cubic)
+            .SetEase(Tween.EaseType.Out);
+        cameraTween.TweenProperty(camera, "zoom", trackingZoom, 0.25f)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.Out);
     }
 
     public void RegisterHumanOnMap(Human human)
     {
-        if(humans.ContainsKey(human)) return;
+        if (humans.ContainsKey(human)) return;
         MapMarker newMapMarker = mapMarkerScene.Instantiate<MapMarker>();
         navigationArea.AddChild(newMapMarker);
         newMapMarker.Position = navigationArea.HasPoints ? navigationArea.GetRandomPointPosition() : Vector2.Zero;
@@ -51,16 +112,27 @@ public partial class MapManager : Sprite2D
 
     public void SetHumanMarkerDestinationToRandomLocation(Human human)
     {
-        if(human == null) return;
-        if(!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
-        if(!navigationArea.HasPoints || navigationArea.PointCount < 2) return;
+        if (human == null) return;
+        if (!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
+        if (!navigationArea.HasPoints || navigationArea.PointCount < 2) return;
 
         Vector2[] path = navigationArea.GetPathToRandomPoint(marker.Position);
-        if(path.Length < 2) return;
+        if (path.Length < 2) return;
 
         marker.SetPath(path);
         human.SetMoving(true);
     }
+
+    private bool IsMapSectionVisible()
+    {
+        return mapSectionToggle != null && mapSectionToggle.IsOpen;
+    }
+
+    private Vector2 MarkerWorldPosition(MapMarker marker)
+    {
+        return _defaultMapPosition + marker.Position * Scale;
+    }
+
     private Vector2 GetViewportCenter()
     {
         Vector2I viewportSize = GetParent<SubViewport>().Size;

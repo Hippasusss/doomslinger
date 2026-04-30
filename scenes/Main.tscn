@@ -39,7 +39,6 @@
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 [ext_resource type="Script" uid="uid://mx0i14vhdisr" path="res://script/NavigationArea.cs" id="31_8b871"]
-[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="31_8cp6k"]
 [ext_resource type="Resource" uid="uid://b0852h5ufnnj8" path="res://resources/Maps/EdinMap.tres" id="32_pdwbg"]
 [ext_resource type="Script" uid="uid://bsw3a7m0xw5ug" path="res://script/MapManager.cs" id="39_8b871"]
 
@@ -95,6 +94,9 @@ shadow_offset = Vector2(1, 1)
 shader = ExtResource("9_mwfav")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b871"]
+bg_color = Color(0.71234256, 0.19794005, 0.2345213, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1iba3"]
 size = Vector2(11, 19)
@@ -409,7 +411,7 @@ offset_right = 203.0
 offset_bottom = 292.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="MapWindow" type="Control" parent="UI/DataSection/LocationSection" unique_id=12062651 node_paths=PackedStringArray("mapViewport", "mapPreview", "mapButton")]
+[node name="MapWindow" type="Control" parent="UI/DataSection/LocationSection" unique_id=12062651 node_paths=PackedStringArray("mapViewport", "mapPreview", "mapButton", "mapSectionToggle")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -424,6 +426,7 @@ script = ExtResource("23_cmqll")
 mapViewport = NodePath("../../../MapSection/SubViewportContainer/SubViewport")
 mapPreview = NodePath("TextureRect")
 mapButton = NodePath("Button")
+mapSectionToggle = NodePath("../../../MapSection/MapHideReveal")
 
 [node name="TextureRect" type="TextureRect" parent="UI/DataSection/LocationSection/MapWindow" unique_id=1715767936]
 clip_children = 2
@@ -546,8 +549,9 @@ texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_right = 640.0
-offset_bottom = 360.0
+offset_top = 156.0
+offset_right = 345.0
+offset_bottom = 351.0
 grow_horizontal = 0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI/MapSection" unique_id=468719036]
@@ -555,18 +559,24 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -0.00012207031
-offset_bottom = 3.0517578e-05
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -2.5557861
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="UI/MapSection/SubViewportContainer" unique_id=830626997]
 handle_input_locally = false
-size = Vector2i(639, 360)
+size = Vector2i(341, 193)
 render_target_update_mode = 4
 
-[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307 node_paths=PackedStringArray("navigationArea")]
+[node name="MapCamera" type="Camera2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=-123190488]
+enabled = true
+position_smoothing_speed = 0.0
+
+[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307 node_paths=PackedStringArray("navigationArea", "camera", "mapSectionToggle")]
 z_index = -1
 texture_filter = 1
 position = Vector2(779.4227, -96.5)
@@ -575,23 +585,24 @@ texture = ExtResource("23_cobve")
 script = ExtResource("39_8b871")
 mapMarkerScene = ExtResource("30_8cp6k")
 navigationArea = NodePath("NavigationArea")
+camera = NodePath("../MapCamera")
+mapSectionToggle = NodePath("../../../MapHideReveal")
 
 [node name="NavigationArea" type="Node2D" parent="UI/MapSection/SubViewportContainer/SubViewport/Map" unique_id=407080664]
 script = ExtResource("31_8b871")
 NavigationGraphData = ExtResource("32_pdwbg")
 
-[node name="mapMarker" parent="UI/MapSection/SubViewportContainer/SubViewport/Map/NavigationArea" unique_id=1971367888 instance=ExtResource("30_8cp6k")]
-
 [node name="MapHideReveal" type="Button" parent="UI/MapSection" unique_id=528598141 node_paths=PackedStringArray("parentRect")]
 layout_mode = 0
-offset_left = -15.0
-offset_top = 200.0
-offset_bottom = 266.0
-theme_override_styles/normal = ExtResource("31_8cp6k")
-theme_override_styles/hover = ExtResource("13_cmqll")
+offset_left = 12.0
+offset_top = 0.9999995
+offset_right = 22.309265
+offset_bottom = 12.0
+rotation = 1.5707964
+theme_override_styles/normal = SubResource("StyleBoxFlat_8b871")
 action_mode = 0
-text = "mp"
-vertical_icon_alignment = 0
+text = "x
+"
 script = ExtResource("17_ft6cd")
 parentRect = NodePath("..")
 directionRight = false

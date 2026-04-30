@@ -5,12 +5,15 @@ public partial class MapMarker : Node2D
     [Signal] public delegate void MovementFinishedEventHandler();
 
     [Export] private Sprite2D markerEmblem;
+    [Export] private Button markerButton;
     [Export] private Color selectedColor = Colors.White;
     [Export] private Color unselectedColor = Colors.Gray;
     [Export(PropertyHint.Range, "1,2,0.01")] private float selectedPulseScale = 1.4f;
     [Export(PropertyHint.Range, "0.1,2,0.01")] private float pulseDuration = 0.5f;
     private NavigationAgent navigationAgent;
     private Tween pulseTween;
+
+    public Human Human { get; set; }
 
     public override void _Ready()
     {
@@ -19,6 +22,13 @@ public partial class MapMarker : Node2D
         navigationAgent.MovementFinished += () => EmitSignal(SignalName.MovementFinished);
 
         SetSelected(false);
+
+        markerButton.Pressed += OnButtonPressed;
+    }
+
+    private void OnButtonPressed()
+    {
+        Human?.Select(true);
     }
 
     public override void _PhysicsProcess(double delta)

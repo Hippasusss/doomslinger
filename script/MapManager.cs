@@ -13,6 +13,7 @@ public partial class MapManager : Sprite2D
     private MapMarker currentMarkerToTrack;
     private Tween cameraTween;
     private bool userControlling = false;
+    private const float triangulationTime = 3f;
 
     private Vector2 _defaultMapPosition;
 
@@ -27,7 +28,7 @@ public partial class MapManager : Sprite2D
 
     public override void _Input(InputEvent @event)
     {
-        if (!IsMapSectionVisible()) return;
+        if (!mapSectionToggle.IsOpen) return;
 
         if (@event is InputEventMouseButton mouseButton && mouseButton.Pressed)
         {
@@ -59,7 +60,7 @@ public partial class MapManager : Sprite2D
 
     public override void _Process(double delta)
     {
-        if (IsMapSectionVisible())
+        if (mapSectionToggle.IsOpen)
         {
             if (!userControlling)
                 TrackHuman();
@@ -92,10 +93,10 @@ public partial class MapManager : Sprite2D
 
         cameraTween?.Kill();
         cameraTween = CreateTween().SetParallel(true);
-        cameraTween.TweenProperty(camera, "position", targetPos, 0.25f)
+        cameraTween.TweenProperty(camera, "position", targetPos, triangulationTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.Out);
-        cameraTween.TweenProperty(camera, "zoom", trackingZoom, 0.25f)
+        cameraTween.TweenProperty(camera, "zoom", trackingZoom, triangulationTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.Out);
     }
@@ -106,6 +107,7 @@ public partial class MapManager : Sprite2D
         MapMarker newMapMarker = mapMarkerScene.Instantiate<MapMarker>();
         navigationArea.AddChild(newMapMarker);
         newMapMarker.Position = navigationArea.HasPoints ? navigationArea.GetRandomPointPosition() : Vector2.Zero;
+        newMapMarker.Human = human;
         newMapMarker.MovementFinished += () => human.SetMoving(false);
         humans.Add(human, newMapMarker);
     }
@@ -121,11 +123,6 @@ public partial class MapManager : Sprite2D
 
         marker.SetPath(path);
         human.SetMoving(true);
-    }
-
-    private bool IsMapSectionVisible()
-    {
-        return mapSectionToggle != null && mapSectionToggle.IsOpen;
     }
 
     private Vector2 MarkerWorldPosition(MapMarker marker)

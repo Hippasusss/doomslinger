@@ -3,10 +3,18 @@
 [ext_resource type="Script" uid="uid://c7tgvplmdqms" path="res://script/MapMarker.cs" id="2_o6qkj"]
 [ext_resource type="Texture2D" uid="uid://5d2kumv8e5i" path="res://sprite/mapmarker.png" id="2_xituv"]
 
-[node name="point" type="Node2D" unique_id=681980734 node_paths=PackedStringArray("markerEmblem")]
+[node name="point" type="Node2D" unique_id=681980734 node_paths=PackedStringArray("markerEmblem", "markerButton")]
 script = ExtResource("2_o6qkj")
 markerEmblem = NodePath("Sprite2D")
+markerButton = NodePath("MarkerButton")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1604415333]
 texture_filter = 1
 texture = ExtResource("2_xituv")
+
+[node name="MarkerButton" type="Button" parent="." unique_id=1324114291]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+flat = true

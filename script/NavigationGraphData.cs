@@ -20,8 +20,49 @@ public partial class NavigationGraphData : Resource
         }
     }
     [Export] public Array<Vector2> Points { get; set; }
-    [Export] public Array<int> EdgesFrom { get; set; }
-    [Export] public Array<int> EdgesTo { get; set; }
+    [Export] public Array<Vector2I> Edges { get; set; }
+    [Export] float distanceThreshold = 0.5f;
+    [Export] float proximityThreshold = 2f;
+
+    private bool rebuild;
+    [Export]
+    public bool Rebuild
+    {
+        get => false;
+        set
+        {
+            if (value && SourceTexture != null)
+                BuildFromTexture();
+        }
+    }
+
+    [Export]
+    public bool ShowDebug
+    {
+        get => false;
+        set
+        {
+            if (!value || SourceTexture == null || Points == null) return;
+
+            Window window = new()
+            {
+                Title = "Navigation Debug",
+                Unresizable = false
+            };
+
+            NavDebugDrawer drawer = new();
+            drawer.SetData(this);
+            window.AddChild(drawer);
+
+            Vector2 texSize = SourceTexture.GetSize();
+            Vector2I windowSize = new((int)texSize.X, (int)texSize.Y);
+
+            window.CloseRequested += () => window.QueueFree();
+
+            EditorInterface.Singleton.GetBaseControl().AddChild(window);
+            window.PopupCentered(windowSize);
+        }
+    }
 
     public void BuildFromTexture()
     {
@@ -29,35 +70,14 @@ public partial class NavigationGraphData : Resource
         Image sourceImage = SourceTexture.GetImage();
         if (sourceImage == null || sourceImage.GetWidth() == 0 || sourceImage.GetHeight() == 0) return;
 
-        int imageWidth = sourceImage.GetWidth();
-        int imageHeight = sourceImage.GetHeight();
-        Vector2I imageSize = new(imageWidth, imageHeight);
+        // Image info
+        Vector2I imageSize = new(sourceImage.GetWidth(), sourceImage.GetHeight());
         System.Collections.Generic.Dictionary<Vector2I, int> pixelToId = [];
         Vector2 halfImageSize = new(imageSize.X / 2.0f, imageSize.Y / 2.0f);
         AStar2D graph = new();
         int pointId = 0;
 
-        bool IsLineWalkable(Vector2 from, Vector2 to)
-        {
-            int x0 = Mathf.FloorToInt(from.X + imageWidth / 2.0f);
-            int y0 = Mathf.FloorToInt(from.Y + imageHeight / 2.0f);
-            int x1 = Mathf.FloorToInt(to.X + imageWidth / 2.0f);
-            int y1 = Mathf.FloorToInt(to.Y + imageHeight / 2.0f);
-            int dx = Mathf.Abs(x1 - x0), dy = Mathf.Abs(y1 - y0);
-            int sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
-            int err = dx - dy;
-            while (true)
-            {
-                if (!IsWalkablePixel(sourceImage.GetPixel(x0, y0)))
-                    return false;
-                if (x0 == x1 && y0 == y1) break;
-                int e2 = 2 * err;
-                if (e2 > -dy) { err -= dy; x0 += sx; }
-                if (e2 < dx) { err += dx; y0 += sy; }
-            }
-            return true;
-        }
-
+        // Scan pixels → points
         for (int y = 0; y < imageSize.Y; y++)
         {
             for (int x = 0; x < imageSize.X; x++)
@@ -69,6 +89,7 @@ public partial class NavigationGraphData : Resource
             }
         }
 
+        // 8-connectivity
         Vector2I[] neighborOffsets = [
             new(-1, -1), new(0, -1), new(1, -1),
             new(-1,  0),              new(1,  0),
@@ -86,28 +107,86 @@ public partial class NavigationGraphData : Resource
             }
         }
 
+        // Prune 2-connected nodes near the line between their neighbors
         while (true)
         {
-            List<long> toRemove = [];
+            List<(long id, long neighborA, long neighborB)> toRemove = [];
             foreach (long id in graph.GetPointIds())
             {
                 long[] connections = graph.GetPointConnections(id);
                 if (connections.Length != 2) continue;
-                if (!IsLineWalkable(graph.GetPointPosition(connections[0]), graph.GetPointPosition(connections[1]))) continue;
-                toRemove.Add(id);
+                Vector2 posA = graph.GetPointPosition(connections[0]);
+                Vector2 posB = graph.GetPointPosition(id);
+                Vector2 posC = graph.GetPointPosition(connections[1]);
+                Vector2 ac = posC - posA;
+                float lenSq = ac.LengthSquared();
+                if (lenSq < 0.0001f) continue;
+                float t = Mathf.Clamp((posB - posA).Dot(ac) / lenSq, 0f, 1f);
+                if (posB.DistanceTo(posA + t * ac) > distanceThreshold) continue;
+                toRemove.Add((id, connections[0], connections[1]));
             }
             if (toRemove.Count == 0) break;
-            foreach (long id in toRemove)
+            foreach (var (id, queuedA, queuedB) in toRemove)
             {
                 long[] connections = graph.GetPointConnections(id);
                 if (connections.Length != 2) continue;
                 long a = connections[0], b = connections[1];
+                if ((a != queuedA || b != queuedB) && (a != queuedB || b != queuedA)) continue;
                 graph.RemovePoint(id);
                 if (!graph.ArePointsConnected(a, b))
                     graph.ConnectPoints(a, b);
             }
         }
 
+        // Merge connected nodes closer than threshold (any degree)
+        System.Collections.Generic.Dictionary<long, int> mergeCount = [];
+        foreach (long id in graph.GetPointIds())
+            mergeCount[id] = 1;
+
+        while (true)
+        {
+            bool merged = false;
+            foreach (long id in graph.GetPointIds())
+            {
+                long[] connections = graph.GetPointConnections(id);
+                foreach (long conn in connections)
+                {
+                    if (conn <= id) continue;
+                    Vector2 posA = graph.GetPointPosition(id);
+                    Vector2 posB = graph.GetPointPosition(conn);
+                    if (posA.DistanceTo(posB) >= proximityThreshold) continue;
+
+                    int degA = graph.GetPointConnections(id).Length;
+                    int degB = graph.GetPointConnections(conn).Length;
+                    long survivor = degB > degA ? conn : (degA > degB ? id : (id < conn ? id : conn));
+                    long victim = survivor == id ? conn : id;
+
+                    int ca = mergeCount[survivor];
+                    int cb = mergeCount[victim];
+                    float total = ca + cb;
+                    Vector2 newPos = (graph.GetPointPosition(survivor) * ca + graph.GetPointPosition(victim) * cb) / total;
+                    mergeCount[survivor] = ca + cb;
+                    mergeCount.Remove(victim);
+
+                    long[] victimConns = graph.GetPointConnections(victim);
+                    graph.RemovePoint(victim);
+                    graph.SetPointPosition(survivor, newPos);
+                    foreach (long vc in victimConns)
+                    {
+                        if (vc == survivor) continue;
+                        if (!graph.ArePointsConnected(survivor, vc))
+                            graph.ConnectPoints(survivor, vc);
+                    }
+
+                    merged = true;
+                    break;
+                }
+                if (merged) break;
+            }
+            if (!merged) break;
+        }
+
+        // Compact IDs to 0..n-1
         long[] oldIds = graph.GetPointIds();
         if (oldIds.Length == 0) return;
         AStar2D compacted = new();
@@ -128,34 +207,7 @@ public partial class NavigationGraphData : Resource
         }
         graph = compacted;
 
-        bool changed = true;
-        while (changed)
-        {
-            changed = false;
-            int count = (int)graph.GetPointCount();
-            for (int i = 0; i < count; i++)
-            {
-                Vector2 posI = graph.GetPointPosition(i);
-                long[] neighbors = graph.GetPointConnections(i);
-                for (int j = 0; j < neighbors.Length; j++)
-                {
-                    int neighbor = (int)neighbors[j];
-                    long[] n2 = graph.GetPointConnections(neighbor);
-                    for (int k = 0; k < n2.Length; k++)
-                    {
-                        int candidate = (int)n2[k];
-                        if (candidate == i) continue;
-                        if (graph.ArePointsConnected(i, candidate)) continue;
-                        if (IsLineWalkable(posI, graph.GetPointPosition(candidate)))
-                        {
-                            graph.ConnectPoints(i, candidate);
-                            changed = true;
-                        }
-                    }
-                }
-            }
-        }
-
+        // Persist to export arrays
         SerializeFromGraph(graph);
     }
 
@@ -164,15 +216,14 @@ public partial class NavigationGraphData : Resource
         graph.Clear();
         for (int i = 0; i < Points.Count; i++)
             graph.AddPoint(i, Points[i]);
-        for (int i = 0; i < EdgesFrom.Count; i++)
-            graph.ConnectPoints(EdgesFrom[i], EdgesTo[i]);
+        for (int i = 0; i < Edges.Count; i++)
+            graph.ConnectPoints(Edges[i].X, Edges[i].Y);
     }
 
     private void SerializeFromGraph(AStar2D graph)
     {
         Points = new Array<Vector2>();
-        EdgesFrom = new Array<int>();
-        EdgesTo = new Array<int>();
+        Edges = new Array<Vector2I>();
 
         long[] ids = graph.GetPointIds();
         for (int i = 0; i < ids.Length; i++)
@@ -185,10 +236,7 @@ public partial class NavigationGraphData : Resource
             {
                 int to = (int)conn;
                 if (to > from)
-                {
-                    EdgesFrom.Add(from);
-                    EdgesTo.Add(to);
-                }
+                    Edges.Add(new Vector2I(from, to));
             }
         }
     }

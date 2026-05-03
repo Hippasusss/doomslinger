@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 public partial class MapManager : Sprite2D
 {
+    [Export] private MapData mapData;
     [Export] private PackedScene mapMarkerScene;
-    [Export] private NavigationArea navigationArea;
     [Export] private Camera2D camera;
     [Export] private SectionRevealer mapSectionToggle;
-    [Export] private Vector2 trackingZoom = new(1.5f, 1.5f);
+    [Export] private float trackingZoom = 1.5f;
+    private NavigationArea navigationArea = new();
 
-    private Dictionary<Human, MapMarker> humans = [];
+    private readonly Dictionary<Human, MapMarker> humans = [];
     private MapMarker currentMarkerToTrack;
     private Tween zoomTween;
     private bool userControlling = false;
@@ -22,11 +23,17 @@ public partial class MapManager : Sprite2D
 
     public override void _Ready()
     {
+        AddChild(navigationArea);
+        TextureFilter = TextureFilterEnum.NearestWithMipmapsAnisotropic;
         _defaultMapPosition = Position;
         SetProcessInput(true);
 
+        Texture = mapData?.DisplayTexture;
+
+        mapData?.LoadIntoGraph(navigationArea.WalkableGraph);
+
         camera.Position = GetViewportCenter();
-        camera.Zoom = trackingZoom;
+        camera.Zoom = new Vector2(trackingZoom, trackingZoom);
     }
 
     public override void _Input(InputEvent @event)
@@ -71,7 +78,7 @@ public partial class MapManager : Sprite2D
             if (!userControlling)
             {
                 if (_isTriangulating)
-                    SmoothChaseMarker(delta);
+                    SmoothChaseMarker();
                 else
                     TrackHuman();
             }
@@ -80,7 +87,7 @@ public partial class MapManager : Sprite2D
         {
             userControlling = false;
             _isTriangulating = false;
-            camera.Zoom = trackingZoom;
+            camera.Zoom = new Vector2(trackingZoom, trackingZoom);
             TrackHuman();
         }
     }
@@ -91,7 +98,7 @@ public partial class MapManager : Sprite2D
         camera.Position = MarkerWorldPosition(currentMarkerToTrack);
     }
 
-    private void SmoothChaseMarker(double delta)
+    private void SmoothChaseMarker()
     {
         if (currentMarkerToTrack == null) return;
 
@@ -119,7 +126,7 @@ public partial class MapManager : Sprite2D
 
         zoomTween?.Kill();
         zoomTween = CreateTween();
-        zoomTween.TweenProperty(camera, "zoom", trackingZoom, triangulationTime)
+        zoomTween.TweenProperty(camera, "zoom", new Vector2(trackingZoom,trackingZoom), triangulationTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.Out);
     }

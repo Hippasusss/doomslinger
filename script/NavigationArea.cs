@@ -1,17 +1,12 @@
 using Godot;
 
-public partial class NavigationArea : Node
+public partial class NavigationArea : Node2D
 {
     private AStar2D walkableGraph = new();
-    [Export] public NavigationGraphData NavigationGraphData { get; set; }
 
+    public AStar2D WalkableGraph {get {return walkableGraph;} }
     public bool HasPoints => walkableGraph.GetPointCount() > 0;
     public int PointCount => (int)walkableGraph.GetPointCount();
-
-    public override void _Ready()
-    {
-        NavigationGraphData?.LoadIntoGraph(walkableGraph);
-    }
 
     public Vector2[] GetPathToRandomPoint(Vector2 fromPosition)
     {

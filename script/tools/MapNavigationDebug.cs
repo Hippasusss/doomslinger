@@ -5,17 +5,17 @@ using Godot.Collections;
 public partial class NavDebugDrawer : Control
 {
     private Texture2D texture;
-    private NavigationGraphData data;
+    private MapData data;
 
     private float zoom = 1f;
     private Vector2 panOffset;
     private bool dragging;
     private Vector2 dragStart;
 
-    public void SetData(NavigationGraphData navData)
+    public void SetData(MapData navData)
     {
         data = navData;
-        texture = navData.SourceTexture;
+        texture = navData.NavigationTexture;
         MouseFilter = MouseFilterEnum.Stop;
         SetAnchorsPreset(LayoutPreset.FullRect);
         QueueRedraw();

@@ -4,34 +4,34 @@ using System.Collections.Generic;
 
 [Tool]
 [GlobalClass]
-public partial class NavigationGraphData : Resource
+public partial class MapData : Resource
 {
     private const float BrightnessThreshold = 0.35f;
 
-    private Texture2D sourceTexture;
-    [Export] public Texture2D SourceTexture
+    [Export] public Texture2D DisplayTexture { get; set;}
+    private Texture2D navigationTexture;
+    [Export] public Texture2D NavigationTexture
     {
-        get => sourceTexture;
+        get => navigationTexture;
         set
         {
-            sourceTexture = value;
+            navigationTexture = value;
             if (value != null)
                 BuildFromTexture();
         }
     }
     [Export] public Array<Vector2> Points { get; set; }
     [Export] public Array<Vector2I> Edges { get; set; }
-    [Export] float distanceThreshold = 0.5f;
-    [Export] float proximityThreshold = 2f;
+    [Export] private float distanceThreshold = 0.5f;
+    [Export] private float proximityThreshold = 2f;
 
-    private bool rebuild;
     [Export]
     public bool Rebuild
     {
         get => false;
         set
         {
-            if (value && SourceTexture != null)
+            if (value && NavigationTexture != null)
                 BuildFromTexture();
         }
     }
@@ -42,7 +42,7 @@ public partial class NavigationGraphData : Resource
         get => false;
         set
         {
-            if (!value || SourceTexture == null || Points == null) return;
+            if (!value || NavigationTexture == null || Points == null) return;
 
             Window window = new()
             {
@@ -54,7 +54,7 @@ public partial class NavigationGraphData : Resource
             drawer.SetData(this);
             window.AddChild(drawer);
 
-            Vector2 texSize = SourceTexture.GetSize();
+            Vector2 texSize = NavigationTexture.GetSize();
             Vector2I windowSize = new((int)texSize.X, (int)texSize.Y);
 
             window.CloseRequested += () => window.QueueFree();
@@ -66,8 +66,8 @@ public partial class NavigationGraphData : Resource
 
     public void BuildFromTexture()
     {
-        if (SourceTexture == null) return;
-        Image sourceImage = SourceTexture.GetImage();
+        if (NavigationTexture == null) return;
+        Image sourceImage = NavigationTexture.GetImage();
         if (sourceImage == null || sourceImage.GetWidth() == 0 || sourceImage.GetHeight() == 0) return;
 
         // Image info

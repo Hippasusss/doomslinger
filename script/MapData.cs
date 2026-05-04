@@ -32,7 +32,11 @@ public partial class MapData : Resource
         set
         {
             if (value && NavigationTexture != null)
+            {
                 BuildFromTexture();
+                if (!string.IsNullOrEmpty(ResourcePath))
+                    ResourceSaver.Save(this, ResourcePath);
+            }
         }
     }
 
@@ -107,83 +111,92 @@ public partial class MapData : Resource
             }
         }
 
-        // Prune 2-connected nodes near the line between their neighbors
-        while (true)
+        // Reduce graph — alternate prune and merge until fixpoint
+        bool reduced = true;
+        while (reduced)
         {
-            List<(long id, long neighborA, long neighborB)> toRemove = [];
-            foreach (long id in graph.GetPointIds())
-            {
-                long[] connections = graph.GetPointConnections(id);
-                if (connections.Length != 2) continue;
-                Vector2 posA = graph.GetPointPosition(connections[0]);
-                Vector2 posB = graph.GetPointPosition(id);
-                Vector2 posC = graph.GetPointPosition(connections[1]);
-                Vector2 ac = posC - posA;
-                float lenSq = ac.LengthSquared();
-                if (lenSq < 0.0001f) continue;
-                float t = Mathf.Clamp((posB - posA).Dot(ac) / lenSq, 0f, 1f);
-                if (posB.DistanceTo(posA + t * ac) > distanceThreshold) continue;
-                toRemove.Add((id, connections[0], connections[1]));
-            }
-            if (toRemove.Count == 0) break;
-            foreach (var (id, queuedA, queuedB) in toRemove)
-            {
-                long[] connections = graph.GetPointConnections(id);
-                if (connections.Length != 2) continue;
-                long a = connections[0], b = connections[1];
-                if ((a != queuedA || b != queuedB) && (a != queuedB || b != queuedA)) continue;
-                graph.RemovePoint(id);
-                if (!graph.ArePointsConnected(a, b))
-                    graph.ConnectPoints(a, b);
-            }
-        }
+            reduced = false;
 
-        // Merge connected nodes closer than threshold (any degree)
-        System.Collections.Generic.Dictionary<long, int> mergeCount = [];
-        foreach (long id in graph.GetPointIds())
-            mergeCount[id] = 1;
-
-        while (true)
-        {
-            bool merged = false;
-            foreach (long id in graph.GetPointIds())
+            // Prune 2-connected nodes near the line between their neighbors
+            while (true)
             {
-                long[] connections = graph.GetPointConnections(id);
-                foreach (long conn in connections)
+                List<(long id, long neighborA, long neighborB)> toRemove = [];
+                foreach (long id in graph.GetPointIds())
                 {
-                    if (conn <= id) continue;
-                    Vector2 posA = graph.GetPointPosition(id);
-                    Vector2 posB = graph.GetPointPosition(conn);
-                    if (posA.DistanceTo(posB) >= proximityThreshold) continue;
-
-                    int degA = graph.GetPointConnections(id).Length;
-                    int degB = graph.GetPointConnections(conn).Length;
-                    long survivor = degB > degA ? conn : (degA > degB ? id : (id < conn ? id : conn));
-                    long victim = survivor == id ? conn : id;
-
-                    int ca = mergeCount[survivor];
-                    int cb = mergeCount[victim];
-                    float total = ca + cb;
-                    Vector2 newPos = (graph.GetPointPosition(survivor) * ca + graph.GetPointPosition(victim) * cb) / total;
-                    mergeCount[survivor] = ca + cb;
-                    mergeCount.Remove(victim);
-
-                    long[] victimConns = graph.GetPointConnections(victim);
-                    graph.RemovePoint(victim);
-                    graph.SetPointPosition(survivor, newPos);
-                    foreach (long vc in victimConns)
-                    {
-                        if (vc == survivor) continue;
-                        if (!graph.ArePointsConnected(survivor, vc))
-                            graph.ConnectPoints(survivor, vc);
-                    }
-
-                    merged = true;
-                    break;
+                    long[] connections = graph.GetPointConnections(id);
+                    if (connections.Length != 2) continue;
+                    Vector2 posA = graph.GetPointPosition(connections[0]);
+                    Vector2 posB = graph.GetPointPosition(id);
+                    Vector2 posC = graph.GetPointPosition(connections[1]);
+                    Vector2 ac = posC - posA;
+                    float lenSq = ac.LengthSquared();
+                    if (lenSq < 0.0001f) continue;
+                    float t = Mathf.Clamp((posB - posA).Dot(ac) / lenSq, 0f, 1f);
+                    if (posB.DistanceTo(posA + t * ac) > distanceThreshold) continue;
+                    toRemove.Add((id, connections[0], connections[1]));
                 }
-                if (merged) break;
+                if (toRemove.Count == 0) break;
+                reduced = true;
+                foreach (var (id, queuedA, queuedB) in toRemove)
+                {
+                    long[] connections = graph.GetPointConnections(id);
+                    if (connections.Length != 2) continue;
+                    long a = connections[0], b = connections[1];
+                    if ((a != queuedA || b != queuedB) && (a != queuedB || b != queuedA)) continue;
+                    graph.RemovePoint(id);
+                    if (!graph.ArePointsConnected(a, b))
+                        graph.ConnectPoints(a, b);
+                }
             }
-            if (!merged) break;
+
+            // Merge connected nodes closer than threshold (any degree)
+            System.Collections.Generic.Dictionary<long, int> mergeCount = [];
+            foreach (long id in graph.GetPointIds())
+                mergeCount[id] = 1;
+
+            while (true)
+            {
+                bool merged = false;
+                foreach (long id in graph.GetPointIds())
+                {
+                    long[] connections = graph.GetPointConnections(id);
+                    foreach (long conn in connections)
+                    {
+                        if (conn <= id) continue;
+                        Vector2 posA = graph.GetPointPosition(id);
+                        Vector2 posB = graph.GetPointPosition(conn);
+                        if (posA.DistanceTo(posB) > proximityThreshold) continue;
+
+                        int degA = graph.GetPointConnections(id).Length;
+                        int degB = graph.GetPointConnections(conn).Length;
+                        long survivor = degB > degA ? conn : (degA > degB ? id : (id < conn ? id : conn));
+                        long victim = survivor == id ? conn : id;
+
+                        int ca = mergeCount[survivor];
+                        int cb = mergeCount[victim];
+                        float total = ca + cb;
+                        Vector2 newPos = (graph.GetPointPosition(survivor) * ca + graph.GetPointPosition(victim) * cb) / total;
+                        mergeCount[survivor] = ca + cb;
+                        mergeCount.Remove(victim);
+
+                        long[] victimConns = graph.GetPointConnections(victim);
+                        graph.RemovePoint(victim);
+                        graph.SetPointPosition(survivor, newPos);
+                        foreach (long vc in victimConns)
+                        {
+                            if (vc == survivor) continue;
+                            if (!graph.ArePointsConnected(survivor, vc))
+                                graph.ConnectPoints(survivor, vc);
+                        }
+
+                        merged = true;
+                        break;
+                    }
+                    if (merged) break;
+                }
+                if (!merged) break;
+                reduced = true;
+            }
         }
 
         // Compact IDs to 0..n-1

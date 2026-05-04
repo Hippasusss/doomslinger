@@ -32,6 +32,12 @@ public partial class MapManager : Sprite2D
 
         mapData?.LoadIntoGraph(navigationArea.WalkableGraph);
 
+        SubViewport viewport = GetParent<SubViewport>();
+        viewport.Size = new Vector2I(1920, 1080);
+
+        if (viewport.GetParent() is Control container)
+            container.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+
         camera.Position = GetViewportCenter();
         camera.Zoom = new Vector2(trackingZoom, trackingZoom);
     }
@@ -73,22 +79,15 @@ public partial class MapManager : Sprite2D
 
     public override void _Process(double delta)
     {
-        if (mapSectionToggle.IsOpen)
-        {
-            if (!userControlling)
-            {
-                if (_isTriangulating)
-                    SmoothChaseMarker();
-                else
-                    TrackHuman();
-            }
-        }
-        else
-        {
+        if (!mapSectionToggle.IsOpen)
             userControlling = false;
-            _isTriangulating = false;
-            camera.Zoom = new Vector2(trackingZoom, trackingZoom);
-            TrackHuman();
+
+        if (!userControlling)
+        {
+            if (_isTriangulating)
+                SmoothChaseMarker();
+            else
+                TrackHuman();
         }
     }
 

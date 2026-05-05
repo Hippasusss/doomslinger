@@ -17,6 +17,7 @@
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
 [ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="10_mwfav"]
 [ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="10_qmy6f"]
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="11_pdwbg"]
 [ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="13_cmqll"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/globalTheme.tres" id="15_hq6as"]
@@ -34,10 +35,14 @@
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://d0t883md1byky" path="res://sprite/AlgoSectionButton.png" id="27_kxyth"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
+[ext_resource type="Script" uid="uid://q51000d3k0cd" path="res://script/ButtonMatrix.cs" id="28_8b871"]
 [ext_resource type="PackedScene" uid="uid://dcwgg4mte8l3q" path="res://scenes/selector.tscn" id="28_kxyth"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
+[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="30_5grtr"]
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
+[ext_resource type="PackedScene" uid="uid://bu3jayqayo2jv" path="res://scenes/MatrixButton.tscn" id="30_t70y2"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
+[ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="30_vua0o"]
 [ext_resource type="Resource" uid="uid://b0852h5ufnnj8" path="res://resources/Maps/EdinMap.tres" id="32_pdwbg"]
 [ext_resource type="Script" uid="uid://bsw3a7m0xw5ug" path="res://script/MapManager.cs" id="39_8b871"]
 
@@ -164,7 +169,7 @@ frame = 32
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController", "humanDataDisplay")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataSection/DataHideReveal"), NodePath("AlgoSection/AlgoHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal")]
+UISections = [NodePath("DataSection/DataHideReveal"), NodePath("AlgoSection/AlgoHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection/HelpHideReveal")]
 blackoutController = NodePath("Blackout")
 humanDataDisplay = NodePath("DataSection")
 
@@ -176,7 +181,7 @@ anchor_right = 1.0
 offset_right = 217.0
 offset_bottom = 360.0
 grow_horizontal = 0
-theme_override_styles/panel = ExtResource("13_cmqll")
+theme_override_styles/panel = ExtResource("11_pdwbg")
 script = ExtResource("8_cvmbd")
 idDisplay = NodePath("InfoSection/IDCardSection")
 heartMonitorDisplay = NodePath("HeartMonitor")
@@ -367,6 +372,7 @@ script = ExtResource("19_2ofn6")
 label = NodePath("FeedDataText")
 
 [node name="FeedDataText" type="RichTextLabel" parent="UI/DataSection/FeedDataSection" unique_id=149028222]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -382,6 +388,17 @@ text = "
 "
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/DataSection/FeedDataSection" unique_id=606702305]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 63.0
+offset_bottom = 94.0
+script = ExtResource("28_8b871")
+Columns = 6
+Rows = 12
+ButtonScene = ExtResource("30_t70y2")
 
 [node name="WaveFormSection" type="Panel" parent="UI/DataSection" unique_id=1815387752]
 layout_mode = 0
@@ -491,21 +508,21 @@ offset_bottom = 354.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425]
+visible = false
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_top = 63.0
+offset_top = 86.0
 offset_right = 335.0
-offset_bottom = 227.0
+offset_bottom = 250.0
 grow_horizontal = 0
-theme_override_styles/panel = ExtResource("13_cmqll")
+theme_override_styles/panel = ExtResource("11_pdwbg")
 
 [node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203 node_paths=PackedStringArray("parentRect")]
 layout_mode = 0
 offset_left = -15.0
-offset_top = 14.0
-offset_bottom = 74.0
+offset_bottom = 60.0
 theme = ExtResource("15_hq6as")
 icon = ExtResource("27_kxyth")
 vertical_icon_alignment = 0
@@ -542,12 +559,40 @@ offset_top = 12.0
 offset_right = 141.0
 offset_bottom = 52.0
 
-[node name="Panel" type="Panel" parent="UI/AlgoSection" unique_id=1690394218]
+[node name="ButtonMatrix" type="Panel" parent="UI/AlgoSection" unique_id=1690394218]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 61.0
 offset_right = 325.0
 offset_bottom = 153.0
+script = ExtResource("28_8b871")
+Columns = 24
+Rows = 8
+ButtonScene = ExtResource("30_t70y2")
+
+[node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
+visible = false
+offset_left = 641.0
+offset_top = 161.0
+offset_right = 1006.0
+offset_bottom = 359.0
+theme_override_styles/panel = ExtResource("11_pdwbg")
+
+[node name="HelpHideReveal" type="Button" parent="UI/HelpSection" unique_id=493216182]
+layout_mode = 1
+offset_right = 86.805
+offset_bottom = 16.0
+rotation = 1.5707964
+theme = ExtResource("15_hq6as")
+theme_override_fonts/font = ExtResource("30_vua0o")
+theme_override_styles/normal = ExtResource("30_5grtr")
+theme_override_styles/pressed = ExtResource("30_5grtr")
+theme_override_styles/hover = ExtResource("30_5grtr")
+text = "help"
+text_overrun_behavior = 1
+script = ExtResource("17_ft6cd")
+directionRight = false
+tweenCurve = ExtResource("25_kxyth")
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
 visible = false
@@ -559,7 +604,7 @@ offset_top = 156.0
 offset_right = 345.0
 offset_bottom = 351.0
 grow_horizontal = 0
-theme_override_styles/panel = ExtResource("13_cmqll")
+theme_override_styles/panel = ExtResource("11_pdwbg")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI/MapSection" unique_id=468719036]
 texture_filter = 1
@@ -626,8 +671,13 @@ continuous_cd = 2
 linear_damp = 0.36
 
 [node name="ADHideReveal" type="Button" parent="UI/AdMachine/FileCabinet" unique_id=1930659280 node_paths=PackedStringArray("rigidBody2D")]
+offset_left = 142.0
+offset_top = -22.0
+offset_right = 153.0
+offset_bottom = 24.0
 script = ExtResource("17_ft6cd")
 rigidBody2D = NodePath("..")
+tweenCurve = ExtResource("25_kxyth")
 
 [node name="Container" type="CollisionPolygon2D" parent="UI/AdMachine/FileCabinet" unique_id=749621471]
 position = Vector2(-42, 16)

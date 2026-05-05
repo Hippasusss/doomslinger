@@ -3,10 +3,7 @@ using Godot;
 public partial class NavigationArea : Node2D
 {
     private AStar2D walkableGraph = new();
-
     public AStar2D WalkableGraph {get {return walkableGraph;} }
-    public bool HasPoints => walkableGraph.GetPointCount() > 0;
-    public int PointCount => (int)walkableGraph.GetPointCount();
 
     public Vector2[] GetPathToRandomPoint(Vector2 fromPosition)
     {

@@ -135,7 +135,7 @@ public partial class MapManager : Sprite2D
         if (humans.ContainsKey(human)) return;
         MapMarker newMapMarker = mapMarkerScene.Instantiate<MapMarker>();
         navigationArea.AddChild(newMapMarker);
-        newMapMarker.Position = navigationArea.HasPoints ? navigationArea.GetRandomPointPosition() : Vector2.Zero;
+        newMapMarker.Position = navigationArea.GetRandomPointPosition();
         newMapMarker.Human = human;
         newMapMarker.MovementFinished += () => human.SetMoving(false);
         humans.Add(human, newMapMarker);
@@ -145,7 +145,6 @@ public partial class MapManager : Sprite2D
     {
         if (human == null) return;
         if (!humans.TryGetValue(human, out MapMarker marker) || marker == null) return;
-        if (!navigationArea.HasPoints || navigationArea.PointCount < 2) return;
 
         Vector2[] path = navigationArea.GetPathToRandomPoint(marker.Position);
         if (path.Length < 2) return;

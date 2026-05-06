@@ -361,7 +361,7 @@ text = "
  "
 scroll_following = true
 
-[node name="FeedDataSection" type="Panel" parent="UI/DataSection" unique_id=2001932955 node_paths=PackedStringArray("label")]
+[node name="FeedDataSection" type="Panel" parent="UI/DataSection" unique_id=2001932955 node_paths=PackedStringArray("label", "matrix")]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 197.0
@@ -370,6 +370,7 @@ offset_bottom = 292.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("19_2ofn6")
 label = NodePath("FeedDataText")
+matrix = NodePath("Panel")
 
 [node name="FeedDataText" type="RichTextLabel" parent="UI/DataSection/FeedDataSection" unique_id=149028222]
 visible = false
@@ -396,9 +397,11 @@ offset_top = 1.0
 offset_right = 63.0
 offset_bottom = 94.0
 script = ExtResource("28_8b871")
-Columns = 6
-Rows = 12
+Columns = 5
+Rows = 7
 ButtonScene = ExtResource("30_t70y2")
+Margin = 0
+Gap = 1
 
 [node name="WaveFormSection" type="Panel" parent="UI/DataSection" unique_id=1815387752]
 layout_mode = 0
@@ -508,7 +511,6 @@ offset_bottom = 354.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
 [node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425]
-visible = false
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -569,9 +571,9 @@ script = ExtResource("28_8b871")
 Columns = 24
 Rows = 8
 ButtonScene = ExtResource("30_t70y2")
+Gap = 1
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
-visible = false
 offset_left = 641.0
 offset_top = 161.0
 offset_right = 1006.0
@@ -595,7 +597,6 @@ directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
-visible = false
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -625,7 +626,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 sdf_scale = 0
 size = Vector2i(341, 193)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="MapCamera" type="Camera2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=-123190488]
 position_smoothing_speed = 0.0

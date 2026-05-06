@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bu3jayqayo2jv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjbop"]
-bg_color = Color(0.13877764, 0.41430017, 0.43068832, 1)
+bg_color = Color(0.35011256, 0.5924695, 0.64597553, 1)
 
 [node name="Button" type="Button" unique_id=227815813]
 offset_right = 40.0
@@ -10,3 +10,4 @@ theme_override_colors/icon_normal_color = Color(0.4005212, 0.15920505, 0.2063912
 theme_override_colors/icon_focus_color = Color(0.4, 0.16078432, 0.20784314, 1)
 theme_override_colors/icon_pressed_color = Color(0.4, 0.16078432, 0.20784314, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_qjbop")
+text_overrun_behavior = 1

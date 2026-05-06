@@ -8,6 +8,8 @@ public partial class ButtonMatrix : Panel
     private int columns = 1;
     private int rows = 1;
     private PackedScene buttonScene;
+    private int margin = 2;
+    private int gap = 0;
 
     [Export]
     public int Columns
@@ -16,7 +18,7 @@ public partial class ButtonMatrix : Panel
         set
         {
             columns = Mathf.Max(1, value);
-            Rebuild();
+            if (IsInsideTree()) Rebuild();
         }
     }
 
@@ -27,7 +29,7 @@ public partial class ButtonMatrix : Panel
         set
         {
             rows = Mathf.Max(1, value);
-            Rebuild();
+            if (IsInsideTree()) Rebuild();
         }
     }
 
@@ -38,7 +40,29 @@ public partial class ButtonMatrix : Panel
         set
         {
             buttonScene = value;
-            Rebuild();
+            if (IsInsideTree()) Rebuild();
+        }
+    }
+
+    [Export]
+    public int Margin
+    {
+        get => margin;
+        set
+        {
+            margin = value;
+            if (grid != null) ApplyMargins();
+        }
+    }
+
+    [Export]
+    public int Gap
+    {
+        get => gap;
+        set
+        {
+            gap = value;
+            if (grid != null) ApplyGaps();
         }
     }
 
@@ -52,8 +76,11 @@ public partial class ButtonMatrix : Panel
         if (grid == null)
         {
             grid = new GridContainer();
-            grid.SetAnchorsPreset(LayoutPreset.FullRect);
+            grid.SetAnchorsPreset(LayoutPreset.FullRect, true);
+            ApplyMargins();
+            ApplyGaps();
             AddChild(grid);
+            grid.Owner = this;
         }
 
         foreach (Node child in grid.GetChildren())
@@ -68,6 +95,27 @@ public partial class ButtonMatrix : Panel
             button.SizeFlagsHorizontal = SizeFlags.ExpandFill;
             button.SizeFlagsVertical = SizeFlags.ExpandFill;
             grid.AddChild(button);
+            button.Owner = grid;
         }
+    }
+
+    private void ApplyMargins()
+    {
+        grid.OffsetLeft = margin;
+        grid.OffsetTop = margin;
+        grid.OffsetRight = -margin;
+        grid.OffsetBottom = -margin;
+    }
+
+    private void ApplyGaps()
+    {
+        grid.AddThemeConstantOverride("h_separation", gap);
+        grid.AddThemeConstantOverride("v_separation", gap);
+    }
+
+    public Button GetButton(int index)
+    {
+        if (grid == null || index < 0 || index >= grid.GetChildCount()) return null;
+        return grid.GetChild(index) as Button;
     }
 }

@@ -1,42 +1,4 @@
 
-
-# TODO
-- [] Finish All Data Panels
-    - [] Top ID (Meaningfull connections, Interests)
-    - [] Left of BPM (SleepScore, Steps, Money, Uptime, )
-    - [] Right of eye. 
-    - [] Feed Data (Show data of current feed item)
-    - [] Waveform (have react to random events in real world) Banned words must be reported
-    - [] Browser history. Banned websites must be reported
-    - [] Bottom left. location. Gatherings of certain groups must be reported. plot on map
-    - [] Bottom right
-
-- [] Algo Section
-    - how
-        - modular patchbay?
-        - simple sliders/numbers?
-        - Interest based?
-        - 
-
-
-- [] 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Mechanic Ideas
 
 - if user eye is certain way (undilated?) send push notification to pull them back in
@@ -44,6 +6,12 @@
 - Warning when user might leave. Computer risk detection is not always right. Can be upgraded.
 - Upgradable advert injector
 - Meaningful connections
+- Location based actions.
+    - user has a home. (curfews must be adhered to later on)
+    - multiple users in known colluder areas.
+    - user attacks big tek area
+    - bad actions must be reported
+
 
 ## Data Link Ideas
 
@@ -68,9 +36,8 @@
 - Perspiration -> 
 
 ## Scripted Moments
-- Assigned local area of users for new rollout.
 
-
+- Testing new device and algo on small town before wider roll out
 - Unconvicted Pedo
     - How does the user respond
     - Correct response leads to Game Over? Fired for calling police?
@@ -78,7 +45,8 @@
     - Big Tek covers it up
 
 - Big Tek Share holder meeting
-- watch introduced
+- watch introduced 
+    - (allows for more tracking even when user isn't on their phone)
 
 - Heart arythmia leading to death. Big Tek denies knowledge. Removes info from employee hand book.
 

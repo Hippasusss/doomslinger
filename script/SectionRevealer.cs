@@ -19,6 +19,10 @@ public partial class SectionRevealer : Button
     
     public override void _Ready()
     {
+        if(parentRect == null)
+        {
+            parentRect = GetParent() as Control;
+        }
         Pressed += Toggle;
     }
 

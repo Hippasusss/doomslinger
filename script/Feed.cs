@@ -22,7 +22,7 @@ public partial class Feed : CanvasGroup
     public Action<Feedblock> newMainFeedBlockCallBack;
     public List<Feedblock> FeedBlocks => feedBlocks;
 
-    private const int numBlocks = 9;
+    private const int numBlocks = 7;
     private const int blockSpacing = 52;
     private const float turnOffRate = 0.5f;
     private readonly List<Feedblock> feedBlocks = [];

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bu3jayqayo2jv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjbop"]
-bg_color = Color(0.35011256, 0.5924695, 0.64597553, 1)
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Button" type="Button" unique_id=227815813]
 offset_right = 40.0

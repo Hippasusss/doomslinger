@@ -5,11 +5,11 @@ public partial class ButtonMatrix : Panel
 {
     private GridContainer grid;
 
-    private int columns = 1;
-    private int rows = 1;
+    private int columns = 5;
+    private int rows = 6;
     private PackedScene buttonScene;
     private int margin = 2;
-    private int gap = 0;
+    private int gap = 1;
 
     [Export]
     public int Columns
@@ -73,6 +73,8 @@ public partial class ButtonMatrix : Panel
 
     private void Rebuild()
     {
+        if (buttonScene == null) return;
+
         if (grid == null)
         {
             grid = new GridContainer();
@@ -85,8 +87,6 @@ public partial class ButtonMatrix : Panel
 
         foreach (Node child in grid.GetChildren())
             child.QueueFree();
-
-        if (buttonScene == null || columns < 1 || rows < 1) return;
 
         grid.Columns = columns;
         for (int i = 0; i < rows * columns; i++)

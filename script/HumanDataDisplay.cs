@@ -18,12 +18,13 @@ public partial class HumanDataDisplay : Panel
     [Export] private EyeDisplay eyeDisplay;
     [Export] private FeedDataDisplay feedDataDisplay;
     [Export] private WaveFormDisplay waveFormDisplay;
+    [Export] private MapDisplay mapDisplay;
     private IDisplay[] displays;
     private Human currentHuman;
 
     public override void _Ready()
     {
-        displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay, waveFormDisplay];
+        displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay, waveFormDisplay, mapDisplay];
         ClearDisplay();
     }
     private readonly DeltaTimer updateTimer = new (0.2);

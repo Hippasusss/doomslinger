@@ -33,7 +33,6 @@ public partial class MapManager : Sprite2D
         mapData?.LoadIntoGraph(navigationArea.WalkableGraph);
 
         SubViewport viewport = GetParent<SubViewport>();
-        viewport.Size = new Vector2I(1920, 1080);
 
         if (viewport.GetParent() is Control container)
             container.SetAnchorsPreset(Control.LayoutPreset.FullRect);

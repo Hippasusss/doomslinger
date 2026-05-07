@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
+[ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="22_8gny2"]
 [ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
 [ext_resource type="Script" uid="uid://bmjqjuqq64p7b" path="res://script/MapDisplay.cs" id="23_cmqll"]
 [ext_resource type="Texture2D" uid="uid://b7h6lhfodrq36" path="res://sprite/Map.png" id="23_cobve"]
@@ -99,6 +100,23 @@ shader = ExtResource("9_mwfav")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gny2"]
+bg_color = Color(0.21805939, 0.2250098, 0.22330877, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t70y2"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78020656, 0.24613741, 0.28181723, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color(0.96673995, 0.5271128, 0.47312066, 0.17400001)
+shadow_size = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b871"]
 bg_color = Color(0.71234256, 0.19794005, 0.2345213, 1)
 
@@ -131,7 +149,7 @@ script = ExtResource("1_rvslj")
 humanManager = NodePath("..")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-numHumans = 8
+numHumans = 20
 faceGenerator = NodePath("FaceGenerator")
 
 [node name="Positioner" type="Marker2D" parent="HumanArea/Spawner" unique_id=2019220739]
@@ -173,7 +191,7 @@ UISections = [NodePath("DataSection/DataHideReveal"), NodePath("AlgoSection/Algo
 blackoutController = NodePath("Blackout")
 humanDataDisplay = NodePath("DataSection")
 
-[node name="DataSection" type="Panel" parent="UI" unique_id=2019699738 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay")]
+[node name="DataSection" type="Panel" parent="UI" unique_id=2019699738 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay")]
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -188,6 +206,7 @@ heartMonitorDisplay = NodePath("HeartMonitor")
 eyeDisplay = NodePath("EyeSection/Eye")
 feedDataDisplay = NodePath("FeedDataSection")
 waveFormDisplay = NodePath("WaveFormSection/WaveFormDisplay")
+mapDisplay = NodePath("LocationSection/MapWindow")
 
 [node name="InfoSection" type="Panel" parent="UI/DataSection" unique_id=224137]
 layout_mode = 0
@@ -361,7 +380,7 @@ text = "
  "
 scroll_following = true
 
-[node name="FeedDataSection" type="Panel" parent="UI/DataSection" unique_id=2001932955 node_paths=PackedStringArray("label", "matrix")]
+[node name="FeedDataSection" type="Panel" parent="UI/DataSection" unique_id=2001932955 node_paths=PackedStringArray("matrix")]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 197.0
@@ -369,39 +388,31 @@ offset_right = 73.0
 offset_bottom = 292.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 script = ExtResource("19_2ofn6")
-label = NodePath("FeedDataText")
-matrix = NodePath("Panel")
+matrix = NodePath("Container/ButtonMatrix")
 
-[node name="FeedDataText" type="RichTextLabel" parent="UI/DataSection/FeedDataSection" unique_id=149028222]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 6
-bbcode_enabled = true
-text = "
+[node name="Container" type="Panel" parent="UI/DataSection/FeedDataSection" unique_id=648385127]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 95.0
+theme_override_styles/panel = ExtResource("22_8gny2")
 
-"
-scroll_active = false
-horizontal_alignment = 1
-
-[node name="Panel" type="Panel" parent="UI/DataSection/FeedDataSection" unique_id=606702305]
+[node name="ButtonMatrix" type="Panel" parent="UI/DataSection/FeedDataSection/Container" unique_id=606702305]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 63.0
 offset_bottom = 94.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gny2")
 script = ExtResource("28_8b871")
-Columns = 5
-Rows = 7
 ButtonScene = ExtResource("30_t70y2")
-Margin = 0
-Gap = 1
+
+[node name="Highlighter" type="Panel" parent="UI/DataSection/FeedDataSection/Container" unique_id=1914759579]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 76.0
+offset_right = 63.0
+offset_bottom = 94.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t70y2")
 
 [node name="WaveFormSection" type="Panel" parent="UI/DataSection" unique_id=1815387752]
 layout_mode = 0
@@ -569,11 +580,10 @@ offset_right = 325.0
 offset_bottom = 153.0
 script = ExtResource("28_8b871")
 Columns = 24
-Rows = 8
 ButtonScene = ExtResource("30_t70y2")
-Gap = 1
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
+visible = false
 offset_left = 641.0
 offset_top = 161.0
 offset_right = 1006.0
@@ -595,6 +605,11 @@ text_overrun_behavior = 1
 script = ExtResource("17_ft6cd")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
+
+[node name="Panel" type="Panel" parent="UI" unique_id=583447152]
+offset_right = 149.0
+offset_bottom = 26.0
+theme_override_styles/panel = ExtResource("11_pdwbg")
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
 texture_filter = 1
@@ -660,7 +675,7 @@ directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
-position = Vector2(-142, 41)
+position = Vector2(-142, 242)
 
 [node name="FileCabinet" type="RigidBody2D" parent="UI/AdMachine" unique_id=770060897]
 mass = 20.972

@@ -21,12 +21,14 @@ public partial class Feed : CanvasGroup
 
     public Action<Feedblock> newMainFeedBlockCallBack;
     public List<Feedblock> FeedBlocks => feedBlocks;
+    public bool IsScrolling { get; private set; }
 
     private const int numBlocks = 7;
     private const int blockSpacing = 52;
     private const float turnOffRate = 0.5f;
     private readonly List<Feedblock> feedBlocks = [];
     private bool enabled = true;
+    private int currentBlockIndex = 0;
 
     private readonly DeltaTimer swipeTimer = new(3, 14);
 
@@ -53,11 +55,9 @@ public partial class Feed : CanvasGroup
             AddChild(newfeedblock);
             FeedBlocks.Add(newfeedblock);
             ResetBlock(newfeedblock);
-            if (CheckBlockDelta(newfeedblock, 0))
-            {
-                screenLight.Color = newfeedblock.GetColour();
-            }
         }
+        screenLight.Color = GetBlockBeingRead().GetColour();
+        // GetBlockBeingRead().SetColour( Colors.White);
     }
 
     public override void _Process(double delta) 
@@ -70,37 +70,28 @@ public partial class Feed : CanvasGroup
 
     private void AdvanceFeed()
     {
+        IsScrolling = true;
         Tween tween = CreateTween().SetParallel(true);
         float duration = 0.4f;
+        int nextBlockIndex =  (currentBlockIndex + 1) % numBlocks;
 
         foreach (Feedblock block in FeedBlocks)
         {
             tween.TweenProperty(block, "position:y", block.Position.Y + blockSpacing, duration)
                 .SetTrans(Tween.TransitionType.Quart)
                 .SetEase(Tween.EaseType.Out);
-
-            if (CheckBlockDelta(block, -1))
-            {
-                tween.TweenProperty(screenLight, "color", block.GetColour(), duration)
-                    .SetTrans(Tween.TransitionType.Quart)
-                    .SetEase(Tween.EaseType.Out);
-            }
         }
+        tween.TweenProperty(screenLight, "color", feedBlocks[nextBlockIndex].GetColour(), duration)
+            .SetTrans(Tween.TransitionType.Quart)
+            .SetEase(Tween.EaseType.Out);
 
         tween.Chain().TweenCallback(Callable.From(() =>
-        {
-            foreach (Feedblock block in FeedBlocks)
-            {
-                if (block.Position.Y > 100)
-                {
-                    ResetBlock(block);
-                }
-                if(CheckBlockDelta(block, 0))
-                {
-                    newMainFeedBlockCallBack?.Invoke(block);
-                }
-            }
-        }));
+                    {
+                    ResetBlock(GetBlockBeingRead());
+                    currentBlockIndex = nextBlockIndex;
+                    newMainFeedBlockCallBack?.Invoke(GetBlockBeingRead());
+                    IsScrolling = false;
+                    }));
     }
 
     public void ToggleOnOff(bool onOff)
@@ -124,28 +115,11 @@ public partial class Feed : CanvasGroup
         }
     }
 
-    public Feedblock GetBlockBeingRead()
-    {
-        foreach(Feedblock block in feedBlocks)
-        {
-            if(CheckBlockDelta(block, 0))
-            {
-                return block;
-            }
-        }
-        return null;
-    }
-
-    private static bool CheckBlockDelta(Feedblock block, int delta)
-    {
-        if (Mathf.Abs(block.Position.Y + (blockSpacing * -delta)) < 1.0f) return true;
-        return false;
-    }
-
+    public Feedblock GetBlockBeingRead() => feedBlocks[currentBlockIndex];
 
     private void ResetBlock(Feedblock block)
     {
-        block.Position = new Vector2(block.Position.X, (FeedBlocks.Count - 2) * -blockSpacing);
+        block.Position = new Vector2(block.Position.X, (FeedBlocks.Count - 1) * -blockSpacing);
         block.SetColour(feedBlockPalette.Colors.GetRandom());
         block.stats.RandomizeStats(-2, 2);
     }

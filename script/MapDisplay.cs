@@ -7,16 +7,16 @@ public partial class MapDisplay : Control, IDisplay
     [Export] private Button mapButton;
     [Export] private SectionRevealer mapSectionToggle;
 
-    public bool Enabled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public bool Enabled {get; set;} = true;
 
     public void ToggleOnOff(bool onOff)
     {
-        throw new System.NotImplementedException();
+        Visible = onOff;
+        Enabled = onOff;
     }
 
     public void UpdateDisplay(Human human)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void _Ready()

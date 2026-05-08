@@ -45,6 +45,7 @@
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="30_vua0o"]
 [ext_resource type="Resource" uid="uid://b0852h5ufnnj8" path="res://resources/Maps/EdinMap.tres" id="32_pdwbg"]
+[ext_resource type="Script" uid="uid://bpsiao3t75nku" path="res://script/CreditSection.cs" id="34_s3wmy"]
 [ext_resource type="Script" uid="uid://bsw3a7m0xw5ug" path="res://script/MapManager.cs" id="39_8b871"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
@@ -149,7 +150,7 @@ script = ExtResource("1_rvslj")
 humanManager = NodePath("..")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-numHumans = 20
+numHumans = 4
 faceGenerator = NodePath("FaceGenerator")
 
 [node name="Positioner" type="Marker2D" parent="HumanArea/Spawner" unique_id=2019220739]
@@ -606,10 +607,24 @@ script = ExtResource("17_ft6cd")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
-[node name="Panel" type="Panel" parent="UI" unique_id=583447152]
+[node name="CreditSection" type="Panel" parent="UI" unique_id=583447152 node_paths=PackedStringArray("creditText")]
 offset_right = 149.0
 offset_bottom = 26.0
 theme_override_styles/panel = ExtResource("11_pdwbg")
+script = ExtResource("34_s3wmy")
+creditText = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/CreditSection" unique_id=593784724]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 71.0
+offset_bottom = 25.0
+theme_override_font_sizes/normal_font_size = 21
+text = "100"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
 texture_filter = 1

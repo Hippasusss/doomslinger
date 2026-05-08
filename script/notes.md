@@ -2,26 +2,35 @@
 # Mechanic Ideas
 
 - if user eye is certain way (undilated?) send push notification to pull them back in
-- Ability to warn users via email about their issues. lowers the ceiling for getting fired. 
+- Ability to warn users via email about their issues. lowers the ceiling for getting fired.
 - Warning when user might leave. Computer risk detection is not always right. Can be upgraded.
-- Upgradable advert injector
 - Meaningful connections
+
 - Location based actions.
     - user has a home. (curfews must be adhered to later on)
     - multiple users in known colluder areas.
     - user attacks big tek area
     - bad actions must be reported
+- Algo Section
+    - The button matrix is a bid board. Everything is an advert. Each button is an ad bid and shows an amount. hovering shows info and stats about the bid.
+    - Select up coming content by clicking bids? (to manual?)
+    - Selections can be queued up for users.
+    - Server Upgrade increases the size of the queue.
+
+- Upgrades
+    - Server RAM upgrade (Increases size of the queue)
+    - Server CPI/AI upgrade (Increases accuracy of user warnings)
 
 
 ## Data Link Ideas
 
 - Dependants
-- Interests (Randomly taken from large list. Could change and grow more ominous over time.) 
+- Interests (Randomly taken from large list. Could change and grow more ominous over time.)
     - could include an extreme dark list that some users have. Player might treat differently.
     - effects what content and adverts they are into
 - Age
     - Affect what adverts they are into. (young dirtbike, old pocketwatch)
-    - Affect reaction to violence. 
+    - Affect reaction to violence.
     - Affect reaction to Adverts.
 
 - Iris size -> Interest in current Video
@@ -33,7 +42,7 @@
 - Heart bpm -> Rage or Fear
 - Heart beat shape ->
 
-- Perspiration -> 
+- Perspiration ->
 
 ## Scripted Moments
 
@@ -45,12 +54,12 @@
     - Big Tek covers it up
 
 - Big Tek Share holder meeting
-- watch introduced 
+- watch introduced
     - (allows for more tracking even when user isn't on their phone)
 
 - Heart arythmia leading to death. Big Tek denies knowledge. Removes info from employee hand book.
 
-- Winning the game is having lots of money at the expense of everything else. Everyone is a husk of themselves and has no meaningful connections. 
+- Winning the game is having lots of money at the expense of everything else. Everyone is a husk of themselves and has no meaningful connections.
 All they feel is extreme emotions of rage and fear and max out their screen time buying random shit online. gg.
 
 # TODO
@@ -92,8 +101,8 @@ All they feel is extreme emotions of rage and fear and max out their screen time
 - [] Meaning full connections
 - [] Battery level
 - [] Social Credit
-- [] Waveform - can be probed for info (wife is trying to talk OR grunts and farts OR 
-- [] Uptime 
+- [] Waveform - can be probed for info (wife is trying to talk OR grunts and farts OR
+- [] Uptime
 - [] Sleep Score?
 
 ### interesting data human emotions:

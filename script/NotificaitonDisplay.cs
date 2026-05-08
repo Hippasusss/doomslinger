@@ -25,13 +25,4 @@ public partial class NotificaitonDisplay : Control
         string prepend = WarningTypeNames[warningType];
         displayText.Text += prepend + notification +"\n";
     }
-     
-    readonly DeltaTimer testTimer = new (1);
-    public override void _Process(double delta)
-    {
-        if(testTimer.Delta(delta))
-        {
-            AddNotification("hello", WarningType.Error);
-        }
-    }
 }

@@ -11,7 +11,7 @@ public partial class CreditSection : Panel
         get => creditAmount;
         private set
         {
-            creditAmount += value;
+            creditAmount = value;
             creditText.Text = creditAmount.ToString();
         }
     }

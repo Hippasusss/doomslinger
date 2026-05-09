@@ -2,9 +2,14 @@ using Godot;
 using System.Collections.Generic;
 using Utils;
 
-public partial class NotificaitonDisplay : Control
+public partial class NotificaitonDisplay : Control, IDisplay
 {
     [Export] private RichTextLabel displayText;
+    private Human currentHuman;
+    private const int maxNotifications = 10;
+    private readonly Dictionary<Human, Queue<string>> notificationMap = [];
+
+    public bool Enabled { get; set; } = true;
 
     public enum WarningType
     {
@@ -20,9 +25,54 @@ public partial class NotificaitonDisplay : Control
         { WarningType.Error, "> X: " }
     };
 
-    public void AddNotification(string notification, WarningType warningType = WarningType.Info)
+
+    public void AddNotificationToHuman(Human human, string notification, WarningType warningType = WarningType.Info)
     {
+        if (!notificationMap.TryGetValue(human, out var queue))
+            notificationMap[human] = queue = new();
+
+        if (queue.Count >= maxNotifications)
+            queue.Dequeue();
+
         string prepend = WarningTypeNames[warningType];
-        displayText.Text += prepend + notification +"\n";
+        string final = prepend + notification +"\n";
+        queue.Enqueue(final);
+        if(human == currentHuman)
+        {
+            displayText.AppendText(final);
+        }
     }
+
+    private void RedrawNotifications(Human human)
+    {
+        displayText.Text = "";
+        if (!notificationMap.TryGetValue(human, out var queue)) return;
+        foreach(string line in queue)
+        {
+            displayText.AppendText(line);
+        }
+    }
+
+    public void ToggleOnOff(bool onOff)
+    {
+        Enabled = onOff;
+        if(!onOff)
+        {
+            displayText.Text = "none";
+        }
+        else
+        {
+            RedrawNotifications(currentHuman);
+        }
+    }
+
+    public void UpdateDisplay(Human human)
+    {
+        if(currentHuman != human) 
+        {
+            currentHuman = human;
+            RedrawNotifications(human);
+        }
+    }
+
 }

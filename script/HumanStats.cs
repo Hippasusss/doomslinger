@@ -36,15 +36,14 @@ public class HumanStats
         deepStats.AddRange([engagement, longTermFatigue, addiction, mentalStability]);
     }
 
-    public static HumanStats operator + (HumanStats a, HumanStats b)
+    public void AddOther(HumanStats other)
     {
-        a.rage += b.rage;
-        a.dopamine += b.dopamine;
-        a.fear += b.fear;
-        a.hunger += b.hunger;
-        a.fatigue += b.fatigue;
-        a.engagement.Value = Mathf.Max(a.rage, a.fear) * a.fatigue.GetNormalised();
-        return a;
+        rage += other.rage;
+        dopamine += other.dopamine;
+        fear += other.fear;
+        hunger += other.hunger;
+        fatigue += other.fatigue;
+        engagement.Value = Mathf.Max(rage, fear) * fatigue.GetNormalised();
     }
 
     public void RandomizeStats(float rangeLow, float rangeHigh)

@@ -83,7 +83,7 @@ _data = {
 &"hover": SubResource("Animation_2pby3")
 }
 
-[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol")]
+[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol", "SelectionButton")]
 script = ExtResource("1_sogvw")
 face = NodePath("Face")
 feed = NodePath("Feed")
@@ -92,6 +92,7 @@ animation = NodePath("AnimationPlayer")
 phone = NodePath("Phone")
 warnignSymbol = NodePath("WarningSymbold")
 movingSymbol = NodePath("MovingSymbold")
+SelectionButton = NodePath("SelectButton")
 
 [node name="FeedMachine" type="Sprite2D" parent="." unique_id=1629747291]
 texture_filter = 1
@@ -180,4 +181,8 @@ texture_filter = 1
 position = Vector2(0, 32)
 texture = ExtResource("15_5jfd8")
 
-[connection signal="input_event" from="." to="." method="OnClick"]
+[node name="SelectButton" type="Button" parent="." unique_id=797575278]
+offset_left = -17.0
+offset_top = -21.0
+offset_right = 18.0
+offset_bottom = 23.0

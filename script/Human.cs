@@ -20,20 +20,25 @@ public partial class Human : Node2D
     [Export] private Sprite2D phone;
     [Export] private Sprite2D warnignSymbol;
     [Export] private Sprite2D movingSymbol;
+    [Export] private Button SelectionButton;
+
     private HumanStats stats = new();
     private HumanPersonalData data = new();
     private Color[] colors;
     private bool isOnline = true;
     private bool isMoving = false;
-
     private bool selected = false;
 
-    public Sprite2D Face { get => face; set => face = value; }
-    public HumanStats Stats { get => stats; set => stats = value; }
+    public HumanStats Stats { get => stats; }
     public HumanPersonalData Data { get => data; set => data = value; }
-    public Color[] Colors { get => colors; set => colors = value; }
-    public Sprite2D Phone { get => phone; set => phone = value; }
-    public Feed Feed { get => feed; set => feed = value; }
+    public Color[] Colors { get => colors; set => colors = value; } 
+
+    public Sprite2D Face { get => face; }
+    public Sprite2D Phone { get => phone; }
+    public Feed Feed { get => feed; }
+
+    public int BPM {get ; set;}
+
     public bool IsOnline { get => isOnline;}
     public bool IsMoving { get => isMoving; }
     public bool Selected { get => selected; }
@@ -43,6 +48,7 @@ public partial class Human : Node2D
     {
         stats = new(rate: 0.7f);
         Feed.newMainFeedBlockCallBack += ReadFeedBlock;
+        SelectionButton.Pressed += () => {Select(!selected);};
     }
 
     private readonly DeltaTimer warningTimerCheck = new(0.2);
@@ -78,6 +84,7 @@ public partial class Human : Node2D
         if(statUpdateTimer.Delta(delta))
         {
             stats.UpdateAll(delta);
+            CalculateBPM();
         }
     }
 
@@ -121,7 +128,7 @@ public partial class Human : Node2D
 
     private void ReadFeedBlock(Feedblock block)
     {
-        Stats += block.stats;
+        Stats.AddOther(block.stats);
     }
 
     public void Select(bool setSelected, bool emit = true)
@@ -140,15 +147,21 @@ public partial class Human : Node2D
         }
     }
 
-    public void OnClick(Node viewport, InputEvent clickEvent, long shape_idx)
+    private readonly (int min, int max) BPMRange = (35, 199);
+    private void CalculateBPM()
     {
-        if (clickEvent is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
-        {
-            if (mouseEvent.ButtonIndex == MouseButton.Left)
-            {
-                Select(!selected);
-            }
-        }
+        int BPMdiff = BPMRange.max- BPMRange.min;
+
+        float rage = Stats.rage.GetNormalised();
+        float fear = Stats.fear.GetNormalised();
+        float fatigue = Stats.fatigue.GetNormalised();
+
+        int rageBPM = (int)(BPMdiff * rage * (1 - fatigue * 0.5f) + BPMRange.min);
+        int fearBPM = (int)(BPMdiff * fear * (1 - fatigue * 0.5f) + BPMRange.min);
+
+        BPM = Mathf.Max(rageBPM, fearBPM);
+        BPM = Mathf.Clamp(BPM, BPMRange.min, BPMRange.max);
+
     }
 
     private void ToggleWarning(bool onOff)

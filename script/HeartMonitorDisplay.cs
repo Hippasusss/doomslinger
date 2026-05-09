@@ -13,7 +13,6 @@ public partial class HeartMonitorDisplay : Control, IDisplay
     private const int numPoints = 100;
     private const float beepLength = 0.1f;
     private const float amplitude = 15f;
-    private readonly (int min, int max) BPMRange = (35, 199);
 
     private float targetValue = 0;
     private readonly DeltaTimer updateTimer = new(0.01);
@@ -78,25 +77,7 @@ public partial class HeartMonitorDisplay : Control, IDisplay
         else
         {
             BPMText.Text = "--";
-
         }
-    }
-
-    private int CalculateBPM(Human human)
-    {
-        int BPMdiff = BPMRange.max- BPMRange.min;
-
-        float rage = human.Stats.rage.GetNormalised();
-        float fear = human.Stats.fear.GetNormalised();
-        float fatigue = human.Stats.fatigue.GetNormalised();
-
-        int rageBPM = (int)(BPMdiff * rage * (1 - fatigue * 0.5f) + BPMRange.min);
-        int fearBPM = (int)(BPMdiff * fear * (1 - fatigue * 0.5f) + BPMRange.min);
-
-        int BPM = Mathf.Max(rageBPM, fearBPM);
-        BPM = Mathf.Clamp(BPM, BPMRange.min, BPMRange.max);
-
-        return BPM;
     }
 
     public void Wipe()
@@ -127,7 +108,7 @@ public partial class HeartMonitorDisplay : Control, IDisplay
             Wipe();
             currentHuman = human;
         }
-        SetBPM(CalculateBPM(human));
+        SetBPM(human.BPM);
     }
 
 }

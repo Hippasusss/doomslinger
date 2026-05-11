@@ -13,8 +13,8 @@ using Godot;
 
 public partial class Feedblock : Node2D 
 {
-    public HumanStats stats = new(0);
     [Export] private Sprite2D colourSprite;
+    public BlockData blockData;
 
     public void SetColour(float r, float g, float b, float a)
     {

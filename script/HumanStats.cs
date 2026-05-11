@@ -13,6 +13,7 @@ public class HumanStats
     public Stat longTermFatigue;
     public Stat addiction;
     public Stat mentalStability;
+    public Stat politicalLeaning;
 
     public readonly List<Stat> mainStats = [];
     public readonly List<Stat> deepStats = [];
@@ -31,9 +32,10 @@ public class HumanStats
         addiction = new("addiction", 0);
         mentalStability = new("mental stability", 10);
 
-        allStats.AddRange([this.dopamine, this.rage, this.fear, this.hunger, this.fatigue, engagement, longTermFatigue, addiction, mentalStability]);
         mainStats.AddRange([this.dopamine, this.rage, this.fear, this.hunger, this.fatigue]);
-        deepStats.AddRange([engagement, longTermFatigue, addiction, mentalStability]);
+        deepStats.AddRange([engagement, longTermFatigue, addiction, mentalStability, politicalLeaning]);
+        allStats.AddRange(mainStats);
+        allStats.AddRange(deepStats);
     }
 
     public void AddOther(HumanStats other)

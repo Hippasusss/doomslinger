@@ -9,7 +9,7 @@
 - Location based actions.
     - user has a home. (curfews must be adhered to later on)
     - multiple users in known colluder areas.
-    - user attacks big tek area
+    - user attacks DOOMCORP area
     - bad actions must be reported
 - Algo Section
     - The button matrix is a bid board. Everything is an advert. Each button is an ad bid and shows an amount. hovering shows info and stats about the bid.
@@ -51,13 +51,13 @@
     - How does the user respond
     - Correct response leads to Game Over? Fired for calling police?
     - Good response from scary vids
-    - Big Tek covers it up
+    - DOOMCORP covers it up
 
-- Big Tek Share holder meeting
+- DOOMCORP Share holder meeting
 - watch introduced
     - (allows for more tracking even when user isn't on their phone)
 
-- Heart arythmia leading to death. Big Tek denies knowledge. Removes info from employee hand book.
+- Heart arythmia leading to death. DOOMCORP denies knowledge. Removes info from employee hand book.
 
 - Winning the game is having lots of money at the expense of everything else. Everyone is a husk of themselves and has no meaningful connections.
 All they feel is extreme emotions of rage and fear and max out their screen time buying random shit online. gg.
@@ -67,7 +67,7 @@ All they feel is extreme emotions of rage and fear and max out their screen time
 ## Feed an advert into the user's feed
 - [] different adverts available in filing cabinet?
 - [] have to give ads that user is currently engaged for.
-- [] BigTek may have rules they think are good for the company that make things harder
+- [] DOOMCORP may have rules they think are good for the company that make things harder
 - [] First task to sell them a smart watch for more data
 
 ## More Global Stuff
@@ -81,7 +81,7 @@ All they feel is extreme emotions of rage and fear and max out their screen time
 - [x] Click through with debreif at end of day
 - [x] Start New Day
 - [] performance report at end of day
-- [] New info from BigTek in the morning (rules  etc)
+- [] New info from DOOMCORP in the morning (rules  etc)
 
 ## Improve Face Generation
 - [x] add women

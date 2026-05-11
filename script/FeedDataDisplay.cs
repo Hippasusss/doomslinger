@@ -5,6 +5,11 @@ public partial class FeedDataDisplay : Control, IDisplay
     [Export] private ButtonMatrix matrix;
     public bool Enabled {get; set;} = true;
 
+    public override void _Ready()
+    {
+
+    }
+
     public void UpdateDisplay(Human human)
     {
         if (!Enabled || human.Feed.IsScrolling) return;
@@ -29,8 +34,8 @@ public partial class FeedDataDisplay : Control, IDisplay
             for (int statIdx = 0; statIdx < numStats; statIdx++)
             {
                 float t = (block.stats.mainStats[statIdx].GetNormalised() + 1) / 2;
-                Button button = matrix.GetButton(blockIdx * cols + statIdx);
-                button.SelfModulate = block.GetColour() * t;
+                MatrixCell cell = matrix.GetCell(blockIdx * cols + statIdx);
+                cell.Color = block.GetColour() * t;
             }
         }
     }
@@ -44,7 +49,7 @@ public partial class FeedDataDisplay : Control, IDisplay
             Color grey = new(dim, dim, dim, 1);
             int count = matrix.Columns * matrix.Rows;
             for (int i = 0; i < count; i++)
-                matrix.GetButton(i).SelfModulate = grey;
+                matrix.GetCell(i).Color = grey;
         }
     }
 }

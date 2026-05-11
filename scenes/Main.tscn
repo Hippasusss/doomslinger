@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="30_5grtr"]
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
+[ext_resource type="Script" uid="uid://cpgh2g2qo0knb" path="res://script/AlgoSection.cs" id="30_gdcyb"]
 [ext_resource type="PackedScene" uid="uid://bu3jayqayo2jv" path="res://scenes/MatrixButton.tscn" id="30_t70y2"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="30_vua0o"]
@@ -532,6 +533,7 @@ offset_right = 335.0
 offset_bottom = 250.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("11_pdwbg")
+script = ExtResource("30_gdcyb")
 
 [node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203 node_paths=PackedStringArray("parentRect")]
 layout_mode = 0
@@ -580,8 +582,9 @@ offset_top = 61.0
 offset_right = 325.0
 offset_bottom = 153.0
 script = ExtResource("28_8b871")
-Columns = 24
 ButtonScene = ExtResource("30_t70y2")
+Columns = 24
+Rows = 8
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
 visible = false
@@ -627,6 +630,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
+visible = false
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -656,7 +660,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 sdf_scale = 0
 size = Vector2i(341, 193)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MapCamera" type="Camera2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=-123190488]
 position_smoothing_speed = 0.0

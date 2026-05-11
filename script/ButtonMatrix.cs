@@ -5,11 +5,21 @@ public partial class ButtonMatrix : Panel
 {
     private GridContainer grid;
 
+    private PackedScene buttonScene;
     private int columns = 5;
     private int rows = 6;
-    private PackedScene buttonScene;
     private int margin = 2;
     private int gap = 1;
+    [Export]
+    public PackedScene ButtonScene
+    {
+        get => buttonScene;
+        set
+        {
+            buttonScene = value;
+            if (IsInsideTree()) Rebuild();
+        }
+    }
 
     [Export]
     public int Columns
@@ -33,16 +43,6 @@ public partial class ButtonMatrix : Panel
         }
     }
 
-    [Export]
-    public PackedScene ButtonScene
-    {
-        get => buttonScene;
-        set
-        {
-            buttonScene = value;
-            if (IsInsideTree()) Rebuild();
-        }
-    }
 
     [Export]
     public int Margin
@@ -91,11 +91,11 @@ public partial class ButtonMatrix : Panel
         grid.Columns = columns;
         for (int i = 0; i < rows * columns; i++)
         {
-            Button button = buttonScene.Instantiate<Button>();
-            button.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-            button.SizeFlagsVertical = SizeFlags.ExpandFill;
-            grid.AddChild(button);
-            button.Owner = grid;
+            MatrixCell cell = buttonScene.Instantiate<MatrixCell>();
+            cell.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+            cell.SizeFlagsVertical = SizeFlags.ExpandFill;
+            grid.AddChild(cell);
+            cell.Owner = grid;
         }
     }
 
@@ -113,9 +113,10 @@ public partial class ButtonMatrix : Panel
         grid.AddThemeConstantOverride("v_separation", gap);
     }
 
-    public Button GetButton(int index)
+    public MatrixCell GetCell(int index)
     {
         if (grid == null || index < 0 || index >= grid.GetChildCount()) return null;
-        return grid.GetChild(index) as Button;
+        return grid.GetChild(index) as MatrixCell;
     }
+
 }

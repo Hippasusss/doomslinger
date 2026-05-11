@@ -11,6 +11,8 @@ public partial class SectionRevealer : Button
     [Export] public Curve tweenCurve;
     public bool IsOpen => open;
     private bool open = false;
+    private float closedX;
+    private Tween openCloseTween;
 
     private const int force = 20000;
     private const string animationCloseName = "close";
@@ -19,10 +21,8 @@ public partial class SectionRevealer : Button
     
     public override void _Ready()
     {
-        if(parentRect == null)
-        {
-            parentRect = GetParent() as Control;
-        }
+        parentRect ??= GetParent() as Control;
+        closedX = parentRect.Position.X;
         Pressed += Toggle;
     }
 
@@ -54,13 +54,13 @@ public partial class SectionRevealer : Button
         }
         else if (parentRect != null)
         {
+            openCloseTween?.Kill();
             float width = parentRect.GetRect().Size.X;
-            float movement = width * direction; 
-            Tween openCloseTween = CreateTween();
-            Callable tweenCurveCallable = Callable.From<float, float>(tweenCurve.SampleBaked);
-            openCloseTween.TweenProperty(parentRect, "position:x", movement, tweenDuration)
-                .AsRelative() 
-                .SetCustomInterpolator(tweenCurveCallable);
+            float offset = width * direction;
+            float targetX = shouldOpen ? closedX + offset : closedX;
+            openCloseTween = CreateTween();
+            openCloseTween.TweenProperty(parentRect, "position:x", targetX, tweenDuration)
+                .SetCustomInterpolator(Callable.From<float, float>(tweenCurve.SampleBaked));
         }
         open = shouldOpen;
     }

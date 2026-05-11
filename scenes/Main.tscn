@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c4b1crddu6d8o"]
 
 [ext_resource type="Script" uid="uid://d2iofbakvf44f" path="res://script/CameraController.cs" id="1_mwfav"]
+[ext_resource type="Script" uid="uid://cou6ho58td326" path="res://script/GameManager.cs" id="1_oa6sj"]
 [ext_resource type="Script" uid="uid://vqum7ak6ukpm" path="res://script/HumanSpawner.cs" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://cg0jst0bit7ga" path="res://scenes/prefab/human.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://bcaiiynn7r52i" path="res://scenes/prefab/BGGenerator.tscn" id="3_1nqs0"]
@@ -129,6 +130,7 @@ size = Vector2(11, 19)
 size = Vector2(11.93, 40.755)
 
 [node name="World" type="Node2D" unique_id=889943719]
+script = ExtResource("1_oa6sj")
 metadata/_edit_vertical_guides_ = [757.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1338437481]

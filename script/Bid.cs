@@ -13,4 +13,3 @@ public class Bid
         price = newPrice;
     }
 }
-

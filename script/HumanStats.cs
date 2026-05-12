@@ -14,6 +14,7 @@ public class HumanStats
     public Stat addiction;
     public Stat mentalStability;
     public Stat politicalLeaning;
+    public Stat attentionSpan;
 
     public readonly List<Stat> mainStats = [];
     public readonly List<Stat> deepStats = [];
@@ -28,9 +29,10 @@ public class HumanStats
         this.fatigue = new("fatigue", fatigue, rate);
 
         engagement = new("engagement", 5);
-        longTermFatigue = new("fatigue", fatigue, rate * 100, targetStat: this.fatigue);
+        longTermFatigue = new("fatigue", fatigue, rate * 100, newTargetStat: this.fatigue);
         addiction = new("addiction", 0);
         mentalStability = new("mental stability", 10);
+        politicalLeaning = new("political leaning", 5);
 
         mainStats.AddRange([this.dopamine, this.rage, this.fear, this.hunger, this.fatigue]);
         deepStats.AddRange([engagement, longTermFatigue, addiction, mentalStability, politicalLeaning]);
@@ -82,4 +84,3 @@ public class HumanStats
         }
     }
 }
-

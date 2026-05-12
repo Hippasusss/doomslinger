@@ -1,12 +1,11 @@
 using Godot;
-using System;
 
 public partial class SectionRevealer : Button 
 {
 
     [Export] public RigidBody2D rigidBody2D;
     [Export] public AnimationPlayer animationPlayer;
-    [Export] public Control parentRect;
+    [Export] public Panel parentRect;
     [Export] public bool directionRight = true;
     [Export] public Curve tweenCurve;
     public bool IsOpen => open;
@@ -21,8 +20,12 @@ public partial class SectionRevealer : Button
     
     public override void _Ready()
     {
-        parentRect ??= GetParent() as Control;
-        closedX = parentRect.Position.X;
+        parentRect ??= GetParent() as Panel;
+        if(parentRect != null)
+        {
+            closedX = parentRect.Position.X;
+        }
+        
         Pressed += Toggle;
     }
 

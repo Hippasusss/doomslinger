@@ -1,40 +1,29 @@
 using Godot;
 
-public class Stat
+public class Stat(string newName, float newValue = 0, float newRate = 0, (float min, float max) newRange = default, Stat newTargetStat = null)
 {
-    private readonly string name;
-    private float value;
-    private float targetValue;
-    private Stat targetStat;
-    private readonly float coolValue;
-
-    private readonly float rate;
-    private (float min, float max) range;
+    private readonly string name = newName;
+    private float currentValue = newValue;
+    private float targetValue = newValue;
+    private Stat targetStat = newTargetStat;
+    private readonly float coolValue = newValue;
+    private readonly float rate = newRate;
+    private (float min, float max) range = newRange == (0, 0) ? (0, 10) : newRange;
 
     public float Value 
     { 
-        get {return this.value;} 
+        get {return currentValue;} 
         set 
         {
             targetValue = value;
             if(rate <= float.Epsilon)
             {
-                this.value = value;
+                currentValue = value;
             }
         } 
     }
-    public string Name => name;
 
-    public Stat(string name, float value = 0, float rate = 0, (float min, float max) range = default, Stat targetStat = null)
-    {
-        this.name = name;
-        this.value = value;
-        this.rate = rate;
-        this.targetValue = value;
-        this.coolValue = value;
-        this.range = range == (0,0) ? (0, 10) : range;
-        this.targetStat = targetStat;
-    }
+    public string Name => name;
 
     public static Stat operator + (Stat a, float b)
     {
@@ -84,11 +73,11 @@ public class Stat
     public void Update(double delta)
     {
         float currentValue = targetStat == null ? targetValue : targetStat.Value;
-        value = Mathf.Lerp(value, currentValue , rate * (float)delta);
+        this.currentValue = Mathf.Lerp(this.currentValue, currentValue , rate * (float)delta);
     }
      
     public void CoolDown(double delta)
     {
-        value = Mathf.Lerp(value, coolValue, rate * (float)delta);
+        currentValue = Mathf.Lerp(currentValue, coolValue, rate * (float)delta);
     }
 }

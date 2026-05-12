@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class NavigationArea : Node2D
 {
     private AStar2D walkableGraph = new();

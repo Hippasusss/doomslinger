@@ -1,4 +1,6 @@
 
+namespace DoomSlinger;
+
 public class Bid 
 {
     private Company company;

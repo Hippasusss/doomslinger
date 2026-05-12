@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class Outline : Sprite2D
 {
     [Export] public Color OutlineColor = Colors.Yellow;

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class FeedDataDisplay : Control, IDisplay
 {
     [Export] private ButtonMatrix matrix;

@@ -1,5 +1,6 @@
 using Godot;
-using Utils;
+
+namespace DoomSlinger;
 
 public partial class DayNightTimer : Node2D
 {

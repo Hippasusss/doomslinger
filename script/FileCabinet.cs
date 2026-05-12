@@ -1,5 +1,7 @@
-using Godot;
 using System;
+using Godot;
+
+namespace DoomSlinger;
 
 public partial class FileCabinet : Sprite2D
 {

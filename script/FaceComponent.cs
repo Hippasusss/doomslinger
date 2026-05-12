@@ -1,12 +1,6 @@
-
-
-
-
-
-
-
-
 using Godot;
+
+namespace DoomSlinger;
 
 public partial class FaceComponent : Sprite2D
 {

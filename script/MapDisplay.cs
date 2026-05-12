@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class MapDisplay : Control, IDisplay
 {
     [Export] private SubViewport mapViewport;

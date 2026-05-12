@@ -1,15 +1,6 @@
-
-
-
-
-
-
-
-
-
-
 using Godot;
-using Utils;
+
+namespace DoomSlinger;
 
 public partial class HumanDataDisplay : Panel 
 {

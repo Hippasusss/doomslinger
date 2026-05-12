@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class NavigationAgent : Node
 {
     [Signal] public delegate void MovementFinishedEventHandler();

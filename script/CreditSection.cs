@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class CreditSection : Panel
 {
     [Export] private RichTextLabel creditText;

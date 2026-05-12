@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class MapMarker : Node2D
 {
     [Signal] public delegate void MovementFinishedEventHandler();

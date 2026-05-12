@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class Company : Resource
 {
     [Export] Texture2D logo;

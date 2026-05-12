@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class ButtonMatrix : Panel
 {
     private GridContainer grid;

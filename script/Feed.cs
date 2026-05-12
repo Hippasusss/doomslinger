@@ -1,16 +1,8 @@
-
-
-
-
-
-
-
-
-
-using Godot;
 using System;
 using System.Collections.Generic;
-using Utils;
+using Godot;
+
+namespace DoomSlinger;
 
 public partial class Feed : CanvasGroup 
 {

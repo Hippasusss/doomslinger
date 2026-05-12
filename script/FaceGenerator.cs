@@ -1,6 +1,8 @@
-using Godot;
 using System.Linq;
 using System.Threading.Tasks;
+using Godot;
+
+namespace DoomSlinger;
 
 public partial class FaceGenerator : SubViewport
 {

@@ -1,6 +1,7 @@
-using Godot;
 using System;
-using Utils;
+using Godot;
+
+namespace DoomSlinger;
 
 public partial class EyeDisplay : Node2D, IDisplay
 {

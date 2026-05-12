@@ -1,4 +1,6 @@
 
+namespace DoomSlinger;
+
 public interface IDisplay
 {
     void ToggleOnOff(bool onOff);

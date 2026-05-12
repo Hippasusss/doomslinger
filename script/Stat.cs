@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public class Stat(string newName, float newValue = 0, float newRate = 0, (float min, float max) newRange = default, Stat newTargetStat = null)
 {
     private readonly string name = newName;

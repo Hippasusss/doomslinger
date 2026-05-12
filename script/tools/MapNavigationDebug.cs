@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
 
+namespace DoomSlinger;
+
 [Tool]
 public partial class NavDebugDrawer : Control
 {

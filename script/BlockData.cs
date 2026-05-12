@@ -1,5 +1,7 @@
 using System;
 
+namespace DoomSlinger;
+
 public class BlockData(float politicalLeaning, float outrage, float interesting, float fun, float length) 
 {
 

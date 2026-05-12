@@ -1,6 +1,7 @@
-using Godot;
 using System.Collections.Generic;
-using Utils;
+using Godot;
+
+namespace DoomSlinger;
 
 public partial class AlgoSection : Panel
 {

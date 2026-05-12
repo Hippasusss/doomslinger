@@ -1,5 +1,7 @@
-using Godot;
 using System.Collections.Generic;
+using Godot;
+
+namespace DoomSlinger;
 
 public partial class GameData : Resource
 {

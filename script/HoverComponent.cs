@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoomSlinger;
+
 public partial class HoverComponent : Sprite2D
 {
     [Export] public float Radius = 5.0f;

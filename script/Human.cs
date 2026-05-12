@@ -1,13 +1,6 @@
-
-
-
-
-
-
-
-
 using Godot;
-using Utils;
+
+namespace DoomSlinger;
 
 public partial class Human : Node2D
 {

@@ -1,6 +1,8 @@
-using Godot;
 using System;
 using System.Collections.Generic;
+using Godot;
+
+namespace DoomSlinger;
 
 public partial class BgGenerator : Node2D
 {

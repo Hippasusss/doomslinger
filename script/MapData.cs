@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
-using System.Collections.Generic;
+
+namespace DoomSlinger;
 
 [Tool]
 [GlobalClass]

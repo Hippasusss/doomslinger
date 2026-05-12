@@ -1,6 +1,5 @@
 using Godot;
 
-[Tool]
 public partial class ButtonMatrix : Panel
 {
     private GridContainer grid;
@@ -10,61 +9,12 @@ public partial class ButtonMatrix : Panel
     private int rows = 6;
     private int margin = 2;
     private int gap = 1;
-    [Export]
-    public PackedScene ButtonScene
-    {
-        get => buttonScene;
-        set
-        {
-            buttonScene = value;
-            if (IsInsideTree()) Rebuild();
-        }
-    }
 
-    [Export]
-    public int Columns
-    {
-        get => columns;
-        set
-        {
-            columns = Mathf.Max(1, value);
-            if (IsInsideTree()) Rebuild();
-        }
-    }
-
-    [Export]
-    public int Rows
-    {
-        get => rows;
-        set
-        {
-            rows = Mathf.Max(1, value);
-            if (IsInsideTree()) Rebuild();
-        }
-    }
-
-
-    [Export]
-    public int Margin
-    {
-        get => margin;
-        set
-        {
-            margin = value;
-            if (grid != null) ApplyMargins();
-        }
-    }
-
-    [Export]
-    public int Gap
-    {
-        get => gap;
-        set
-        {
-            gap = value;
-            if (grid != null) ApplyGaps();
-        }
-    }
+    [Export] public PackedScene ButtonScene { get => buttonScene; set => buttonScene = value; }
+    [Export] public int Columns { get => columns; set => columns = value; }
+    [Export] public int Rows { get => rows; set => rows = value; }
+    [Export] public int Margin { get => margin; set => margin = value; }
+    [Export] public int Gap { get => gap; set => gap = value; }
 
     public override void _Ready()
     {

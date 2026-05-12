@@ -57,7 +57,6 @@ public partial class Feed : CanvasGroup
             ResetBlock(newfeedblock);
         }
         screenLight.Color = GetBlockBeingRead().GetColour();
-        // GetBlockBeingRead().SetColour( Colors.White);
     }
 
     public override void _Process(double delta) 
@@ -121,6 +120,6 @@ public partial class Feed : CanvasGroup
     {
         block.Position = new Vector2(block.Position.X, (FeedBlocks.Count - 1) * -blockSpacing);
         block.SetColour(feedBlockPalette.Colors.GetRandom());
-        block.stats.RandomizeStats(-2, 2);
+        block.blockData.Randomize();
     }
 }

@@ -15,6 +15,11 @@ public partial class Feedblock : Node2D
 {
     [Export] private Sprite2D colourSprite;
     public BlockData blockData;
+    public override void _Ready()
+    {
+        blockData = new();
+        blockData.Randomize();
+    }
 
     public void SetColour(float r, float g, float b, float a)
     {

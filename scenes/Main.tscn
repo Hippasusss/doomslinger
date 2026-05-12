@@ -489,19 +489,6 @@ offset_right = 203.0
 offset_bottom = 149.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="DataHideReveal" type="Button" parent="UI/DataSection" unique_id=752823811 node_paths=PackedStringArray("parentRect")]
-layout_mode = 0
-offset_left = -14.0
-offset_right = 1.0
-offset_bottom = 66.0
-action_mode = 0
-icon = ExtResource("22_fs0b5")
-vertical_icon_alignment = 0
-script = ExtResource("17_ft6cd")
-parentRect = NodePath("..")
-directionRight = false
-tweenCurve = ExtResource("25_kxyth")
-
 [node name="Panel" type="Panel" parent="UI/DataSection" unique_id=1395904642]
 layout_mode = 0
 offset_left = 9.0
@@ -525,7 +512,19 @@ offset_right = 203.0
 offset_bottom = 354.0
 theme_override_styles/panel = ExtResource("13_cmqll")
 
-[node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425]
+[node name="DataHideReveal" type="Button" parent="UI/DataSection" unique_id=752823811]
+layout_mode = 0
+offset_left = -14.0
+offset_right = 1.0
+offset_bottom = 66.0
+action_mode = 0
+icon = ExtResource("22_fs0b5")
+vertical_icon_alignment = 0
+script = ExtResource("17_ft6cd")
+directionRight = false
+tweenCurve = ExtResource("25_kxyth")
+
+[node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425 node_paths=PackedStringArray("bidMatrix")]
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -536,8 +535,9 @@ offset_bottom = 250.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("11_pdwbg")
 script = ExtResource("30_gdcyb")
+bidMatrix = NodePath("ButtonMatrix")
 
-[node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203 node_paths=PackedStringArray("parentRect")]
+[node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203]
 layout_mode = 0
 offset_left = -15.0
 offset_bottom = 60.0
@@ -545,7 +545,6 @@ theme = ExtResource("15_hq6as")
 icon = ExtResource("27_kxyth")
 vertical_icon_alignment = 0
 script = ExtResource("17_ft6cd")
-parentRect = NodePath("..")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
@@ -586,7 +585,6 @@ offset_bottom = 153.0
 script = ExtResource("28_8b871")
 ButtonScene = ExtResource("30_t70y2")
 Columns = 24
-Rows = 8
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
 visible = false
@@ -612,27 +610,7 @@ script = ExtResource("17_ft6cd")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
-[node name="CreditSection" type="Panel" parent="UI" unique_id=583447152 node_paths=PackedStringArray("creditText")]
-offset_right = 149.0
-offset_bottom = 26.0
-theme_override_styles/panel = ExtResource("11_pdwbg")
-script = ExtResource("34_s3wmy")
-creditText = NodePath("RichTextLabel")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/CreditSection" unique_id=593784724]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 71.0
-offset_bottom = 25.0
-theme_override_font_sizes/normal_font_size = 21
-text = "100"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
-visible = false
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -662,7 +640,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 sdf_scale = 0
 size = Vector2i(341, 193)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="MapCamera" type="Camera2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=-123190488]
 position_smoothing_speed = 0.0
@@ -679,7 +657,7 @@ mapMarkerScene = ExtResource("30_8cp6k")
 camera = NodePath("../MapCamera")
 mapSectionToggle = NodePath("../../../MapHideReveal")
 
-[node name="MapHideReveal" type="Button" parent="UI/MapSection" unique_id=528598141 node_paths=PackedStringArray("parentRect")]
+[node name="MapHideReveal" type="Button" parent="UI/MapSection" unique_id=528598141]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 0.9999995
@@ -691,9 +669,27 @@ action_mode = 0
 text = "x
 "
 script = ExtResource("17_ft6cd")
-parentRect = NodePath("..")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
+
+[node name="CreditSection" type="Panel" parent="UI" unique_id=583447152 node_paths=PackedStringArray("creditText")]
+offset_right = 149.0
+offset_bottom = 26.0
+theme_override_styles/panel = ExtResource("11_pdwbg")
+script = ExtResource("34_s3wmy")
+creditText = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/CreditSection" unique_id=593784724]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 71.0
+offset_bottom = 25.0
+theme_override_font_sizes/normal_font_size = 21
+text = "100"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
 position = Vector2(-142, 242)
@@ -804,6 +800,7 @@ text = ""
 stream = ExtResource("18_bb450")
 volume_db = -9.055
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="DayNightTimer" type="Node2D" parent="." unique_id=2021218286]

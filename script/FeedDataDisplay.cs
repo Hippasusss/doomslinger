@@ -30,10 +30,10 @@ public partial class FeedDataDisplay : Control, IDisplay
             int index = Mathf.PosMod(blockBeingReadIndex + (matrix.Rows - 1 - blockIdx), count);
             Feedblock block = feedBlocks[index];
 
-            int numStats = block.stats.mainStats.Count;
+            int numStats = block.blockData.Stats.Length;
             for (int statIdx = 0; statIdx < numStats; statIdx++)
             {
-                float t = (block.stats.mainStats[statIdx].GetNormalised() + 1) / 2;
+                float t = (block.blockData.Stats[statIdx] + 1) / 2;
                 MatrixCell cell = matrix.GetCell(blockIdx * cols + statIdx);
                 cell.Color = block.GetColour() * t;
             }

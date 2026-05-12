@@ -16,8 +16,8 @@ public partial class AlgoSection : Panel
         }
     }
 
-    private void generateNewBid()
+    private void GenerateNewBid()
     {
-        Bid bid = new();
+        // Bid bid = new();
     }
 }

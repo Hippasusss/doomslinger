@@ -128,7 +128,7 @@ public partial class Human : Node2D
 
     private void ReadFeedBlock(Feedblock block)
     {
-        Stats.AddOther(block.stats);
+        // Stats.AddOther(block.stats);
     }
 
     public void Select(bool setSelected, bool emit = true)

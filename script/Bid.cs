@@ -1,16 +1,19 @@
+using Godot;
 
 namespace DoomSlinger;
 
 public class Bid 
 {
-    private Company company;
-    private BlockData data;
-    private int price;
+    public Company CompanyBidding { get; set; }
+    public BlockData BlockData { get; set; }
+    public int Price { get; set;}
 
-    public Bid(Company newCompany, BlockData newData, int newPrice)
+    public Bid(Company newCompany)
     {
-        company = newCompany;
-        data = newData;
-        price = newPrice;
+        CompanyBidding = newCompany;
+        BlockData = new(newCompany);
+        Price = (int)GD.Randfn(5f, newCompany.Chaos);
     }
+
+
 }

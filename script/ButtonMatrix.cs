@@ -18,6 +18,8 @@ public partial class ButtonMatrix : Panel
     [Export] public int Margin { get => margin; set => margin = value; }
     [Export] public int Gap { get => gap; set => gap = value; }
 
+    public int Count { get => rows * columns; }
+
     public override void _Ready()
     {
         Rebuild();
@@ -69,6 +71,11 @@ public partial class ButtonMatrix : Panel
     {
         if (grid == null || index < 0 || index >= grid.GetChildCount()) return null;
         return grid.GetChild(index) as MatrixCell;
+    }
+
+    public MatrixCell GetRandomCell()
+    {
+        return GetCell(GD.RandRange(0, Count - 1));
     }
 
 }

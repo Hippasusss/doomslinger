@@ -30,12 +30,30 @@ public partial class Human : Node2D
     public Sprite2D Phone { get => phone; }
     public Feed Feed { get => feed; }
 
-    public int BPM {get ; set;}
 
     public bool IsOnline { get => isOnline;}
     public bool IsMoving { get => isMoving; }
     public bool Selected { get => selected; }
 
+    public int BPM 
+    {
+        get 
+        {
+            (int min, int max) = (35, 199);
+            int BPMdiff = max- min;
+
+            float seratonin = Stats.Seratonin.GetNormalised();
+            float cortisol = Stats.Cortisol.GetNormalised();
+            float melatonin = Stats.Melatonin.GetNormalised();
+
+            int rageBPM = (int)(BPMdiff * seratonin * (1 - melatonin * 0.5f) + min);
+            int fearBPM = (int)(BPMdiff * cortisol * (1 - melatonin * 0.5f) + min);
+
+            int final = Mathf.Max(rageBPM, fearBPM);
+            return Mathf.Clamp(final, min, max);
+
+        }
+    }
 
     public override void _Ready()
     {
@@ -77,7 +95,6 @@ public partial class Human : Node2D
         if(statUpdateTimer.Delta(delta))
         {
             stats.UpdateAll(delta);
-            CalculateBPM();
         }
     }
 
@@ -140,22 +157,6 @@ public partial class Human : Node2D
         }
     }
 
-    private readonly (int min, int max) BPMRange = (35, 199);
-    private void CalculateBPM()
-    {
-        int BPMdiff = BPMRange.max- BPMRange.min;
-
-        float rage = Stats.rage.GetNormalised();
-        float fear = Stats.fear.GetNormalised();
-        float fatigue = Stats.fatigue.GetNormalised();
-
-        int rageBPM = (int)(BPMdiff * rage * (1 - fatigue * 0.5f) + BPMRange.min);
-        int fearBPM = (int)(BPMdiff * fear * (1 - fatigue * 0.5f) + BPMRange.min);
-
-        BPM = Mathf.Max(rageBPM, fearBPM);
-        BPM = Mathf.Clamp(BPM, BPMRange.min, BPMRange.max);
-
-    }
 
     private void ToggleWarning(bool onOff)
     {

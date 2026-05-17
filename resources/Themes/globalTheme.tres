@@ -1,0 +1,46 @@
+[gd_resource type="Theme" format=3 uid="uid://dqooghemw7a8d"]
+
+[ext_resource type="Texture2D" uid="uid://5d2kumv8e5i" path="res://sprite/mapmarker.png" id="1_ynpy7"]
+[ext_resource type="Texture2D" uid="uid://8rwfn6yrhqgq" path="res://sprite/politicalLeaningSliderBackground.png" id="2_7s8wb"]
+[ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="2_wmc14"]
+[ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="3_7s8wb"]
+[ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="4_n5py1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23km4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d0ctx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bc8qu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhohs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f842f"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n5py1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("2_7s8wb")
+
+[resource]
+default_font = ExtResource("4_n5py1")
+default_font_size = 8
+Button/styles/disabled = SubResource("StyleBoxEmpty_23km4")
+Button/styles/focus = SubResource("StyleBoxEmpty_d0ctx")
+Button/styles/hover = SubResource("StyleBoxEmpty_bc8qu")
+Button/styles/normal = SubResource("StyleBoxEmpty_nhohs")
+Button/styles/pressed = SubResource("StyleBoxEmpty_f842f")
+HSlider/icons/grabber = ExtResource("1_ynpy7")
+HSlider/icons/grabber_disabled = ExtResource("1_ynpy7")
+HSlider/styles/grabber_area = ExtResource("3_7s8wb")
+HSlider/styles/grabber_area_highlight = ExtResource("3_7s8wb")
+HSlider/styles/slider = SubResource("StyleBoxTexture_n5py1")
+RichTextLabel/colors/default_color = Color(0.71692264, 0.7664014, 0.95715314, 1)
+RichTextLabel/fonts/bold_font = ExtResource("2_wmc14")
+RichTextLabel/fonts/normal_font = ExtResource("2_wmc14")
+VScrollBar/styles/grabber = ExtResource("3_7s8wb")
+VScrollBar/styles/grabber_highlight = ExtResource("3_7s8wb")
+VScrollBar/styles/grabber_pressed = ExtResource("3_7s8wb")
+VScrollBar/styles/scroll = ExtResource("3_7s8wb")
+VScrollBar/styles/scroll_focus = ExtResource("3_7s8wb")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Company" format=3 uid="uid://yctveyd8phcy"]
+
+[ext_resource type="Texture2D" uid="uid://ih20mpaqywx1" path="res://sprite/LogoOldHeadsINC.png" id="1_mcxfw"]
+[ext_resource type="Script" uid="uid://dw8aetio5v1hw" path="res://script/Company.cs" id="1_w67mv"]
+
+[resource]
+script = ExtResource("1_w67mv")
+Logo = ExtResource("1_mcxfw")
+Name = "Oldheads ltd"
+Description = "Really old company full of grumpy old men. These men will do good business but are extremely cross all day. "
+Sectors = 1
+MarketCap = 10000000000.0
+Age = 77.241
+PoliticalLeaning = 0.8399999999999999
+Chaos = 0.098
+CurrentStanding = 0.715
+metadata/_custom_type_script = "uid://dw8aetio5v1hw"

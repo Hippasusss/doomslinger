@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Company" format=3 uid="uid://dpiunt3spq8tt"]
+
+[ext_resource type="Script" uid="uid://dw8aetio5v1hw" path="res://script/Company.cs" id="1_45ypv"]
+[ext_resource type="Texture2D" uid="uid://nmp42nkq4bbd" path="res://sprite/LogoSillyCO.png" id="1_vsi3y"]
+
+[resource]
+script = ExtResource("1_45ypv")
+Logo = ExtResource("1_vsi3y")
+Name = "Silly CO"
+Description = "Really silly company with no money. Run by buffons that mean well."
+Sectors = 65552
+IsLocal = true
+MarketCap = 20000.0
+Age = 2.451
+PoliticalLeaning = -0.795
+Chaos = 0.882
+CurrentStanding = 0.889
+metadata/_custom_type_script = "uid://dw8aetio5v1hw"

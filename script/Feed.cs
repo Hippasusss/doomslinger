@@ -4,7 +4,7 @@ using Godot;
 
 namespace DoomSlinger;
 
-public partial class Feed : CanvasGroup 
+public partial class Feed : CanvasGroup
 {
     [Export] private PackedScene feedBlockSN;
     [Export] private ColorPalette feedBlockPalette;
@@ -51,7 +51,7 @@ public partial class Feed : CanvasGroup
         screenLight.Color = GetBlockBeingRead().GetColour();
     }
 
-    public override void _Process(double delta) 
+    public override void _Process(double delta)
     {
         if(swipeTimer.Delta(delta) && enabled)
         {

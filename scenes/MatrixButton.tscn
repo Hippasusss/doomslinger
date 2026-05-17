@@ -25,6 +25,7 @@ button = NodePath("Button2")
 text = NodePath("RichTextLabel")
 
 [node name="Button2" type="Button" parent="." unique_id=1638670685]
+self_modulate = Color(0.34220693, 0.34220695, 0.3422069, 1)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_dngb4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ik3d2")
@@ -32,6 +33,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ik3d2")
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1802684054]
 layout_mode = 2
 mouse_filter = 2
-text = "AA"
+text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1

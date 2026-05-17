@@ -31,9 +31,6 @@ load_path = "res://.godot/imported/FacePlaceHolder.png-ecc258afcbd13701e5134df53
 shader = ExtResource("9_b524o")
 shader_parameter/intensity = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj28b"]
-size = Vector2(27, 67.5)
-
 [sub_resource type="Animation" id="Animation_b524o"]
 length = 0.2
 tracks/0/type = "value"
@@ -48,10 +45,46 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Face:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Phone/ScreenLight:EnergyOffset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Phone:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
 
 [sub_resource type="Animation" id="Animation_2pby3"]
 resource_name = "hover"
-length = 0.3
+length = 0.6333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,22 +92,46 @@ tracks/0/path = NodePath("Face:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(2.4622886, 1),
+"times": PackedFloat32Array(0, 0.13333334, 0.3, 0.46666667, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10)]
+"values": [Vector2(0, 0), Vector2(-2.045, -0.96), Vector2(0, 0), Vector2(2.045, -0.96), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/path = NodePath("Face:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(2.4622886, 1),
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10)]
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Phone/ScreenLight:EnergyOffset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.15]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Phone:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.4), Vector2(0.44, 0.44)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5jfd8"]
@@ -83,7 +140,7 @@ _data = {
 &"hover": SubResource("Animation_2pby3")
 }
 
-[node name="Human" type="Area2D" unique_id=1247641853 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol", "SelectionButton")]
+[node name="Human" type="Node2D" unique_id=1949069056 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol", "SelectionButton")]
 script = ExtResource("1_sogvw")
 face = NodePath("Face")
 feed = NodePath("Feed")
@@ -136,10 +193,8 @@ IsHighlighted = true
 modulate = Color(0.27752772, 0.27752772, 0.27752772, 1)
 z_index = 2
 material = SubResource("ShaderMaterial_2pby3")
-position = Vector2(1.4177952, 14.948789)
-rotation = -0.045378562
+position = Vector2(0, 12.000001)
 scale = Vector2(0.4, 0.4)
-skew = 0.017453194
 texture = ExtResource("2_or0av")
 script = ExtResource("5_b524o")
 Radius = 1.0
@@ -159,12 +214,6 @@ texture = ExtResource("6_evmiy")
 script = ExtResource("7_2baw4")
 FlickerRange = 0.4
 FlickerSpeed = 10.04
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1364458529]
-visible = false
-position = Vector2(1, 9)
-shape = SubResource("RectangleShape2D_vj28b")
-debug_color = Color(0, 0.6, 0.69803923, 0.3137255)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=112613896]
 libraries/ = SubResource("AnimationLibrary_5jfd8")

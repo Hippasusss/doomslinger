@@ -22,6 +22,9 @@ public partial class MapManager : Sprite2D
     private const float triangulationTime = 3f;
 
     private Vector2 _defaultMapPosition;
+    private Vector2 _mapHalfSize;
+    private Vector2 _minZoom;
+    private SubViewport _viewport;
 
     public override void _Ready()
     {
@@ -34,10 +37,16 @@ public partial class MapManager : Sprite2D
 
         mapData?.LoadIntoGraph(navigationArea.WalkableGraph);
 
-        SubViewport viewport = GetParent<SubViewport>();
+        _viewport = GetParent<SubViewport>();
 
-        if (viewport.GetParent() is Control container)
+        if (_viewport.GetParent() is Control container)
             container.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+
+        if (mapData?.DisplayTexture != null)
+        {
+            _mapHalfSize = mapData.DisplayTexture.GetSize() * Scale / 2;
+            _minZoom = _viewport.Size / (_mapHalfSize * 2);
+        }
 
         camera.Position = GetViewportCenter();
         camera.Zoom = new Vector2(trackingZoom, trackingZoom);
@@ -54,8 +63,9 @@ public partial class MapManager : Sprite2D
                 zoomTween?.Kill();
                 _isTriangulating = false;
                 Vector2 zoom = camera.Zoom;
-                zoom = (zoom * 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
+                zoom = (zoom * 1.1f).Clamp(_minZoom, Vector2.One * 5.0f);
                 camera.Zoom = zoom;
+                ClampCameraToBounds();
                 userControlling = true;
             }
             else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
@@ -63,8 +73,9 @@ public partial class MapManager : Sprite2D
                 zoomTween?.Kill();
                 _isTriangulating = false;
                 Vector2 zoom = camera.Zoom;
-                zoom = (zoom / 1.1f).Clamp(Vector2.One * 0.2f, Vector2.One * 5.0f);
+                zoom = (zoom / 1.1f).Clamp(_minZoom, Vector2.One * 5.0f);
                 camera.Zoom = zoom;
+                ClampCameraToBounds();
                 userControlling = true;
             }
         }
@@ -74,6 +85,7 @@ public partial class MapManager : Sprite2D
             zoomTween?.Kill();
             _isTriangulating = false;
             camera.Position -= motion.Relative / camera.Zoom;
+            ClampCameraToBounds();
             userControlling = true;
         }
     }
@@ -161,7 +173,15 @@ public partial class MapManager : Sprite2D
 
     private Vector2 GetViewportCenter()
     {
-        Vector2I viewportSize = GetParent<SubViewport>().Size;
-        return new(viewportSize.X / 2.0f, viewportSize.Y / 2.0f);
+        return new(_viewport.Size.X / 2.0f, _viewport.Size.Y / 2.0f);
+    }
+
+    private void ClampCameraToBounds()
+    {
+        if (_mapHalfSize == Vector2.Zero) return;
+        Vector2 halfView = _viewport.Size / (2 * camera.Zoom);
+        Vector2 minPos = _defaultMapPosition - _mapHalfSize + halfView;
+        Vector2 maxPos = _defaultMapPosition + _mapHalfSize - halfView;
+        camera.Position = camera.Position.Clamp(minPos, maxPos);
     }
 }

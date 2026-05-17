@@ -134,13 +134,13 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     private void CalculateEye(Human human)
     {
-        float engagementNorm = human.Stats.engagement.GetNormalised();
+        float engagementNorm = human.Stats.Engagement.GetNormalised();
 
         irisSize = Mathf.Lerp(irisSizeRange.min, irisSizeRange.max, 1 - engagementNorm); 
         blinkRate = Mathf.Lerp(blinkRateRange.min, blinkRateRange.max, engagementNorm);
         moveRate = Mathf.Lerp(moveRateRange.min, moveRateRange.max, 1 - engagementNorm);
-        redEyeAmount = human.Stats.fatigue.GetNormalised();
-        eyebagAmount = human.Stats.longTermFatigue.GetNormalised();
+        redEyeAmount = human.Stats.Melatonin.GetNormalised();
+        eyebagAmount = human.Stats.LongTermFatigue.GetNormalised();
 
         const float minMove = 1f;
         float currentRadius = eyeballMoveRange.max * (1.0f - engagementNorm) + minMove;

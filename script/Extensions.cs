@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -30,5 +31,14 @@ public static class SpriteExtensions
             source.Visible = true;
             source.Frame = (int)Mathf.Floor((float)((source.Hframes - 1) * percent));
         }
+    }
+}
+
+public static class EnumExtensions
+{
+    public static T NextEnum<T>(this Random random) where T : struct, Enum
+    {
+        var values = Enum.GetValues<T>();
+        return values[random.Next(values.Length)];
     }
 }

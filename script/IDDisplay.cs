@@ -18,7 +18,7 @@ public partial class IDDisplay : Control, IDisplay
             [table=2]
             [cell][right][b]DOB:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.DOB}[/right][/color][/cell]
             [cell][right][b]HT:[/b][/right][/cell]   [cell expand=true][color=white][right]{human.Data.height}[/right][/color][/cell]
-            [cell][right][b]GEN:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.gender}[/right][/color][/cell]
+            [cell][right][b]GEN:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.gender.ToString()}[/right][/color][/cell]
             [cell][right][b]UID:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.UID}[/right][/color][/cell]
             [cell][right][b]NAT:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.nationality}[/right][/color][/cell]
             [/table]

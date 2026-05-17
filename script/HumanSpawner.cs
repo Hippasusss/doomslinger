@@ -7,18 +7,16 @@ namespace DoomSlinger;
 
 public partial class HumanSpawner : Node2D
 {
-
     [Export] private HumanManager humanManager;
     [Export] private PackedScene human;
     [Export] private Node2D initPosition;
     [Export] private int numHumans = 1;
     [Export] private FaceGenerator faceGenerator;
     private const int humanSpacing = 50;
-    private static readonly string[] nationalities = [ "Scottish", "English", "Welsh", "Irish", "French", "German", "Spanish", "Italian", "American", "Canadian", "Australian", "Japanese", "Chinese", "Indian", "Brazilian", "Mexican", "Russian", "Danish", "Swedish", "Norwegian" ];
+    [Export] StringList nationalities;
     private static readonly string[] femaleNames = [ "Jane", "Alice", "Diana", "Fiona", "Hannah", "Julia", "Laura", "Nora", "Paula", "Sarah", "Ursula", "Wendy", "Yara" ];
     private static readonly string[] maleNames = [ "John", "Bob", "Charlie", "Edward", "George", "Ian", "Kevin", "Mike", "Oscar", "Quinn", "Ryan", "Tom", "Victor", "Xander", "Zack" ];
     private static readonly string[] surnames = [ "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson" ];
-    private static readonly string[] genders = [ "M", "F" ];
 
     public override async void _Ready()
     {
@@ -34,8 +32,9 @@ public partial class HumanSpawner : Node2D
         AddChild(newHuman);
         humanManager.AddHuman(newHuman);
         newHuman.Position = new Vector2(initPosition.Position.X + (humanManager.HumanCount * humanSpacing), initPosition.Position.Y );
-        string gender = GetRandomGender();
-        newHuman.Data = new HumanPersonalData(GetRandomName(gender),GetRandomDate(), GetRandomHeight(gender), gender, GetRandomNationality() , 5);
+        HumanPersonalData.Gender gender = GetRandomGender();
+        HumanPersonalData.Orientation orientation = GetRandomOrientation();
+        newHuman.Data = new HumanPersonalData(GetRandomName(gender), GetRandomDate(), GetRandomHeight(gender), gender, orientation, GetRandomNationality());
 
         // need to wait for it to draw the aggregate sprite
         var (texture, colours) = await faceGenerator.GenerateAsync(newHuman.Data);
@@ -44,14 +43,14 @@ public partial class HumanSpawner : Node2D
         newHuman.Phone.Modulate = newHuman.Colors[5];
     }
 
-    private static string GetRandomName(string gender)
+    private static string GetRandomName(HumanPersonalData.Gender gender)
     {
         string firstName;
-        if (gender == "M")
+        if (gender == HumanPersonalData.Gender.Male)
         {
             firstName = maleNames.GetRandom();
         }
-        else if (gender == "F")
+        else if (gender == HumanPersonalData.Gender.Female)
         {
             firstName = femaleNames.GetRandom();
         }
@@ -63,17 +62,17 @@ public partial class HumanSpawner : Node2D
         return $"{firstName} {lastName}";
     }
 
-    private static int GetRandomHeight(string gender)
+    private static int GetRandomHeight(HumanPersonalData.Gender gender)
     {
         (int min, int max) = (155, 210);
         double mean, stdDev;
 
-        if (gender == "M")
+        if (gender == HumanPersonalData.Gender.Male)
         {
             mean = 177.0;
             stdDev = 8.0;
         }
-        else if (gender == "F")
+        else if (gender == HumanPersonalData.Gender.Female)
         {
             mean = 164.0;
             stdDev = 7.0;
@@ -105,14 +104,19 @@ public partial class HumanSpawner : Node2D
         return (int)Math.Round(height);
     }
 
-    private static string GetRandomGender()
+    private static HumanPersonalData.Gender GetRandomGender()
     {
-        return genders.GetRandom();
+        return Random.Shared.NextEnum<HumanPersonalData.Gender>();
     }
 
-    private static string GetRandomNationality()
+    private static HumanPersonalData.Orientation GetRandomOrientation()
     {
-        return nationalities.GetRandom();
+        return Random.Shared.NextEnum<HumanPersonalData.Orientation>();
+    }
+
+    private string GetRandomNationality()
+    {
+        return nationalities.values.GetRandom();
     }
 
     private static DateOnly GetRandomDate()

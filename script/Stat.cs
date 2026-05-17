@@ -74,8 +74,8 @@ public class Stat(string newName, float newValue = 0, float newRate = 0, (float 
 
     public void Update(double delta)
     {
-        float currentValue = targetStat == null ? targetValue : targetStat.Value;
-        this.currentValue = Mathf.Lerp(this.currentValue, currentValue , rate * (float)delta);
+        float setValue = targetStat == null ? targetValue : targetStat.Value;
+        currentValue = Mathf.Lerp(currentValue, setValue , rate * (float)delta);
     }
      
     public void CoolDown(double delta)

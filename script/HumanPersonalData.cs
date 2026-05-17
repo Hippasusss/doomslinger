@@ -4,30 +4,33 @@ using Godot;
 
 namespace DoomSlinger;
 
-public struct HumanPersonalData
+public readonly struct HumanPersonalData
 {
+    public enum Gender { Male, Female, NonBinary }
+    public enum Orientation { Straight, Bi, Gay }
+
     public readonly string name;
     public readonly DateOnly DOB;
     public readonly int height;
-    public readonly string gender;
+    public readonly Gender gender;
+    public readonly Orientation orientation;
     public readonly string nationality;
     public readonly int UID;
-    public int meaningfullConnections;
     private readonly static List<int> UIDs = [];
 
     public HumanPersonalData(string name,
             DateOnly DOB,
             int height,
-            string gender,
-            string nationality,
-            int meaningfullConnections)
+            Gender gender,
+            Orientation orientation,
+            string nationality)
     {
         this.name = name;
         this.DOB = DOB;
         this.height = height;
         this.gender = gender;
+        this.orientation = orientation;
         this.nationality = nationality;
-        this.meaningfullConnections = meaningfullConnections;
         do
         {
             UID = GD.RandRange(0,99999);

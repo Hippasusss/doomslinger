@@ -32,7 +32,7 @@ public partial class FaceGenerator : SubViewport
         var children = GetChildren().OfType<FaceComponent>().ToList();
 
         Texture2D sheet;
-        if (data.gender == "F")
+        if (data.gender == HumanPersonalData.Gender.Female)
         {
             sheet = femaleSpriteSheet;
         }
@@ -79,7 +79,7 @@ public partial class FaceGenerator : SubViewport
 
             if (name.Contains("hair") && !name.Contains("back"))
             {
-                part.Visible = (GD.Randf() < HairChance) || data.gender == "F";
+                part.Visible = (GD.Randf() < HairChance) || data.gender == HumanPersonalData.Gender.Female;
                 part.Modulate = hairColor;
                 var hairback = children.FirstOrDefault(x => x.Name.ToString().Equals("hairback", System.StringComparison.CurrentCultureIgnoreCase));
                 hairback.Modulate = hairColor;
@@ -88,7 +88,7 @@ public partial class FaceGenerator : SubViewport
             else if (name.Contains("beard"))
             {
                 part.Visible = GD.Randf() < BeardChance;
-                part.Modulate = data.gender == "M" ? hairColor : jewleryColor;
+                part.Modulate = data.gender == HumanPersonalData.Gender.Male ? hairColor : jewleryColor;
             }
             else if (name.Contains("face"))
             {

@@ -41,11 +41,11 @@ public partial class WaveFormDisplay : Control, IDisplay
             float t = i / (float)(points.Length - 2);
             float xpos = t * width;
 
-            float wave1 = Mathf.Sin((human.Stats.rage * t * Mathf.Tau) + _time);
-            float wave2 = Mathf.Sin((human.Stats.fear * t * Mathf.Tau) + _time);
+            float wave1 = Mathf.Sin((human.Stats.Seratonin * t * Mathf.Tau) + _time);
+            float wave2 = Mathf.Sin((human.Stats.Cortisol * t * Mathf.Tau) + _time);
 
             float combinedWave = wave1 * wave2;
-            float finalYOffset = combinedWave * (centerY * Amplitude * ((human.Stats.rage + human.Stats.fear) / 10f));
+            float finalYOffset = combinedWave * (centerY * Amplitude * ((human.Stats.Seratonin + human.Stats.Cortisol) / 10f));
 
             points[i] = new Vector2(xpos, centerY + finalYOffset);
             points[i + 1] = new Vector2(xpos, centerY - finalYOffset);

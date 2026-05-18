@@ -15,24 +15,96 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.9868733, 0.44897026, 0.631689, 1)
 
-[node name="MatrixCell" type="PanelContainer" unique_id=309822490 node_paths=PackedStringArray("button", "text")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dw0gp"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71d8v"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="MatrixCell" type="Panel" unique_id=879974903 node_paths=PackedStringArray("button", "text", "SelectionNumber")]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_any81")
 script = ExtResource("1_any81")
 button = NodePath("Button2")
-text = NodePath("RichTextLabel")
+text = NodePath("MainText")
+SelectionNumber = NodePath("SelectionNumber")
 
 [node name="Button2" type="Button" parent="." unique_id=1638670685]
 self_modulate = Color(0.34220693, 0.34220695, 0.3422069, 1)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_dngb4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ik3d2")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1802684054]
-layout_mode = 2
+[node name="MainText" type="RichTextLabel" parent="." unique_id=1802684054]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SelectionNumber" type="Control" parent="." unique_id=529784809]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Border" type="Panel" parent="SelectionNumber" unique_id=650441243]
+modulate = Color(0.1966385, 0.5436611, 0.6464206, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dw0gp")
+
+[node name="Background" type="Panel" parent="SelectionNumber/Border" unique_id=74857884]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_71d8v")
+
+[node name="Number" type="RichTextLabel" parent="SelectionNumber" unique_id=379580471]
+z_index = 7
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 5
+text = " 1"

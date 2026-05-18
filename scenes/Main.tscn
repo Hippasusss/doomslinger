@@ -584,8 +584,7 @@ offset_right = 326.0
 offset_bottom = 118.0
 script = ExtResource("28_8b871")
 ButtonScene = ExtResource("26_0f1tp")
-Columns = 24
-Rows = 8
+Columns = 16
 
 [node name="BidDataDisplay" type="Panel" parent="UI/AlgoSection" unique_id=476280038 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidInfo", "PoliticalSlider")]
 layout_mode = 0

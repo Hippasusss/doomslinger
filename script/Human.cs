@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 namespace DoomSlinger;
 
@@ -30,14 +31,15 @@ public partial class Human : Node2D
     public Sprite2D Phone { get => phone; }
     public Feed Feed { get => feed; }
 
+    public List<BlockData> NextBlockDatas { get; set; } = [];
 
     public bool IsOnline { get => isOnline;}
     public bool IsMoving { get => isMoving; }
     public bool Selected { get => selected; }
 
-    public int BPM 
+    public int BPM
     {
-        get 
+        get
         {
             (int min, int max) = (35, 199);
             int BPMdiff = max- min;

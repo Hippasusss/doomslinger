@@ -1,22 +1,26 @@
-using System.Collections.Generic;
-using Godot;
+
+using System.Collections.Generic; using Godot;
 
 namespace DoomSlinger;
 
 public partial class AlgoSection : Panel
 {
     [Export] private GameData gameData;
+    [Export] private HumanManager humanManager;
     [Export] private ButtonMatrix bidMatrix;
     [Export] private BidDataDisplay bidDataDisplay;
 
     private readonly Dictionary<MatrixCell, Bid> ActiveBids = [];
+
+    private Human currentHuman;
 
     public override void _Ready()
     {
         for (int i = 0; i < bidMatrix.Count; i++)
         {
             MatrixCell cell = bidMatrix.GetCell(i);
-            cell.Button.MouseEntered += () => DisplayCellData(cell);
+            cell.Button.MouseEntered += () => HoverCell(cell);
+            cell.Button.Pressed += () => ClickCell(cell);
         }
     }
 
@@ -27,6 +31,12 @@ public partial class AlgoSection : Panel
         {
             GenerateBatchOfBids();
         }
+    }
+    
+    public void DisplayHuman(Human human)
+    {
+        currentHuman = human;
+        UpdateMatrixCellsDisplay();
     }
 
     private void GenerateBatchOfBids()
@@ -52,11 +62,38 @@ public partial class AlgoSection : Panel
             cascade.TweenInterval(0.07f);
             cascade.TweenCallback(Callable.From(() => capturedCell.Color = c));
         }
+
     }
-    private void DisplayCellData(MatrixCell cell)
+
+    // Shows company and bid data. registered in this constructor.
+    private void HoverCell(MatrixCell cell)
     {
         if(!ActiveBids.TryGetValue(cell, out Bid value)) return;
         bidDataDisplay.UpdateDisplay(value);
     }
 
+    // Adds cell bid to human upcoming bids and updates display. registered in this constructor.
+    private void ClickCell(MatrixCell cell)
+    {
+        if(!ActiveBids.TryGetValue(cell, out Bid value)) return;
+        currentHuman.RegisterBidWithHuman(value);
+        UpdateMatrixCellsDisplay();
+    }
+
+    private void UpdateMatrixCellsDisplay()
+    {
+        foreach(KeyValuePair<MatrixCell, Bid> matrixBid in ActiveBids)
+        {
+            int index = currentHuman.SelectedBids.IndexOf(matrixBid.Value);
+            if(index >= 0)
+            {
+                matrixBid.Key.HideSelectionNumber(false);
+                matrixBid.Key.SetSelectionNumber(index + 1, currentHuman.ColorPhone);
+            }
+            else
+            {
+                matrixBid.Key.HideSelectionNumber(true);
+            }
+        }
+    }
 }

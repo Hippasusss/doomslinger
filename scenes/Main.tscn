@@ -145,10 +145,11 @@ script = ExtResource("1_mwfav")
 [node name="BGGenerator" parent="." unique_id=917973400 instance=ExtResource("3_1nqs0")]
 position = Vector2(27.999998, 73)
 
-[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataDisplay", "mapManager")]
+[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataDisplay", "algoSection", "mapManager")]
 script = ExtResource("8_pnhog")
 camera = NodePath("../Camera2D")
 humanDataDisplay = NodePath("../UI/DataSection")
+algoSection = NodePath("../UI/AlgoSection")
 mapManager = NodePath("../UI/MapSection/SubViewportContainer/SubViewport/Map")
 
 [node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("humanManager", "initPosition", "faceGenerator")]

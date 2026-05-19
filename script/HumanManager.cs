@@ -7,6 +7,7 @@ public partial class HumanManager : Node2D
 {
     [Export] private CameraController camera;
     [Export] private HumanDataDisplay humanDataDisplay;
+    [Export] private AlgoSection algoSection;
     [Export] private MapManager mapManager;
     private List<Human> humans = [];
     public int HumanCount => humans.Count;
@@ -41,7 +42,11 @@ public partial class HumanManager : Node2D
         camera.MovePositionToNode(human);
         mapManager.SetHumanToTrack(human);
         mapManager.SetHumanMarkerDestinationToRandomLocation(human);
-        if(human.Selected)humanDataDisplay.DisplayHuman(human);
+        if(human.Selected)
+        {
+            humanDataDisplay.DisplayHuman(human);
+            algoSection.DisplayHuman(human);
+        }
         else humanDataDisplay.ClearDisplay();
         foreach(Human otherHuman in humans)
         {

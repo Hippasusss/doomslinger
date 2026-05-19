@@ -33,23 +33,20 @@ public partial class MatrixCell : Panel
 
     public void SetColor(Color newColor, float tweenTime = 0)
     {
-            colorTween?.Kill();
-            colorTween = CreateTween();
-            colorTween.TweenProperty(button, "self_modulate", newColor, tweenTime);
+        colorTween?.Kill();
+        colorTween = CreateTween();
+        colorTween.TweenProperty(button, "self_modulate", newColor, tweenTime);
     }
 
     public void HideSelectionNumber(bool hide = true)
     {
-        SelectionNumber.Visible = hide;
+        SelectionNumber.Visible = !hide;
     }
 
-    public void SetSelectionNumber(int number)
+    public void SetSelectionNumber(int number, Color color)
     {
         numberText.Text = number.ToString();
-    }
-
-    public void SetSelectionColour(Color color)
-    {
         border.Modulate = color;
     }
+
 }

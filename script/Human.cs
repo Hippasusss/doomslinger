@@ -36,7 +36,7 @@ public partial class Human : Node2D
     public Sprite2D Phone { get => phone; }
     public Feed Feed { get => feed; }
 
-    public List<BlockData> NextBlockDatas { get; set; } = [];
+    public List<Bid> SelectedBids { get; set; } = [];
 
     public bool IsOnline { get => isOnline;}
     public bool IsMoving { get => isMoving; }
@@ -58,7 +58,6 @@ public partial class Human : Node2D
 
             int final = Mathf.Max(rageBPM, fearBPM);
             return Mathf.Clamp(final, min, max);
-
         }
     }
 
@@ -146,6 +145,14 @@ public partial class Human : Node2D
     private void ReadFeedBlock(Feedblock block)
     {
         // Stats.AddOther(block.stats);
+    }
+
+    public void RegisterBidWithHuman(Bid bid)
+    {
+        if (!SelectedBids.Remove(bid))
+        {
+            SelectedBids.Add(bid);
+        }
     }
 
     public void Select(bool setSelected, bool emit = true)

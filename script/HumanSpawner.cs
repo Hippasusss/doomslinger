@@ -39,8 +39,13 @@ public partial class HumanSpawner : Node2D
         // need to wait for it to draw the aggregate sprite
         var (texture, colours) = await faceGenerator.GenerateAsync(newHuman.Data);
         newHuman.Face.Texture = texture;
-        newHuman.Colors = colours;
-        newHuman.Phone.Modulate = newHuman.Colors[5];
+        newHuman.ColorFace = colours[0];
+        newHuman.ColorHair = colours[1];
+        newHuman.ColorClothes = colours[2];
+        newHuman.ColorTrim = colours[3];
+        newHuman.ColorEyes = colours[4];
+        newHuman.ColorPhone = colours[5];
+        newHuman.Phone.Modulate = colours[5];
     }
 
     private static string GetRandomName(HumanPersonalData.Gender gender)

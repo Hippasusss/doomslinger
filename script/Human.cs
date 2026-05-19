@@ -18,14 +18,19 @@ public partial class Human : Node2D
 
     private HumanStats stats = new();
     private HumanPersonalData data = new();
-    private Color[] colors;
     private bool isOnline = true;
     private bool isMoving = false;
     private bool selected = false;
 
     public HumanStats Stats { get => stats; }
     public HumanPersonalData Data { get => data; set => data = value; }
-    public Color[] Colors { get => colors; set => colors = value; } 
+
+    public Color ColorFace { get; set; }
+    public Color ColorHair { get; set; }
+    public Color ColorClothes { get; set; }
+    public Color ColorTrim { get; set; }
+    public Color ColorEyes { get; set; }
+    public Color ColorPhone { get; set; }
 
     public Sprite2D Face { get => face; }
     public Sprite2D Phone { get => phone; }

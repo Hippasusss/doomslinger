@@ -125,8 +125,8 @@ public partial class EyeDisplay : Node2D, IDisplay
             ScaleIris(irisSize, 0);
             ChangeEyeBag(eyebagAmount);
             ChangeRedeye(redEyeAmount);
-            _eyelid.Modulate = human.Colors[0];
-            _eyeColor.Modulate = human.Colors[4];
+            _eyelid.Modulate = human.ColorFace;
+            _eyeColor.Modulate = human.ColorEyes;
             currentHuman = human;
         }
         CalculateEye(human);

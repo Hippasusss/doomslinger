@@ -7,12 +7,12 @@ public partial class MatrixCell : Panel
     [Export] private Button button;
     [Export] private RichTextLabel text;
     [Export] private Control SelectionNumber;
+    [Export] private AnimationPlayer animationPlayer;
 
     public Button Button {get => button;}
     public RichTextLabel Text {get => text;}
     private Panel border;
     private RichTextLabel numberText;
-
 
     public override void _Ready()
     {
@@ -49,4 +49,15 @@ public partial class MatrixCell : Panel
         border.Modulate = color;
     }
 
+    public void Flash(bool shouldFlash)
+    {
+        if(shouldFlash)
+        {
+            animationPlayer.Play("Flash");
+        }
+        else
+        {
+            animationPlayer.Stop();
+        }
+    }
 }

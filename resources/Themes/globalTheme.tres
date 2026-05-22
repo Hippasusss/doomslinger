@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dqooghemw7a8d"]
 
-[ext_resource type="Texture2D" uid="uid://5d2kumv8e5i" path="res://sprite/mapmarker.png" id="1_ynpy7"]
+[ext_resource type="Texture2D" uid="uid://cx8eew8xedtl4" path="res://sprite/politicalLeaningSliderSelector.png" id="1_wmc14"]
 [ext_resource type="Texture2D" uid="uid://8rwfn6yrhqgq" path="res://sprite/politicalLeaningSliderBackground.png" id="2_7s8wb"]
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="2_wmc14"]
 [ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="3_7s8wb"]
@@ -31,8 +31,8 @@ Button/styles/focus = SubResource("StyleBoxEmpty_d0ctx")
 Button/styles/hover = SubResource("StyleBoxEmpty_bc8qu")
 Button/styles/normal = SubResource("StyleBoxEmpty_nhohs")
 Button/styles/pressed = SubResource("StyleBoxEmpty_f842f")
-HSlider/icons/grabber = ExtResource("1_ynpy7")
-HSlider/icons/grabber_disabled = ExtResource("1_ynpy7")
+HSlider/icons/grabber = ExtResource("1_wmc14")
+HSlider/icons/grabber_disabled = ExtResource("1_wmc14")
 HSlider/styles/grabber_area = ExtResource("3_7s8wb")
 HSlider/styles/grabber_area_highlight = ExtResource("3_7s8wb")
 HSlider/styles/slider = SubResource("StyleBoxTexture_n5py1")

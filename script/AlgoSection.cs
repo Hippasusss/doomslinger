@@ -11,6 +11,8 @@ public partial class AlgoSection : Panel
     [Export] private BidDataDisplay bidDataDisplay;
 
     private readonly Dictionary<MatrixCell, Bid> ActiveBids = [];
+    private readonly Dictionary<MatrixCell, Human> CellOwners = [];
+    private readonly Dictionary<Human, List<MatrixCell>> HumanSelections = [];
 
     private Human currentHuman;
 
@@ -36,7 +38,7 @@ public partial class AlgoSection : Panel
     public void DisplayHuman(Human human)
     {
         currentHuman = human;
-        UpdateMatrixCellsDisplay();
+        UpdateAllCellDisplays();
     }
 
     private void GenerateBatchOfBids()
@@ -75,24 +77,48 @@ public partial class AlgoSection : Panel
     // Adds cell bid to human upcoming bids and updates display. registered in this constructor.
     private void ClickCell(MatrixCell cell)
     {
-        if(!ActiveBids.TryGetValue(cell, out Bid value)) return;
-        currentHuman.RegisterBidWithHuman(value);
-        UpdateMatrixCellsDisplay();
+        if (!ActiveBids.TryGetValue(cell, out _)) return;
+
+        if (CellOwners.TryGetValue(cell, out Human owner) && owner == currentHuman)
+        {
+            CellOwners.Remove(cell);
+            HumanSelections[currentHuman].Remove(cell);
+        }
+        else
+        {
+            if (owner != null)
+                HumanSelections[owner].Remove(cell);
+            CellOwners[cell] = currentHuman;
+            if (!HumanSelections.TryGetValue(currentHuman, out var list))
+                HumanSelections[currentHuman] = list = [];
+            list.Add(cell);
+        }
+
+        UpdateAllCellDisplays();
     }
 
-    private void UpdateMatrixCellsDisplay()
+    private void UpdateAllCellDisplays()
     {
-        foreach(KeyValuePair<MatrixCell, Bid> matrixBid in ActiveBids)
+        foreach (var (cell, _) in ActiveBids)
         {
-            int index = currentHuman.SelectedBids.IndexOf(matrixBid.Value);
-            if(index >= 0)
+            if (CellOwners.TryGetValue(cell, out Human owner))
             {
-                matrixBid.Key.HideSelectionNumber(false);
-                matrixBid.Key.SetSelectionNumber(index + 1, currentHuman.ColorPhone);
+                int index = HumanSelections[owner].IndexOf(cell) + 1;
+                cell.HideSelectionNumber(false);
+                cell.SetSelectionNumber(index, owner.ColorPhone);
+
+                if(index == 1)
+                {
+                    cell.Flash(true);
+                }
+                else
+                {
+                    cell.Flash(false);
+                }
             }
             else
             {
-                matrixBid.Key.HideSelectionNumber(true);
+                cell.HideSelectionNumber(true);
             }
         }
     }

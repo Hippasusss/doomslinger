@@ -26,7 +26,45 @@ border_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71d8v"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="MatrixCell" type="Panel" unique_id=879974903 node_paths=PackedStringArray("button", "text", "SelectionNumber")]
+[sub_resource type="Animation" id="Animation_any81"]
+resource_name = "Flash"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainText:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ik3d2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainText:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dngb4"]
+_data = {
+&"Flash": SubResource("Animation_any81"),
+&"RESET": SubResource("Animation_ik3d2")
+}
+
+[node name="MatrixCell" type="Panel" unique_id=879974903 node_paths=PackedStringArray("button", "text", "SelectionNumber", "animationPlayer")]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
@@ -35,6 +73,7 @@ script = ExtResource("1_any81")
 button = NodePath("Button2")
 text = NodePath("MainText")
 SelectionNumber = NodePath("SelectionNumber")
+animationPlayer = NodePath("AnimationPlayer")
 
 [node name="Button2" type="Button" parent="." unique_id=1638670685]
 self_modulate = Color(0.34220693, 0.34220695, 0.3422069, 1)
@@ -109,3 +148,6 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 5
 text = " 1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=914799842]
+libraries/ = SubResource("AnimationLibrary_dngb4")

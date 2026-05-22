@@ -1,5 +1,4 @@
 using Godot;
-using System.Collections.Generic;
 
 namespace DoomSlinger;
 
@@ -35,8 +34,6 @@ public partial class Human : Node2D
     public Sprite2D Face { get => face; }
     public Sprite2D Phone { get => phone; }
     public Feed Feed { get => feed; }
-
-    public List<Bid> SelectedBids { get; set; } = [];
 
     public bool IsOnline { get => isOnline;}
     public bool IsMoving { get => isMoving; }
@@ -147,14 +144,6 @@ public partial class Human : Node2D
         // Stats.AddOther(block.stats);
     }
 
-    public void RegisterBidWithHuman(Bid bid)
-    {
-        if (!SelectedBids.Remove(bid))
-        {
-            SelectedBids.Add(bid);
-        }
-    }
-
     public void Select(bool setSelected, bool emit = true)
     {
         if(setSelected && !selected && isOnline)
@@ -170,7 +159,6 @@ public partial class Human : Node2D
             if(emit) EmitSignal(SignalName.HumanSelected, this);
         }
     }
-
 
     private void ToggleWarning(bool onOff)
     {

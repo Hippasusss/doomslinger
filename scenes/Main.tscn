@@ -530,7 +530,7 @@ script = ExtResource("17_ft6cd")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
-[node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425 node_paths=PackedStringArray("bidMatrix", "bidDataDisplay")]
+[node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425 node_paths=PackedStringArray("humanManager", "bidMatrix", "bidDataDisplay")]
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -542,6 +542,7 @@ grow_horizontal = 0
 theme_override_styles/panel = ExtResource("11_pdwbg")
 script = ExtResource("30_gdcyb")
 gameData = ExtResource("33_0qimb")
+humanManager = NodePath("../../HumanArea")
 bidMatrix = NodePath("ButtonMatrix")
 bidDataDisplay = NodePath("BidDataDisplay")
 
@@ -585,7 +586,7 @@ offset_right = 326.0
 offset_bottom = 118.0
 script = ExtResource("28_8b871")
 ButtonScene = ExtResource("26_0f1tp")
-Columns = 16
+Columns = 20
 
 [node name="BidDataDisplay" type="Panel" parent="UI/AlgoSection" unique_id=476280038 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidInfo", "PoliticalSlider")]
 layout_mode = 0
@@ -698,7 +699,6 @@ F: 1994
 MGMT: :("
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
-visible = false
 offset_left = 641.0
 offset_top = 161.0
 offset_right = 1006.0

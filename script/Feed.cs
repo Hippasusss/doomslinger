@@ -24,13 +24,14 @@ public partial class Feed : CanvasGroup
 
     private readonly DeltaTimer swipeTimer = new(3, 14);
 
+
     public override async void _Ready()
     {
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         Vector2 globalPos = GlobalPosition;
         Vector2 screenSize = GetViewportRect().Size;
 
-        generator.Position = new(Position.X, -globalPos.Y);
+        generator.Position = new(Position.X, -globalPos.Y - 10f);
 
         if(Material is ShaderMaterial mat)
         {
@@ -85,6 +86,8 @@ public partial class Feed : CanvasGroup
                     }));
     }
 
+    public Feedblock GetBlockBeingRead() => feedBlocks[currentBlockIndex];
+
     public void ToggleOnOff(bool onOff)
     {
         enabled = onOff;
@@ -106,7 +109,6 @@ public partial class Feed : CanvasGroup
         }
     }
 
-    public Feedblock GetBlockBeingRead() => feedBlocks[currentBlockIndex];
 
     private void ResetBlock(Feedblock block)
     {

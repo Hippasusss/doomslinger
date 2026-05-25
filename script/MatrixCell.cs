@@ -60,4 +60,13 @@ public partial class MatrixCell : Panel
             animationPlayer.Stop();
         }
     }
+
+    public void Reset()
+    {
+        colorTween?.Kill();
+        button.SelfModulate = Colors.White;
+        text.Text = "";
+        HideSelectionNumber(true);
+        animationPlayer.Stop();
+    }
 }

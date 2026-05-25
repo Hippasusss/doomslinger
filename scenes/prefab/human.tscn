@@ -15,6 +15,7 @@
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="9_b524o"]
 [ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="14_2pby3"]
 [ext_resource type="Texture2D" uid="uid://dsciiy7ee7fmj" path="res://sprite/MovingSymbold.png" id="15_5jfd8"]
+[ext_resource type="Texture2D" uid="uid://c17v53gecm2pc" path="res://sprite/Shock Symbold.png" id="16_8txhf"]
 
 [sub_resource type="Animation" id="Animation_5jfd8"]
 resource_name = "Grumble"
@@ -271,6 +272,11 @@ visible = false
 texture_filter = 1
 position = Vector2(0, 32)
 texture = ExtResource("15_5jfd8")
+
+[node name="ShockSymbol" type="Sprite2D" parent="." unique_id=1689127147]
+texture_filter = 1
+position = Vector2(14, -28)
+texture = ExtResource("16_8txhf")
 
 [node name="SelectButton" type="Button" parent="." unique_id=797575278]
 offset_left = -17.0

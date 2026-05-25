@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 namespace DoomSlinger;
 
@@ -13,6 +14,7 @@ public partial class Human : Node2D
     [Export] private Sprite2D phone;
     [Export] private Sprite2D warnignSymbol;
     [Export] private Sprite2D movingSymbol;
+    [Export] private Sprite2D shockSymbol;
     [Export] private Button SelectionButton;
 
     private HumanStats stats = new();
@@ -84,7 +86,7 @@ public partial class Human : Node2D
             }
             if(stats.AreAnyOver(logOffLevel))
             {
-                SetUserOnline(false);
+                // SetUserOnline(false);
             }
         }
         if(!isOnline)
@@ -141,7 +143,6 @@ public partial class Human : Node2D
 
     private void ReadFeedBlock(Feedblock block)
     {
-        // Stats.AddOther(block.stats);
     }
 
     public void Select(bool setSelected, bool emit = true)
@@ -168,5 +169,10 @@ public partial class Human : Node2D
     private void ToggleMoving(bool onOff)
     {
         movingSymbol.Visible = onOff;
+    }
+
+    private void ToggleShock(bool onOff)
+    {
+        shockSymbol.Visible = onOff;
     }
 }

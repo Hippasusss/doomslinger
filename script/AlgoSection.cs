@@ -67,6 +67,22 @@ public partial class AlgoSection : Panel
 
     }
 
+    public Bid TryConsumeFirstBid(Human human)
+    {
+        if (!HumanSelections.TryGetValue(human, out var list) || list.Count == 0)
+            return null;
+
+        MatrixCell cell = list[0];
+        Bid bid = ActiveBids[cell];
+
+        list.RemoveAt(0);
+        CellOwners.Remove(cell);
+        ActiveBids.Remove(cell);
+        cell.Reset();
+
+        return bid;
+    }
+
     // Shows company and bid data. registered in this constructor.
     private void HoverCell(MatrixCell cell)
     {
@@ -77,7 +93,7 @@ public partial class AlgoSection : Panel
     // Adds cell bid to human upcoming bids and updates display. registered in this constructor.
     private void ClickCell(MatrixCell cell)
     {
-        if (!ActiveBids.TryGetValue(cell, out _)) return;
+        if (!ActiveBids.TryGetValue(cell, out Bid bid)) return;
 
         if (CellOwners.TryGetValue(cell, out Human owner) && owner == currentHuman)
         {

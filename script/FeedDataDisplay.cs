@@ -31,11 +31,12 @@ public partial class FeedDataDisplay : Control, IDisplay
             int blockBeingReadIndex = feedBlocks.IndexOf(feed.GetBlockBeingRead());
             int index = Mathf.PosMod(blockBeingReadIndex + (matrix.Rows - 1 - blockIdx), count);
             Feedblock block = feedBlocks[index];
+            if (block.BlockData == null) continue;
 
-            int numStats = block.blockData.Stats.Length;
+            int numStats = block.BlockData.Stats.Length;
             for (int statIdx = 0; statIdx < numStats; statIdx++)
             {
-                float t = (block.blockData.Stats[statIdx] + 1) / 2;
+                float t = (block.BlockData.Stats[statIdx] + 1) / 2;
                 MatrixCell cell = matrix.GetCell(blockIdx * cols + statIdx);
                 cell.Color = block.GetColour() * t;
             }

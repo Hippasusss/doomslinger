@@ -17,6 +17,7 @@ public partial class HumanManager : Node2D
         mapManager.RegisterHumanOnMap(human);
         humans.Add(human);
         human.HumanSelected += OnHumanSelected;
+        human.Feed.OnRequestBlockData = () => algoSection.TryConsumeFirstBid(human)?.BlockData;
     }
 
     public void SetAllOfflineState(bool onOff)

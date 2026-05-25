@@ -8,16 +8,19 @@ public partial class MatrixCell : Panel
     [Export] private RichTextLabel text;
     [Export] private Control SelectionNumber;
     [Export] private AnimationPlayer animationPlayer;
+    private Panel border;
+    private RichTextLabel borderNumberText;
+    private (Color color, string text) resetData;
 
     public Button Button {get => button;}
     public RichTextLabel Text {get => text;}
-    private Panel border;
-    private RichTextLabel numberText;
 
     public override void _Ready()
     {
         border = SelectionNumber.GetChild(0) as Panel; 
-        numberText = SelectionNumber.GetChild(1) as RichTextLabel; 
+        borderNumberText = SelectionNumber.GetChild(1) as RichTextLabel; 
+        resetData.color = Color;
+        resetData.text = Text.Text;
     }
     private Tween colorTween;
     public Color Color
@@ -45,7 +48,7 @@ public partial class MatrixCell : Panel
 
     public void SetSelectionNumber(int number, Color color)
     {
-        numberText.Text = number.ToString();
+        borderNumberText.Text = number.ToString();
         border.Modulate = color;
     }
 
@@ -64,8 +67,8 @@ public partial class MatrixCell : Panel
     public void Reset()
     {
         colorTween?.Kill();
-        button.SelfModulate = Colors.White;
-        text.Text = "";
+        Color = resetData.color;
+        text.Text = resetData.text;
         HideSelectionNumber(true);
         animationPlayer.Stop();
     }

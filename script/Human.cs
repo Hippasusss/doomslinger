@@ -143,6 +143,17 @@ public partial class Human : Node2D
 
     private void ReadFeedBlock(Feedblock block)
     {
+        if(block == null)
+        {
+            ToggleShock(true);
+            return;
+        }
+        else
+        {
+            ToggleShock(false);
+            float length = block.BlockData.Length;
+            float politicalLeaning = block.BlockData.PoliticalLeaning;
+        }
     }
 
     public void Select(bool setSelected, bool emit = true)

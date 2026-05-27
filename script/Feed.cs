@@ -12,7 +12,7 @@ public partial class Feed : CanvasGroup
     [Export] private Sprite2D generator;
 
     public Action<Feedblock> newMainFeedBlockCallBack;
-    public Func<BlockData> OnRequestBlockData;
+    public Func<BlockData> OnRequestBlockDataCallBack;
     public List<Feedblock> FeedBlocks => feedBlocks;
     public bool IsScrolling { get; private set; }
 
@@ -91,7 +91,7 @@ public partial class Feed : CanvasGroup
 
             while (active.Count < numBlocks)
             {
-                BlockData bid = OnRequestBlockData?.Invoke();
+                BlockData bid = OnRequestBlockDataCallBack?.Invoke();
                 if (bid == null || pool.Count == 0) break;
                 Feedblock block = pool.Pop();
                 block.Reset(bid);

@@ -63,7 +63,7 @@ public class Stat(string newName, float newValue = 0, float newRate = 0, (float 
 
     public float GetNormalised()
     {
-        return range.max == 0 ?  0 : Value/range.max;
+        return range.max == 0 ?  0 : Value / (range.max - range.min);
     }
 
     public bool IsOver(float percent)

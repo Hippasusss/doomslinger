@@ -56,6 +56,7 @@ public class BlockData
         {
             stats[i] = (float)(random.NextDouble() * 2.0 - 1.0);
         }
+        Length = GD.RandRange(7, 35);
         CalculateColor();
     }
 

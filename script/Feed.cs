@@ -26,8 +26,6 @@ public partial class Feed : CanvasGroup
     private readonly Stack<Feedblock> pool = new();
     private bool enabled = true;
 
-    private readonly DeltaTimer swipeTimer = new(3, 14);
-
     public override async void _Ready()
     {
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
@@ -57,13 +55,7 @@ public partial class Feed : CanvasGroup
         screenLight.Color = Colors.White;
     }
 
-    public override void _Process(double delta)
-    {
-        if(swipeTimer.Delta(delta) && enabled)
-            AdvanceFeed();
-    }
-
-    private void AdvanceFeed()
+    public void AdvanceFeed()
     {
         IsScrolling = true;
         Tween phase1 = CreateTween().SetParallel(true);

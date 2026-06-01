@@ -47,6 +47,7 @@ public class Stat(string newName, float newValue = 0, float newRate = 0, (float 
     {
         targetStat = other;
     }
+
     public void Randomize(float min = 0, float max = 0)
     {
         if (min == 0 && max == 0)

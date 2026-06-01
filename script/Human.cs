@@ -69,13 +69,29 @@ public partial class Human : Node2D
 
     private readonly DeltaTimer warningTimerCheck = new(0.2);
     private readonly DeltaTimer offlineReturnTimer =  new(10);
+    private readonly DeltaTimer swipeTimer = new(3, 14);
     private readonly DeltaTimer statUpdateTimer =  new(0.1);
     public override void _Process(double delta)
     {
-        const float warningLevel = 0.79f;
-        const float logOffLevel = 0.99f;
+        if(isOnline)
+        {
+            if(swipeTimer.Delta(delta))
+            {
+                feed.AdvanceFeed();
+            }
+        }
+        else
+        {
+            if(offlineReturnTimer.Delta(delta))
+            {
+                SetUserOnline(true);
+            }
+            stats.CoolDown(delta);
+        }
         if(warningTimerCheck.Delta(delta))
         {
+            const float warningLevel = 0.79f;
+            const float logOffLevel = 0.99f;
             if(stats.AreAnyOver(warningLevel))
             {
                 ToggleWarning(true);
@@ -86,16 +102,8 @@ public partial class Human : Node2D
             }
             if(stats.AreAnyOver(logOffLevel))
             {
-                // SetUserOnline(false);
+                SetUserOnline(false);
             }
-        }
-        if(!isOnline)
-        {
-            if(offlineReturnTimer.Delta(delta))
-            {
-                SetUserOnline(true);
-            }
-            stats.CoolDown(delta);
         }
         if(statUpdateTimer.Delta(delta))
         {
@@ -152,7 +160,18 @@ public partial class Human : Node2D
         {
             ToggleShock(false);
             float length = block.BlockData.Length;
+            const float politicalSway = 2f;
             float politicalLeaning = block.BlockData.PoliticalLeaning;
+            float politicalAlignment = Mathf.Abs(politicalLeaning - Stats.PoliticalLeaning) / 2f;
+
+            GD.Print(politicalLeaning);
+            GD.Print(stats.PoliticalLeaning.Value);
+            GD.Print(politicalAlignment);
+            GD.Print("");
+            Stats.Dopamine.Value += politicalAlignment;
+            Stats.PoliticalLeaning.Value = Mathf.Lerp(Stats.PoliticalLeaning, politicalLeaning, politicalAlignment * politicalSway);
+
+            swipeTimer.SetResetTime(length, true);
         }
     }
 

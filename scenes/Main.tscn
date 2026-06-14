@@ -914,6 +914,7 @@ text = ""
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1870095868]
 stream = ExtResource("18_bb450")
 volume_db = -9.055
+autoplay = true
 bus = &"Music"
 parameters/looping = true
 

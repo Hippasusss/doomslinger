@@ -33,7 +33,7 @@ public class HumanStats
         Engagement = new("engagement", 5); // Tend towards each block's human defined engagement score. Target changes each time a block is read (synonymous with addiction)
         LongTermFatigue = new("fatigue", newOxytocin, rate * 100, newTargetStat: Melatonin); // Tends towards melatonin level. 
         MentalStability = new("mental stability", 10); // certain videos decay this
-        PoliticalLeaning = new("political leaning", 5); // Tends towards each current video if within some range of current human's political leaning. If very far away then it repels them. 
+        PoliticalLeaning = new("political leaning", 0, newRange: (-1, 1)); // Tends towards each current video if within some range of current human's political leaning. If very far away then it repels them. 
 
         hormones.AddRange([Dopamine, Seratonin, Cortisol, Ocytocin, Melatonin]);
         deepStats.AddRange([Engagement, LongTermFatigue, MentalStability, PoliticalLeaning]);

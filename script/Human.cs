@@ -16,6 +16,7 @@ public partial class Human : Node2D
     [Export] private Sprite2D movingSymbol;
     [Export] private Sprite2D shockSymbol;
     [Export] private Button SelectionButton;
+    [Export] private LoadingBar WatchTimeBar;
 
     private HumanStats stats = new();
     private HumanPersonalData data = new();
@@ -65,6 +66,7 @@ public partial class Human : Node2D
         stats = new(rate: 0.7f);
         Feed.newMainFeedBlockCallBack += ReadFeedBlock;
         SelectionButton.Pressed += () => {Select(!selected);};
+        swipeTimer.AutoRestart = false;
     }
 
     private readonly DeltaTimer warningTimerCheck = new(0.2);
@@ -79,6 +81,7 @@ public partial class Human : Node2D
             {
                 feed.AdvanceFeed();
             }
+            WatchTimeBar.Set(swipeTimer.Progress);
         }
         else
         {
@@ -151,28 +154,30 @@ public partial class Human : Node2D
 
     private void ReadFeedBlock(Feedblock block)
     {
-        if(block == null)
+        if (block == null)
         {
             ToggleShock(true);
             return;
         }
-        else
-        {
-            ToggleShock(false);
-            float length = block.BlockData.Length;
-            const float politicalSway = 2f;
-            float politicalLeaning = block.BlockData.PoliticalLeaning;
-            float politicalAlignment = Mathf.Abs(politicalLeaning - Stats.PoliticalLeaning) / 2f;
 
-            GD.Print(politicalLeaning);
-            GD.Print(stats.PoliticalLeaning.Value);
-            GD.Print(politicalAlignment);
-            GD.Print("");
-            Stats.Dopamine.Value += politicalAlignment;
-            Stats.PoliticalLeaning.Value = Mathf.Lerp(Stats.PoliticalLeaning, politicalLeaning, politicalAlignment * politicalSway);
+        ToggleShock(false);
+        BlockData data = block.BlockData;
+        float length = data.Length;
+        float lengthFactor = Mathf.Clamp(length / 20f, 0.5f, 2f);
 
-            swipeTimer.SetResetTime(length, true);
-        }
+        float politicalLeaning = data.PoliticalLeaning;
+        float politicalAlignment = Mathf.Abs(politicalLeaning - Stats.PoliticalLeaning) / 2f;
+
+        Stats.Dopamine.Value += data.Interesting * 2f * lengthFactor * (1f - politicalAlignment * 0.5f);
+        Stats.Cortisol.Value += data.Outrage * 1.5f * lengthFactor;
+        Stats.Seratonin.Value += (1f - politicalAlignment * 2f) * lengthFactor;
+        Stats.Melatonin.Value += lengthFactor * 0.5f;
+        Stats.Engagement.Value = data.Interesting * 10f;
+
+        const float politicalSway = 2f;
+        Stats.PoliticalLeaning.Value = Mathf.Lerp(Stats.PoliticalLeaning, politicalLeaning, politicalAlignment * politicalSway);
+
+        swipeTimer.SetResetTime(length, true);
     }
 
     public void Select(bool setSelected, bool emit = true)

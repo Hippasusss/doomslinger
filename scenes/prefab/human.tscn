@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://1mivkwj4mn5c" path="res://sprite/Symbols/Warning Symbold.png" id="14_2pby3"]
 [ext_resource type="Texture2D" uid="uid://dsciiy7ee7fmj" path="res://sprite/MovingSymbold.png" id="15_5jfd8"]
 [ext_resource type="Texture2D" uid="uid://c17v53gecm2pc" path="res://sprite/Shock Symbold.png" id="16_8txhf"]
+[ext_resource type="Script" uid="uid://dom2pdw0p7sel" path="res://script/LoadingBar.cs" id="17_n5qo3"]
 
 [sub_resource type="Animation" id="Animation_5jfd8"]
 resource_name = "Grumble"
@@ -179,7 +180,14 @@ _data = {
 &"hover": SubResource("Animation_2pby3")
 }
 
-[node name="Human" type="Node2D" unique_id=1949069056 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol", "shockSymbol", "SelectionButton")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8txhf"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="Human" type="Node2D" unique_id=1949069056 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol", "shockSymbol", "SelectionButton", "WatchTimeBar")]
 script = ExtResource("1_sogvw")
 face = NodePath("Face")
 feed = NodePath("Feed")
@@ -190,6 +198,7 @@ warnignSymbol = NodePath("WarningSymbold")
 movingSymbol = NodePath("MovingSymbold")
 shockSymbol = NodePath("ShockSymbol")
 SelectionButton = NodePath("SelectButton")
+WatchTimeBar = NodePath("WatchTime")
 
 [node name="FeedMachine" type="Sprite2D" parent="." unique_id=1629747291]
 texture_filter = 1
@@ -263,15 +272,13 @@ FlickerSpeed = 10.04
 libraries/ = SubResource("AnimationLibrary_5jfd8")
 
 [node name="WarningSymbold" type="Sprite2D" parent="." unique_id=1496949490]
-visible = false
 texture_filter = 1
-position = Vector2(-13.1, 32)
+position = Vector2(-13, 35)
 texture = ExtResource("14_2pby3")
 
 [node name="MovingSymbold" type="Sprite2D" parent="." unique_id=1033043765]
-visible = false
 texture_filter = 1
-position = Vector2(0, 32)
+position = Vector2(0, 35)
 texture = ExtResource("15_5jfd8")
 
 [node name="ShockSymbol" type="Sprite2D" parent="." unique_id=1689127147]
@@ -286,3 +293,26 @@ offset_left = -17.0
 offset_top = -21.0
 offset_right = 18.0
 offset_bottom = 23.0
+
+[node name="WatchTime" type="Control" parent="." unique_id=1196876685 node_paths=PackedStringArray("loadingBarPanel")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -20.0
+offset_top = 26.0
+offset_right = 21.0
+offset_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("17_n5qo3")
+loadingBarPanel = NodePath("Panel")
+
+[node name="Panel" type="Panel" parent="WatchTime" unique_id=140519338]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_8txhf")

@@ -52,6 +52,7 @@
 [ext_resource type="Script" uid="uid://bpsiao3t75nku" path="res://script/CreditSection.cs" id="34_s3wmy"]
 [ext_resource type="Script" uid="uid://bmhk44aq7rjw5" path="res://script/BidDataDisplay.cs" id="36_in2eo"]
 [ext_resource type="Texture2D" uid="uid://ih20mpaqywx1" path="res://sprite/LogoOldHeadsINC.png" id="37_dyyw8"]
+[ext_resource type="PackedScene" uid="uid://k3rppnfhyhs8" path="res://scenes/prefab/labeled_value.tscn" id="38_gjpm3"]
 [ext_resource type="Script" uid="uid://bsw3a7m0xw5ug" path="res://script/MapManager.cs" id="39_8b871"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
@@ -123,6 +124,9 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 shadow_color = Color(0.96673995, 0.5271128, 0.47312066, 0.17400001)
 shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knagv"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b871"]
 bg_color = Color(0.71234256, 0.19794005, 0.2345213, 1)
@@ -591,7 +595,7 @@ script = ExtResource("28_8b871")
 ButtonScene = ExtResource("26_0f1tp")
 Columns = 20
 
-[node name="BidDataDisplay" type="Panel" parent="UI/AlgoSection" unique_id=476280038 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidInfo", "PoliticalSlider")]
+[node name="BidDataDisplay" type="Panel" parent="UI/AlgoSection" unique_id=476280038 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidPrice", "BidLength", "PoliticalSlider")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 124.0
@@ -602,44 +606,18 @@ CompanyLogo = NodePath("Company/Company Logo")
 CompanyName = NodePath("Company/CompanyName")
 CompanyInfo = NodePath("Company/Company Info")
 CompanySectors = NodePath("Company/CompanySectors")
-BidInfo = NodePath("BidInfo")
-PoliticalSlider = NodePath("Control/HSlider")
+BidPrice = NodePath("Panel/Price")
+BidLength = NodePath("Panel/Length")
+PoliticalSlider = NodePath("Panel/PoliticalLeaning/HSlider")
 
 [node name="BidInfo" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay" unique_id=1075487087]
+visible = false
 layout_mode = 0
 offset_left = 161.0
-offset_top = 4.0
-offset_right = 230.0
-offset_bottom = 17.0
+offset_top = 7.0
+offset_right = 218.0
+offset_bottom = 18.0
 text = "$5"
-
-[node name="Control" type="Control" parent="UI/AlgoSection/BidDataDisplay" unique_id=1406597843]
-anchors_preset = 0
-offset_left = 221.0
-offset_top = 5.0
-offset_right = 304.0
-offset_bottom = 26.0
-
-[node name="HSlider" type="HSlider" parent="UI/AlgoSection/BidDataDisplay/Control" unique_id=1854991382]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 8.0
-offset_right = 75.0
-offset_bottom = 16.0
-theme = ExtResource("15_hq6as")
-theme_type_variation = &"pl"
-min_value = -1.0
-max_value = 1.0
-step = 0.01
-editable = false
-scrollable = false
-ticks_position = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay/Control" unique_id=534819341]
-layout_mode = 0
-offset_right = 77.0
-offset_bottom = 7.0
-text = "Political Leaning"
 
 [node name="Company" type="Panel" parent="UI/AlgoSection/BidDataDisplay" unique_id=1923993572]
 layout_mode = 0
@@ -701,7 +679,77 @@ F: 1994
 :): low
 MGMT: :("
 
+[node name="Panel" type="Panel" parent="UI/AlgoSection/BidDataDisplay" unique_id=1522283088]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 3.0
+offset_right = 314.0
+offset_bottom = 71.0
+
+[node name="Price" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=2074968864 instance=ExtResource("38_gjpm3")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 66.0
+offset_bottom = 14.0
+LabelText = "Price:"
+
+[node name="Length" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=1142005410 instance=ExtResource("38_gjpm3")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 14.0
+offset_right = 67.0
+offset_bottom = 23.0
+LabelText = "Length:"
+
+[node name="Age" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=386320934 instance=ExtResource("38_gjpm3")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 23.0
+offset_right = 66.0
+offset_bottom = 32.0
+LabelText = "Age:"
+
+[node name="PoliticalLeaning" type="Control" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=1406597843]
+anchors_preset = 0
+offset_left = 61.0
+offset_top = 2.0
+offset_right = 144.0
+offset_bottom = 23.0
+
+[node name="HSlider" type="HSlider" parent="UI/AlgoSection/BidDataDisplay/Panel/PoliticalLeaning" unique_id=1854991382]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 89.0
+offset_bottom = 25.0
+theme = ExtResource("15_hq6as")
+theme_type_variation = &"pl"
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+editable = false
+scrollable = false
+ticks_position = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay/Panel/PoliticalLeaning" unique_id=534819341]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 3.0
+offset_right = 90.0
+offset_bottom = 10.0
+text = "Political Leaning"
+
+[node name="Panel" type="Panel" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=1445896407]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 4.0
+offset_right = 72.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_knagv")
+
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
+visible = false
 offset_left = 641.0
 offset_top = 161.0
 offset_right = 1006.0
@@ -725,6 +773,7 @@ directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
+visible = false
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -754,7 +803,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 sdf_scale = 0
 size = Vector2i(341, 193)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MapCamera" type="Camera2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=-123190488]
 position_smoothing_speed = 0.0

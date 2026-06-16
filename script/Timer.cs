@@ -37,7 +37,11 @@ public class DeltaTimer
         {
             _currentTime = 0;
             if (AutoRestart) Reset();
-            else Stop();
+            else
+            {
+                _resetValue = 0;
+                Stop();
+            }
             return true;
         }
         return false;

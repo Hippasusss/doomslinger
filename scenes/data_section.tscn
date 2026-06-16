@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ct5pe0ahrkuli"]
 
 [ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="1_8q6pq"]
-[ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="2_xen3b"]
+[ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataSection.cs" id="2_xen3b"]
 [ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="3_sj4o5"]
 [ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="4_s27er"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="5_1lol3"]
@@ -52,7 +52,7 @@ corner_radius_bottom_left = 1
 shadow_color = Color(0.96673995, 0.5271128, 0.47312066, 0.17400001)
 shadow_size = 2
 
-[node name="DataSection" type="Panel" unique_id=300798386 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay")]
+[node name="DataSection" type="Panel" unique_id=300798386 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay", "revealer")]
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -62,14 +62,15 @@ offset_bottom = 360.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("1_8q6pq")
 script = ExtResource("2_xen3b")
-idDisplay = NodePath("InfoSection/IDCardSection")
-heartMonitorDisplay = NodePath("HeartMonitor")
-eyeDisplay = NodePath("EyeSection/Eye")
-feedDataDisplay = NodePath("FeedDataSection")
-waveFormDisplay = NodePath("WaveFormSection/WaveFormDisplay")
-mapDisplay = NodePath("LocationSection/MapWindow")
+idDisplay = NodePath("InfoDisplay/IDCardSection")
+heartMonitorDisplay = NodePath("HeartMonitorDisplay")
+eyeDisplay = NodePath("EyeDisplay/Eye")
+feedDataDisplay = NodePath("FeedDataDisplay")
+waveFormDisplay = NodePath("WaveformDisplay/WaveFormDisplay")
+mapDisplay = NodePath("LocationDisplay/MapWindow")
+revealer = NodePath("DataHideReveal")
 
-[node name="InfoSection" type="Panel" parent="." unique_id=995009148]
+[node name="InfoDisplay" type="Panel" parent="." unique_id=995009148]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 11.0
@@ -77,7 +78,7 @@ offset_right = 203.0
 offset_bottom = 83.0
 theme_override_styles/panel = ExtResource("3_sj4o5")
 
-[node name="IDCardSection" type="Panel" parent="InfoSection" unique_id=1552875135 node_paths=PackedStringArray("textName", "textData", "face")]
+[node name="IDCardSection" type="Panel" parent="InfoDisplay" unique_id=1552875135 node_paths=PackedStringArray("textName", "textData", "face")]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 4.0
@@ -89,7 +90,7 @@ textName = NodePath("Name")
 textData = NodePath("IDText")
 face = NodePath("FaceSection/Headshot")
 
-[node name="Name" type="RichTextLabel" parent="InfoSection/IDCardSection" unique_id=343444242]
+[node name="Name" type="RichTextLabel" parent="InfoDisplay/IDCardSection" unique_id=343444242]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 2.0
@@ -99,7 +100,7 @@ bbcode_enabled = true
 text = "NAME: [color=white][font_size=8]DANNY HERBERT[/font_size][/color]"
 vertical_alignment = 1
 
-[node name="IDText" type="RichTextLabel" parent="InfoSection/IDCardSection" unique_id=1617314996]
+[node name="IDText" type="RichTextLabel" parent="InfoDisplay/IDCardSection" unique_id=1617314996]
 texture_filter = 1
 texture_repeat = 1
 layout_direction = 2
@@ -128,20 +129,20 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_direction = 1
 
-[node name="FaceSection" type="Panel" parent="InfoSection/IDCardSection" unique_id=512838736]
+[node name="FaceSection" type="Panel" parent="InfoDisplay/IDCardSection" unique_id=512838736]
 layout_mode = 0
 offset_left = 86.0
 offset_top = 15.551022
 offset_right = 117.0
 offset_bottom = 56.0
 
-[node name="Headshot" type="Sprite2D" parent="InfoSection/IDCardSection/FaceSection" unique_id=2117922267]
+[node name="Headshot" type="Sprite2D" parent="InfoDisplay/IDCardSection/FaceSection" unique_id=2117922267]
 material = SubResource("ShaderMaterial_36rkl")
 position = Vector2(15.5625, 20.548985)
 scale = Vector2(0.49750066, 0.4975007)
 texture = ExtResource("7_j361h")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="InfoSection" unique_id=840089063]
+[node name="RichTextLabel" type="RichTextLabel" parent="InfoDisplay" unique_id=840089063]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 5.0
@@ -155,7 +156,7 @@ Cycling
 Medical:
 "
 
-[node name="HeartMonitor" type="Panel" parent="." unique_id=1608618766 node_paths=PackedStringArray("line", "BPMText")]
+[node name="HeartMonitorDisplay" type="Panel" parent="." unique_id=1608618766 node_paths=PackedStringArray("line", "BPMText")]
 layout_mode = 0
 offset_left = 79.0
 offset_top = 156.0
@@ -166,14 +167,14 @@ script = ExtResource("8_r2aec")
 line = NodePath("Line2D")
 BPMText = NodePath("BPM Readout/Value")
 
-[node name="Line2D" type="Line2D" parent="HeartMonitor" unique_id=1955959916]
+[node name="Line2D" type="Line2D" parent="HeartMonitorDisplay" unique_id=1955959916]
 position = Vector2(0.9999924, 17)
 scale = Vector2(0.5881957, 1)
 points = PackedVector2Array(1, 0, 160.5474, 0)
 width = 1.0
 default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
 
-[node name="BPM Readout" type="Control" parent="HeartMonitor" unique_id=287404794]
+[node name="BPM Readout" type="Control" parent="HeartMonitorDisplay" unique_id=287404794]
 clip_children = 1
 anchors_preset = 0
 offset_left = 167.0
@@ -181,7 +182,7 @@ offset_top = 1.0
 offset_right = 192.0
 offset_bottom = 32.0
 
-[node name="Label" type="RichTextLabel" parent="HeartMonitor/BPM Readout" unique_id=829647204]
+[node name="Label" type="RichTextLabel" parent="HeartMonitorDisplay/BPM Readout" unique_id=829647204]
 layout_mode = 0
 offset_left = -68.00006
 offset_top = 2.0
@@ -191,7 +192,7 @@ text = "BPM
 "
 scroll_active = false
 
-[node name="Value" type="RichTextLabel" parent="HeartMonitor/BPM Readout" unique_id=1671986750]
+[node name="Value" type="RichTextLabel" parent="HeartMonitorDisplay/BPM Readout" unique_id=1671986750]
 layout_mode = 0
 offset_left = -69.00006
 offset_top = 7.0
@@ -202,7 +203,7 @@ text = "150
 "
 scroll_active = false
 
-[node name="EyeSection" type="Panel" parent="." unique_id=1937028858]
+[node name="EyeDisplay" type="Panel" parent="." unique_id=1937028858]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 88.0
@@ -210,11 +211,11 @@ offset_right = 107.0
 offset_bottom = 149.0
 theme_override_styles/panel = ExtResource("3_sj4o5")
 
-[node name="Eye" parent="EyeSection" unique_id=517888025 instance=ExtResource("9_h7rj8")]
+[node name="Eye" parent="EyeDisplay" unique_id=517888025 instance=ExtResource("9_h7rj8")]
 material = null
 position = Vector2(49, 30.5)
 
-[node name="RiskSection" type="Panel" parent="." unique_id=363485708 node_paths=PackedStringArray("displayText")]
+[node name="RiskDisplay" type="Panel" parent="." unique_id=363485708 node_paths=PackedStringArray("displayText")]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 298.0
@@ -225,7 +226,7 @@ theme_override_styles/panel = ExtResource("3_sj4o5")
 script = ExtResource("10_bqle7")
 displayText = NodePath("RiskText")
 
-[node name="RiskText" type="RichTextLabel" parent="RiskSection" unique_id=1152286133]
+[node name="RiskText" type="RichTextLabel" parent="RiskDisplay" unique_id=1152286133]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -241,7 +242,7 @@ text = "
  "
 scroll_following = true
 
-[node name="FeedDataSection" type="Panel" parent="." unique_id=172342613 node_paths=PackedStringArray("matrix")]
+[node name="FeedDataDisplay" type="Panel" parent="." unique_id=172342613 node_paths=PackedStringArray("matrix")]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 197.0
@@ -251,13 +252,13 @@ theme_override_styles/panel = ExtResource("3_sj4o5")
 script = ExtResource("11_ge8cr")
 matrix = NodePath("Container/ButtonMatrix")
 
-[node name="Container" type="Panel" parent="FeedDataSection" unique_id=504611465]
+[node name="Container" type="Panel" parent="FeedDataDisplay" unique_id=504611465]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 95.0
 theme_override_styles/panel = ExtResource("12_ik04b")
 
-[node name="ButtonMatrix" type="Panel" parent="FeedDataSection/Container" unique_id=1236524320]
+[node name="ButtonMatrix" type="Panel" parent="FeedDataDisplay/Container" unique_id=1236524320]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -267,7 +268,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8gny2")
 script = ExtResource("13_6oa2m")
 ButtonScene = ExtResource("14_c8u22")
 
-[node name="Highlighter" type="Panel" parent="FeedDataSection/Container" unique_id=1645104568]
+[node name="Highlighter" type="Panel" parent="FeedDataDisplay/Container" unique_id=1645104568]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 76.0
@@ -275,7 +276,7 @@ offset_right = 63.0
 offset_bottom = 94.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_t70y2")
 
-[node name="WaveFormSection" type="Panel" parent="." unique_id=733789141]
+[node name="WaveformDisplay" type="Panel" parent="." unique_id=733789141]
 layout_mode = 0
 offset_left = 79.0
 offset_top = 197.0
@@ -283,7 +284,7 @@ offset_right = 203.0
 offset_bottom = 230.0
 theme_override_styles/panel = ExtResource("3_sj4o5")
 
-[node name="WaveFormDisplay" type="Control" parent="WaveFormSection" unique_id=476902148]
+[node name="WaveFormDisplay" type="Control" parent="WaveformDisplay" unique_id=476902148]
 anchors_preset = 0
 offset_left = 2.0
 offset_top = 1.0
@@ -293,7 +294,7 @@ script = ExtResource("15_4cuy4")
 colour = Color(0.7176471, 0.7647059, 0.95686275, 1)
 Amplitude = 0.53
 
-[node name="LocationSection" type="Panel" parent="." unique_id=1642658168]
+[node name="LocationDisplay" type="Panel" parent="." unique_id=1642658168]
 texture_filter = 1
 layout_mode = 0
 offset_left = 79.0
@@ -302,7 +303,7 @@ offset_right = 203.0
 offset_bottom = 292.0
 theme_override_styles/panel = ExtResource("3_sj4o5")
 
-[node name="MapWindow" type="Control" parent="LocationSection" unique_id=1461103118 node_paths=PackedStringArray("mapViewport", "mapPreview", "mapButton", "mapSectionToggle")]
+[node name="MapWindow" type="Control" parent="LocationDisplay" unique_id=1461103118 node_paths=PackedStringArray("mapPreview", "mapButton")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -314,12 +315,10 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_rbkkf")
-mapViewport = NodePath("")
 mapPreview = NodePath("TextureRect")
 mapButton = NodePath("Button")
-mapSectionToggle = NodePath("")
 
-[node name="TextureRect" type="TextureRect" parent="LocationSection/MapWindow" unique_id=323865531]
+[node name="TextureRect" type="TextureRect" parent="LocationDisplay/MapWindow" unique_id=323865531]
 clip_children = 2
 clip_contents = true
 layout_mode = 1
@@ -331,7 +330,7 @@ grow_vertical = 2
 expand_mode = 2
 stretch_mode = 6
 
-[node name="Button" type="Button" parent="LocationSection/MapWindow" unique_id=1719462484]
+[node name="Button" type="Button" parent="LocationDisplay/MapWindow" unique_id=1719462484]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0

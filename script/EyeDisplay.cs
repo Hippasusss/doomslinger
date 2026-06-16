@@ -19,7 +19,7 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     private readonly (float min, float max) eyeballMoveRange = (0, 14);
     private readonly (float min, float max) moveRateRange = (0.05f, 8);
-    private readonly (float min, float max) irisSizeRange = (0.4f, 2);
+    private readonly (float min, float max) irisSizeRange = (0.1f, 2f);
     private readonly (float min, float max) blinkRateRange = (0.2f, 10);
 
     private readonly DeltaTimer eyeMoveTimer = new(0.5, 3);

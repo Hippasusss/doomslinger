@@ -3,12 +3,17 @@ using System.Collections.Generic; using Godot;
 
 namespace DoomSlinger;
 
-public partial class AlgoSection : Panel
+public partial class AlgoSection : Panel, ISection
 {
     [Export] private GameData gameData;
     [Export] private HumanManager humanManager;
     [Export] private ButtonMatrix bidMatrix;
     [Export] private BidDataDisplay bidDataDisplay;
+    [Export] private SectionRevealer revealer;
+
+    public void Toggle() => revealer?.Toggle();
+    public void SetOpen(bool open) => revealer?.SetOpen(open);
+    public bool IsOpen => revealer?.IsOpen ?? false;
 
     private readonly Dictionary<MatrixCell, Bid> ActiveBids = [];
     private readonly Dictionary<MatrixCell, Human> CellOwners = [];

@@ -2,7 +2,7 @@ using Godot;
 
 namespace DoomSlinger;
 
-public partial class HumanDataDisplay : Panel 
+public partial class HumanDataSection : Panel, ISection
 {
     [Export] private IDDisplay idDisplay;
     [Export] private HeartMonitorDisplay heartMonitorDisplay;
@@ -10,13 +10,20 @@ public partial class HumanDataDisplay : Panel
     [Export] private FeedDataDisplay feedDataDisplay;
     [Export] private WaveFormDisplay waveFormDisplay;
     [Export] private MapDisplay mapDisplay;
+    [Export] private MapSection mapSection;
+    [Export] private SectionRevealer revealer;
     private IDisplay[] displays;
     private Human currentHuman;
+
+    public void Toggle() => revealer?.Toggle();
+    public void SetOpen(bool open) => revealer?.SetOpen(open);
+    public bool IsOpen => revealer?.IsOpen ?? false;
 
     public override void _Ready()
     {
         displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay, waveFormDisplay, mapDisplay];
         ClearDisplay();
+        mapDisplay.Init(mapSection);
     }
     private readonly DeltaTimer updateTimer = new (0.2);
     public override void _Process(double delta)

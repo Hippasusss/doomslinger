@@ -17,7 +17,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knagv"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="AlgoSection" type="Panel" unique_id=1934035250 node_paths=PackedStringArray("humanManager", "bidMatrix", "bidDataDisplay")]
+[node name="AlgoSection" type="Panel" unique_id=1934035250 node_paths=PackedStringArray("bidMatrix", "bidDataDisplay", "revealer")]
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -30,9 +30,9 @@ grow_horizontal = 0
 theme_override_styles/panel = ExtResource("1_tilh8")
 script = ExtResource("2_ym777")
 gameData = ExtResource("3_gfnuc")
-humanManager = NodePath("")
 bidMatrix = NodePath("ButtonMatrix")
 bidDataDisplay = NodePath("BidDataDisplay")
+revealer = NodePath("AlgoHideReveal")
 
 [node name="Selectors" type="Container" parent="." unique_id=638813868]
 visible = false
@@ -78,7 +78,7 @@ script = ExtResource("9_a2abt")
 ButtonScene = ExtResource("10_wkyo5")
 Columns = 20
 
-[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "PoliticalSlider")]
+[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidPrice", "BidLength", "PoliticalSlider")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 124.0
@@ -89,6 +89,8 @@ CompanyLogo = NodePath("Company/Company Logo")
 CompanyName = NodePath("Company/CompanyName")
 CompanyInfo = NodePath("Company/Company Info")
 CompanySectors = NodePath("Company/CompanySectors")
+BidPrice = NodePath("Panel/Price")
+BidLength = NodePath("Panel/Length")
 PoliticalSlider = NodePath("Panel/PoliticalLeaning/HSlider")
 
 [node name="BidInfo" type="RichTextLabel" parent="BidDataDisplay" unique_id=1093248494]

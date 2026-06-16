@@ -6,15 +6,15 @@ namespace DoomSlinger;
 public partial class HumanManager : Node2D
 {
     [Export] private CameraController camera;
-    [Export] private HumanDataDisplay humanDataDisplay;
+    [Export] private HumanDataSection humanDataSection;
     [Export] private AlgoSection algoSection;
-    [Export] private MapManager mapManager;
+    [Export] private MapSection mapSection;
     private List<Human> humans = [];
     public int HumanCount => humans.Count;
 
     public void AddHuman(Human human)
     {
-        mapManager.RegisterHumanOnMap(human);
+        mapSection.RegisterHumanOnMap(human);
         humans.Add(human);
         human.HumanSelected += OnHumanSelected;
         human.Feed.OnRequestBlockDataCallBack = () => algoSection.TryConsumeFirstBid(human)?.BlockData;
@@ -41,14 +41,14 @@ public partial class HumanManager : Node2D
     public void OnHumanSelected(Human human)
     {
         camera.MovePositionToNode(human);
-        mapManager.SetHumanToTrack(human);
-        mapManager.SetHumanMarkerDestinationToRandomLocation(human);
+        mapSection.SetHumanToTrack(human);
+        mapSection.SetHumanMarkerDestinationToRandomLocation(human);
         if(human.Selected)
         {
-            humanDataDisplay.DisplayHuman(human);
+            humanDataSection.DisplayHuman(human);
             algoSection.DisplayHuman(human);
         }
-        else humanDataDisplay.ClearDisplay();
+        else humanDataSection.ClearDisplay();
         foreach(Human otherHuman in humans)
         {
             if(human == otherHuman) continue;

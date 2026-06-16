@@ -8,52 +8,32 @@
 [ext_resource type="PackedScene" uid="uid://dfv4wku4lcbuj" path="res://scenes/prefab/FaceGenerator.tscn" id="3_bjd11"]
 [ext_resource type="ColorPalette" uid="uid://d32pqxf3o0s7l" path="res://resources/ColorPalettes/Face/clothesPalette.tres" id="7_2c4at"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
-[ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="8_cvmbd"]
 [ext_resource type="Script" uid="uid://b6c4jb6obonfh" path="res://script/UIManager.cs" id="8_dg70y"]
 [ext_resource type="Resource" uid="uid://cc17vl7vt2loa" path="res://resources/StingLists/Nationalities.tres" id="8_oa6sj"]
 [ext_resource type="Script" uid="uid://bgc0gotw2o688" path="res://script/HumanManager.cs" id="8_pnhog"]
 [ext_resource type="Texture2D" uid="uid://bkn0gbxuvg7jh" path="res://sprite/controls.png" id="8_xa025"]
-[ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_bjd11"]
-[ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="9_ft6cd"]
-[ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="9_mwfav"]
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
-[ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="10_mwfav"]
-[ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="10_qmy6f"]
 [ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="11_pdwbg"]
-[ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="13_cmqll"]
+[ext_resource type="PackedScene" uid="uid://ct5pe0ahrkuli" path="res://scenes/data_section.tscn" id="13_2c4at"]
+[ext_resource type="PackedScene" uid="uid://dfko036wsih6w" path="res://scenes/algo_section.tscn" id="14_g6wdg"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="15_hq6as"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
-[ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="18_36rkl"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
-[ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="19_2ofn6"]
 [ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
-[ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="22_8gny2"]
-[ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="22_fs0b5"]
-[ext_resource type="Script" uid="uid://bmjqjuqq64p7b" path="res://script/MapDisplay.cs" id="23_cmqll"]
 [ext_resource type="Texture2D" uid="uid://b7h6lhfodrq36" path="res://sprite/Map.png" id="23_cobve"]
-[ext_resource type="Script" uid="uid://bwj76dqlxv73p" path="res://script/WaveFormDisplay.cs" id="24_cobve"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="25_kxyth"]
-[ext_resource type="PackedScene" uid="uid://bu3jayqayo2jv" path="res://scenes/MatrixButton.tscn" id="26_0f1tp"]
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
-[ext_resource type="Texture2D" uid="uid://d0t883md1byky" path="res://sprite/AlgoSectionButton.png" id="27_kxyth"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
-[ext_resource type="Script" uid="uid://q51000d3k0cd" path="res://script/ButtonMatrix.cs" id="28_8b871"]
-[ext_resource type="PackedScene" uid="uid://dcwgg4mte8l3q" path="res://scenes/selector.tscn" id="28_kxyth"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="30_5grtr"]
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
-[ext_resource type="Script" uid="uid://cpgh2g2qo0knb" path="res://script/AlgoSection.cs" id="30_gdcyb"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="30_vua0o"]
 [ext_resource type="Resource" uid="uid://b0852h5ufnnj8" path="res://resources/Maps/EdinMap.tres" id="32_pdwbg"]
-[ext_resource type="Resource" uid="uid://cevkgbllo7cp0" path="res://resources/MainGameData.tres" id="33_0qimb"]
 [ext_resource type="Script" uid="uid://bpsiao3t75nku" path="res://script/CreditSection.cs" id="34_s3wmy"]
-[ext_resource type="Script" uid="uid://bmhk44aq7rjw5" path="res://script/BidDataDisplay.cs" id="36_in2eo"]
-[ext_resource type="Texture2D" uid="uid://ih20mpaqywx1" path="res://sprite/LogoOldHeadsINC.png" id="37_dyyw8"]
-[ext_resource type="PackedScene" uid="uid://k3rppnfhyhs8" path="res://scenes/prefab/labeled_value.tscn" id="38_gjpm3"]
-[ext_resource type="Script" uid="uid://bsw3a7m0xw5ug" path="res://script/MapManager.cs" id="39_8b871"]
+[ext_resource type="Script" uid="uid://b48mndg73r0wy" path="res://script/MapSection.cs" id="39_8b871"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebg2g"]
 shader = ExtResource("10_lhr70")
@@ -93,41 +73,6 @@ shader_parameter/intensity = 1.0
 shader = ExtResource("8_1iba3")
 shader_parameter/intensity = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cobve"]
-bg_color = Color(0.27450982, 0.33333334, 0.33333334, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_color = Color(0.18394011, 0.22801757, 0.22802815, 1)
-shadow_size = 1
-shadow_offset = Vector2(1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_36rkl"]
-shader = ExtResource("9_mwfav")
-shader_parameter/divider = 3.0
-shader_parameter/boost = 0.3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gny2"]
-bg_color = Color(0.21805939, 0.2250098, 0.22330877, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t70y2"]
-bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.78020656, 0.24613741, 0.28181723, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-shadow_color = Color(0.96673995, 0.5271128, 0.47312066, 0.17400001)
-shadow_size = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knagv"]
-bg_color = Color(1, 1, 1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b871"]
 bg_color = Color(0.71234256, 0.19794005, 0.2345213, 1)
 
@@ -149,12 +94,12 @@ script = ExtResource("1_mwfav")
 [node name="BGGenerator" parent="." unique_id=917973400 instance=ExtResource("3_1nqs0")]
 position = Vector2(27.999998, 73)
 
-[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataDisplay", "algoSection", "mapManager")]
+[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataSection", "algoSection", "mapSection")]
 script = ExtResource("8_pnhog")
 camera = NodePath("../Camera2D")
-humanDataDisplay = NodePath("../UI/DataSection")
+humanDataSection = NodePath("../UI/DataSection")
 algoSection = NodePath("../UI/AlgoSection")
-mapManager = NodePath("../UI/MapSection/SubViewportContainer/SubViewport/Map")
+mapSection = NodePath("../UI/MapSection")
 
 [node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("humanManager", "initPosition", "faceGenerator")]
 texture_filter = 1
@@ -199,557 +144,18 @@ material = SubResource("ShaderMaterial_1nqs0")
 material = SubResource("ShaderMaterial_1iba3")
 frame = 32
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController", "humanDataDisplay")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataSection/DataHideReveal"), NodePath("AlgoSection/AlgoHideReveal"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection/HelpHideReveal")]
+UISections = [NodePath("DataSection"), NodePath("AlgoSection"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection/HelpHideReveal")]
 blackoutController = NodePath("Blackout")
-humanDataDisplay = NodePath("DataSection")
 
-[node name="DataSection" type="Panel" parent="UI" unique_id=2019699738 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay")]
-texture_filter = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_right = 217.0
-offset_bottom = 360.0
-grow_horizontal = 0
-theme_override_styles/panel = ExtResource("11_pdwbg")
-script = ExtResource("8_cvmbd")
-idDisplay = NodePath("InfoSection/IDCardSection")
-heartMonitorDisplay = NodePath("HeartMonitor")
-eyeDisplay = NodePath("EyeSection/Eye")
-feedDataDisplay = NodePath("FeedDataSection")
-waveFormDisplay = NodePath("WaveFormSection/WaveFormDisplay")
-mapDisplay = NodePath("LocationSection/MapWindow")
+[node name="DataSection" parent="UI" unique_id=300798386 node_paths=PackedStringArray("mapSection") instance=ExtResource("13_2c4at")]
+mapSection = NodePath("../MapSection")
 
-[node name="InfoSection" type="Panel" parent="UI/DataSection" unique_id=224137]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 11.0
-offset_right = 203.0
-offset_bottom = 83.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-
-[node name="IDCardSection" type="Panel" parent="UI/DataSection/InfoSection" unique_id=422255932 node_paths=PackedStringArray("textName", "textData", "face")]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 4.0
-offset_right = 124.0
-offset_bottom = 66.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_cobve")
-script = ExtResource("9_ft6cd")
-textName = NodePath("Name")
-textData = NodePath("IDText")
-face = NodePath("FaceSection/Headshot")
-
-[node name="Name" type="RichTextLabel" parent="UI/DataSection/InfoSection/IDCardSection" unique_id=983701997]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 2.0
-offset_right = 118.0
-offset_bottom = 13.0
-bbcode_enabled = true
-text = "NAME: [color=white][font_size=8]DANNY HERBERT[/font_size][/color]"
-vertical_alignment = 1
-
-[node name="IDText" type="RichTextLabel" parent="UI/DataSection/InfoSection/IDCardSection" unique_id=806655714]
-texture_filter = 1
-texture_repeat = 1
-layout_direction = 2
-layout_mode = 0
-offset_left = 6.0
-offset_top = 11.0
-offset_right = 84.0
-offset_bottom = 61.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("15_hq6as")
-theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 0.187)
-theme_override_constants/table_h_separation = 12
-theme_override_constants/table_v_separation = 0
-bbcode_enabled = true
-text = "[table=2]
-    [cell]DOB:[/cell]  [cell][color=white]09/03/1994[/color][/cell]
-    [cell]HT:[/cell]   [cell][color=white]187cm[/color][/cell]
-    [cell]GEN:[/cell]  [cell][color=white]M[/color][/cell]
-    [cell]UID:[/cell]  [cell][color=white]7387387[/color][/cell]
-    [cell]NAT:[/cell]  [cell][color=white]scottish[/color][/cell]
-[/table]"
-autowrap_mode = 0
-autowrap_trim_flags = 0
-horizontal_alignment = 2
-vertical_alignment = 1
-text_direction = 1
-
-[node name="FaceSection" type="Panel" parent="UI/DataSection/InfoSection/IDCardSection" unique_id=2068549372]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 15.551022
-offset_right = 117.0
-offset_bottom = 56.0
-
-[node name="Headshot" type="Sprite2D" parent="UI/DataSection/InfoSection/IDCardSection/FaceSection" unique_id=1005073743]
-material = SubResource("ShaderMaterial_36rkl")
-position = Vector2(15.5625, 20.548985)
-scale = Vector2(0.49750066, 0.4975007)
-texture = ExtResource("10_mwfav")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/DataSection/InfoSection" unique_id=1110700049]
-layout_mode = 0
-offset_left = 130.0
-offset_top = 5.0
-offset_right = 189.0
-offset_bottom = 66.0
-text = "MC: 
-I:
-Football
-Cocaine 
-Cycling
-Medical:
-"
-
-[node name="HeartMonitor" type="Panel" parent="UI/DataSection" unique_id=344411435 node_paths=PackedStringArray("line", "BPMText")]
-layout_mode = 0
-offset_left = 79.0
-offset_top = 156.0
-offset_right = 203.0
-offset_bottom = 189.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-script = ExtResource("10_qmy6f")
-line = NodePath("Line2D")
-BPMText = NodePath("BPM Readout/Value")
-
-[node name="Line2D" type="Line2D" parent="UI/DataSection/HeartMonitor" unique_id=440793788]
-position = Vector2(0.9999924, 17)
-scale = Vector2(0.5881957, 1)
-points = PackedVector2Array(1, 0, 160.5474, 0)
-width = 1.0
-default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
-
-[node name="BPM Readout" type="Control" parent="UI/DataSection/HeartMonitor" unique_id=1734247390]
-clip_children = 1
-anchors_preset = 0
-offset_left = 167.0
-offset_top = 1.0
-offset_right = 192.0
-offset_bottom = 32.0
-
-[node name="Label" type="RichTextLabel" parent="UI/DataSection/HeartMonitor/BPM Readout" unique_id=154003182]
-layout_mode = 0
-offset_left = -68.00006
-offset_top = 2.0
-offset_right = -45.00006
-offset_bottom = 10.0
-text = "BPM
-"
-scroll_active = false
-
-[node name="Value" type="RichTextLabel" parent="UI/DataSection/HeartMonitor/BPM Readout" unique_id=213886279]
-layout_mode = 0
-offset_left = -69.00006
-offset_top = 7.0
-offset_right = -44.00006
-offset_bottom = 20.0
-theme_override_font_sizes/normal_font_size = 13
-text = "150
-"
-scroll_active = false
-
-[node name="EyeSection" type="Panel" parent="UI/DataSection" unique_id=1959998522]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 88.0
-offset_right = 107.0
-offset_bottom = 149.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-
-[node name="Eye" parent="UI/DataSection/EyeSection" unique_id=517888025 instance=ExtResource("9_bjd11")]
-material = null
-position = Vector2(49, 30.5)
-
-[node name="RiskSection" type="Panel" parent="UI/DataSection" unique_id=1641152237 node_paths=PackedStringArray("displayText")]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 298.0
-offset_right = 99.0
-offset_bottom = 359.0
-scale = Vector2(1, 0.9200049)
-theme_override_styles/panel = ExtResource("13_cmqll")
-script = ExtResource("18_36rkl")
-displayText = NodePath("RiskText")
-
-[node name="RiskText" type="RichTextLabel" parent="UI/DataSection/RiskSection" unique_id=346930113]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 6
-text = "
- "
-scroll_following = true
-
-[node name="FeedDataSection" type="Panel" parent="UI/DataSection" unique_id=2001932955 node_paths=PackedStringArray("matrix")]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 197.0
-offset_right = 73.0
-offset_bottom = 292.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-script = ExtResource("19_2ofn6")
-matrix = NodePath("Container/ButtonMatrix")
-
-[node name="Container" type="Panel" parent="UI/DataSection/FeedDataSection" unique_id=648385127]
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 95.0
-theme_override_styles/panel = ExtResource("22_8gny2")
-
-[node name="ButtonMatrix" type="Panel" parent="UI/DataSection/FeedDataSection/Container" unique_id=606702305]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 63.0
-offset_bottom = 94.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_8gny2")
-script = ExtResource("28_8b871")
-ButtonScene = ExtResource("26_0f1tp")
-
-[node name="Highlighter" type="Panel" parent="UI/DataSection/FeedDataSection/Container" unique_id=1914759579]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 76.0
-offset_right = 63.0
-offset_bottom = 94.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_t70y2")
-
-[node name="WaveFormSection" type="Panel" parent="UI/DataSection" unique_id=1815387752]
-layout_mode = 0
-offset_left = 79.0
-offset_top = 197.0
-offset_right = 203.0
-offset_bottom = 230.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-
-[node name="WaveFormDisplay" type="Control" parent="UI/DataSection/WaveFormSection" unique_id=2098131099]
-anchors_preset = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 122.0
-offset_bottom = 32.0
-script = ExtResource("24_cobve")
-colour = Color(0.7176471, 0.7647059, 0.95686275, 1)
-Amplitude = 0.53
-
-[node name="LocationSection" type="Panel" parent="UI/DataSection" unique_id=649410363]
-texture_filter = 1
-layout_mode = 0
-offset_left = 79.0
-offset_top = 237.0
-offset_right = 203.0
-offset_bottom = 292.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-
-[node name="MapWindow" type="Control" parent="UI/DataSection/LocationSection" unique_id=12062651 node_paths=PackedStringArray("mapViewport", "mapPreview", "mapButton", "mapSectionToggle")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("23_cmqll")
-mapViewport = NodePath("../../../MapSection/SubViewportContainer/SubViewport")
-mapPreview = NodePath("TextureRect")
-mapButton = NodePath("Button")
-mapSectionToggle = NodePath("../../../MapSection/MapHideReveal")
-
-[node name="TextureRect" type="TextureRect" parent="UI/DataSection/LocationSection/MapWindow" unique_id=1715767936]
-clip_children = 2
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 2
-stretch_mode = 6
-
-[node name="Button" type="Button" parent="UI/DataSection/LocationSection/MapWindow" unique_id=439587712]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 123.0
-offset_bottom = 54.0
-
-[node name="Section2" type="Panel" parent="UI/DataSection" unique_id=1476674157]
-layout_mode = 0
-offset_left = 114.0
-offset_top = 88.0
-offset_right = 203.0
-offset_bottom = 149.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-
-[node name="Panel" type="Panel" parent="UI/DataSection" unique_id=1395904642]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 156.0
-offset_right = 73.0
-offset_bottom = 189.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-
-[node name="Label" type="Label" parent="UI/DataSection/Panel" unique_id=1785488370]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 32.0
-offset_bottom = 12.0
-
-[node name="Panel2" type="Panel" parent="UI/DataSection" unique_id=23966203]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 298.0
-offset_right = 203.0
-offset_bottom = 354.0
-theme_override_styles/panel = ExtResource("13_cmqll")
-
-[node name="DataHideReveal" type="Button" parent="UI/DataSection" unique_id=752823811]
-layout_mode = 0
-offset_left = -14.0
-offset_right = 1.0
-offset_bottom = 66.0
-action_mode = 0
-icon = ExtResource("22_fs0b5")
-vertical_icon_alignment = 0
-script = ExtResource("17_ft6cd")
-directionRight = false
-tweenCurve = ExtResource("25_kxyth")
-
-[node name="AlgoSection" type="Panel" parent="UI" unique_id=1869736425 node_paths=PackedStringArray("humanManager", "bidMatrix", "bidDataDisplay")]
-texture_filter = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 1.0
-offset_top = 67.0
-offset_right = 336.0
-offset_bottom = 272.0
-grow_horizontal = 0
-theme_override_styles/panel = ExtResource("11_pdwbg")
-script = ExtResource("30_gdcyb")
-gameData = ExtResource("33_0qimb")
+[node name="AlgoSection" parent="UI" unique_id=1934035250 node_paths=PackedStringArray("humanManager") instance=ExtResource("14_g6wdg")]
 humanManager = NodePath("../../HumanArea")
-bidMatrix = NodePath("ButtonMatrix")
-bidDataDisplay = NodePath("BidDataDisplay")
-
-[node name="Selectors" type="Container" parent="UI/AlgoSection" unique_id=1827927458]
-visible = false
-layout_mode = 0
-offset_right = 174.0
-offset_bottom = 57.0
-
-[node name="Selector" parent="UI/AlgoSection/Selectors" unique_id=929270317 instance=ExtResource("28_kxyth")]
-layout_mode = 2
-
-[node name="Selector2" parent="UI/AlgoSection/Selectors" unique_id=287766970 instance=ExtResource("28_kxyth")]
-layout_mode = 2
-
-[node name="Selector3" parent="UI/AlgoSection/Selectors" unique_id=767723341 instance=ExtResource("28_kxyth")]
-layout_mode = 2
-
-[node name="Selector4" parent="UI/AlgoSection/Selectors" unique_id=1897980541 instance=ExtResource("28_kxyth")]
-layout_mode = 2
-
-[node name="AlgoHideReveal" type="Button" parent="UI/AlgoSection" unique_id=368932203]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -350.0
-offset_right = -335.0
-offset_bottom = 60.0
-grow_horizontal = 0
-theme = ExtResource("15_hq6as")
-icon = ExtResource("27_kxyth")
-vertical_icon_alignment = 0
-script = ExtResource("17_ft6cd")
-directionRight = false
-tweenCurve = ExtResource("25_kxyth")
-
-[node name="ButtonMatrix" type="Panel" parent="UI/AlgoSection" unique_id=1690394218]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 7.0
-offset_right = 326.0
-offset_bottom = 118.0
-script = ExtResource("28_8b871")
-ButtonScene = ExtResource("26_0f1tp")
-Columns = 20
-
-[node name="BidDataDisplay" type="Panel" parent="UI/AlgoSection" unique_id=476280038 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidPrice", "BidLength", "PoliticalSlider")]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 124.0
-offset_right = 326.0
-offset_bottom = 199.0
-script = ExtResource("36_in2eo")
-CompanyLogo = NodePath("Company/Company Logo")
-CompanyName = NodePath("Company/CompanyName")
-CompanyInfo = NodePath("Company/Company Info")
-CompanySectors = NodePath("Company/CompanySectors")
-BidPrice = NodePath("Panel/Price")
-BidLength = NodePath("Panel/Length")
-PoliticalSlider = NodePath("Panel/PoliticalLeaning/HSlider")
-
-[node name="BidInfo" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay" unique_id=1075487087]
-visible = false
-layout_mode = 0
-offset_left = 161.0
-offset_top = 7.0
-offset_right = 218.0
-offset_bottom = 18.0
-text = "$5"
-
-[node name="Company" type="Panel" parent="UI/AlgoSection/BidDataDisplay" unique_id=1923993572]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 156.0
-offset_bottom = 71.0
-
-[node name="CompanyName" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay/Company" unique_id=1318898770]
-layout_mode = 1
-offset_left = 15.0
-offset_top = 1.0
-offset_right = 104.0
-offset_bottom = 13.0
-theme_override_font_sizes/normal_font_size = 12
-text = "Company Name"
-fit_content = true
-scroll_active = false
-vertical_alignment = 1
-
-[node name="CompanySectors" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay/Company" unique_id=1425157705]
-layout_mode = 1
-offset_left = 16.0
-offset_top = 11.0
-offset_right = 72.0
-offset_bottom = 16.0
-theme_override_colors/default_color = Color(0.6405938, 0.69789743, 0.9429049, 0.55600005)
-theme_override_font_sizes/normal_font_size = 5
-text = "Sectors"
-fit_content = true
-scroll_active = false
-
-[node name="Company Info" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay/Company" unique_id=1038612964]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 17.0
-offset_right = 100.0
-offset_bottom = 64.0
-theme_override_font_sizes/normal_font_size = 7
-text = "Company information "
-
-[node name="Company Logo" type="TextureRect" parent="UI/AlgoSection/BidDataDisplay/Company" unique_id=94583831]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 3.0
-offset_right = 14.0
-offset_bottom = 12.0
-texture = ExtResource("37_dyyw8")
-expand_mode = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay/Company" unique_id=651673709]
-layout_mode = 0
-offset_left = 101.0
-offset_top = 19.0
-offset_right = 149.0
-offset_bottom = 65.0
-text = "$: 18B
-F: 1994
-:): low
-MGMT: :("
-
-[node name="Panel" type="Panel" parent="UI/AlgoSection/BidDataDisplay" unique_id=1522283088]
-layout_mode = 0
-offset_left = 160.0
-offset_top = 3.0
-offset_right = 314.0
-offset_bottom = 71.0
-
-[node name="Price" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=2074968864 instance=ExtResource("38_gjpm3")]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 5.0
-offset_right = 66.0
-offset_bottom = 14.0
-LabelText = "Price:"
-
-[node name="Length" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=1142005410 instance=ExtResource("38_gjpm3")]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 14.0
-offset_right = 67.0
-offset_bottom = 23.0
-LabelText = "Length:"
-
-[node name="Age" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=386320934 instance=ExtResource("38_gjpm3")]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 23.0
-offset_right = 66.0
-offset_bottom = 32.0
-LabelText = "Age:"
-
-[node name="PoliticalLeaning" type="Control" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=1406597843]
-anchors_preset = 0
-offset_left = 61.0
-offset_top = 2.0
-offset_right = 144.0
-offset_bottom = 23.0
-
-[node name="HSlider" type="HSlider" parent="UI/AlgoSection/BidDataDisplay/Panel/PoliticalLeaning" unique_id=1854991382]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 9.0
-offset_right = 89.0
-offset_bottom = 25.0
-theme = ExtResource("15_hq6as")
-theme_type_variation = &"pl"
-min_value = -1.0
-max_value = 1.0
-step = 0.01
-editable = false
-scrollable = false
-ticks_position = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/AlgoSection/BidDataDisplay/Panel/PoliticalLeaning" unique_id=534819341]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 3.0
-offset_right = 90.0
-offset_bottom = 10.0
-text = "Political Leaning"
-
-[node name="Panel" type="Panel" parent="UI/AlgoSection/BidDataDisplay/Panel" unique_id=1445896407]
-layout_mode = 0
-offset_left = 71.0
-offset_top = 4.0
-offset_right = 72.0
-offset_bottom = 65.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_knagv")
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
-visible = false
 offset_left = 641.0
 offset_top = 161.0
 offset_right = 1006.0
@@ -772,8 +178,7 @@ script = ExtResource("17_ft6cd")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
-[node name="MapSection" type="Panel" parent="UI" unique_id=383819351]
-visible = false
+[node name="MapSection" type="Panel" parent="UI" unique_id=383819351 node_paths=PackedStringArray("revealer", "camera", "mapSprite", "viewport")]
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -783,6 +188,13 @@ offset_right = 345.0
 offset_bottom = 351.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("11_pdwbg")
+script = ExtResource("39_8b871")
+revealer = NodePath("MapHideReveal")
+mapData = ExtResource("32_pdwbg")
+mapMarkerScene = ExtResource("30_8cp6k")
+camera = NodePath("SubViewportContainer/SubViewport/MapCamera")
+mapSprite = NodePath("SubViewportContainer/SubViewport/Map")
+viewport = NodePath("SubViewportContainer/SubViewport")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI/MapSection" unique_id=468719036]
 texture_filter = 1
@@ -803,22 +215,17 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 sdf_scale = 0
 size = Vector2i(341, 193)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="MapCamera" type="Camera2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=-123190488]
 position_smoothing_speed = 0.0
 
-[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307 node_paths=PackedStringArray("camera", "mapSectionToggle")]
+[node name="Map" type="Sprite2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=331929307]
 z_index = -1
 texture_filter = 1
 position = Vector2(779.4227, -96.5)
 scale = Vector2(1.3863631, 1.2925)
 texture = ExtResource("23_cobve")
-script = ExtResource("39_8b871")
-mapData = ExtResource("32_pdwbg")
-mapMarkerScene = ExtResource("30_8cp6k")
-camera = NodePath("../MapCamera")
-mapSectionToggle = NodePath("../../../MapHideReveal")
 
 [node name="MapHideReveal" type="Button" parent="UI/MapSection" unique_id=528598141]
 layout_mode = 0
@@ -836,7 +243,6 @@ directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="CreditSection" type="Panel" parent="UI" unique_id=583447152 node_paths=PackedStringArray("creditText")]
-visible = false
 offset_right = 149.0
 offset_bottom = 26.0
 theme_override_styles/panel = ExtResource("11_pdwbg")

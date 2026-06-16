@@ -6,15 +6,17 @@ namespace DoomSlinger;
 
 public partial class UIManager : CanvasLayer
 {
-    [Export] private SectionRevealer[] UISections;
+    [Export] private Node[] UISections;
     [Export] private BlackoutController blackoutController;
-    [Export] private HumanDataDisplay humanDataDisplay;
 
     public void CloseAllSections()
     {
-        foreach(SectionRevealer section in UISections)
+        foreach(var s in UISections)
         {
-            section.SetOpen(false);
+            if (s is ISection section)
+                section.SetOpen(false);
+            else if (s is SectionRevealer revealer)
+                revealer.SetOpen(false);
         }
     }
 

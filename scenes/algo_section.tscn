@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://dfko036wsih6w"]
+
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="1_tilh8"]
+[ext_resource type="Script" uid="uid://cpgh2g2qo0knb" path="res://script/AlgoSection.cs" id="2_ym777"]
+[ext_resource type="Resource" uid="uid://cevkgbllo7cp0" path="res://resources/MainGameData.tres" id="3_gfnuc"]
+[ext_resource type="PackedScene" uid="uid://dcwgg4mte8l3q" path="res://scenes/selector.tscn" id="4_7jmoy"]
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="5_4k8pu"]
+[ext_resource type="Texture2D" uid="uid://d0t883md1byky" path="res://sprite/AlgoSectionButton.png" id="6_suuvk"]
+[ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="7_ajvdo"]
+[ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="8_qmx3f"]
+[ext_resource type="Script" uid="uid://q51000d3k0cd" path="res://script/ButtonMatrix.cs" id="9_a2abt"]
+[ext_resource type="PackedScene" uid="uid://bu3jayqayo2jv" path="res://scenes/MatrixButton.tscn" id="10_wkyo5"]
+[ext_resource type="Script" uid="uid://bmhk44aq7rjw5" path="res://script/BidDataDisplay.cs" id="11_5lk0f"]
+[ext_resource type="Texture2D" uid="uid://ih20mpaqywx1" path="res://sprite/LogoOldHeadsINC.png" id="12_a6u5w"]
+[ext_resource type="PackedScene" uid="uid://k3rppnfhyhs8" path="res://scenes/prefab/labeled_value.tscn" id="13_ym777"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knagv"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="AlgoSection" type="Panel" unique_id=1934035250 node_paths=PackedStringArray("humanManager", "bidMatrix", "bidDataDisplay")]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 67.0
+offset_right = 336.0
+offset_bottom = 272.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("1_tilh8")
+script = ExtResource("2_ym777")
+gameData = ExtResource("3_gfnuc")
+humanManager = NodePath("")
+bidMatrix = NodePath("ButtonMatrix")
+bidDataDisplay = NodePath("BidDataDisplay")
+
+[node name="Selectors" type="Container" parent="." unique_id=638813868]
+visible = false
+layout_mode = 0
+offset_right = 174.0
+offset_bottom = 57.0
+
+[node name="Selector" parent="Selectors" unique_id=929270317 instance=ExtResource("4_7jmoy")]
+layout_mode = 2
+
+[node name="Selector2" parent="Selectors" unique_id=2071404294 instance=ExtResource("4_7jmoy")]
+layout_mode = 2
+
+[node name="Selector3" parent="Selectors" unique_id=95290129 instance=ExtResource("4_7jmoy")]
+layout_mode = 2
+
+[node name="Selector4" parent="Selectors" unique_id=1837482105 instance=ExtResource("4_7jmoy")]
+layout_mode = 2
+
+[node name="AlgoHideReveal" type="Button" parent="." unique_id=202190071]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_right = -335.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme = ExtResource("5_4k8pu")
+icon = ExtResource("6_suuvk")
+vertical_icon_alignment = 0
+script = ExtResource("7_ajvdo")
+directionRight = false
+tweenCurve = ExtResource("8_qmx3f")
+
+[node name="ButtonMatrix" type="Panel" parent="." unique_id=2120362141]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 326.0
+offset_bottom = 118.0
+script = ExtResource("9_a2abt")
+ButtonScene = ExtResource("10_wkyo5")
+Columns = 20
+
+[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "PoliticalSlider")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 124.0
+offset_right = 326.0
+offset_bottom = 199.0
+script = ExtResource("11_5lk0f")
+CompanyLogo = NodePath("Company/Company Logo")
+CompanyName = NodePath("Company/CompanyName")
+CompanyInfo = NodePath("Company/Company Info")
+CompanySectors = NodePath("Company/CompanySectors")
+PoliticalSlider = NodePath("Panel/PoliticalLeaning/HSlider")
+
+[node name="BidInfo" type="RichTextLabel" parent="BidDataDisplay" unique_id=1093248494]
+visible = false
+layout_mode = 0
+offset_left = 161.0
+offset_top = 7.0
+offset_right = 218.0
+offset_bottom = 18.0
+text = "$5"
+
+[node name="Company" type="Panel" parent="BidDataDisplay" unique_id=1553244093]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 156.0
+offset_bottom = 71.0
+
+[node name="CompanyName" type="RichTextLabel" parent="BidDataDisplay/Company" unique_id=2063933241]
+layout_mode = 1
+offset_left = 15.0
+offset_top = 1.0
+offset_right = 104.0
+offset_bottom = 13.0
+theme_override_font_sizes/normal_font_size = 12
+text = "Company Name"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="CompanySectors" type="RichTextLabel" parent="BidDataDisplay/Company" unique_id=2122071661]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 72.0
+offset_bottom = 16.0
+theme_override_colors/default_color = Color(0.6405938, 0.69789743, 0.9429049, 0.55600005)
+theme_override_font_sizes/normal_font_size = 5
+text = "Sectors"
+fit_content = true
+scroll_active = false
+
+[node name="Company Info" type="RichTextLabel" parent="BidDataDisplay/Company" unique_id=1369178129]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 17.0
+offset_right = 100.0
+offset_bottom = 64.0
+theme_override_font_sizes/normal_font_size = 7
+text = "Company information "
+
+[node name="Company Logo" type="TextureRect" parent="BidDataDisplay/Company" unique_id=111117433]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 14.0
+offset_bottom = 12.0
+texture = ExtResource("12_a6u5w")
+expand_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BidDataDisplay/Company" unique_id=533482600]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 19.0
+offset_right = 149.0
+offset_bottom = 65.0
+text = "$: 18B
+F: 1994
+:): low
+MGMT: :("
+
+[node name="Panel" type="Panel" parent="BidDataDisplay" unique_id=697104091]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 3.0
+offset_right = 314.0
+offset_bottom = 71.0
+
+[node name="Price" parent="BidDataDisplay/Panel" unique_id=2074968864 instance=ExtResource("13_ym777")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 66.0
+offset_bottom = 14.0
+LabelText = null
+ValueText = null
+
+[node name="Length" parent="BidDataDisplay/Panel" unique_id=466924549 instance=ExtResource("13_ym777")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 14.0
+offset_right = 67.0
+offset_bottom = 23.0
+LabelText = null
+ValueText = null
+
+[node name="Age" parent="BidDataDisplay/Panel" unique_id=1400191494 instance=ExtResource("13_ym777")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 23.0
+offset_right = 66.0
+offset_bottom = 32.0
+LabelText = null
+ValueText = null
+
+[node name="PoliticalLeaning" type="Control" parent="BidDataDisplay/Panel" unique_id=1528402535]
+anchors_preset = 0
+offset_left = 61.0
+offset_top = 2.0
+offset_right = 144.0
+offset_bottom = 23.0
+
+[node name="HSlider" type="HSlider" parent="BidDataDisplay/Panel/PoliticalLeaning" unique_id=110816537]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 89.0
+offset_bottom = 25.0
+theme = ExtResource("5_4k8pu")
+theme_type_variation = &"pl"
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+editable = false
+scrollable = false
+ticks_position = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BidDataDisplay/Panel/PoliticalLeaning" unique_id=1068334866]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 3.0
+offset_right = 90.0
+offset_bottom = 10.0
+text = "Political Leaning"
+
+[node name="Panel" type="Panel" parent="BidDataDisplay/Panel" unique_id=893568205]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 4.0
+offset_right = 72.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_knagv")

@@ -1,0 +1,382 @@
+[gd_scene format=3 uid="uid://ct5pe0ahrkuli"]
+
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="1_8q6pq"]
+[ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataDisplay.cs" id="2_xen3b"]
+[ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="3_sj4o5"]
+[ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="4_s27er"]
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="5_1lol3"]
+[ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="6_y7o72"]
+[ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="7_j361h"]
+[ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="8_r2aec"]
+[ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_h7rj8"]
+[ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="10_bqle7"]
+[ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="11_ge8cr"]
+[ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="12_ik04b"]
+[ext_resource type="Script" uid="uid://q51000d3k0cd" path="res://script/ButtonMatrix.cs" id="13_6oa2m"]
+[ext_resource type="PackedScene" uid="uid://bu3jayqayo2jv" path="res://scenes/MatrixButton.tscn" id="14_c8u22"]
+[ext_resource type="Script" uid="uid://bwj76dqlxv73p" path="res://script/WaveFormDisplay.cs" id="15_4cuy4"]
+[ext_resource type="Script" uid="uid://bmjqjuqq64p7b" path="res://script/MapDisplay.cs" id="16_rbkkf"]
+[ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="17_x60el"]
+[ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="18_0e4ab"]
+[ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="19_eskgm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cobve"]
+bg_color = Color(0.27450982, 0.33333334, 0.33333334, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.18394011, 0.22801757, 0.22802815, 1)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36rkl"]
+shader = ExtResource("6_y7o72")
+shader_parameter/divider = 3.0
+shader_parameter/boost = 0.3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gny2"]
+bg_color = Color(0.21805939, 0.2250098, 0.22330877, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t70y2"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78020656, 0.24613741, 0.28181723, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color(0.96673995, 0.5271128, 0.47312066, 0.17400001)
+shadow_size = 2
+
+[node name="DataSection" type="Panel" unique_id=300798386 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay")]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = 217.0
+offset_bottom = 360.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("1_8q6pq")
+script = ExtResource("2_xen3b")
+idDisplay = NodePath("InfoSection/IDCardSection")
+heartMonitorDisplay = NodePath("HeartMonitor")
+eyeDisplay = NodePath("EyeSection/Eye")
+feedDataDisplay = NodePath("FeedDataSection")
+waveFormDisplay = NodePath("WaveFormSection/WaveFormDisplay")
+mapDisplay = NodePath("LocationSection/MapWindow")
+
+[node name="InfoSection" type="Panel" parent="." unique_id=995009148]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 11.0
+offset_right = 203.0
+offset_bottom = 83.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="IDCardSection" type="Panel" parent="InfoSection" unique_id=1552875135 node_paths=PackedStringArray("textName", "textData", "face")]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 124.0
+offset_bottom = 66.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cobve")
+script = ExtResource("4_s27er")
+textName = NodePath("Name")
+textData = NodePath("IDText")
+face = NodePath("FaceSection/Headshot")
+
+[node name="Name" type="RichTextLabel" parent="InfoSection/IDCardSection" unique_id=343444242]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 118.0
+offset_bottom = 13.0
+bbcode_enabled = true
+text = "NAME: [color=white][font_size=8]DANNY HERBERT[/font_size][/color]"
+vertical_alignment = 1
+
+[node name="IDText" type="RichTextLabel" parent="InfoSection/IDCardSection" unique_id=1617314996]
+texture_filter = 1
+texture_repeat = 1
+layout_direction = 2
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 84.0
+offset_bottom = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("5_1lol3")
+theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 0.187)
+theme_override_constants/table_h_separation = 12
+theme_override_constants/table_v_separation = 0
+bbcode_enabled = true
+text = "[table=2]
+    [cell]DOB:[/cell]  [cell][color=white]09/03/1994[/color][/cell]
+    [cell]HT:[/cell]   [cell][color=white]187cm[/color][/cell]
+    [cell]GEN:[/cell]  [cell][color=white]M[/color][/cell]
+    [cell]UID:[/cell]  [cell][color=white]7387387[/color][/cell]
+    [cell]NAT:[/cell]  [cell][color=white]scottish[/color][/cell]
+[/table]"
+autowrap_mode = 0
+autowrap_trim_flags = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+text_direction = 1
+
+[node name="FaceSection" type="Panel" parent="InfoSection/IDCardSection" unique_id=512838736]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 15.551022
+offset_right = 117.0
+offset_bottom = 56.0
+
+[node name="Headshot" type="Sprite2D" parent="InfoSection/IDCardSection/FaceSection" unique_id=2117922267]
+material = SubResource("ShaderMaterial_36rkl")
+position = Vector2(15.5625, 20.548985)
+scale = Vector2(0.49750066, 0.4975007)
+texture = ExtResource("7_j361h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InfoSection" unique_id=840089063]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 5.0
+offset_right = 189.0
+offset_bottom = 66.0
+text = "MC: 
+I:
+Football
+Cocaine 
+Cycling
+Medical:
+"
+
+[node name="HeartMonitor" type="Panel" parent="." unique_id=1608618766 node_paths=PackedStringArray("line", "BPMText")]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 156.0
+offset_right = 203.0
+offset_bottom = 189.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+script = ExtResource("8_r2aec")
+line = NodePath("Line2D")
+BPMText = NodePath("BPM Readout/Value")
+
+[node name="Line2D" type="Line2D" parent="HeartMonitor" unique_id=1955959916]
+position = Vector2(0.9999924, 17)
+scale = Vector2(0.5881957, 1)
+points = PackedVector2Array(1, 0, 160.5474, 0)
+width = 1.0
+default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
+
+[node name="BPM Readout" type="Control" parent="HeartMonitor" unique_id=287404794]
+clip_children = 1
+anchors_preset = 0
+offset_left = 167.0
+offset_top = 1.0
+offset_right = 192.0
+offset_bottom = 32.0
+
+[node name="Label" type="RichTextLabel" parent="HeartMonitor/BPM Readout" unique_id=829647204]
+layout_mode = 0
+offset_left = -68.00006
+offset_top = 2.0
+offset_right = -45.00006
+offset_bottom = 10.0
+text = "BPM
+"
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="HeartMonitor/BPM Readout" unique_id=1671986750]
+layout_mode = 0
+offset_left = -69.00006
+offset_top = 7.0
+offset_right = -44.00006
+offset_bottom = 20.0
+theme_override_font_sizes/normal_font_size = 13
+text = "150
+"
+scroll_active = false
+
+[node name="EyeSection" type="Panel" parent="." unique_id=1937028858]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 88.0
+offset_right = 107.0
+offset_bottom = 149.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="Eye" parent="EyeSection" unique_id=517888025 instance=ExtResource("9_h7rj8")]
+material = null
+position = Vector2(49, 30.5)
+
+[node name="RiskSection" type="Panel" parent="." unique_id=363485708 node_paths=PackedStringArray("displayText")]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 298.0
+offset_right = 99.0
+offset_bottom = 359.0
+scale = Vector2(1, 0.9200049)
+theme_override_styles/panel = ExtResource("3_sj4o5")
+script = ExtResource("10_bqle7")
+displayText = NodePath("RiskText")
+
+[node name="RiskText" type="RichTextLabel" parent="RiskSection" unique_id=1152286133]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 6
+text = "
+ "
+scroll_following = true
+
+[node name="FeedDataSection" type="Panel" parent="." unique_id=172342613 node_paths=PackedStringArray("matrix")]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 197.0
+offset_right = 73.0
+offset_bottom = 292.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+script = ExtResource("11_ge8cr")
+matrix = NodePath("Container/ButtonMatrix")
+
+[node name="Container" type="Panel" parent="FeedDataSection" unique_id=504611465]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 95.0
+theme_override_styles/panel = ExtResource("12_ik04b")
+
+[node name="ButtonMatrix" type="Panel" parent="FeedDataSection/Container" unique_id=1236524320]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 63.0
+offset_bottom = 94.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gny2")
+script = ExtResource("13_6oa2m")
+ButtonScene = ExtResource("14_c8u22")
+
+[node name="Highlighter" type="Panel" parent="FeedDataSection/Container" unique_id=1645104568]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 76.0
+offset_right = 63.0
+offset_bottom = 94.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t70y2")
+
+[node name="WaveFormSection" type="Panel" parent="." unique_id=733789141]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 197.0
+offset_right = 203.0
+offset_bottom = 230.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="WaveFormDisplay" type="Control" parent="WaveFormSection" unique_id=476902148]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 122.0
+offset_bottom = 32.0
+script = ExtResource("15_4cuy4")
+colour = Color(0.7176471, 0.7647059, 0.95686275, 1)
+Amplitude = 0.53
+
+[node name="LocationSection" type="Panel" parent="." unique_id=1642658168]
+texture_filter = 1
+layout_mode = 0
+offset_left = 79.0
+offset_top = 237.0
+offset_right = 203.0
+offset_bottom = 292.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="MapWindow" type="Control" parent="LocationSection" unique_id=1461103118 node_paths=PackedStringArray("mapViewport", "mapPreview", "mapButton", "mapSectionToggle")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_rbkkf")
+mapViewport = NodePath("")
+mapPreview = NodePath("TextureRect")
+mapButton = NodePath("Button")
+mapSectionToggle = NodePath("")
+
+[node name="TextureRect" type="TextureRect" parent="LocationSection/MapWindow" unique_id=323865531]
+clip_children = 2
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="LocationSection/MapWindow" unique_id=1719462484]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 123.0
+offset_bottom = 54.0
+
+[node name="Section2" type="Panel" parent="." unique_id=198841522]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 88.0
+offset_right = 203.0
+offset_bottom = 149.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="Panel" type="Panel" parent="." unique_id=419805112]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 156.0
+offset_right = 73.0
+offset_bottom = 189.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="Label" type="Label" parent="Panel" unique_id=432516690]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 32.0
+offset_bottom = 12.0
+
+[node name="Panel2" type="Panel" parent="." unique_id=1306730358]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 298.0
+offset_right = 203.0
+offset_bottom = 354.0
+theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="DataHideReveal" type="Button" parent="." unique_id=89951406]
+layout_mode = 0
+offset_left = -14.0
+offset_right = 1.0
+offset_bottom = 66.0
+action_mode = 0
+icon = ExtResource("17_x60el")
+vertical_icon_alignment = 0
+script = ExtResource("18_0e4ab")
+directionRight = false
+tweenCurve = ExtResource("19_eskgm")

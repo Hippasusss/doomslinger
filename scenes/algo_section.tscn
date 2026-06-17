@@ -148,6 +148,7 @@ theme_override_font_sizes/normal_font_size = 7
 text = "Company information "
 
 [node name="Company Logo" type="TextureRect" parent="BidDataDisplay/Company" unique_id=111117433]
+texture_filter = 1
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0

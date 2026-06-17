@@ -17,10 +17,10 @@ public partial class EyeDisplay : Node2D, IDisplay
 
     public bool Enabled {get; set;} = true;
 
-    private readonly (float min, float max) eyeballMoveRange = (0, 14);
-    private readonly (float min, float max) moveRateRange = (0.05f, 8);
-    private readonly (float min, float max) irisSizeRange = (0.1f, 2f);
-    private readonly (float min, float max) blinkRateRange = (0.2f, 10);
+    private readonly (float min, float max) eyeballMoveRange = (0, 6);
+    private readonly (float min, float max) moveRateRange = (0.1f, 5);
+    private readonly (float min, float max) irisSizeRange = (0.2f, 1.1f);
+    private readonly (float min, float max) blinkRateRange = (2, 15);
 
     private readonly DeltaTimer eyeMoveTimer = new(0.5, 3);
     private readonly DeltaTimer blinkTimer = new(0.2, 3);
@@ -136,23 +136,22 @@ public partial class EyeDisplay : Node2D, IDisplay
     {
         float engagementNorm = human.Stats.Engagement.GetNormalised();
 
-        irisSize = Mathf.Lerp(irisSizeRange.min, irisSizeRange.max, 1 - engagementNorm); 
+        irisSize = Mathf.Lerp(irisSizeRange.max, irisSizeRange.min, engagementNorm);
         blinkRate = Mathf.Lerp(blinkRateRange.min, blinkRateRange.max, engagementNorm);
-        moveRate = Mathf.Lerp(moveRateRange.min, moveRateRange.max, 1 - engagementNorm);
+        moveRate = Mathf.Lerp(moveRateRange.max, moveRateRange.min, engagementNorm);
         redEyeAmount = human.Stats.Melatonin.GetNormalised();
         eyebagAmount = human.Stats.LongTermFatigue.GetNormalised();
 
         const float minMove = 1f;
-        float currentRadius = eyeballMoveRange.max * (1.0f - engagementNorm) + minMove;
+        float currentRadius = eyeballMoveRange.max * (1f - engagementNorm) + minMove;
 
-        float yOffset = eyeballMoveRange.max/2 * engagementNorm;
+        float yOffset = eyeballMoveRange.max / 2f * (1f - engagementNorm);
 
         float angle = GD.Randf() * Mathf.Tau;
         float distance = Mathf.Sqrt(GD.Randf()) * currentRadius;
 
         Vector2 randomPoint = Vector2.FromAngle(angle) * distance;
-        eyeballMovePosition = new Vector2(0, yOffset) + randomPoint;
-
+        eyeballMovePosition = new Vector2(0, -yOffset) + randomPoint;
     }
 
     private void SetCRTAmount(float vhs, float noise, bool grey)

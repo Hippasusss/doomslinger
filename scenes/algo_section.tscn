@@ -13,9 +13,11 @@
 [ext_resource type="Script" uid="uid://bmhk44aq7rjw5" path="res://script/BidDataDisplay.cs" id="11_5lk0f"]
 [ext_resource type="Texture2D" uid="uid://ih20mpaqywx1" path="res://sprite/LogoOldHeadsINC.png" id="12_a6u5w"]
 [ext_resource type="PackedScene" uid="uid://k3rppnfhyhs8" path="res://scenes/prefab/labeled_value.tscn" id="13_ym777"]
+[ext_resource type="Theme" uid="uid://5kmy2blejgp0" path="res://resources/Themes/labeledValueTheme.tres" id="14_gfnuc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knagv"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ym777"]
+color = Color(0.7176471, 0.7647059, 0.95686275, 1)
+vertical = true
 
 [node name="AlgoSection" type="Panel" unique_id=1934035250 node_paths=PackedStringArray("bidMatrix", "bidDataDisplay", "revealer")]
 texture_filter = 1
@@ -78,7 +80,7 @@ script = ExtResource("9_a2abt")
 ButtonScene = ExtResource("10_wkyo5")
 Columns = 20
 
-[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidPrice", "BidLength", "PoliticalSlider")]
+[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "CompanyMarketCap", "CompanyFoundedDate", "CompanyStanding", "BidPrice", "BidLength", "PoliticalSlider")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 124.0
@@ -89,8 +91,11 @@ CompanyLogo = NodePath("Company/Company Logo")
 CompanyName = NodePath("Company/CompanyName")
 CompanyInfo = NodePath("Company/Company Info")
 CompanySectors = NodePath("Company/CompanySectors")
-BidPrice = NodePath("Panel/Price")
-BidLength = NodePath("Panel/Length")
+CompanyMarketCap = NodePath("Company/VBoxContainer/Market Cap")
+CompanyFoundedDate = NodePath("Company/VBoxContainer/Date Founded")
+CompanyStanding = NodePath("Company/VBoxContainer/Social Standing")
+BidPrice = NodePath("Panel/VBoxContainer/Price")
+BidLength = NodePath("Panel/VBoxContainer/Length")
 PoliticalSlider = NodePath("Panel/PoliticalLeaning/HSlider")
 
 [node name="BidInfo" type="RichTextLabel" parent="BidDataDisplay" unique_id=1093248494]
@@ -151,16 +156,28 @@ offset_bottom = 12.0
 texture = ExtResource("12_a6u5w")
 expand_mode = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="BidDataDisplay/Company" unique_id=533482600]
+[node name="VBoxContainer" type="VBoxContainer" parent="BidDataDisplay/Company" unique_id=210391000]
 layout_mode = 0
-offset_left = 101.0
-offset_top = 19.0
-offset_right = 149.0
+offset_left = 99.0
+offset_top = 13.0
+offset_right = 150.0
 offset_bottom = 65.0
-text = "$: 18B
-F: 1994
-:): low
-MGMT: :("
+theme_override_constants/separation = 0
+
+[node name="Market Cap" parent="BidDataDisplay/Company/VBoxContainer" unique_id=2074968864 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Mcap"
+
+[node name="Social Standing" parent="BidDataDisplay/Company/VBoxContainer" unique_id=554878453 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Social"
+
+[node name="Date Founded" parent="BidDataDisplay/Company/VBoxContainer" unique_id=1994209653 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "DOF"
 
 [node name="Panel" type="Panel" parent="BidDataDisplay" unique_id=697104091]
 layout_mode = 0
@@ -169,32 +186,29 @@ offset_top = 3.0
 offset_right = 314.0
 offset_bottom = 71.0
 
-[node name="Price" parent="BidDataDisplay/Panel" unique_id=2074968864 instance=ExtResource("13_ym777")]
+[node name="VBoxContainer" type="VBoxContainer" parent="BidDataDisplay/Panel" unique_id=90892064]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 5.0
-offset_right = 66.0
-offset_bottom = 14.0
-LabelText = null
-ValueText = null
+offset_top = 4.0
+offset_right = 69.0
+offset_bottom = 65.0
+theme = ExtResource("14_gfnuc")
+theme_override_constants/separation = 0
 
-[node name="Length" parent="BidDataDisplay/Panel" unique_id=466924549 instance=ExtResource("13_ym777")]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 14.0
-offset_right = 67.0
-offset_bottom = 23.0
-LabelText = null
-ValueText = null
+[node name="Price" parent="BidDataDisplay/Panel/VBoxContainer" unique_id=83202015 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Price"
 
-[node name="Age" parent="BidDataDisplay/Panel" unique_id=1400191494 instance=ExtResource("13_ym777")]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 23.0
-offset_right = 66.0
-offset_bottom = 32.0
-LabelText = null
-ValueText = null
+[node name="Length" parent="BidDataDisplay/Panel/VBoxContainer" unique_id=466924549 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Length"
+
+[node name="Age" parent="BidDataDisplay/Panel/VBoxContainer" unique_id=1400191494 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Age "
 
 [node name="PoliticalLeaning" type="Control" parent="BidDataDisplay/Panel" unique_id=1528402535]
 anchors_preset = 0
@@ -221,15 +235,16 @@ ticks_position = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="BidDataDisplay/Panel/PoliticalLeaning" unique_id=1068334866]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 3.0
+offset_top = 2.0
 offset_right = 90.0
-offset_bottom = 10.0
+offset_bottom = 9.0
 text = "Political Leaning"
 
-[node name="Panel" type="Panel" parent="BidDataDisplay/Panel" unique_id=893568205]
+[node name="VSeparator" type="VSeparator" parent="BidDataDisplay/Panel" unique_id=1795499827]
 layout_mode = 0
 offset_left = 71.0
-offset_top = 4.0
+offset_top = 5.0
 offset_right = 72.0
-offset_bottom = 65.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_knagv")
+offset_bottom = 64.0
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_ym777")

@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://k3rppnfhyhs8"]
 
 [ext_resource type="Script" uid="uid://c1s5m3w8w14xq" path="res://script/LabeledValue.cs" id="1_6c01w"]
+[ext_resource type="Theme" uid="uid://5kmy2blejgp0" path="res://resources/Themes/labeledValueTheme.tres" id="2_6htln"]
 
 [node name="LabeledValue" type="Control" unique_id=2074968864 node_paths=PackedStringArray("Label", "Value")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 55.0
-offset_bottom = 9.0
+offset_bottom = 6.0
 script = ExtResource("1_6c01w")
 Label = NodePath("HBoxContainer/Label")
 Value = NodePath("HBoxContainer/Value")
+LabelText = " "
+ValueText = " "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1651896840]
 layout_mode = 1
@@ -18,12 +21,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_6htln")
+theme_override_constants/separation = 0
 
 [node name="Label" type="RichTextLabel" parent="HBoxContainer" unique_id=1376412279]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_6htln")
+text = " "
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Delim" type="RichTextLabel" parent="HBoxContainer" unique_id=1845676837]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_6htln")
+text = " :"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
 
 [node name="Value" type="RichTextLabel" parent="HBoxContainer" unique_id=2112844925]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_6htln")
+text = " "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 horizontal_alignment = 2

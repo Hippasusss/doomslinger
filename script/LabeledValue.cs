@@ -8,21 +8,39 @@ public partial class LabeledValue : Control
     [Export] private RichTextLabel Label;
     [Export] private RichTextLabel Value;
 
-    [Export] public string LabelText
+    private string _labelText;
+    private string _valueText;
+
+    [Export]
+    public string LabelText
     {
-        get => Label.Text;
-        set => Label.Text = value;
+        get => _labelText;
+        set
+        {
+            _labelText = value;
+            if (IsInsideTree()) CallDeferred(nameof(Sync));
+        }
     }
 
-    [Export] public string ValueText
+    [Export]
+    public string ValueText
     {
-        get => Value.Text;
-        set => Value.Text = value;
+        get => _valueText;
+        set
+        {
+            _valueText = value;
+            if (IsInsideTree()) CallDeferred(nameof(Sync));
+        }
     }
 
-    public void Set(string label, string value)
+    public override void _Ready()
     {
-        LabelText = label;
-        ValueText = value;
+        Sync();
+    }
+
+    private void Sync()
+    {
+        if (Label != null) Label.Text = _labelText;
+        if (Value != null) Value.Text = _valueText;
     }
 }

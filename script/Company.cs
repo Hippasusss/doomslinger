@@ -45,5 +45,6 @@ public enum Sector {
     AI = 1 << 21,
     Government = 1 << 22,
     Sports= 1 << 23,
-    Music= 1 << 24
+    Music= 1 << 24,
+    Tech= 1 << 25
 }

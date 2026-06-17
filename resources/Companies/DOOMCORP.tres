@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Company" format=3 uid="uid://dobkrh862jths"]
+
+[ext_resource type="Script" uid="uid://dw8aetio5v1hw" path="res://script/Company.cs" id="1_28sft"]
+[ext_resource type="Texture2D" uid="uid://c6lc5y84u0r7n" path="res://sprite/DOOMCORP.png" id="1_xx8ih"]
+
+[resource]
+script = ExtResource("1_28sft")
+Logo = ExtResource("1_xx8ih")
+Name = "DOOMCORP"
+Description = "The greatest tech company ever. "
+Sectors = 33554432
+MarketCap = 9999999999999.0
+Age = 17.391
+PoliticalLeaning = 1.0
+Chaos = 0.17
+CurrentStanding = 0.075
+metadata/_custom_type_script = "uid://dw8aetio5v1hw"

@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://5kmy2blejgp0"]
+
+[ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="1_tlhrj"]
+
+[resource]
+default_font = ExtResource("1_tlhrj")
+default_font_size = 7
+VBoxContainer/constants/separation = 0

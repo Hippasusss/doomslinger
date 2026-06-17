@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Company" format=3 uid="uid://dmeyqolyifhtq"]
+
+[ext_resource type="Texture2D" uid="uid://bcsyhh7v243kw" path="res://sprite/LogoTA.png" id="1_ddw0m"]
+[ext_resource type="Script" uid="uid://dw8aetio5v1hw" path="res://script/Company.cs" id="1_qwpbe"]
+
+[resource]
+script = ExtResource("1_qwpbe")
+Logo = ExtResource("1_ddw0m")
+Name = "Tartan Army"
+Description = "Really cool group of sports fans"
+Sectors = 9437184
+IsLocal = true
+MarketCap = 100.0
+Age = 99.0
+PoliticalLeaning = -0.626
+Chaos = 0.543
+CurrentStanding = 0.961
+metadata/_custom_type_script = "uid://dw8aetio5v1hw"

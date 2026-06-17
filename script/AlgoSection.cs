@@ -6,7 +6,6 @@ namespace DoomSlinger;
 public partial class AlgoSection : Panel, ISection
 {
     [Export] private GameData gameData;
-    [Export] private HumanManager humanManager;
     [Export] private ButtonMatrix bidMatrix;
     [Export] private BidDataDisplay bidDataDisplay;
     [Export] private SectionRevealer revealer;

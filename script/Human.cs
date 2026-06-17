@@ -17,6 +17,7 @@ public partial class Human : Node2D
     [Export] private Sprite2D shockSymbol;
     [Export] private Button SelectionButton;
     [Export] private LoadingBar WatchTimeBar;
+    [Export] private Label OverFlowCount;
 
     private HumanStats stats = new();
     private HumanPersonalData data = new();
@@ -194,6 +195,11 @@ public partial class Human : Node2D
             selected = false;
             if(emit) EmitSignal(SignalName.HumanSelected, this);
         }
+    }
+    
+    public void SetOverFlowCount(int count)
+    {
+        OverFlowCount.Text = count.ToString();
     }
 
     private void ToggleWarning(bool onOff)

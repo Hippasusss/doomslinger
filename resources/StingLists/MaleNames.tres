@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StringList" format=3 uid="uid://cd55s4qtqp2cr"]
+
+[ext_resource type="Script" uid="uid://oq7g0su2iwex" path="res://script/StringList.cs" id="1_sm0a4"]
+
+[resource]
+script = ExtResource("1_sm0a4")
+values = PackedStringArray("John", "Bob", "Charlie", "Edward", "George", "Ian", "Kevin", "Mike", "Oscar", "Quinn", "Tom", "Ryan", "Victor", "Xander", "Zach", "Lewis", "Kramer", "Andrew", "Robert", "Harold")
+metadata/_custom_type_script = "uid://oq7g0su2iwex"

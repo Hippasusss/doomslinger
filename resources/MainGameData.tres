@@ -5,8 +5,20 @@
 [ext_resource type="Resource" uid="uid://yctveyd8phcy" path="res://resources/Companies/OldHeadsLTD.tres" id="2_ssvl6"]
 [ext_resource type="Resource" uid="uid://dmeyqolyifhtq" path="res://resources/Companies/TartanArmy.tres" id="3_ssvl6"]
 [ext_resource type="Resource" uid="uid://dobkrh862jths" path="res://resources/Companies/DOOMCORP.tres" id="4_7myhf"]
+[ext_resource type="Resource" uid="uid://21jnrvs3vqaj" path="res://resources/StingLists/FemaleNames.tres" id="5_wc8ch"]
+[ext_resource type="Resource" uid="uid://cd55s4qtqp2cr" path="res://resources/StingLists/MaleNames.tres" id="6_pdwey"]
+[ext_resource type="Resource" path="res://resources/Nationalities/Frintish.tres" id="7_xcqm6"]
+[ext_resource type="Resource" path="res://resources/Nationalities/Karak.tres" id="8_dcmkd"]
+[ext_resource type="Resource" uid="uid://cbgngvm1884u2" path="res://resources/StingLists/Surnames.tres" id="9_da5bc"]
+[ext_resource type="Resource" path="res://resources/Nationalities/Coluco.tres" id="9_hl37l"]
+[ext_resource type="Resource" path="res://resources/Nationalities/Ashkani.tres" id="10_778us"]
+[ext_resource type="Resource" path="res://resources/Nationalities/Prelish.tres" id="11_djg8m"]
 
 [resource]
 script = ExtResource("1_d1vhj")
 companies = Array[Object]([ExtResource("1_wyx0g"), ExtResource("2_ssvl6"), ExtResource("3_ssvl6"), ExtResource("4_7myhf")])
+nationalities = Array[Object]([ExtResource("7_xcqm6"), ExtResource("8_dcmkd"), ExtResource("9_hl37l"), ExtResource("10_778us"), ExtResource("11_djg8m")])
+maleFirstNames = ExtResource("6_pdwey")
+femaleFirstNames = ExtResource("5_wc8ch")
+secondNames = ExtResource("9_da5bc")
 metadata/_custom_type_script = "uid://dplyu30mhckx1"

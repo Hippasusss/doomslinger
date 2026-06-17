@@ -9,7 +9,6 @@
 [ext_resource type="ColorPalette" uid="uid://d32pqxf3o0s7l" path="res://resources/ColorPalettes/Face/clothesPalette.tres" id="7_2c4at"]
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
 [ext_resource type="Script" uid="uid://b6c4jb6obonfh" path="res://script/UIManager.cs" id="8_dg70y"]
-[ext_resource type="Resource" uid="uid://cc17vl7vt2loa" path="res://resources/StingLists/Nationalities.tres" id="8_oa6sj"]
 [ext_resource type="Script" uid="uid://bgc0gotw2o688" path="res://script/HumanManager.cs" id="8_pnhog"]
 [ext_resource type="Texture2D" uid="uid://bkn0gbxuvg7jh" path="res://sprite/controls.png" id="8_xa025"]
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
@@ -32,6 +31,7 @@
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="30_vua0o"]
 [ext_resource type="Resource" uid="uid://b0852h5ufnnj8" path="res://resources/Maps/EdinMap.tres" id="32_pdwbg"]
+[ext_resource type="Resource" uid="uid://cevkgbllo7cp0" path="res://resources/MainGameData.tres" id="33_0qimb"]
 [ext_resource type="Script" uid="uid://bpsiao3t75nku" path="res://script/CreditSection.cs" id="34_s3wmy"]
 [ext_resource type="Script" uid="uid://b48mndg73r0wy" path="res://script/MapSection.cs" id="39_8b871"]
 
@@ -84,6 +84,7 @@ size = Vector2(11.93, 40.755)
 
 [node name="World" type="Node2D" unique_id=889943719]
 script = ExtResource("1_oa6sj")
+gameData = ExtResource("33_0qimb")
 metadata/_edit_vertical_guides_ = [757.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1338437481]
@@ -109,7 +110,7 @@ human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
 numHumans = 4
 faceGenerator = NodePath("FaceGenerator")
-nationalities = ExtResource("8_oa6sj")
+gameData = ExtResource("33_0qimb")
 
 [node name="Positioner" type="Marker2D" parent="HumanArea/Spawner" unique_id=2019220739]
 position = Vector2(0, 320)
@@ -242,6 +243,7 @@ directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="CreditSection" type="Panel" parent="UI" unique_id=583447152 node_paths=PackedStringArray("creditText")]
+visible = false
 offset_right = 149.0
 offset_bottom = 26.0
 theme_override_styles/panel = ExtResource("11_pdwbg")
@@ -368,7 +370,6 @@ text = ""
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1870095868]
 stream = ExtResource("18_bb450")
 volume_db = -9.055
-autoplay = true
 bus = &"Music"
 parameters/looping = true
 

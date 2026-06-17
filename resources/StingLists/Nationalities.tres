@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="StringList" format=3 uid="uid://cc17vl7vt2loa"]
-
-[ext_resource type="Script" uid="uid://oq7g0su2iwex" path="res://script/StringList.cs" id="1_gdic5"]
-
-[resource]
-script = ExtResource("1_gdic5")
-values = PackedStringArray("Ashkani", "Karak", "Prelish", "Frintish")
-metadata/_custom_type_script = "uid://oq7g0su2iwex"

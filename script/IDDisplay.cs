@@ -20,7 +20,7 @@ public partial class IDDisplay : Control, IDisplay
             [cell][right][b]HT:[/b][/right][/cell]   [cell expand=true][color=white][right]{human.Data.height}[/right][/color][/cell]
             [cell][right][b]GEN:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.gender.ToString()}[/right][/color][/cell]
             [cell][right][b]UID:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.UID}[/right][/color][/cell]
-            [cell][right][b]NAT:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.nationality}[/right][/color][/cell]
+            [cell][right][b]NAT:[/b][/right][/cell]  [cell expand=true][color=white][right]{human.Data.nationality?.Name}[/right][/color][/cell]
             [/table]
             """;
 

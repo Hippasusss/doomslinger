@@ -17,6 +17,7 @@ public partial class Company : Resource
     [Export (PropertyHint.Range, "-1, 1, 0.01")] public float PoliticalLeaning { get; set;}
     [Export (PropertyHint.Range, "0, 1, 0.01")] public float Chaos { get; set;} // low is well run, high is poorly run
     [Export (PropertyHint.Range, "0, 1, 0.01")] public float CurrentStanding { get; set;} // low is disliked, high is liked (by public)
+    [Export] public Nationality Nationality { get; set;}
 }
 
 [Flags]

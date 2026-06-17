@@ -80,7 +80,7 @@ script = ExtResource("9_a2abt")
 ButtonScene = ExtResource("10_wkyo5")
 Columns = 20
 
-[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "CompanyMarketCap", "CompanyFoundedDate", "CompanyStanding", "BidPrice", "BidLength", "PoliticalSlider")]
+[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidPrice", "BidLength", "PoliticalSlider")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 124.0
@@ -91,9 +91,6 @@ CompanyLogo = NodePath("Company/Company Logo")
 CompanyName = NodePath("Company/CompanyName")
 CompanyInfo = NodePath("Company/Company Info")
 CompanySectors = NodePath("Company/CompanySectors")
-CompanyMarketCap = NodePath("Company/VBoxContainer/Market Cap")
-CompanyFoundedDate = NodePath("Company/VBoxContainer/Date Founded")
-CompanyStanding = NodePath("Company/VBoxContainer/Social Standing")
 BidPrice = NodePath("Panel/VBoxContainer/Price")
 BidLength = NodePath("Panel/VBoxContainer/Length")
 PoliticalSlider = NodePath("Panel/PoliticalLeaning/HSlider")

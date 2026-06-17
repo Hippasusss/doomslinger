@@ -210,6 +210,15 @@ offset = Vector2(0, 14.779)
 libraries/ = SubResource("AnimationLibrary_n5qo3")
 autoplay = &"Grumble"
 
+[node name="OverFlowCount" type="Label" parent="FeedMachine" unique_id=1131645045]
+offset_left = -18.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 25.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Feed" type="CanvasGroup" parent="." unique_id=2075176353 node_paths=PackedStringArray("screenLight", "generator")]
 process_mode = 3
 z_index = -2

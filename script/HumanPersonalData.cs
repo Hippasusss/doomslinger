@@ -14,7 +14,7 @@ public readonly struct HumanPersonalData
     public readonly int height;
     public readonly Gender gender;
     public readonly Orientation orientation;
-    public readonly string nationality;
+    public readonly Nationality nationality;
     public readonly int UID;
     private readonly static List<int> UIDs = [];
 
@@ -23,7 +23,7 @@ public readonly struct HumanPersonalData
             int height,
             Gender gender,
             Orientation orientation,
-            string nationality)
+            Nationality nationality)
     {
         this.name = name;
         this.DOB = DOB;

@@ -13,10 +13,7 @@ public partial class HumanSpawner : Node2D
     [Export] private int numHumans = 1;
     [Export] private FaceGenerator faceGenerator;
     private const int humanSpacing = 50;
-    [Export] StringList nationalities;
-    private static readonly string[] femaleNames = [ "Jane", "Alice", "Diana", "Fiona", "Hannah", "Julia", "Laura", "Nora", "Paula", "Sarah", "Ursula", "Wendy", "Yara" ];
-    private static readonly string[] maleNames = [ "John", "Bob", "Charlie", "Edward", "George", "Ian", "Kevin", "Mike", "Oscar", "Quinn", "Ryan", "Tom", "Victor", "Xander", "Zack" ];
-    private static readonly string[] surnames = [ "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson" ];
+    [Export] private GameData gameData;
 
     public override async void _Ready()
     {
@@ -48,22 +45,22 @@ public partial class HumanSpawner : Node2D
         newHuman.Phone.Modulate = colours[5];
     }
 
-    private static string GetRandomName(HumanPersonalData.Gender gender)
+    private string GetRandomName(HumanPersonalData.Gender gender)
     {
         string firstName;
         if (gender == HumanPersonalData.Gender.Male)
         {
-            firstName = maleNames.GetRandom();
+            firstName = gameData.MaleFirstNames.values.GetRandom();
         }
         else if (gender == HumanPersonalData.Gender.Female)
         {
-            firstName = femaleNames.GetRandom();
+            firstName = gameData.FemaleFirstNames.values.GetRandom();
         }
         else
         {
-            firstName = maleNames.GetRandom();
+            firstName = gameData.MaleFirstNames.values.GetRandom();
         }
-        string lastName = surnames.GetRandom();
+        string lastName = gameData.SecondNames.values.GetRandom();
         return $"{firstName} {lastName}";
     }
 
@@ -119,9 +116,9 @@ public partial class HumanSpawner : Node2D
         return Random.Shared.NextEnum<HumanPersonalData.Orientation>();
     }
 
-    private string GetRandomNationality()
+    private Nationality GetRandomNationality()
     {
-        return nationalities.values.GetRandom();
+        return gameData.Nationalities.GetRandom();
     }
 
     private static DateOnly GetRandomDate()

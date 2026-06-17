@@ -149,7 +149,8 @@ script = ExtResource("8_dg70y")
 UISections = [NodePath("DataSection"), NodePath("AlgoSection"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection/HelpHideReveal")]
 blackoutController = NodePath("Blackout")
 
-[node name="DataSection" parent="UI" unique_id=300798386 instance=ExtResource("13_2c4at")]
+[node name="DataSection" parent="UI" unique_id=300798386 node_paths=PackedStringArray("mapSection") instance=ExtResource("13_2c4at")]
+mapSection = NodePath("../MapSection")
 
 [node name="AlgoSection" parent="UI" unique_id=1934035250 instance=ExtResource("14_g6wdg")]
 

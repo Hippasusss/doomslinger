@@ -63,6 +63,6 @@ public class BlockData
     private void CalculateColor()
     {
         float t = (PoliticalLeaning + 1f) / 2f;
-        BlockColor = Colors.Salmon.Lerp(Colors.AliceBlue, t);
+        BlockColor = new Color(1f, 0.55f, 0.55f).Lerp(new Color(0.55f, 0.65f, 1f), t);
     }
 }

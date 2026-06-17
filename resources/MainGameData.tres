@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dplyu30mhckx1" path="res://script/GameData.cs" id="1_d1vhj"]
 [ext_resource type="Resource" uid="uid://dpiunt3spq8tt" path="res://resources/Companies/SillyCO.tres" id="1_wyx0g"]
 [ext_resource type="Resource" uid="uid://yctveyd8phcy" path="res://resources/Companies/OldHeadsLTD.tres" id="2_ssvl6"]
+[ext_resource type="Resource" uid="uid://dmeyqolyifhtq" path="res://resources/Companies/TartanArmy.tres" id="3_ssvl6"]
 
 [resource]
 script = ExtResource("1_d1vhj")
-companies = Array[Object]([ExtResource("1_wyx0g"), ExtResource("2_ssvl6")])
+companies = Array[Object]([ExtResource("1_wyx0g"), ExtResource("2_ssvl6"), ExtResource("3_ssvl6")])
 metadata/_custom_type_script = "uid://dplyu30mhckx1"

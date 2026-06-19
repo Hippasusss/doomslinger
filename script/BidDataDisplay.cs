@@ -23,7 +23,7 @@ public partial class BidDataDisplay : Panel
         CompanyInfo.Text = bid.CompanyBidding.Description;
         CompanySectors.Text = bid.CompanyBidding.Sectors.ToString();
         CompanyLogo.Texture = bid.CompanyBidding.Logo;
-        CompanyMarketCap.ValueText = $"{bid.CompanyBidding.MarketCap}";
+        CompanyMarketCap.ValueText = Helpers.FormatLargeDollarAmount(bid.CompanyBidding.MarketCap);
         CompanyFoundedDate.ValueText = $"{Mathf.FloorToInt(DateTime.Now.Year - bid.CompanyBidding.Age)}";
         CompanyStanding.ValueText = $"{bid.CompanyBidding.CurrentStanding}";
         CompanyLocation.ValueText = $"{bid.CompanyBidding.Nationality.Name}";

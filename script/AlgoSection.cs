@@ -79,7 +79,7 @@ public partial class AlgoSection : Panel, ISection
         MatrixCell cell = list[0];
         Bid bid = ActiveBids[cell];
 
-        list.RemoveAt(0);
+        RemoveSelection(human, cell);
         CellOwners.Remove(cell);
         ActiveBids.Remove(cell);
         cell.Reset();
@@ -94,7 +94,23 @@ public partial class AlgoSection : Panel, ISection
         bidDataDisplay.UpdateDisplay(value);
     }
 
-    // Adds cell bid to human upcoming bids and updates display. registered in this constructor.
+    private void AddSelection(Human human, MatrixCell cell)
+    {
+        if (!HumanSelections.TryGetValue(human, out var list))
+            HumanSelections[human] = list = [];
+        list.Add(cell);
+        human.SetOverFlowCount(list.Count);
+    }
+
+    private void RemoveSelection(Human human, MatrixCell cell)
+    {
+        if (HumanSelections.TryGetValue(human, out var list))
+        {
+            list.Remove(cell);
+            human.SetOverFlowCount(list.Count);
+        }
+    }
+
     private void ClickCell(MatrixCell cell)
     {
         if (!ActiveBids.TryGetValue(cell, out Bid bid)) return;
@@ -102,16 +118,14 @@ public partial class AlgoSection : Panel, ISection
         if (CellOwners.TryGetValue(cell, out Human owner) && owner == currentHuman)
         {
             CellOwners.Remove(cell);
-            HumanSelections[currentHuman].Remove(cell);
+            RemoveSelection(currentHuman, cell);
         }
         else
         {
             if (owner != null)
-                HumanSelections[owner].Remove(cell);
+                RemoveSelection(owner, cell);
             CellOwners[cell] = currentHuman;
-            if (!HumanSelections.TryGetValue(currentHuman, out var list))
-                HumanSelections[currentHuman] = list = [];
-            list.Add(cell);
+            AddSelection(currentHuman, cell);
         }
 
         UpdateAllCellDisplays();

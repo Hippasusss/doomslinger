@@ -108,7 +108,7 @@ script = ExtResource("1_rvslj")
 humanManager = NodePath("..")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-numHumans = 4
+numHumans = 10
 faceGenerator = NodePath("FaceGenerator")
 gameData = ExtResource("33_0qimb")
 
@@ -370,6 +370,7 @@ text = ""
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1870095868]
 stream = ExtResource("18_bb450")
 volume_db = -9.055
+autoplay = true
 bus = &"Music"
 parameters/looping = true
 

@@ -345,6 +345,14 @@ offset_right = 203.0
 offset_bottom = 149.0
 theme_override_styles/panel = ExtResource("3_sj4o5")
 
+[node name="Label" type="Label" parent="Section2" unique_id=723473912]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 67.0
+offset_bottom = 33.0
+text = "MC Graph?"
+
 [node name="Panel" type="Panel" parent="." unique_id=419805112]
 layout_mode = 0
 offset_left = 9.0
@@ -355,10 +363,14 @@ theme_override_styles/panel = ExtResource("3_sj4o5")
 
 [node name="Label" type="Label" parent="Panel" unique_id=432516690]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 32.0
-offset_bottom = 12.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 60.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 4
+text = "Battery, steps, signal, basic phone data?
+"
+autowrap_mode = 3
 
 [node name="Panel2" type="Panel" parent="." unique_id=1306730358]
 layout_mode = 0

@@ -243,9 +243,10 @@ offset_bottom = 23.0
 [node name="HSlider" type="HSlider" parent="BidDataDisplay/Panel/PoliticalLeaning" unique_id=110816537]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 9.0
+offset_top = 10.0
 offset_right = 89.0
-offset_bottom = 25.0
+offset_bottom = 26.0
+scale = Vector2(1, 0.35)
 theme = ExtResource("5_4k8pu")
 theme_type_variation = &"pl"
 min_value = -1.0

@@ -80,7 +80,7 @@ script = ExtResource("9_a2abt")
 ButtonScene = ExtResource("10_wkyo5")
 Columns = 20
 
-[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "BidPrice", "BidLength", "PoliticalSlider")]
+[node name="BidDataDisplay" type="Panel" parent="." unique_id=137675033 node_paths=PackedStringArray("CompanyLogo", "CompanyName", "CompanyInfo", "CompanySectors", "CompanyMarketCap", "CompanyFoundedDate", "CompanyStanding", "CompanyLocation", "BidPrice", "BidLength", "PoliticalSlider")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 124.0
@@ -91,6 +91,10 @@ CompanyLogo = NodePath("Company/Company Logo")
 CompanyName = NodePath("Company/CompanyName")
 CompanyInfo = NodePath("Company/Company Info")
 CompanySectors = NodePath("Company/CompanySectors")
+CompanyMarketCap = NodePath("Company/VBoxContainer/Market Cap")
+CompanyFoundedDate = NodePath("Company/VBoxContainer/Date Founded")
+CompanyStanding = NodePath("Company/VBoxContainer/Social Standing")
+CompanyLocation = NodePath("Company/VBoxContainer/Location")
 BidPrice = NodePath("Panel/VBoxContainer/Price")
 BidLength = NodePath("Panel/VBoxContainer/Length")
 PoliticalSlider = NodePath("Panel/PoliticalLeaning/HSlider")
@@ -126,9 +130,9 @@ vertical_alignment = 1
 [node name="CompanySectors" type="RichTextLabel" parent="BidDataDisplay/Company" unique_id=2122071661]
 layout_mode = 1
 offset_left = 16.0
-offset_top = 11.0
+offset_top = 10.0
 offset_right = 72.0
-offset_bottom = 16.0
+offset_bottom = 15.0
 theme_override_colors/default_color = Color(0.6405938, 0.69789743, 0.9429049, 0.55600005)
 theme_override_font_sizes/normal_font_size = 5
 text = "Sectors"
@@ -138,8 +142,8 @@ scroll_active = false
 [node name="Company Info" type="RichTextLabel" parent="BidDataDisplay/Company" unique_id=1369178129]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 28.0
-offset_right = 150.0
+offset_top = 18.0
+offset_right = 95.0
 offset_bottom = 64.0
 theme_override_font_sizes/normal_font_size = 7
 text = "Company information "
@@ -159,7 +163,7 @@ layout_mode = 0
 offset_left = 99.0
 offset_top = 3.0
 offset_right = 150.0
-offset_bottom = 26.0
+offset_bottom = 65.0
 theme_override_constants/separation = 0
 
 [node name="Market Cap" parent="BidDataDisplay/Company/VBoxContainer" unique_id=2074968864 instance=ExtResource("13_ym777")]
@@ -176,6 +180,27 @@ LabelText = "Social"
 custom_minimum_size = Vector2(0, 7)
 layout_mode = 2
 LabelText = "DOF"
+
+[node name="Location" parent="BidDataDisplay/Company/VBoxContainer" unique_id=605891898 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Loc"
+
+[node name="VSeparator" type="VSeparator" parent="BidDataDisplay/Company" unique_id=81349582]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 5.0
+offset_right = 97.0
+offset_bottom = 63.0
+theme_override_constants/separation = 1
+
+[node name="HSeparator" type="HSeparator" parent="BidDataDisplay/Company" unique_id=2097723090]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 16.0
+offset_right = 95.0
+offset_bottom = 17.0
+theme_override_constants/separation = 1
 
 [node name="Panel" type="Panel" parent="BidDataDisplay" unique_id=697104091]
 layout_mode = 0

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ih20mpaqywx1" path="res://sprite/LogoOldHeadsINC.png" id="1_mcxfw"]
 [ext_resource type="Script" uid="uid://dw8aetio5v1hw" path="res://script/Company.cs" id="1_w67mv"]
+[ext_resource type="Resource" path="res://resources/Nationalities/Ashkani.tres" id="2_0kuin"]
 
 [resource]
 script = ExtResource("1_w67mv")
@@ -14,4 +15,5 @@ Age = 77.241
 PoliticalLeaning = 0.8399999999999999
 Chaos = 0.098
 CurrentStanding = 0.715
+Nationality = ExtResource("2_0kuin")
 metadata/_custom_type_script = "uid://dw8aetio5v1hw"

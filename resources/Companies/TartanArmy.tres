@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bcsyhh7v243kw" path="res://sprite/LogoTA.png" id="1_ddw0m"]
 [ext_resource type="Script" uid="uid://dw8aetio5v1hw" path="res://script/Company.cs" id="1_qwpbe"]
+[ext_resource type="Resource" path="res://resources/Nationalities/Frintish.tres" id="2_tefhd"]
 
 [resource]
 script = ExtResource("1_qwpbe")
@@ -15,4 +16,5 @@ Age = 99.0
 PoliticalLeaning = -0.626
 Chaos = 0.543
 CurrentStanding = 0.961
+Nationality = ExtResource("2_tefhd")
 metadata/_custom_type_script = "uid://dw8aetio5v1hw"

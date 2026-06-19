@@ -12,6 +12,7 @@ public partial class BidDataDisplay : Panel
     [Export] public LabeledValue CompanyMarketCap { get; set;}
     [Export] public LabeledValue CompanyFoundedDate { get; set;}
     [Export] public LabeledValue CompanyStanding { get; set;}
+    [Export] public LabeledValue CompanyLocation{ get; set;}
     [Export] public LabeledValue BidPrice { get; set;}
     [Export] public LabeledValue BidLength { get; set;}
     [Export] public HSlider PoliticalSlider { get; set;}
@@ -25,6 +26,7 @@ public partial class BidDataDisplay : Panel
         CompanyMarketCap.ValueText = $"{bid.CompanyBidding.MarketCap}";
         CompanyFoundedDate.ValueText = $"{Mathf.FloorToInt(DateTime.Now.Year - bid.CompanyBidding.Age)}";
         CompanyStanding.ValueText = $"{bid.CompanyBidding.CurrentStanding}";
+        CompanyLocation.ValueText = $"{bid.CompanyBidding.Nationality.Name}";
         BidPrice.ValueText = $"${bid.Price}";
         BidLength.ValueText = $"{bid.BlockData.Length}s";
         PoliticalSlider.Value = bid.BlockData.PoliticalLeaning;

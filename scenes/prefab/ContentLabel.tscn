@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://fn45p05ufufc"]
+
+[ext_resource type="Script" uid="uid://bhuf1rvtpr386" path="res://script/ColoredLabel.cs" id="1_ochj1"]
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="2_ub7kl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ochj1"]
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="ColoredLabel" type="Label" unique_id=271502160 node_paths=PackedStringArray("background")]
+offset_right = 1.0
+offset_bottom = 8.0
+text = "violence"
+script = ExtResource("1_ochj1")
+background = NodePath("Panel")
+
+[node name="Panel" type="Panel" parent="." unique_id=328629988]
+self_modulate = Color(0.8004818, 0.29769143, 0.39944983, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ub7kl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ochj1")

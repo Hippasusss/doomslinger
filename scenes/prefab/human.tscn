@@ -287,11 +287,13 @@ FlickerSpeed = 10.04
 libraries/ = SubResource("AnimationLibrary_5jfd8")
 
 [node name="WarningSymbold" type="Sprite2D" parent="." unique_id=1496949490]
+visible = false
 texture_filter = 1
 position = Vector2(-13, 35)
 texture = ExtResource("14_2pby3")
 
 [node name="MovingSymbold" type="Sprite2D" parent="." unique_id=1033043765]
+visible = false
 texture_filter = 1
 position = Vector2(0, 35)
 texture = ExtResource("15_5jfd8")

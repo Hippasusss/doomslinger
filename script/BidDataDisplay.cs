@@ -16,6 +16,8 @@ public partial class BidDataDisplay : Panel
     [Export] public LabeledValue BidPrice { get; set;}
     [Export] public LabeledValue BidLength { get; set;}
     [Export] public HSlider PoliticalSlider { get; set;}
+    [Export] private Node contentLabels;
+    [Export] private PackedScene coloredLabelScene;
 
     public void UpdateDisplay(Bid bid)
     {
@@ -30,5 +32,21 @@ public partial class BidDataDisplay : Panel
         BidPrice.ValueText = $"${bid.Price}";
         BidLength.ValueText = $"{bid.BlockData.Length}s";
         PoliticalSlider.Value = bid.BlockData.PoliticalLeaning;
+        DisplayContentLabels(bid.BlockData.ContentTypes);
+    }
+
+    private void DisplayContentLabels(ContentType types)
+    {
+        foreach (Node child in contentLabels.GetChildren())
+            child.QueueFree();
+
+        foreach (ContentType type in Enum.GetValues<ContentType>())
+        {
+            if (!types.HasFlag(type)) continue;
+            ColoredLabel label = coloredLabelScene.Instantiate<ColoredLabel>();
+            contentLabels.AddChild(label);
+            label.Text = type.ToString();
+            label.SetBackgroundColour(ContentTypeInfo.GetColor(type));
+        }
     }
 }

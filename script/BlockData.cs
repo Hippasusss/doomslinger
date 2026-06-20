@@ -16,6 +16,7 @@ public class BlockData
     public Span<float> Stats => stats.AsSpan();
 
     public Color BlockColor {get; set;}
+    public ContentType ContentTypes {get; set;}
 
     public BlockData()
     {
@@ -47,6 +48,7 @@ public class BlockData
         // TODO make better
         Length = GD.RandRange(7, 35);
         CalculateColor();
+        RandomizeContentTypes();
     }
 
     public void Randomize()
@@ -58,6 +60,23 @@ public class BlockData
         }
         Length = GD.RandRange(7, 35);
         CalculateColor();
+        RandomizeContentTypes();
+    }
+
+    private void RandomizeContentTypes()
+    {
+        var source = Enum.GetValues<ContentType>();
+        var pool = new ContentType[source.Length];
+        source.CopyTo(pool, 0);
+        int count = GD.RandRange(1, 3);
+        ContentType result = 0;
+        for (int i = 0; i < count; i++)
+        {
+            int index = GD.RandRange(i, pool.Length - 1);
+            (pool[i], pool[index]) = (pool[index], pool[i]);
+            result |= pool[i];
+        }
+        ContentTypes = result;
     }
 
     private void CalculateColor()

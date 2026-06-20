@@ -108,7 +108,7 @@ script = ExtResource("1_rvslj")
 humanManager = NodePath("..")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-numHumans = 10
+numHumans = 3
 faceGenerator = NodePath("FaceGenerator")
 gameData = ExtResource("33_0qimb")
 
@@ -154,6 +154,8 @@ blackoutController = NodePath("Blackout")
 mapSection = NodePath("../MapSection")
 
 [node name="AlgoSection" parent="UI" unique_id=1934035250 instance=ExtResource("14_g6wdg")]
+offset_top = 78.0
+offset_bottom = 283.0
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
 offset_left = 641.0

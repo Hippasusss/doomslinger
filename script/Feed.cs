@@ -16,7 +16,7 @@ public partial class Feed : CanvasGroup
     public List<Feedblock> FeedBlocks => feedBlocks;
     public bool IsScrolling { get; private set; }
 
-    private const int numBlocks = 7;
+    private const int numBlocks = 6;
     private const int blockSpacing = 52;
     private const float turnOffRate = 0.5f;
     private const float cascadeTop = (numBlocks - 1) * -blockSpacing;

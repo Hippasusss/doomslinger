@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="6_y7o72"]
 [ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="7_j361h"]
 [ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="8_r2aec"]
+[ext_resource type="PackedScene" uid="uid://fn45p05ufufc" path="res://scenes/prefab/ContentLabel.tscn" id="8_xen3b"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_h7rj8"]
 [ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="10_bqle7"]
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="11_ge8cr"]
@@ -73,9 +74,9 @@ revealer = NodePath("DataHideReveal")
 [node name="InfoDisplay" type="Panel" parent="." unique_id=995009148]
 layout_mode = 0
 offset_left = 9.0
-offset_top = 11.0
+offset_top = 5.0
 offset_right = 203.0
-offset_bottom = 83.0
+offset_bottom = 77.0
 theme_override_styles/panel = ExtResource("3_sj4o5")
 
 [node name="IDCardSection" type="Panel" parent="InfoDisplay" unique_id=1552875135 node_paths=PackedStringArray("textName", "textData", "face")]
@@ -142,19 +143,31 @@ position = Vector2(15.5625, 20.548985)
 scale = Vector2(0.49750066, 0.4975007)
 texture = ExtResource("7_j361h")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="InfoDisplay" unique_id=840089063]
+[node name="Interests" type="HFlowContainer" parent="InfoDisplay" unique_id=213583063]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 5.0
 offset_right = 189.0
 offset_bottom = 66.0
-text = "MC: 
-I:
-Football
-Cocaine 
-Cycling
-Medical:
-"
+
+[node name="Node" parent="InfoDisplay/Interests" unique_id=271502160 instance=ExtResource("8_xen3b")]
+layout_mode = 2
+
+[node name="Node2" parent="InfoDisplay/Interests" unique_id=1458996093 instance=ExtResource("8_xen3b")]
+layout_mode = 2
+text = "Kids"
+
+[node name="Node3" parent="InfoDisplay/Interests" unique_id=1702957421 instance=ExtResource("8_xen3b")]
+layout_mode = 2
+text = "Porn"
+
+[node name="Node4" parent="InfoDisplay/Interests" unique_id=1665586053 instance=ExtResource("8_xen3b")]
+layout_mode = 2
+text = "Drugs"
+
+[node name="Node5" parent="InfoDisplay/Interests" unique_id=253514775 instance=ExtResource("8_xen3b")]
+layout_mode = 2
+text = "Tennis"
 
 [node name="HeartMonitorDisplay" type="Panel" parent="." unique_id=1608618766 node_paths=PackedStringArray("line", "BPMText")]
 layout_mode = 0
@@ -372,13 +385,22 @@ text = "Battery, steps, signal, basic phone data?
 "
 autowrap_mode = 3
 
-[node name="Panel2" type="Panel" parent="." unique_id=1306730358]
+[node name="Communications" type="Panel" parent="." unique_id=1306730358]
 layout_mode = 0
 offset_left = 105.0
 offset_top = 298.0
 offset_right = 203.0
 offset_bottom = 354.0
 theme_override_styles/panel = ExtResource("3_sj4o5")
+
+[node name="Label" type="Label" parent="Communications" unique_id=2031670159]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 90.0
+offset_bottom = 50.0
+text = "user messages, email etc"
+autowrap_mode = 2
 
 [node name="DataHideReveal" type="Button" parent="." unique_id=89951406]
 layout_mode = 0

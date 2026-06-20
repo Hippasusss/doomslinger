@@ -36,6 +36,9 @@ shader = ExtResource("6_y7o72")
 shader_parameter/divider = 3.0
 shader_parameter/boost = 0.3
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xen3b"]
+color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gny2"]
 bg_color = Color(0.21805939, 0.2250098, 0.22330877, 1)
 
@@ -143,10 +146,26 @@ position = Vector2(15.5625, 20.548985)
 scale = Vector2(0.49750066, 0.4975007)
 texture = ExtResource("7_j361h")
 
+[node name="Label" type="Label" parent="InfoDisplay" unique_id=694972874]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 3.0
+offset_right = 170.0
+offset_bottom = 11.0
+text = "Interests:"
+
+[node name="HSeparator" type="HSeparator" parent="InfoDisplay/Label" unique_id=589684565]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 9.0
+offset_right = 58.0
+offset_bottom = 10.0
+theme_override_styles/separator = SubResource("StyleBoxLine_xen3b")
+
 [node name="Interests" type="HFlowContainer" parent="InfoDisplay" unique_id=213583063]
 layout_mode = 0
 offset_left = 130.0
-offset_top = 5.0
+offset_top = 15.0
 offset_right = 189.0
 offset_bottom = 66.0
 

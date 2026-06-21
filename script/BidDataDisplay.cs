@@ -35,18 +35,17 @@ public partial class BidDataDisplay : Panel
         DisplayContentLabels(bid.BlockData.ContentTypes);
     }
 
-    private void DisplayContentLabels(ContentType types)
+    private void DisplayContentLabels(ContentType[] types)
     {
         foreach (Node child in contentLabels.GetChildren())
             child.QueueFree();
 
-        foreach (ContentType type in Enum.GetValues<ContentType>())
+        foreach (ContentType type in types)
         {
-            if (!types.HasFlag(type)) continue;
             ColoredLabel label = coloredLabelScene.Instantiate<ColoredLabel>();
             contentLabels.AddChild(label);
-            label.Text = type.ToString();
-            label.SetBackgroundColour(ContentTypeInfo.GetColor(type));
+            label.Text = type.Name;
+            label.SetBackgroundColour(type.Category.Color);
         }
     }
 }

@@ -53,7 +53,7 @@ public partial class AlgoSection : Panel, ISection
 
         for(int i = 0; i < numberOfBids; i++)
         {
-            queuedBids[i] = new(gameData.GetRandomCompany());
+            queuedBids[i] = new(gameData.GetRandomCompany(), gameData.ContentTypes);
         }
 
         for (int i = 0; i < queuedBids.Length; i++)

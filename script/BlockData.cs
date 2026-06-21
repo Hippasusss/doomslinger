@@ -16,15 +16,15 @@ public class BlockData
     public Span<float> Stats => stats.AsSpan();
 
     public Color BlockColor {get; set;}
-    public ContentType ContentTypes {get; set;}
+    public ContentType[] ContentTypes {get; set;}
 
-    public BlockData()
+    public BlockData(ContentType[] contentTypePool = null)
     {
         BlockColor = Colors.White;
-        Randomize();
+        Randomize(contentTypePool);
     }
 
-    public BlockData(Company company)
+    public BlockData(Company company, ContentType[] contentTypePool)
     {
         Owner = company;
 
@@ -48,10 +48,10 @@ public class BlockData
         // TODO make better
         Length = GD.RandRange(7, 35);
         CalculateColor();
-        RandomizeContentTypes();
+        RandomizeContentTypes(contentTypePool);
     }
 
-    public void Randomize()
+    public void Randomize(ContentType[] contentTypePool = null)
     {
         var random = Random.Shared;
         for (int i = 0; i < stats.Length; i++)
@@ -60,21 +60,25 @@ public class BlockData
         }
         Length = GD.RandRange(7, 35);
         CalculateColor();
-        RandomizeContentTypes();
+        RandomizeContentTypes(contentTypePool);
     }
 
-    private void RandomizeContentTypes()
+    private void RandomizeContentTypes(ContentType[] pool)
     {
-        var source = Enum.GetValues<ContentType>();
-        var pool = new ContentType[source.Length];
-        source.CopyTo(pool, 0);
-        int count = GD.RandRange(1, 3);
-        ContentType result = 0;
+        if (pool == null || pool.Length == 0)
+        {
+            ContentTypes = [];
+            return;
+        }
+        var shuffled = new ContentType[pool.Length];
+        pool.CopyTo(shuffled, 0);
+        int count = GD.RandRange(1, Math.Min(3, shuffled.Length));
+        var result = new ContentType[count];
         for (int i = 0; i < count; i++)
         {
-            int index = GD.RandRange(i, pool.Length - 1);
-            (pool[i], pool[index]) = (pool[index], pool[i]);
-            result |= pool[i];
+            int index = GD.RandRange(i, shuffled.Length - 1);
+            (shuffled[i], shuffled[index]) = (shuffled[index], shuffled[i]);
+            result[i] = shuffled[i];
         }
         ContentTypes = result;
     }

@@ -31,7 +31,7 @@ public partial class HumanSpawner : Node2D
         newHuman.Position = new Vector2(initPosition.Position.X + (humanManager.HumanCount * humanSpacing), initPosition.Position.Y );
         HumanPersonalData.Gender gender = GetRandomGender();
         HumanPersonalData.Orientation orientation = GetRandomOrientation();
-        newHuman.Data = new HumanPersonalData(GetRandomName(gender), GetRandomDate(), GetRandomHeight(gender), gender, orientation, GetRandomNationality());
+        newHuman.Data = new HumanPersonalData(GetRandomName(gender), GetRandomDate(), GetRandomHeight(gender), gender, orientation, GetRandomNationality(), GetRandomInterests());
 
         // need to wait for it to draw the aggregate sprite
         var (texture, colours) = await faceGenerator.GenerateAsync(newHuman.Data);
@@ -119,6 +119,22 @@ public partial class HumanSpawner : Node2D
     private Nationality GetRandomNationality()
     {
         return gameData.Nationalities.GetRandom();
+    }
+
+    private ContentType[] GetRandomInterests()
+    {
+        var pool = gameData.ContentTypes;
+        var shuffled = new ContentType[pool.Length];
+        pool.CopyTo(shuffled, 0);
+        int count = GD.RandRange(4, Math.Min(6, shuffled.Length));
+        var result = new ContentType[count];
+        for (int i = 0; i < count; i++)
+        {
+            int index = GD.RandRange(i, shuffled.Length - 1);
+            (shuffled[i], shuffled[index]) = (shuffled[index], shuffled[i]);
+            result[i] = shuffled[i];
+        }
+        return result;
     }
 
     private static DateOnly GetRandomDate()

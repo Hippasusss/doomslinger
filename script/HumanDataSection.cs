@@ -11,6 +11,7 @@ public partial class HumanDataSection : Panel, ISection
     [Export] private WaveFormDisplay waveFormDisplay;
     [Export] private MapDisplay mapDisplay;
     [Export] private MapSection mapSection;
+    [Export] private InterestsDisplay interestsDisplay;
     [Export] private SectionRevealer revealer;
     private IDisplay[] displays;
     private Human currentHuman;
@@ -21,7 +22,7 @@ public partial class HumanDataSection : Panel, ISection
 
     public override void _Ready()
     {
-        displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay, waveFormDisplay, mapDisplay];
+        displays = [idDisplay, heartMonitorDisplay, eyeDisplay, feedDataDisplay, waveFormDisplay, mapDisplay, interestsDisplay];
         ClearDisplay();
         mapDisplay.Init(mapSection);
     }

@@ -15,6 +15,7 @@ public readonly struct HumanPersonalData
     public readonly Gender gender;
     public readonly Orientation orientation;
     public readonly Nationality nationality;
+    public readonly ContentType[] interests;
     public readonly int UID;
     private readonly static List<int> UIDs = [];
 
@@ -23,7 +24,8 @@ public readonly struct HumanPersonalData
             int height,
             Gender gender,
             Orientation orientation,
-            Nationality nationality)
+            Nationality nationality,
+            ContentType[] interests)
     {
         this.name = name;
         this.DOB = DOB;
@@ -31,6 +33,7 @@ public readonly struct HumanPersonalData
         this.gender = gender;
         this.orientation = orientation;
         this.nationality = nationality;
+        this.interests = interests;
         do
         {
             UID = GD.RandRange(0,99999);

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfko036wsih6w"]
 
-[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="1_tilh8"]
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/Styles/DataPanelNoShadow.tres" id="1_tilh8"]
 [ext_resource type="Script" uid="uid://cpgh2g2qo0knb" path="res://script/AlgoSection.cs" id="2_ym777"]
 [ext_resource type="Resource" uid="uid://cevkgbllo7cp0" path="res://resources/MainGameData.tres" id="3_gfnuc"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="5_4k8pu"]
@@ -81,15 +81,6 @@ PoliticalSlider = NodePath("BidData/PoliticalLeaning/HSlider")
 contentLabels = NodePath("BidData/ContentLabels")
 coloredLabelScene = ExtResource("15_7jmoy")
 
-[node name="BidInfo" type="RichTextLabel" parent="BidDataDisplay" unique_id=1093248494]
-visible = false
-layout_mode = 0
-offset_left = 161.0
-offset_top = 7.0
-offset_right = 218.0
-offset_bottom = 18.0
-text = "$5"
-
 [node name="Company" type="Panel" parent="BidDataDisplay" unique_id=1553244093]
 layout_mode = 0
 offset_left = 3.0
@@ -169,6 +160,31 @@ custom_minimum_size = Vector2(0, 7)
 layout_mode = 2
 LabelText = "Loc"
 
+[node name="Location2" parent="BidDataDisplay/Company/VBoxContainer" unique_id=1920221385 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Loc"
+
+[node name="Location3" parent="BidDataDisplay/Company/VBoxContainer" unique_id=1218450658 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Loc"
+
+[node name="Location4" parent="BidDataDisplay/Company/VBoxContainer" unique_id=1582648998 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Loc"
+
+[node name="Location5" parent="BidDataDisplay/Company/VBoxContainer" unique_id=1602649050 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Loc"
+
+[node name="Location6" parent="BidDataDisplay/Company/VBoxContainer" unique_id=1451631847 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Loc"
+
 [node name="VSeparator" type="VSeparator" parent="BidDataDisplay/Company" unique_id=81349582]
 layout_mode = 0
 offset_left = 96.0
@@ -242,6 +258,11 @@ custom_minimum_size = Vector2(0, 7)
 layout_mode = 2
 LabelText = "Age "
 
+[node name="Age7" parent="BidDataDisplay/BidData/VBoxContainer" unique_id=1147327735 instance=ExtResource("13_ym777")]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+LabelText = "Age "
+
 [node name="PoliticalLeaning" type="Control" parent="BidDataDisplay/BidData" unique_id=1528402535]
 anchors_preset = 0
 offset_left = 61.0
@@ -311,3 +332,15 @@ offset_bottom = 65.0
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 1
 last_wrap_alignment = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=537230309]
+show_behind_parent = true
+visibility_layer = 2
+layout_mode = 0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 342.0
+offset_bottom = 212.0
+mouse_filter = 2
+theme = ExtResource("5_4k8pu")
+theme_type_variation = &"ShadowCastPanel"

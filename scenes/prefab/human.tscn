@@ -30,8 +30,8 @@ tracks/0/path = NodePath("..:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.025898969, 0.04698813, 0.071407154, 0.1, 0.10951564, 0.13911445, 0.15872368, 0.18055281, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.025898967, 0.046988133, 0.071407154, 0.099999994, 0.10951564, 0.13911445, 0.15872368, 0.18055281, 0.2),
+"transitions": PackedFloat32Array(1.1892072, 1.1892072, 1.1892072, 1.1892072, 1.1892072, 1.1892072, 1.1892072, 1.1892072, 1.1892072, 1.1892072),
 "update": 0,
 "values": [Vector2(0, 0.779), Vector2(0.895, -0.659), Vector2(-0.554, 0.623), Vector2(-0.309, -0.614), Vector2(-0.449, 0.714), Vector2(-0.245, -0.835), Vector2(-0.385, 0.572), Vector2(-0.849, 0.519), Vector2(-0.36, 0.885), Vector2(0, 0.639)]
 }
@@ -193,14 +193,12 @@ OverFlowCount = NodePath("Control/FeedMachine/OverFlowCount")
 [node name="Control" type="Control" parent="." unique_id=889520441]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 0.779)
+metadata/_edit_use_anchors_ = true
 
 [node name="FeedMachine" type="Sprite2D" parent="Control" unique_id=1629747291]
 texture_filter = 1
-position = Vector2(0, -295)
 texture = ExtResource("2_5jfd8")
 offset = Vector2(0, 14.779)
 
@@ -209,18 +207,30 @@ libraries/ = SubResource("AnimationLibrary_n5qo3")
 autoplay = &"Grumble"
 
 [node name="OverFlowCount" type="Label" parent="Control/FeedMachine" unique_id=1131645045]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 13.000009
-offset_right = -20.0
-offset_bottom = -0.22100067
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_right = -15.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Control/FeedMachine/OverFlowCount" unique_id=958683945]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_neukj")
+theme_type_variation = &"BackgroundPanel"
 
 [node name="Feed" type="CanvasGroup" parent="." unique_id=2075176353 node_paths=PackedStringArray("screenLight", "generator")]
 process_mode = 3

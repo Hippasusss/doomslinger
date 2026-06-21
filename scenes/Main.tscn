@@ -10,9 +10,8 @@
 [ext_resource type="Shader" uid="uid://dgdkfub18kmq1" path="res://script/shader/reColour.gdshader" id="8_1iba3"]
 [ext_resource type="Script" uid="uid://b6c4jb6obonfh" path="res://script/UIManager.cs" id="8_dg70y"]
 [ext_resource type="Script" uid="uid://bgc0gotw2o688" path="res://script/HumanManager.cs" id="8_pnhog"]
-[ext_resource type="Texture2D" uid="uid://bkn0gbxuvg7jh" path="res://sprite/controls.png" id="8_xa025"]
 [ext_resource type="Shader" uid="uid://php6vxlpsmuf" path="res://script/shader/ScreenSpace.gdshader" id="10_lhr70"]
-[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="11_pdwbg"]
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/Styles/DataPanelNoShadow.tres" id="11_pdwbg"]
 [ext_resource type="PackedScene" uid="uid://ct5pe0ahrkuli" path="res://scenes/data_section.tscn" id="13_2c4at"]
 [ext_resource type="PackedScene" uid="uid://dfko036wsih6w" path="res://scenes/algo_section.tscn" id="14_g6wdg"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
@@ -20,13 +19,13 @@
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
-[ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/materials/physics/Adblock.tres" id="20_yxlcp"]
+[ext_resource type="PhysicsMaterial" uid="uid://dxd222hetwwef" path="res://resources/Styles/physics/Adblock.tres" id="20_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://b7h6lhfodrq36" path="res://sprite/Map.png" id="23_cobve"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="25_kxyth"]
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
-[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="30_5grtr"]
+[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/Styles/DataPanelButton.tres" id="30_5grtr"]
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="30_vua0o"]
@@ -147,15 +146,15 @@ frame = 32
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataSection"), NodePath("AlgoSection"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection/HelpHideReveal")]
+UISections = [NodePath("DataSection"), NodePath("AlgoSection"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection/HelpHideReveal"), NodePath("CorporateSection")]
 blackoutController = NodePath("Blackout")
 
 [node name="DataSection" parent="UI" unique_id=300798386 node_paths=PackedStringArray("mapSection") instance=ExtResource("13_2c4at")]
 mapSection = NodePath("../MapSection")
 
 [node name="AlgoSection" parent="UI" unique_id=1934035250 instance=ExtResource("14_g6wdg")]
-offset_top = 78.0
-offset_bottom = 283.0
+offset_top = 82.0
+offset_bottom = 287.0
 
 [node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
 offset_left = 640.0
@@ -179,6 +178,39 @@ text_overrun_behavior = 1
 script = ExtResource("17_ft6cd")
 directionRight = false
 tweenCurve = ExtResource("25_kxyth")
+
+[node name="CorporateSection" type="Panel" parent="UI" unique_id=1298839842]
+offset_left = 640.0
+offset_top = 204.0
+offset_right = 1141.0
+offset_bottom = 330.0
+theme_override_styles/panel = ExtResource("11_pdwbg")
+
+[node name="CorporateHideReveal" type="Button" parent="UI/CorporateSection" unique_id=1562906702]
+layout_mode = 1
+offset_right = 60.321075
+offset_bottom = 16.0
+rotation = 1.5707964
+theme = ExtResource("15_hq6as")
+theme_override_fonts/font = ExtResource("30_vua0o")
+theme_override_styles/normal = ExtResource("30_5grtr")
+theme_override_styles/pressed = ExtResource("30_5grtr")
+theme_override_styles/hover = ExtResource("30_5grtr")
+text = "CORPORATE"
+text_overrun_behavior = 1
+script = ExtResource("17_ft6cd")
+directionRight = false
+tweenCurve = ExtResource("25_kxyth")
+
+[node name="Panel" type="Panel" parent="UI/CorporateSection" unique_id=810253030]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 7.0
+offset_right = 512.0
+offset_bottom = 132.0
+theme = ExtResource("15_hq6as")
+theme_type_variation = &"ShadowCastPanel"
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351 node_paths=PackedStringArray("revealer", "camera", "mapSprite", "viewport")]
 visible = false
@@ -246,8 +278,8 @@ directionRight = false
 tweenCurve = ExtResource("25_kxyth")
 
 [node name="CreditSection" type="Panel" parent="UI" unique_id=583447152 node_paths=PackedStringArray("creditText")]
-visible = false
-offset_right = 149.0
+offset_left = 32.0
+offset_right = 181.0
 offset_bottom = 26.0
 theme_override_styles/panel = ExtResource("11_pdwbg")
 script = ExtResource("34_s3wmy")
@@ -266,6 +298,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AdMachine" type="Node2D" parent="UI" unique_id=951621444]
+visible = false
 position = Vector2(-142, 242)
 
 [node name="FileCabinet" type="RigidBody2D" parent="UI/AdMachine" unique_id=770060897]
@@ -348,14 +381,6 @@ texture = ExtResource("18_nfivy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/AdMachine/AdBlocks/Adblock2" unique_id=1318608411]
 position = Vector2(-0.16000366, 0)
 shape = SubResource("RectangleShape2D_yxlcp")
-
-[node name="ActionBar" type="Node2D" parent="UI" unique_id=1924222355]
-visible = false
-
-[node name="Controls" type="Sprite2D" parent="UI/ActionBar" unique_id=1091065098]
-texture_filter = 1
-position = Vector2(199, 345)
-texture = ExtResource("8_xa025")
 
 [node name="Blackout" type="Node2D" parent="UI" unique_id=2015092074 node_paths=PackedStringArray("blackout")]
 visible = false

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ct5pe0ahrkuli"]
 
-[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="1_8q6pq"]
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/Styles/DataPanelNoShadow.tres" id="1_8q6pq"]
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataSection.cs" id="2_xen3b"]
 [ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="4_s27er"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="5_1lol3"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_h7rj8"]
 [ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="10_bqle7"]
 [ext_resource type="Script" uid="uid://b0wft7lhbokt6" path="res://script/FeedDataDisplay.cs" id="11_ge8cr"]
-[ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="12_ik04b"]
+[ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/Styles/Hide.tres" id="12_ik04b"]
 [ext_resource type="Script" uid="uid://q51000d3k0cd" path="res://script/ButtonMatrix.cs" id="13_6oa2m"]
 [ext_resource type="PackedScene" uid="uid://bu3jayqayo2jv" path="res://scenes/MatrixButton.tscn" id="14_c8u22"]
 [ext_resource type="Script" uid="uid://bwj76dqlxv73p" path="res://script/WaveFormDisplay.cs" id="15_4cuy4"]
@@ -47,7 +47,7 @@ color = Color(1, 1, 1, 1)
 bg_color = Color(0.21805939, 0.2250098, 0.22330877, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t70y2"]
-bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+bg_color = Color(0, 0, 0, 0.45800003)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -61,6 +61,7 @@ shadow_color = Color(0.96673995, 0.5271128, 0.47312066, 0.17400001)
 shadow_size = 2
 
 [node name="DataSection" type="Panel" unique_id=300798386 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay", "interestsDisplay", "revealer")]
+visibility_layer = 3
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -291,28 +292,53 @@ script = ExtResource("11_ge8cr")
 matrix = NodePath("Container/ButtonMatrix")
 
 [node name="Container" type="Panel" parent="FeedDataDisplay" unique_id=504611465]
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 95.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = ExtResource("12_ik04b")
 
 [node name="ButtonMatrix" type="Panel" parent="FeedDataDisplay/Container" unique_id=1236524320]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 63.0
-offset_bottom = 94.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8gny2")
 script = ExtResource("13_6oa2m")
 ButtonScene = ExtResource("14_c8u22")
 
 [node name="Highlighter" type="Panel" parent="FeedDataDisplay/Container" unique_id=1645104568]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 1.0
-offset_top = 76.0
-offset_right = 63.0
-offset_bottom = 94.0
+offset_top = -18.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_t70y2")
+
+[node name="Label" type="Label" parent="FeedDataDisplay/Container/Highlighter" unique_id=1351373259]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "READING"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="WaveformDisplay" type="Panel" parent="." unique_id=733789141]
 layout_mode = 0
@@ -371,11 +397,14 @@ expand_mode = 2
 stretch_mode = 6
 
 [node name="Button" type="Button" parent="LocationDisplay/MapWindow" unique_id=1719462484]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 123.0
-offset_bottom = 54.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"InvisibleButton"
 
 [node name="Section2" type="Panel" parent="." unique_id=198841522]
 layout_mode = 0

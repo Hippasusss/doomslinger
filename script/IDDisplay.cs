@@ -7,11 +7,16 @@ public partial class IDDisplay : Control, IDisplay
     [Export] private RichTextLabel textName;
     [Export] private RichTextLabel textData;
     [Export] private Sprite2D face;
+    [Export] private Sprite2D flag;
+
+    private Human currentHuman;
 
     public bool Enabled {get; set;} = true;
 
     public void UpdateDisplay(Human human)
     {
+        bool humanChanged = human != currentHuman;
+        if(humanChanged) currentHuman = human;
         if(!Enabled) return;
         string nameText = $"NAME: [color=white][font_size=8]{human.Data.name}[/font_size][/color]";
         string dataText = $"""
@@ -26,6 +31,11 @@ public partial class IDDisplay : Control, IDisplay
 
         textName.Text = nameText;
         textData.Text = dataText;
+        flag.Texture = human.Data.nationality.Flag;
+        SelfModulate = human.Data.nationality.IDColor;
+
+        const float wiggleAmount = 2f;
+        if(humanChanged)RotationDegrees = (GD.Randf() * 2 * wiggleAmount) - wiggleAmount;
 
         face.Texture = human.Face.Texture;
     }

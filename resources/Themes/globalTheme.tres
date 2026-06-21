@@ -1,20 +1,14 @@
 [gd_resource type="Theme" format=3 uid="uid://dqooghemw7a8d"]
 
+[ext_resource type="StyleBox" uid="uid://qg6bxfj1ijae" path="res://resources/materials/BackgroundPanel.tres" id="1_vk5uu"]
 [ext_resource type="Texture2D" uid="uid://cx8eew8xedtl4" path="res://sprite/politicalLeaningSliderSelector.png" id="1_wmc14"]
 [ext_resource type="Texture2D" uid="uid://8rwfn6yrhqgq" path="res://sprite/politicalLeaningSliderBackground.png" id="2_7s8wb"]
 [ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="2_wmc14"]
+[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/materials/DataPanelButton.tres" id="2_ygj43"]
 [ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/materials/Hide.tres" id="3_7s8wb"]
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="4_n5py1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23km4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d0ctx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bc8qu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhohs"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f842f"]
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="5_7s8wb"]
+[ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="6_n5py1"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_wmc14"]
 color = Color(0.7176471, 0.7647059, 0.95686275, 1)
@@ -33,11 +27,14 @@ vertical = true
 [resource]
 default_font = ExtResource("4_n5py1")
 default_font_size = 8
-Button/styles/disabled = SubResource("StyleBoxEmpty_23km4")
-Button/styles/focus = SubResource("StyleBoxEmpty_d0ctx")
-Button/styles/hover = SubResource("StyleBoxEmpty_bc8qu")
-Button/styles/normal = SubResource("StyleBoxEmpty_nhohs")
-Button/styles/pressed = SubResource("StyleBoxEmpty_f842f")
+BackgroundPanel/base_type = &"Panel"
+BackgroundPanel/styles/panel = ExtResource("1_vk5uu")
+Button/fonts/font = ExtResource("2_wmc14")
+Button/styles/disabled = ExtResource("2_ygj43")
+Button/styles/focus = ExtResource("2_ygj43")
+Button/styles/hover = ExtResource("2_ygj43")
+Button/styles/normal = ExtResource("2_ygj43")
+Button/styles/pressed = ExtResource("2_ygj43")
 HSeparator/constants/separation = 1
 HSeparator/styles/separator = SubResource("StyleBoxLine_wmc14")
 HSlider/icons/grabber = ExtResource("1_wmc14")
@@ -45,10 +42,25 @@ HSlider/icons/grabber_disabled = ExtResource("1_wmc14")
 HSlider/styles/grabber_area = ExtResource("3_7s8wb")
 HSlider/styles/grabber_area_highlight = ExtResource("3_7s8wb")
 HSlider/styles/slider = SubResource("StyleBoxTexture_n5py1")
+InvisibleButton/base_type = &"Button"
+InvisibleButton/styles/disabled = ExtResource("3_7s8wb")
+InvisibleButton/styles/disabled_mirrored = ExtResource("3_7s8wb")
+InvisibleButton/styles/focus = ExtResource("3_7s8wb")
+InvisibleButton/styles/hover = ExtResource("3_7s8wb")
+InvisibleButton/styles/hover_mirrored = ExtResource("3_7s8wb")
+InvisibleButton/styles/hover_pressed = ExtResource("3_7s8wb")
+InvisibleButton/styles/hover_pressed_mirrored = ExtResource("3_7s8wb")
+InvisibleButton/styles/normal = ExtResource("3_7s8wb")
+InvisibleButton/styles/normal_mirrored = ExtResource("3_7s8wb")
+InvisibleButton/styles/pressed = ExtResource("3_7s8wb")
+InvisibleButton/styles/pressed_mirrored = ExtResource("3_7s8wb")
 Label/fonts/font = ExtResource("2_wmc14")
+Panel/styles/panel = ExtResource("5_7s8wb")
 RichTextLabel/colors/default_color = Color(0.71692264, 0.7664014, 0.95715314, 1)
 RichTextLabel/fonts/bold_font = ExtResource("2_wmc14")
 RichTextLabel/fonts/normal_font = ExtResource("2_wmc14")
+ShadowPanel/base_type = &"Panel"
+ShadowPanel/styles/panel = ExtResource("6_n5py1")
 VScrollBar/styles/grabber = ExtResource("3_7s8wb")
 VScrollBar/styles/grabber_highlight = ExtResource("3_7s8wb")
 VScrollBar/styles/grabber_pressed = ExtResource("3_7s8wb")

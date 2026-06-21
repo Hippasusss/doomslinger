@@ -2,12 +2,13 @@
 
 [ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/materials/DataPanelNoShadow.tres" id="1_8q6pq"]
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataSection.cs" id="2_xen3b"]
-[ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/materials/DataPanel.tres" id="3_sj4o5"]
 [ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="4_s27er"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="5_1lol3"]
 [ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="6_y7o72"]
 [ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="7_j361h"]
 [ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="8_r2aec"]
+[ext_resource type="Texture2D" uid="uid://cd2wk8j77nqav" path="res://sprite/flags/ashkani.png" id="8_s27er"]
+[ext_resource type="Script" uid="uid://j8wqlc8j7h86" path="res://script/InterestsDisplay.cs" id="8_sj4o5"]
 [ext_resource type="PackedScene" uid="uid://fn45p05ufufc" path="res://scenes/prefab/ContentLabel.tscn" id="8_xen3b"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_h7rj8"]
 [ext_resource type="Script" uid="uid://igfjw4td0dor" path="res://script/NotificaitonDisplay.cs" id="10_bqle7"]
@@ -17,12 +18,15 @@
 [ext_resource type="PackedScene" uid="uid://bu3jayqayo2jv" path="res://scenes/MatrixButton.tscn" id="14_c8u22"]
 [ext_resource type="Script" uid="uid://bwj76dqlxv73p" path="res://script/WaveFormDisplay.cs" id="15_4cuy4"]
 [ext_resource type="Script" uid="uid://bmjqjuqq64p7b" path="res://script/MapDisplay.cs" id="16_rbkkf"]
-[ext_resource type="Texture2D" uid="uid://cim57m4bs6q2d" path="res://sprite/..dataLabel.png" id="17_x60el"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="18_0e4ab"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="19_eskgm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cobve"]
-bg_color = Color(0.27450982, 0.33333334, 0.33333334, 1)
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -56,7 +60,7 @@ corner_radius_bottom_left = 1
 shadow_color = Color(0.96673995, 0.5271128, 0.47312066, 0.17400001)
 shadow_size = 2
 
-[node name="DataSection" type="Panel" unique_id=300798386 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay", "revealer")]
+[node name="DataSection" type="Panel" unique_id=300798386 node_paths=PackedStringArray("idDisplay", "heartMonitorDisplay", "eyeDisplay", "feedDataDisplay", "waveFormDisplay", "mapDisplay", "interestsDisplay", "revealer")]
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -72,6 +76,7 @@ eyeDisplay = NodePath("EyeDisplay/Eye")
 feedDataDisplay = NodePath("FeedDataDisplay")
 waveFormDisplay = NodePath("WaveformDisplay/WaveFormDisplay")
 mapDisplay = NodePath("LocationDisplay/MapWindow")
+interestsDisplay = NodePath("InfoDisplay/Interests")
 revealer = NodePath("DataHideReveal")
 
 [node name="InfoDisplay" type="Panel" parent="." unique_id=995009148]
@@ -80,19 +85,29 @@ offset_left = 9.0
 offset_top = 5.0
 offset_right = 203.0
 offset_bottom = 77.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 
-[node name="IDCardSection" type="Panel" parent="InfoDisplay" unique_id=1552875135 node_paths=PackedStringArray("textName", "textData", "face")]
+[node name="IDCardSection" type="Panel" parent="InfoDisplay" unique_id=1552875135 node_paths=PackedStringArray("textName", "textData", "face", "flag")]
+self_modulate = Color(0.3553136, 0.35531354, 0.35531357, 1)
 layout_mode = 0
 offset_left = 3.0
 offset_top = 4.0
 offset_right = 124.0
 offset_bottom = 66.0
+pivot_offset = Vector2(57, 32)
 theme_override_styles/panel = SubResource("StyleBoxFlat_cobve")
 script = ExtResource("4_s27er")
 textName = NodePath("Name")
 textData = NodePath("IDText")
 face = NodePath("FaceSection/Headshot")
+flag = NodePath("Flag")
+
+[node name="Flag" type="Sprite2D" parent="InfoDisplay/IDCardSection" unique_id=488111145]
+self_modulate = Color(1, 1, 1, 0.21176471)
+position = Vector2(21, 15)
+scale = Vector2(0.37949798, 0.37949812)
+texture = ExtResource("8_s27er")
 
 [node name="Name" type="RichTextLabel" parent="InfoDisplay/IDCardSection" unique_id=343444242]
 layout_mode = 0
@@ -107,7 +122,6 @@ vertical_alignment = 1
 [node name="IDText" type="RichTextLabel" parent="InfoDisplay/IDCardSection" unique_id=1617314996]
 texture_filter = 1
 texture_repeat = 1
-layout_direction = 2
 layout_mode = 0
 offset_left = 6.0
 offset_top = 11.0
@@ -115,6 +129,7 @@ offset_right = 84.0
 offset_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+layout_direction = 2
 theme = ExtResource("5_1lol3")
 theme_override_colors/table_odd_row_bg = Color(0, 0, 0, 0.187)
 theme_override_constants/table_h_separation = 12
@@ -139,6 +154,8 @@ offset_left = 86.0
 offset_top = 15.551022
 offset_right = 117.0
 offset_bottom = 56.0
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"BackgroundPanel"
 
 [node name="Headshot" type="Sprite2D" parent="InfoDisplay/IDCardSection/FaceSection" unique_id=2117922267]
 material = SubResource("ShaderMaterial_36rkl")
@@ -168,25 +185,10 @@ offset_left = 130.0
 offset_top = 15.0
 offset_right = 189.0
 offset_bottom = 66.0
-
-[node name="Node" parent="InfoDisplay/Interests" unique_id=271502160 instance=ExtResource("8_xen3b")]
-layout_mode = 2
-
-[node name="Node2" parent="InfoDisplay/Interests" unique_id=1458996093 instance=ExtResource("8_xen3b")]
-layout_mode = 2
-text = "Kids"
-
-[node name="Node3" parent="InfoDisplay/Interests" unique_id=1702957421 instance=ExtResource("8_xen3b")]
-layout_mode = 2
-text = "Porn"
-
-[node name="Node4" parent="InfoDisplay/Interests" unique_id=1665586053 instance=ExtResource("8_xen3b")]
-layout_mode = 2
-text = "Drugs"
-
-[node name="Node5" parent="InfoDisplay/Interests" unique_id=253514775 instance=ExtResource("8_xen3b")]
-layout_mode = 2
-text = "Tennis"
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+script = ExtResource("8_sj4o5")
+coloredLabelScene = ExtResource("8_xen3b")
 
 [node name="HeartMonitorDisplay" type="Panel" parent="." unique_id=1608618766 node_paths=PackedStringArray("line", "BPMText")]
 layout_mode = 0
@@ -194,7 +196,8 @@ offset_left = 79.0
 offset_top = 156.0
 offset_right = 203.0
 offset_bottom = 189.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 script = ExtResource("8_r2aec")
 line = NodePath("Line2D")
 BPMText = NodePath("BPM Readout/Value")
@@ -241,7 +244,8 @@ offset_left = 9.0
 offset_top = 88.0
 offset_right = 107.0
 offset_bottom = 149.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 
 [node name="Eye" parent="EyeDisplay" unique_id=517888025 instance=ExtResource("9_h7rj8")]
 material = null
@@ -254,7 +258,8 @@ offset_top = 298.0
 offset_right = 99.0
 offset_bottom = 359.0
 scale = Vector2(1, 0.9200049)
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 script = ExtResource("10_bqle7")
 displayText = NodePath("RiskText")
 
@@ -280,7 +285,8 @@ offset_left = 9.0
 offset_top = 197.0
 offset_right = 73.0
 offset_bottom = 292.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 script = ExtResource("11_ge8cr")
 matrix = NodePath("Container/ButtonMatrix")
 
@@ -314,7 +320,8 @@ offset_left = 79.0
 offset_top = 197.0
 offset_right = 203.0
 offset_bottom = 230.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 
 [node name="WaveFormDisplay" type="Control" parent="WaveformDisplay" unique_id=476902148]
 anchors_preset = 0
@@ -333,7 +340,8 @@ offset_left = 79.0
 offset_top = 237.0
 offset_right = 203.0
 offset_bottom = 292.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 
 [node name="MapWindow" type="Control" parent="LocationDisplay" unique_id=1461103118 node_paths=PackedStringArray("mapPreview", "mapButton")]
 layout_mode = 1
@@ -375,7 +383,8 @@ offset_left = 114.0
 offset_top = 88.0
 offset_right = 203.0
 offset_bottom = 149.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 
 [node name="Label" type="Label" parent="Section2" unique_id=723473912]
 layout_mode = 0
@@ -391,7 +400,8 @@ offset_left = 9.0
 offset_top = 156.0
 offset_right = 73.0
 offset_bottom = 189.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 
 [node name="Label" type="Label" parent="Panel" unique_id=432516690]
 layout_mode = 0
@@ -410,7 +420,8 @@ offset_left = 105.0
 offset_top = 298.0
 offset_right = 203.0
 offset_bottom = 354.0
-theme_override_styles/panel = ExtResource("3_sj4o5")
+theme = ExtResource("5_1lol3")
+theme_type_variation = &"ShadowPanel"
 
 [node name="Label" type="Label" parent="Communications" unique_id=2031670159]
 layout_mode = 0
@@ -422,13 +433,16 @@ text = "user messages, email etc"
 autowrap_mode = 2
 
 [node name="DataHideReveal" type="Button" parent="." unique_id=89951406]
-layout_mode = 0
-offset_left = -14.0
-offset_right = 1.0
-offset_bottom = 66.0
+layout_mode = 1
+offset_right = 50.0
+offset_bottom = 16.0
+rotation = 1.5707964
+theme = ExtResource("5_1lol3")
 action_mode = 0
-icon = ExtResource("17_x60el")
+text = "DATA"
+autowrap_mode = 2
 vertical_icon_alignment = 0
+text_direction = 1
 script = ExtResource("18_0e4ab")
 directionRight = false
 tweenCurve = ExtResource("19_eskgm")

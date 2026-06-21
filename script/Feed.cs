@@ -19,7 +19,7 @@ public partial class Feed : CanvasGroup
     private const int numBlocks = 6;
     private const int blockSpacing = 52;
     private const float turnOffRate = 0.5f;
-    private const float cascadeTop = (numBlocks - 1) * -blockSpacing;
+    private const float cascadeTop = numBlocks * -blockSpacing;
 
     private readonly List<Feedblock> feedBlocks = [];
     private readonly List<Feedblock> active = [];

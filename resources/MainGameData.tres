@@ -12,12 +12,33 @@
 [ext_resource type="Resource" uid="uid://cbgngvm1884u2" path="res://resources/StingLists/Surnames.tres" id="9_da5bc"]
 [ext_resource type="Resource" path="res://resources/Nationalities/Coluco.tres" id="9_hl37l"]
 [ext_resource type="Resource" path="res://resources/Nationalities/Ashkani.tres" id="10_778us"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Activism.tres" id="10_t7f1a"]
 [ext_resource type="Resource" path="res://resources/Nationalities/Prelish.tres" id="11_djg8m"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Animals.tres" id="11_y6yar"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Comedy.tres" id="12_2ycr4"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Violence.tres" id="12_ct1"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Sport.tres" id="13_ct2"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Conspiracy.tres" id="13_pn8vm"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Kids.tres" id="14_ct3"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/DIY.tres" id="14_g2hwe"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Cooking.tres" id="15_ct4"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Drama.tres" id="15_m37fn"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Porn.tres" id="16_ct5"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Fashion.tres" id="16_rrwsv"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Fitness.tres" id="17_51l3a"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Gambling.tres" id="18_idvcg"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Gaming.tres" id="19_1qbn7"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Music.tres" id="20_v8egi"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/News.tres" id="21_y76ea"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Propaganda.tres" id="22_x8src"]
+[ext_resource type="Resource" uid="uid://dy4wtcumlmhkw" path="res://resources/ContentTypes/Religion.tres" id="23_8ftfc"]
+[ext_resource type="Resource" path="res://resources/ContentTypes/Science.tres" id="24_xl75v"]
 
 [resource]
 script = ExtResource("1_d1vhj")
 companies = Array[Object]([ExtResource("1_wyx0g"), ExtResource("2_ssvl6"), ExtResource("3_ssvl6"), ExtResource("4_7myhf")])
 nationalities = Array[Object]([ExtResource("7_xcqm6"), ExtResource("8_dcmkd"), ExtResource("9_hl37l"), ExtResource("10_778us"), ExtResource("11_djg8m")])
+contentTypes = Array[Object]([ExtResource("12_ct1"), ExtResource("13_ct2"), ExtResource("14_ct3"), ExtResource("15_ct4"), ExtResource("16_ct5"), ExtResource("10_t7f1a"), ExtResource("11_y6yar"), ExtResource("12_2ycr4"), ExtResource("13_pn8vm"), ExtResource("14_g2hwe"), ExtResource("15_m37fn"), ExtResource("16_rrwsv"), ExtResource("17_51l3a"), ExtResource("18_idvcg"), ExtResource("19_1qbn7"), ExtResource("20_v8egi"), ExtResource("21_y76ea"), ExtResource("22_x8src"), ExtResource("23_8ftfc"), ExtResource("24_xl75v")])
 maleFirstNames = ExtResource("6_pdwey")
 femaleFirstNames = ExtResource("5_wc8ch")
 secondNames = ExtResource("9_da5bc")

@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="Nationality" format=3]
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://cfrnxwg2i7qun"]
 
-[ext_resource type="Script" path="res://script/Nationality.cs" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://bn3bsl7t803un" path="res://sprite/flags/frintish.png" id="1_o3qd0"]
+[ext_resource type="Script" uid="uid://dux13offh8nak" path="res://script/Nationality.cs" id="1_s"]
 
 [resource]
 script = ExtResource("1_s")
 Name = "Frintish"
+IDColor = Color(0.24705882, 0.24705882, 0.45490196, 1)
+Flag = ExtResource("1_o3qd0")

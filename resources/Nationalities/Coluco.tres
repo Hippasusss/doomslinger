@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="Nationality" format=3]
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://b13awwc451rsn"]
 
-[ext_resource type="Script" path="res://script/Nationality.cs" id="1_s"]
+[ext_resource type="Script" uid="uid://dux13offh8nak" path="res://script/Nationality.cs" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://bljr7vd6t1hl4" path="res://sprite/flags/coluco.png" id="1_v286h"]
 
 [resource]
 script = ExtResource("1_s")
 Name = "Coluco"
+IDColor = Color(0.8509804, 0.34117648, 0.3882353, 1)
+Flag = ExtResource("1_v286h")

@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="Nationality" format=3]
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://rlmchoutboj4"]
 
-[ext_resource type="Script" path="res://script/Nationality.cs" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://iwq0wpjmcwyu" path="res://sprite/flags/karak.png" id="1_c46nv"]
+[ext_resource type="Script" uid="uid://dux13offh8nak" path="res://script/Nationality.cs" id="1_s"]
 
 [resource]
 script = ExtResource("1_s")
 Name = "Karak"
+IDColor = Color(0.19607843, 0.23529412, 0.22352941, 1)
+Flag = ExtResource("1_c46nv")

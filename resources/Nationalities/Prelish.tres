@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="Nationality" format=3]
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://clrqdgye5icd7"]
 
-[ext_resource type="Script" path="res://script/Nationality.cs" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://qm5dqqum0y0v" path="res://sprite/flags/prelish.png" id="1_655jx"]
+[ext_resource type="Script" uid="uid://dux13offh8nak" path="res://script/Nationality.cs" id="1_s"]
 
 [resource]
 script = ExtResource("1_s")
 Name = "Prelish"
+IDColor = Color(0.12156863, 0.12156863, 0.12156863, 1)
+Flag = ExtResource("1_655jx")

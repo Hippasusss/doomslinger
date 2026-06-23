@@ -113,6 +113,7 @@ public partial class AlgoSection : Panel, ISection
 
     private void ClickCell(MatrixCell cell)
     {
+        if (currentHuman == null || !currentHuman.Selected) return;
         if (!ActiveBids.TryGetValue(cell, out Bid bid)) return;
 
         if (CellOwners.TryGetValue(cell, out Human owner) && owner == currentHuman)

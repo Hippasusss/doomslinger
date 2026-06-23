@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cnx0aajnhg4tv"]
+
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/Styles/DataPanelNoShadow.tres" id="1_gp5p0"]
+[ext_resource type="Script" uid="uid://chasg8oeux60j" path="res://script/CorporateSection.cs" id="2_vraok"]
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="3_jcqmv"]
+[ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="4_o42sa"]
+[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/Styles/DataPanelButton.tres" id="5_pnhl8"]
+[ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="6_0j3ed"]
+[ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="7_gicu2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnhog"]
+bg_color = Color(0.7137255, 0.19607843, 0.23529412, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0.9552024, 0.46637732, 0.47284436, 1)
+shadow_size = 1
+
+[node name="CorporateSection" type="Panel" unique_id=116205225 node_paths=PackedStringArray("revealer", "notificationLight", "CreditAmountDisplay")]
+offset_left = 640.0
+offset_top = 174.0
+offset_right = 1141.0
+offset_bottom = 300.0
+theme_override_styles/panel = ExtResource("1_gp5p0")
+script = ExtResource("2_vraok")
+revealer = NodePath("CorporateHideReveal")
+notificationLight = NodePath("CorporateHideReveal/NotificationLight")
+CreditAmountDisplay = NodePath("Credits Amount")
+
+[node name="CorporateHideReveal" type="Button" parent="." unique_id=85178010]
+layout_mode = 1
+offset_right = 60.321075
+offset_bottom = 16.0
+rotation = 1.5707964
+theme = ExtResource("3_jcqmv")
+theme_override_fonts/font = ExtResource("4_o42sa")
+theme_override_styles/normal = ExtResource("5_pnhl8")
+theme_override_styles/pressed = ExtResource("5_pnhl8")
+theme_override_styles/hover = ExtResource("5_pnhl8")
+text = "CORPORATE"
+text_overrun_behavior = 1
+script = ExtResource("6_0j3ed")
+directionRight = false
+tweenCurve = ExtResource("7_gicu2")
+
+[node name="NotificationLight" type="Panel" parent="CorporateHideReveal" unique_id=104937060]
+layout_mode = 0
+offset_left = 49.748276
+offset_top = 5.9999995
+offset_right = 53.501144
+offset_bottom = 10.088501
+theme_override_styles/panel = SubResource("StyleBoxFlat_pnhog")
+
+[node name="Shadow" type="Panel" parent="." unique_id=949902562]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(5, 5)
+mouse_filter = 2
+theme = ExtResource("3_jcqmv")
+theme_type_variation = &"ShadowCastPanel"
+
+[node name="Credits Amount" type="Label" parent="." unique_id=1187949560]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 46.0
+offset_bottom = 14.0
+text = "20"

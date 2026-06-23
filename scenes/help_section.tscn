@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b1ritl4ynx5cp"]
+
+[ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/Styles/DataPanelNoShadow.tres" id="1_uaom2"]
+[ext_resource type="Script" uid="uid://dm36gc7mffld3" path="res://script/HelpSection.cs" id="2_lblei"]
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="3_p6udn"]
+[ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="4_44qdi"]
+[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/Styles/DataPanelButton.tres" id="5_wupwo"]
+[ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="6_8rcab"]
+[ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="7_0rj4w"]
+
+[node name="HelpSection" type="Panel" unique_id=426958505 node_paths=PackedStringArray("revealer")]
+offset_left = 640.0
+offset_top = 133.0
+offset_right = 1005.0
+offset_bottom = 331.0
+theme_override_styles/panel = ExtResource("1_uaom2")
+script = ExtResource("2_lblei")
+revealer = NodePath("HelpHideReveal")
+
+[node name="HelpHideReveal" type="Button" parent="." unique_id=75720574]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 16.0
+rotation = 1.5707964
+theme = ExtResource("3_p6udn")
+theme_override_fonts/font = ExtResource("4_44qdi")
+theme_override_styles/normal = ExtResource("5_wupwo")
+theme_override_styles/pressed = ExtResource("5_wupwo")
+theme_override_styles/hover = ExtResource("5_wupwo")
+text = "HELP"
+text_overrun_behavior = 1
+script = ExtResource("6_8rcab")
+directionRight = false
+tweenCurve = ExtResource("7_0rj4w")
+
+[node name="Shadow" type="Panel" parent="." unique_id=1890538437]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(5, 5)
+mouse_filter = 2
+theme = ExtResource("3_p6udn")
+theme_type_variation = &"ShadowCastPanel"

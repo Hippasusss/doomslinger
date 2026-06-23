@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dfko036wsih6w" path="res://scenes/algo_section.tscn" id="14_g6wdg"]
 [ext_resource type="Texture2D" uid="uid://cr7pyr78xbcmb" path="res://sprite/fileCabinet.png" id="15_3p2gp"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="15_hq6as"]
+[ext_resource type="PackedScene" uid="uid://b1ritl4ynx5cp" path="res://scenes/help_section.tscn" id="15_pnhog"]
+[ext_resource type="PackedScene" uid="uid://cnx0aajnhg4tv" path="res://scenes/corporate_section.tscn" id="16_2c4at"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="17_ft6cd"]
 [ext_resource type="AudioStream" uid="uid://ql8h1tb8ww4x" path="res://audio/dCish.ogg" id="18_bb450"]
 [ext_resource type="Texture2D" uid="uid://bavt6t6a3t4f3" path="res://sprite/Adunit.png" id="18_nfivy"]
@@ -25,10 +27,8 @@
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
 [ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
-[ext_resource type="StyleBox" uid="uid://b5c7plf0261lp" path="res://resources/Styles/DataPanelButton.tres" id="30_5grtr"]
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]
-[ext_resource type="FontFile" uid="uid://d1r7wdoa437oq" path="res://assets/fonts/BlockBlueprint.ttf" id="30_vua0o"]
 [ext_resource type="Resource" uid="uid://b0852h5ufnnj8" path="res://resources/Maps/EdinMap.tres" id="32_pdwbg"]
 [ext_resource type="Resource" uid="uid://cevkgbllo7cp0" path="res://resources/MainGameData.tres" id="33_0qimb"]
 [ext_resource type="Script" uid="uid://bpsiao3t75nku" path="res://script/CreditSection.cs" id="34_s3wmy"]
@@ -72,15 +72,6 @@ shader_parameter/intensity = 1.0
 shader = ExtResource("8_1iba3")
 shader_parameter/intensity = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnhog"]
-bg_color = Color(0.7137255, 0.19607843, 0.23529412, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-shadow_color = Color(0.9552024, 0.46637732, 0.47284436, 1)
-shadow_size = 1
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b871"]
 bg_color = Color(0.71234256, 0.19794005, 0.2345213, 1)
 
@@ -103,12 +94,13 @@ script = ExtResource("1_mwfav")
 [node name="BGGenerator" parent="." unique_id=917973400 instance=ExtResource("3_1nqs0")]
 position = Vector2(27.999998, 73)
 
-[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataSection", "algoSection", "mapSection")]
+[node name="HumanArea" type="Node2D" parent="." unique_id=1781715270 node_paths=PackedStringArray("camera", "humanDataSection", "algoSection", "mapSection", "corporateSection")]
 script = ExtResource("8_pnhog")
 camera = NodePath("../Camera2D")
 humanDataSection = NodePath("../UI/DataSection")
 algoSection = NodePath("../UI/AlgoSection")
 mapSection = NodePath("../UI/MapSection")
+corporateSection = NodePath("../UI/CorporateSection")
 
 [node name="Spawner" type="Node2D" parent="HumanArea" unique_id=247484237 node_paths=PackedStringArray("humanManager", "initPosition", "faceGenerator")]
 texture_filter = 1
@@ -116,7 +108,6 @@ script = ExtResource("1_rvslj")
 humanManager = NodePath("..")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
-numHumans = 6
 faceGenerator = NodePath("FaceGenerator")
 gameData = ExtResource("33_0qimb")
 
@@ -155,99 +146,22 @@ frame = 32
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=277055262 node_paths=PackedStringArray("UISections", "blackoutController")]
 script = ExtResource("8_dg70y")
-UISections = [NodePath("DataSection"), NodePath("AlgoSection"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection/HelpHideReveal"), NodePath("CorporateSection")]
+UISections = [NodePath("DataSection"), NodePath("AlgoSection"), NodePath("AdMachine/FileCabinet/ADHideReveal"), NodePath("MapSection/MapHideReveal"), NodePath("HelpSection"), NodePath("CorporateSection")]
 blackoutController = NodePath("Blackout")
 
 [node name="DataSection" parent="UI" unique_id=300798386 node_paths=PackedStringArray("mapSection") instance=ExtResource("13_2c4at")]
 mapSection = NodePath("../MapSection")
 
 [node name="AlgoSection" parent="UI" unique_id=1934035250 instance=ExtResource("14_g6wdg")]
-offset_top = 94.0
-offset_bottom = 299.0
+offset_top = 82.0
+offset_bottom = 287.0
 
-[node name="HelpSection" type="Panel" parent="UI" unique_id=1353740593]
-offset_left = 640.0
-offset_top = 133.0
-offset_right = 1005.0
-offset_bottom = 331.0
-theme_override_styles/panel = ExtResource("11_pdwbg")
+[node name="HelpSection" parent="UI" unique_id=426958505 instance=ExtResource("15_pnhog")]
 
-[node name="HelpHideReveal" type="Button" parent="UI/HelpSection" unique_id=493216182]
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 16.0
-rotation = 1.5707964
-theme = ExtResource("15_hq6as")
-theme_override_fonts/font = ExtResource("30_vua0o")
-theme_override_styles/normal = ExtResource("30_5grtr")
-theme_override_styles/pressed = ExtResource("30_5grtr")
-theme_override_styles/hover = ExtResource("30_5grtr")
-text = "HELP"
-text_overrun_behavior = 1
-script = ExtResource("17_ft6cd")
-directionRight = false
-tweenCurve = ExtResource("25_kxyth")
-
-[node name="Shadow" type="Panel" parent="UI/HelpSection" unique_id=1455673078]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(5, 5)
-mouse_filter = 2
-theme = ExtResource("15_hq6as")
-theme_type_variation = &"ShadowCastPanel"
-
-[node name="CorporateSection" type="Panel" parent="UI" unique_id=1298839842]
-offset_left = 640.0
-offset_top = 174.0
-offset_right = 1141.0
-offset_bottom = 300.0
-theme_override_styles/panel = ExtResource("11_pdwbg")
-
-[node name="CorporateHideReveal" type="Button" parent="UI/CorporateSection" unique_id=1562906702]
-layout_mode = 1
-offset_right = 60.321075
-offset_bottom = 16.0
-rotation = 1.5707964
-theme = ExtResource("15_hq6as")
-theme_override_fonts/font = ExtResource("30_vua0o")
-theme_override_styles/normal = ExtResource("30_5grtr")
-theme_override_styles/pressed = ExtResource("30_5grtr")
-theme_override_styles/hover = ExtResource("30_5grtr")
-text = "CORPORATE"
-text_overrun_behavior = 1
-script = ExtResource("17_ft6cd")
-directionRight = false
-tweenCurve = ExtResource("25_kxyth")
-
-[node name="Panel" type="Panel" parent="UI/CorporateSection/CorporateHideReveal" unique_id=993937762]
-layout_mode = 0
-offset_left = 49.748276
-offset_top = 5.9999995
-offset_right = 53.501144
-offset_bottom = 10.088501
-theme_override_styles/panel = SubResource("StyleBoxFlat_pnhog")
-
-[node name="Shadow" type="Panel" parent="UI/CorporateSection" unique_id=810253030]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(5, 5)
-mouse_filter = 2
-theme = ExtResource("15_hq6as")
-theme_type_variation = &"ShadowCastPanel"
+[node name="CorporateSection" parent="UI" unique_id=116205225 instance=ExtResource("16_2c4at")]
 
 [node name="MapSection" type="Panel" parent="UI" unique_id=383819351 node_paths=PackedStringArray("revealer", "camera", "mapSprite", "viewport")]
+visible = false
 texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -284,7 +198,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 sdf_scale = 0
 size = Vector2i(341, 193)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MapCamera" type="Camera2D" parent="UI/MapSection/SubViewportContainer/SubViewport" unique_id=-123190488]
 position_smoothing_speed = 0.0

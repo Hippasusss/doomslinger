@@ -29,7 +29,7 @@ public partial class BidDataDisplay : Panel
         CompanyFoundedDate.ValueText = $"{Mathf.FloorToInt(DateTime.Now.Year - bid.CompanyBidding.Age)}";
         CompanyStanding.ValueText = $"{bid.CompanyBidding.CurrentStanding}";
         CompanyLocation.ValueText = $"{bid.CompanyBidding.Nationality.Name}";
-        BidPrice.ValueText = $"${bid.Price}";
+        BidPrice.ValueText = $"${bid.BlockData.Price}";
         BidLength.ValueText = $"{bid.BlockData.Length}s";
         PoliticalSlider.Value = bid.BlockData.PoliticalLeaning;
         DisplayContentLabels(bid.BlockData.ContentTypes);

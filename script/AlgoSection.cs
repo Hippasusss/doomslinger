@@ -62,7 +62,7 @@ public partial class AlgoSection : Panel, ISection
             MatrixCell cell;
             do { cell = bidMatrix.GetRandomCell(); } while (ActiveBids.ContainsKey(cell));
             ActiveBids.Add(cell, bid);
-            cell.Text.Text = $"${bid.Price}";
+            cell.Text.Text = $"${bid.BlockData.Price}";
             Color c = bid.BlockData.BlockColor;
             var capturedCell = cell;
             cascade.TweenInterval(0.07f);

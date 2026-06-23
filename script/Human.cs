@@ -6,6 +6,7 @@ namespace DoomSlinger;
 public partial class Human : Node2D
 {
     [Signal] public delegate void HumanSelectedEventHandler(Human selected);
+    public event Action<BlockData> BlockConsumed;
 
     [Export] private Sprite2D face;
     [Export] private Feed feed;
@@ -168,15 +169,16 @@ public partial class Human : Node2D
 
         float politicalLeaning = data.PoliticalLeaning;
         float politicalAlignment = Mathf.Abs(politicalLeaning - Stats.PoliticalLeaning) / 2f;
+        const float politicalSway = 2f;
 
         Stats.Dopamine.Value += data.Interesting * 2f * lengthFactor * (1f - politicalAlignment * 0.5f);
         Stats.Cortisol.Value += data.Outrage * 1.5f * lengthFactor;
         Stats.Seratonin.Value += (1f - politicalAlignment * 2f) * lengthFactor;
         Stats.Melatonin.Value += lengthFactor * 0.5f;
         Stats.Engagement.Value = data.Interesting * 10f;
-
-        const float politicalSway = 2f;
         Stats.PoliticalLeaning.Value = Mathf.Lerp(Stats.PoliticalLeaning, politicalLeaning, politicalAlignment * politicalSway);
+
+        BlockConsumed?.Invoke(data);
 
         swipeTimer.SetResetTime(length, true);
     }

@@ -17,6 +17,7 @@ public class BlockData
 
     public Color BlockColor {get; set;}
     public ContentType[] ContentTypes {get; set;}
+    public int Price {get; set;}
 
     public BlockData(ContentType[] contentTypePool = null)
     {
@@ -49,6 +50,7 @@ public class BlockData
         Length = GD.RandRange(7, 35);
         CalculateColor();
         RandomizeContentTypes(contentTypePool);
+        Price = (int)GD.Randfn(5f, company.Chaos);
     }
 
     public void Randomize(ContentType[] contentTypePool = null)

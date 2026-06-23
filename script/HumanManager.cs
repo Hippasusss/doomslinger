@@ -9,6 +9,7 @@ public partial class HumanManager : Node2D
     [Export] private HumanDataSection humanDataSection;
     [Export] private AlgoSection algoSection;
     [Export] private MapSection mapSection;
+    [Export] private CorporateSection corporateSection;
     private List<Human> humans = [];
     public int HumanCount => humans.Count;
 
@@ -17,6 +18,7 @@ public partial class HumanManager : Node2D
         mapSection.RegisterHumanOnMap(human);
         humans.Add(human);
         human.HumanSelected += OnHumanSelected;
+        human.BlockConsumed += (data) => corporateSection.CreditAmount += data.Price;
         human.Feed.OnRequestBlockDataCallBack = () => algoSection.TryConsumeFirstBid(human)?.BlockData;
     }
 

@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://cicbscnitel5p"]
+
+[ext_resource type="Script" uid="uid://cyec80yiaeyta" path="res://script/MainMenu.cs" id="1_2wh52"]
+[ext_resource type="Texture2D" uid="uid://dtj36l4tm77gp" path="res://sprite/Main menu.png" id="1_yqorp"]
+[ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="2_0ykhv"]
+[ext_resource type="PackedScene" uid="uid://c4b1crddu6d8o" path="res://scenes/Main.tscn" id="2_ow34m"]
+
+[sub_resource type="Animation" id="Animation_0ykhv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../VFlowContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ow34m"]
+resource_name = "Throb"
+length = 20.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.6, 5, 7.4425387, 9.842539, 12.329055, 14.729055, 17.17798, 19.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.651), Color(1, 1, 1, 1), Color(1, 1, 1, 0.651), Color(1, 1, 1, 1), Color(1, 1, 1, 0.651), Color(1, 1, 1, 1), Color(1, 1, 1, 0.651), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2wh52"]
+resource_name = "loadin"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.9666667),
+"transitions": PackedFloat32Array(0.3415101, 3.605001),
+"update": 0,
+"values": [Vector2(0, 300), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.99),
+"transitions": PackedFloat32Array(5.4641676, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../VFlowContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.8666666, 5),
+"transitions": PackedFloat32Array(0.8705506, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ow34m"]
+_data = {
+&"RESET": SubResource("Animation_0ykhv"),
+&"Throb": SubResource("Animation_ow34m"),
+&"loadin": SubResource("Animation_2wh52")
+}
+
+[node name="MainMenu" type="Control" unique_id=1682724895 node_paths=PackedStringArray("animationPlayer", "startButton", "savesButton", "exitButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2wh52")
+animationPlayer = NodePath("Control/Title/AnimationPlayer")
+startButton = NodePath("Control/VFlowContainer/START")
+savesButton = NodePath("Control/VFlowContainer/SAVED")
+exitButton = NodePath("Control/VFlowContainer/EXIT")
+mainScene = ExtResource("2_ow34m")
+
+[node name="Control" type="Control" parent="." unique_id=290031544]
+self_modulate = Color(1, 1, 1, 0.75630254)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 300)
+
+[node name="Title" type="Sprite2D" parent="Control" unique_id=1536490976]
+self_modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(325, 145)
+texture = ExtResource("1_yqorp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Title" unique_id=1804911660]
+libraries/ = SubResource("AnimationLibrary_ow34m")
+autoplay = &"loadin"
+
+[node name="VFlowContainer" type="VBoxContainer" parent="Control" unique_id=748286131]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -129.0
+offset_right = 46.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="START" type="Button" parent="Control/VFlowContainer" unique_id=2072048421]
+layout_mode = 2
+theme = ExtResource("2_0ykhv")
+theme_type_variation = &"NoBackButton"
+theme_override_font_sizes/font_size = 12
+text = "START"
+
+[node name="SAVED" type="Button" parent="Control/VFlowContainer" unique_id=2086073274]
+layout_mode = 2
+theme = ExtResource("2_0ykhv")
+theme_type_variation = &"NoBackButton"
+theme_override_font_sizes/font_size = 12
+text = "SAVED"
+
+[node name="EXIT" type="Button" parent="Control/VFlowContainer" unique_id=514261665]
+layout_mode = 2
+theme = ExtResource("2_0ykhv")
+theme_type_variation = &"NoBackButton"
+theme_override_font_sizes/font_size = 12
+text = "EXIT"

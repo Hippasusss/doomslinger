@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="doomslinger"
-run/main_scene="uid://c4b1crddu6d8o"
+run/main_scene="uid://cicbscnitel5p"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 run/max_fps=240
 config/icon="res://icon.svg"

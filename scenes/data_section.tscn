@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://djapjg3pfjdwe" path="res://script/HumanDataSection.cs" id="2_xen3b"]
 [ext_resource type="Script" uid="uid://duqtxj23uhptf" path="res://script/IDDisplay.cs" id="4_s27er"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="5_1lol3"]
+[ext_resource type="Texture2D" uid="uid://iwq0wpjmcwyu" path="res://sprite/flags/karak.png" id="5_xen3b"]
 [ext_resource type="Shader" uid="uid://dsix0j50r756" path="res://script/shader/greyScale.gdshader" id="6_y7o72"]
 [ext_resource type="Texture2D" uid="uid://cok1qyj4ej8x" path="res://sprite/face/FacePlaceHolder.png" id="7_j361h"]
 [ext_resource type="Script" uid="uid://db1j0yixvtanh" path="res://script/HeartMonitorDisplay.cs" id="8_r2aec"]
-[ext_resource type="Texture2D" uid="uid://cd2wk8j77nqav" path="res://sprite/flags/ashkani.png" id="8_s27er"]
 [ext_resource type="Script" uid="uid://j8wqlc8j7h86" path="res://script/InterestsDisplay.cs" id="8_sj4o5"]
 [ext_resource type="PackedScene" uid="uid://fn45p05ufufc" path="res://scenes/prefab/ContentLabel.tscn" id="8_xen3b"]
 [ext_resource type="PackedScene" uid="uid://d0c5unv81cesg" path="res://scenes/prefab/eye.tscn" id="9_h7rj8"]
@@ -66,7 +66,7 @@ texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_right = 217.0
+offset_right = 222.0
 offset_bottom = 360.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("1_8q6pq")
@@ -108,7 +108,7 @@ flag = NodePath("Flag")
 self_modulate = Color(1, 1, 1, 0.21176471)
 position = Vector2(21, 15)
 scale = Vector2(0.37949798, 0.37949812)
-texture = ExtResource("8_s27er")
+texture = ExtResource("5_xen3b")
 
 [node name="Name" type="RichTextLabel" parent="InfoDisplay/IDCardSection" unique_id=343444242]
 layout_mode = 0

@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cj5r48u4yjthy" path="res://assets/fonts/InputMono-Black.ttf" id="4_n5py1"]
 [ext_resource type="StyleBox" uid="uid://dp4rb6exp54di" path="res://resources/Styles/Hide.tres" id="5_ar8uc"]
 [ext_resource type="StyleBox" uid="uid://b7q45aekph5r4" path="res://resources/Styles/DataPanelNoShadow.tres" id="7_dp1it"]
+[ext_resource type="StyleBox" uid="uid://ga51fy2iwwkv" path="res://resources/Styles/orderCardStyle.tres" id="7_qkclj"]
 [ext_resource type="StyleBox" uid="uid://bog2ukthttumq" path="res://resources/Styles/Shadow.tres" id="8_s33k5"]
 [ext_resource type="StyleBox" uid="uid://ba1306r7ho3ce" path="res://resources/Styles/DataPanel.tres" id="9_gle0l"]
 
@@ -67,6 +68,8 @@ NoBackButton/font_sizes/font_size = 16
 NoBackButton/fonts/font = ExtResource("2_wmc14")
 NoBackButton/styles/hover = SubResource("StyleBoxFlat_pyfgh")
 NoBackButton/styles/normal = SubResource("StyleBoxFlat_uviv1")
+OrderCardPanel/base_type = &"Panel"
+OrderCardPanel/styles/panel = ExtResource("7_qkclj")
 Panel/styles/panel = ExtResource("7_dp1it")
 RichTextLabel/colors/default_color = Color(0.71692264, 0.7664014, 0.95715314, 1)
 RichTextLabel/fonts/bold_font = ExtResource("2_wmc14")

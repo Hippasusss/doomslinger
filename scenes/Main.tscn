@@ -108,6 +108,7 @@ script = ExtResource("1_rvslj")
 humanManager = NodePath("..")
 human = ExtResource("2_0bbpv")
 initPosition = NodePath("Positioner")
+numHumans = 6
 faceGenerator = NodePath("FaceGenerator")
 gameData = ExtResource("33_0qimb")
 

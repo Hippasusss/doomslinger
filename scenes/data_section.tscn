@@ -33,7 +33,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_color = Color(0.18394011, 0.22801757, 0.22802815, 1)
 shadow_size = 1
-shadow_offset = Vector2(1, 1)
+shadow_offset = Vector2(2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_36rkl"]
 shader = ExtResource("6_y7o72")

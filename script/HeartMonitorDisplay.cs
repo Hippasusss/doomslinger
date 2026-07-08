@@ -13,7 +13,7 @@ public partial class HeartMonitorDisplay : Control, IDisplay
 
     private const int numPoints = 100;
     private const float beepLength = 0.1f;
-    private const float amplitude = 15f;
+    private const float amplitude = 7;
 
     private float targetValue = 0;
     private readonly DeltaTimer updateTimer = new(0.01);

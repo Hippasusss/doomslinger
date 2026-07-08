@@ -20,6 +20,9 @@
 [ext_resource type="Script" uid="uid://bmjqjuqq64p7b" path="res://script/MapDisplay.cs" id="16_rbkkf"]
 [ext_resource type="Script" uid="uid://dlj3fyvbas65v" path="res://script/SectionRevealer.cs" id="18_0e4ab"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="19_eskgm"]
+[ext_resource type="Texture2D" uid="uid://dsba164glkv6a" path="res://sprite/Battery.png" id="19_sj4o5"]
+[ext_resource type="Texture2D" uid="uid://buf314xlbftyq" path="res://sprite/aseprite/SignalStrength.png" id="20_s27er"]
+[ext_resource type="Texture2D" uid="uid://buvu33j8tmumq" path="res://sprite/aseprite/UpTime.png" id="21_1lol3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cobve"]
 bg_color = Color(1, 1, 1, 1)
@@ -66,8 +69,9 @@ texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
+offset_top = -2.0
 offset_right = 222.0
-offset_bottom = 360.0
+offset_bottom = 358.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("1_8q6pq")
 script = ExtResource("2_xen3b")
@@ -193,48 +197,232 @@ coloredLabelScene = ExtResource("8_xen3b")
 
 [node name="HeartMonitorDisplay" type="Panel" parent="." unique_id=1608618766 node_paths=PackedStringArray("line", "BPMText")]
 layout_mode = 0
-offset_left = 79.0
-offset_top = 156.0
+offset_left = 113.0
+offset_top = 88.0
 offset_right = 203.0
-offset_bottom = 189.0
+offset_bottom = 149.0
 theme = ExtResource("5_1lol3")
 theme_type_variation = &"ShadowPanel"
 script = ExtResource("8_r2aec")
-line = NodePath("Line2D")
-BPMText = NodePath("BPM Readout/Value")
+line = NodePath("BPMLineReadout/Line2D")
+BPMText = NodePath("BPMLineReadout/ValueReadout/Value")
 
-[node name="Line2D" type="Line2D" parent="HeartMonitorDisplay" unique_id=1955959916]
-position = Vector2(0.9999924, 17)
+[node name="BPMLineReadout" type="Control" parent="HeartMonitorDisplay" unique_id=381927873]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line2D" type="Line2D" parent="HeartMonitorDisplay/BPMLineReadout" unique_id=1955959916]
+position = Vector2(3, 9)
 scale = Vector2(0.5881957, 1)
-points = PackedVector2Array(1, 0, 160.5474, 0)
+points = PackedVector2Array(1, 0, 96.906494, 0)
 width = 1.0
 default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
 
-[node name="BPM Readout" type="Control" parent="HeartMonitorDisplay" unique_id=287404794]
+[node name="ValueReadout" type="Control" parent="HeartMonitorDisplay/BPMLineReadout" unique_id=287404794]
 clip_children = 1
 anchors_preset = 0
-offset_left = 167.0
+offset_left = 62.0
 offset_top = 1.0
-offset_right = 192.0
-offset_bottom = 32.0
+offset_right = 89.0
+offset_bottom = 14.0
 
-[node name="Label" type="RichTextLabel" parent="HeartMonitorDisplay/BPM Readout" unique_id=829647204]
-layout_mode = 0
-offset_left = -68.00006
-offset_top = 2.0
-offset_right = -45.00006
-offset_bottom = 10.0
+[node name="Label" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout/ValueReadout" unique_id=829647204]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 6
 text = "BPM
 "
 scroll_active = false
 
-[node name="Value" type="RichTextLabel" parent="HeartMonitorDisplay/BPM Readout" unique_id=1671986750]
-layout_mode = 0
-offset_left = -69.00006
-offset_top = 7.0
-offset_right = -44.00006
-offset_bottom = 20.0
-theme_override_font_sizes/normal_font_size = 13
+[node name="Value" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout/ValueReadout" unique_id=1671986750]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 11
+text = "150
+"
+scroll_active = false
+
+[node name="BPMLineReadout2" type="Control" parent="HeartMonitorDisplay" unique_id=1416530659]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 14.0
+offset_right = -1.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line2D" type="Line2D" parent="HeartMonitorDisplay/BPMLineReadout2" unique_id=2033519931]
+position = Vector2(3, 9)
+scale = Vector2(0.5881957, 1)
+points = PackedVector2Array(1, 0, 96.906494, 0)
+width = 1.0
+default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
+
+[node name="ValueReadout" type="Control" parent="HeartMonitorDisplay/BPMLineReadout2" unique_id=544216452]
+clip_children = 1
+anchors_preset = 0
+offset_left = 62.0
+offset_top = 1.0
+offset_right = 89.0
+offset_bottom = 14.0
+
+[node name="Label" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout2/ValueReadout" unique_id=1988128526]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 6
+text = "RR
+"
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout2/ValueReadout" unique_id=598778751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 11
+text = "150
+"
+scroll_active = false
+
+[node name="BPMLineReadout3" type="Control" parent="HeartMonitorDisplay" unique_id=1811395434]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 27.0
+offset_right = -1.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line2D" type="Line2D" parent="HeartMonitorDisplay/BPMLineReadout3" unique_id=1744252544]
+position = Vector2(3, 9)
+scale = Vector2(0.5881957, 1)
+points = PackedVector2Array(1, 0, 96.906494, 0)
+width = 1.0
+default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
+
+[node name="ValueReadout" type="Control" parent="HeartMonitorDisplay/BPMLineReadout3" unique_id=545698113]
+clip_children = 1
+anchors_preset = 0
+offset_left = 62.0
+offset_top = 1.0
+offset_right = 89.0
+offset_bottom = 14.0
+
+[node name="Label" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout3/ValueReadout" unique_id=992904994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 6
+text = "VO2
+"
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout3/ValueReadout" unique_id=1469905834]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 11
+text = "150
+"
+scroll_active = false
+
+[node name="BPMLineReadout4" type="Control" parent="HeartMonitorDisplay" unique_id=2081515757]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 40.0
+offset_right = -1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line2D" type="Line2D" parent="HeartMonitorDisplay/BPMLineReadout4" unique_id=11881560]
+position = Vector2(3, 9)
+scale = Vector2(0.5881957, 1)
+points = PackedVector2Array(1, 0, 96.906494, 0)
+width = 1.0
+default_color = Color(0.6076643, 0.69025695, 0.733955, 1)
+
+[node name="ValueReadout" type="Control" parent="HeartMonitorDisplay/BPMLineReadout4" unique_id=1605394366]
+clip_children = 1
+anchors_preset = 0
+offset_left = 62.0
+offset_top = 1.0
+offset_right = 89.0
+offset_bottom = 14.0
+
+[node name="Label" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout4/ValueReadout" unique_id=985230064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 6
+text = "LOM
+"
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="HeartMonitorDisplay/BPMLineReadout4/ValueReadout" unique_id=1879634593]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 11
 text = "150
 "
 scroll_active = false
@@ -408,22 +596,22 @@ theme_type_variation = &"InvisibleButton"
 
 [node name="Section2" type="Panel" parent="." unique_id=198841522]
 layout_mode = 0
-offset_left = 114.0
-offset_top = 88.0
+offset_left = 79.0
+offset_top = 156.0
 offset_right = 203.0
-offset_bottom = 149.0
+offset_bottom = 189.0
 theme = ExtResource("5_1lol3")
 theme_type_variation = &"ShadowPanel"
 
 [node name="Label" type="Label" parent="Section2" unique_id=723473912]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 22.0
-offset_right = 67.0
-offset_bottom = 33.0
+offset_left = 37.0
+offset_top = 13.0
+offset_right = 83.0
+offset_bottom = 24.0
 text = "MC Graph?"
 
-[node name="Panel" type="Panel" parent="." unique_id=419805112]
+[node name="PhoneData" type="Panel" parent="." unique_id=419805112]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 156.0
@@ -432,16 +620,125 @@ offset_bottom = 189.0
 theme = ExtResource("5_1lol3")
 theme_type_variation = &"ShadowPanel"
 
-[node name="Label" type="Label" parent="Panel" unique_id=432516690]
+[node name="BatteryReadout" type="Control" parent="PhoneData" unique_id=115779524]
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 32.0
+offset_bottom = 12.0
+
+[node name="Battery" type="Sprite2D" parent="PhoneData/BatteryReadout" unique_id=1766235468]
+position = Vector2(7, 4.750001)
+scale = Vector2(0.5625, 0.5312501)
+texture = ExtResource("19_sj4o5")
+
+[node name="Label" type="Label" parent="PhoneData/BatteryReadout" unique_id=1320223242]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 3.0
-offset_right = 60.0
-offset_bottom = 27.0
-theme_override_font_sizes/font_size = 4
-text = "Battery, steps, signal, basic phone data?
-"
-autowrap_mode = 3
+offset_left = 15.0
+offset_top = 1.0
+offset_right = 29.0
+offset_bottom = 9.0
+text = "20%"
+
+[node name="SignalReadout" type="Control" parent="PhoneData" unique_id=1103715361]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 63.0
+offset_bottom = 12.0
+
+[node name="Battery" type="Sprite2D" parent="PhoneData/SignalReadout" unique_id=437257688]
+position = Vector2(7, 4.750001)
+scale = Vector2(0.5625, 0.5312501)
+texture = ExtResource("20_s27er")
+
+[node name="Label" type="Label" parent="PhoneData/SignalReadout" unique_id=1148176170]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 1.0
+offset_right = 29.0
+offset_bottom = 9.0
+text = "20%"
+
+[node name="UpTimeReadout" type="Control" parent="PhoneData" unique_id=348014299]
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 11.0
+offset_right = 40.0
+offset_bottom = 21.0
+
+[node name="Battery" type="Sprite2D" parent="PhoneData/UpTimeReadout" unique_id=1976080924]
+position = Vector2(7, 5)
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("21_1lol3")
+
+[node name="Label" type="Label" parent="PhoneData/UpTimeReadout" unique_id=364412027]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 1.0
+offset_right = 29.0
+offset_bottom = 9.0
+text = "240"
+
+[node name="BatteryReadout3" type="Control" parent="PhoneData" unique_id=1026394963]
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 30.0
+
+[node name="Battery" type="Sprite2D" parent="PhoneData/BatteryReadout3" unique_id=1884220078]
+position = Vector2(7, 5)
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("19_sj4o5")
+
+[node name="Label" type="Label" parent="PhoneData/BatteryReadout3" unique_id=2106441181]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 1.0
+offset_right = 30.0
+offset_bottom = 9.0
+text = "20%"
+
+[node name="BatteryReadout4" type="Control" parent="PhoneData" unique_id=358059981]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 11.0
+offset_right = 63.0
+offset_bottom = 21.0
+
+[node name="Battery" type="Sprite2D" parent="PhoneData/BatteryReadout4" unique_id=1684752770]
+position = Vector2(7, 5)
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("19_sj4o5")
+
+[node name="Label" type="Label" parent="PhoneData/BatteryReadout4" unique_id=349922646]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 1.0
+offset_right = 30.0
+offset_bottom = 9.0
+text = "20%"
+
+[node name="BatteryReadout5" type="Control" parent="PhoneData" unique_id=1183917895]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 20.0
+offset_right = 63.0
+offset_bottom = 30.0
+
+[node name="Battery" type="Sprite2D" parent="PhoneData/BatteryReadout5" unique_id=1903987295]
+position = Vector2(7, 5)
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("19_sj4o5")
+
+[node name="Label" type="Label" parent="PhoneData/BatteryReadout5" unique_id=139335799]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 1.0
+offset_right = 30.0
+offset_bottom = 9.0
+text = "20%"
 
 [node name="Communications" type="Panel" parent="." unique_id=1306730358]
 layout_mode = 0

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://duuhkrcf1h1e6" path="res://scenes/OrderCard.tscn" id="8_vraok"]
 [ext_resource type="StyleBox" uid="uid://81pe1fn7tfs4" path="res://resources/Styles/RedButton.tres" id="9_jcqmv"]
 [ext_resource type="Script" uid="uid://cxqcxda6731ys" path="res://scenes/ReportHumanManager.cs" id="10_0j3ed"]
+[ext_resource type="Script" uid="uid://ij3a6r2sxgy3" path="res://script/CutoutContainer.cs" id="12_0j3ed"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnhog"]
 bg_color = Color(0.7137255, 0.19607843, 0.23529412, 1)
@@ -50,7 +51,10 @@ shadow_color = Color(0.2814021, 0.024436597, 0.035803106, 1)
 shadow_size = 1
 shadow_offset = Vector2(1, 1)
 
-[node name="CorporateSection" type="Panel" unique_id=116205225 node_paths=PackedStringArray("revealer", "notificationLight", "CreditAmountDisplay")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uviv1"]
+bg_color = Color(1, 0.5259075, 0.46041763, 0.09019608)
+
+[node name="CorporateSection" type="Panel" unique_id=116205225 node_paths=PackedStringArray("revealer", "notificationLight", "CreditAmountDisplay", "cutoutContainer")]
 offset_left = 640.0
 offset_top = 174.0
 offset_right = 1141.0
@@ -60,6 +64,7 @@ script = ExtResource("2_vraok")
 revealer = NodePath("CorporateHideReveal")
 notificationLight = NodePath("CorporateHideReveal/NotificationLight")
 CreditAmountDisplay = NodePath("Credits Amount")
+cutoutContainer = NodePath("Cutout")
 
 [node name="CorporateHideReveal" type="Button" parent="." unique_id=85178010]
 layout_mode = 1
@@ -91,6 +96,24 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(5, 5)
+mouse_filter = 2
+theme = ExtResource("3_jcqmv")
+theme_type_variation = &"ShadowCastPanel"
+
+[node name="Shadow2" type="Panel" parent="." unique_id=682787862]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 270.0
+offset_right = -217.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
@@ -109,10 +132,12 @@ text = "20"
 
 [node name="Orders" type="Panel" parent="." unique_id=310408411]
 layout_mode = 0
-offset_left = 38.0
+offset_left = 163.0
 offset_top = 4.0
-offset_right = 150.0
+offset_right = 275.0
 offset_bottom = 120.0
+theme = ExtResource("3_jcqmv")
+theme_type_variation = &"ShadowPanel"
 script = ExtResource("8_pnhl8")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Orders" unique_id=1025505075]
@@ -136,20 +161,22 @@ theme_override_constants/separation = 0
 [node name="Panel" parent="Orders/ScrollContainer/VBoxContainer" unique_id=1184017077 instance=ExtResource("8_vraok")]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="." unique_id=981023362]
+[node name="Report" type="Panel" parent="." unique_id=981023362]
 layout_mode = 0
-offset_left = 157.0
-offset_top = 4.0
-offset_right = 212.0
+offset_left = 282.0
+offset_top = 34.0
+offset_right = 488.0
 offset_bottom = 120.0
+theme = ExtResource("3_jcqmv")
+theme_type_variation = &"ShadowPanel"
 script = ExtResource("10_0j3ed")
 
-[node name="Button" type="Button" parent="Panel" unique_id=1882352435]
+[node name="Button" type="Button" parent="Report" unique_id=1882352435]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 3.0
-offset_right = 47.0
-offset_bottom = 21.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 48.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 theme_override_colors/icon_normal_color = Color(1, 0.31229547, 0.24802625, 1)
@@ -165,3 +192,37 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_jcqmv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_o42sa")
 text = "REPORT
 USER"
+
+[node name="Cutout" type="Control" parent="." unique_id=82546111]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_0j3ed")
+
+[node name="Control" type="Panel" parent="Cutout" unique_id=1625280388]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 284.0
+offset_top = -49.0
+offset_right = 486.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uviv1")
+
+[node name="Shadow3" type="Panel" parent="Cutout/Control" unique_id=298324552]
+modulate = Color(1, 0.64138085, 0.58648556, 0.22900002)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(5, 5)
+mouse_filter = 2
+theme = ExtResource("3_jcqmv")
+theme_type_variation = &"ShadowCastPanel"

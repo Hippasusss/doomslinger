@@ -1,5 +1,5 @@
-
-using System.Collections.Generic; using Godot;
+using System.Collections.Generic; 
+using Godot;
 
 namespace DoomSlinger;
 
@@ -114,7 +114,7 @@ public partial class AlgoSection : Panel, ISection
     private void ClickCell(MatrixCell cell)
     {
         if (currentHuman == null || !currentHuman.Selected) return;
-        if (!ActiveBids.TryGetValue(cell, out Bid bid)) return;
+        if (!ActiveBids.TryGetValue(cell, out Bid _)) return;
 
         if (CellOwners.TryGetValue(cell, out Human owner) && owner == currentHuman)
         {

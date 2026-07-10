@@ -1,5 +1,6 @@
 using Godot;
-using System;
+ 
+namespace DoomSlinger;
 
 public partial class MainMenu : Control
 {

@@ -159,6 +159,7 @@ public partial class Human : Node2D
         if (block == null)
         {
             ToggleShock(true);
+            swipeTimer.SetResetTime(5, true);
             return;
         }
 

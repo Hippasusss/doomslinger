@@ -1,15 +1,36 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
 public partial class OrdersManager : Panel
 {
-    // Called when the node enters the scene tree for the first time.
+
+    [Export] PackedScene NewOrder;
+    [Export] VBoxContainer OrderContainer;
+
+    private List<Panel> Orders;
+
     public override void _Ready()
     {
+        AddOrder();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
     }
+
+    public void AddOrder()
+    {
+        Panel orderPanel = NewOrder.Instantiate<Panel>();
+        OrderContainer.AddChild(orderPanel);
+        Orders.Add(orderPanel);
+    }
+
+    public void CheckViolation()
+    {
+    }
+
+    public void IssueViolation()
+    {
+    }
+
 }

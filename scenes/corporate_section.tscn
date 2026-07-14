@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://xx2ig0xkpu2k" path="res://script/OrdersManager.cs" id="8_pnhl8"]
 [ext_resource type="PackedScene" uid="uid://duuhkrcf1h1e6" path="res://scenes/OrderCard.tscn" id="8_vraok"]
 [ext_resource type="StyleBox" uid="uid://81pe1fn7tfs4" path="res://resources/Styles/RedButton.tres" id="9_jcqmv"]
-[ext_resource type="Script" uid="uid://cxqcxda6731ys" path="res://scenes/ReportHumanManager.cs" id="10_0j3ed"]
+[ext_resource type="Script" uid="uid://cxqcxda6731ys" path="res://script/ReportHumanManager.cs" id="10_0j3ed"]
 [ext_resource type="Script" uid="uid://ij3a6r2sxgy3" path="res://script/CutoutContainer.cs" id="12_0j3ed"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnhog"]
@@ -130,7 +130,7 @@ offset_right = 46.0
 offset_bottom = 14.0
 text = "20"
 
-[node name="Orders" type="Panel" parent="." unique_id=310408411]
+[node name="Orders" type="Panel" parent="." unique_id=310408411 node_paths=PackedStringArray("OrderContainer")]
 layout_mode = 0
 offset_left = 163.0
 offset_top = 4.0
@@ -139,6 +139,8 @@ offset_bottom = 129.0
 theme = ExtResource("3_jcqmv")
 theme_type_variation = &"ShadowPanel"
 script = ExtResource("8_pnhl8")
+NewOrder = ExtResource("8_vraok")
+OrderContainer = NodePath("ScrollContainer/VBoxContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Orders" unique_id=1025505075]
 layout_mode = 1
@@ -158,7 +160,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="Panel" parent="Orders/ScrollContainer/VBoxContainer" unique_id=1184017077 instance=ExtResource("8_vraok")]
+[node name="OrderCard" parent="Orders/ScrollContainer/VBoxContainer" unique_id=1184017077 instance=ExtResource("8_vraok")]
 layout_mode = 2
 
 [node name="Report" type="Panel" parent="." unique_id=981023362]

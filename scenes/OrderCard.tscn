@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://duuhkrcf1h1e6"]
 
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="1_pskr5"]
+[ext_resource type="Script" uid="uid://cebqdm84o0hkm" path="res://script/Order.cs" id="2_byf22"]
 
 [node name="Panel" type="Panel" unique_id=1184017077]
 self_modulate = Color(0.9862854, 0.605119, 0.58983654, 1)
@@ -8,6 +9,7 @@ custom_minimum_size = Vector2(-1, 20)
 size_flags_vertical = 3
 theme = ExtResource("1_pskr5")
 theme_type_variation = &"OrderCardPanel"
+script = ExtResource("2_byf22")
 
 [node name="Label" type="Label" parent="." unique_id=453495366]
 layout_mode = 1

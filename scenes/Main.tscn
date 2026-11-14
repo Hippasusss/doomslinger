@@ -25,7 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://b7h6lhfodrq36" path="res://sprite/Map.png" id="23_cobve"]
 [ext_resource type="Curve" uid="uid://d2s4lhwvtopk6" path="res://resources/panelCloseOpen.tres" id="25_kxyth"]
 [ext_resource type="Script" uid="uid://cemni1u7180p8" path="res://script/BlackoutController.cs" id="27_e2s0e"]
-[ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/..blackFullscreen.png" id="27_ma7h6"]
+[ext_resource type="Texture2D" uid="uid://cclvgn8asr678" path="res://sprite/blackFullscreen.png" id="27_ma7h6"]
 [ext_resource type="PackedScene" uid="uid://dwscg668o2gu2" path="res://scenes/prefab/TextSequence.tscn" id="29_v0vrg"]
 [ext_resource type="PackedScene" uid="uid://gd8nihd7rfc0" path="res://scenes/mapMarker.tscn" id="30_8cp6k"]
 [ext_resource type="Script" uid="uid://4ui466oxdrh4" path="res://script/DayNightTimer.cs" id="30_v0vrg"]

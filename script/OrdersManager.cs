@@ -1,6 +1,8 @@
 using Godot;
 using System.Collections.Generic;
 
+namespace DoomSlinger;
+
 public partial class OrdersManager : Panel
 {
 

@@ -178,7 +178,7 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[node name="Human" type="Node2D" unique_id=1949069056 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol", "shockSymbol", "SelectionButton", "WatchTimeBar", "OverFlowCount")]
+[node name="Human" type="Node2D" unique_id=1949069056 node_paths=PackedStringArray("face", "feed", "light", "animation", "phone", "warnignSymbol", "movingSymbol", "shockSymbol", "SelectionButton", "WatchTimeBar", "OverFlowCount", "moneyDisplay")]
 script = ExtResource("1_sogvw")
 face = NodePath("Face")
 feed = NodePath("Feed")
@@ -191,6 +191,7 @@ shockSymbol = NodePath("ShockSymbol")
 SelectionButton = NodePath("SelectButton")
 WatchTimeBar = NodePath("WatchTime")
 OverFlowCount = NodePath("Control/FeedMachine/OverFlowCount")
+moneyDisplay = NodePath("MoneyDisplay")
 
 [node name="Control" type="Control" parent="." unique_id=889520441]
 layout_mode = 3

@@ -19,6 +19,7 @@ public partial class Human : Node2D
     [Export] private Button SelectionButton;
     [Export] private LoadingBar WatchTimeBar;
     [Export] private Label OverFlowCount;
+    [Export] private MoneyDisplay moneyDisplay;
 
     private HumanStats stats = new();
     private HumanPersonalData data = new();
@@ -180,6 +181,7 @@ public partial class Human : Node2D
         Stats.PoliticalLeaning.Value = Mathf.Lerp(Stats.PoliticalLeaning, politicalLeaning, politicalAlignment * politicalSway);
 
         BlockConsumed?.Invoke(data);
+        moneyDisplay.DisplayAmount(data.Price);
 
         swipeTimer.SetResetTime(length, true);
     }

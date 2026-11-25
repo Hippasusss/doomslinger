@@ -9,7 +9,7 @@ public partial class OrdersManager : Panel
 	[Export] PackedScene NewOrder;
 	[Export] VBoxContainer OrderContainer;
 
-	private List<Panel> Orders;
+	private readonly List<Panel> Orders = [];
 
 	public override void _Ready()
 	{

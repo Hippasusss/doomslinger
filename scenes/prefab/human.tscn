@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://c17v53gecm2pc" path="res://sprite/Shock Symbold.png" id="16_8txhf"]
 [ext_resource type="Script" uid="uid://dom2pdw0p7sel" path="res://script/LoadingBar.cs" id="17_n5qo3"]
 [ext_resource type="Theme" uid="uid://dqooghemw7a8d" path="res://resources/Themes/globalTheme.tres" id="17_neukj"]
+[ext_resource type="Script" uid="uid://cpymbu5chx31m" path="res://script/MoneyDisplay.cs" id="19_moneydisplay"]
+[ext_resource type="PackedScene" uid="uid://b7mq2yakf4n0a" path="res://scenes/prefab/moneyAmount.tscn" id="20_moneyamount"]
 
 [sub_resource type="Animation" id="Animation_5jfd8"]
 resource_name = "Grumble"
@@ -342,3 +344,14 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_8txhf")
+
+[node name="MoneyDisplay" type="Control" parent="." unique_id=20548942]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -26.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 28.0
+mouse_filter = 2
+script = ExtResource("19_moneydisplay")
+amountScene = ExtResource("20_moneyamount")

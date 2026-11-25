@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b7mq2yakf4n0a"]
+
+[ext_resource type="Script" uid="uid://bac5q662pcrr1" path="res://script/MoneyAmount.cs" id="1_moneyamount"]
+[ext_resource type="Script" uid="uid://ctbofjiipjjgf" path="res://script/FadeAndMoveParent.cs" id="2_fadeparent"]
+
+[node name="MoneyAmount" type="RichTextLabel" unique_id=2017323801 node_paths=PackedStringArray("animator")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.15902671, 0.65128577, 0, 1)
+theme_override_font_sizes/normal_font_size = 12
+text = "$7"
+horizontal_alignment = 1
+script = ExtResource("1_moneyamount")
+animator = NodePath("FadeAndMoveParent")
+
+[node name="FadeAndMoveParent" type="Node" parent="." unique_id=1702840763]
+script = ExtResource("2_fadeparent")
+horizontalDriftRange = 0.2

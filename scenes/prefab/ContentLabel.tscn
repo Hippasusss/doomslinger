@@ -10,8 +10,9 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
 [node name="ColoredLabel" type="Label" unique_id=271502160 node_paths=PackedStringArray("background")]
-offset_right = 1.0
-offset_bottom = 8.0
+offset_right = 22.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 8
 text = "violence"
 script = ExtResource("1_ochj1")
 background = NodePath("Panel")

@@ -239,7 +239,6 @@ theme_type_variation = &"BackgroundPanel"
 process_mode = 3
 z_index = -2
 material = SubResource("ShaderMaterial_5jfd8")
-scale = Vector2(1.165, 1.165)
 script = ExtResource("3_cjs1v")
 feedBlockSN = ExtResource("4_b524o")
 feedBlockPalette = ExtResource("7_2b3g0")

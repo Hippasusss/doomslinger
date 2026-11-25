@@ -3,6 +3,8 @@
 [ext_resource type="Shader" uid="uid://sl6bshe3rf3y" path="res://script/shader/feedblock.gdshader" id="1_kpqs0"]
 [ext_resource type="Texture2D" uid="uid://djkugk50v5t6b" path="res://sprite/feedblock.png" id="2_2bmi6"]
 [ext_resource type="Script" uid="uid://v0ypjitj2tuc" path="res://script/Feedblock.cs" id="3_73s5c"]
+[ext_resource type="Script" uid="uid://j8wqlc8j7h86" path="res://script/InterestsDisplay.cs" id="4_73s5c"]
+[ext_resource type="PackedScene" uid="uid://fn45p05ufufc" path="res://scenes/prefab/ContentLabel.tscn" id="5_0cera"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2bmi6"]
 shader = ExtResource("1_kpqs0")
@@ -26,16 +28,68 @@ shader_parameter/chroma_offset = 0.0050000002375
 shader_parameter/flicker_strength = 0.03200000152
 shader_parameter/vignette_strength = 0.0
 
-[node name="Feedblock" type="Node2D" unique_id=526387067 node_paths=PackedStringArray("colourSprite")]
+[node name="Feedblock" type="Node2D" unique_id=526387067 node_paths=PackedStringArray("colourSprite", "priceText", "lengthText", "leaningText", "interestsDisplay")]
 clip_children = 1
 light_mask = 4
 texture_filter = 1
 material = SubResource("ShaderMaterial_2bmi6")
 script = ExtResource("3_73s5c")
 colourSprite = NodePath("Sprite2D")
+priceText = NodePath("Price")
+lengthText = NodePath("Length")
+leaningText = NodePath("Leaning")
+interestsDisplay = NodePath("HFlowContainer")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1735178243]
 modulate = Color(1, 1, 0.4988736, 1)
 texture_filter = 1
 material = SubResource("ShaderMaterial_73s5c")
+position = Vector2(0.5000001, -1.4999998)
 texture = ExtResource("2_2bmi6")
+
+[node name="Price" type="RichTextLabel" parent="." unique_id=1916944093]
+offset_left = -14.0
+offset_top = -26.0
+offset_bottom = -16.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.35253492, 0.15538374, 0.09719003, 1)
+theme_override_font_sizes/normal_font_size = 8
+text = "$0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Length" type="RichTextLabel" parent="." unique_id=1767329346]
+offset_top = -26.0
+offset_right = 15.0
+offset_bottom = -16.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.35253492, 0.15538374, 0.09719003, 1)
+theme_override_font_sizes/normal_font_size = 8
+text = "0s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Leaning" type="RichTextLabel" parent="." unique_id=635331633]
+offset_left = -15.0
+offset_top = -18.0
+offset_right = 15.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.35253492, 0.15538374, 0.09719003, 1)
+theme_override_font_sizes/normal_font_size = 8
+text = "0.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="." unique_id=707206622]
+offset_left = -13.0
+offset_top = -10.0
+offset_right = 14.0
+offset_bottom = 12.0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+alignment = 1
+last_wrap_alignment = 2
+script = ExtResource("4_73s5c")
+coloredLabelScene = ExtResource("5_0cera")
+centerRows = true
